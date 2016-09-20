@@ -9,6 +9,11 @@ r_github_packages:
   - jimhester/covr
   - jimhester/lintr
   - MangoTheCat/goodpractice
+  - richelbilderbeek/beastscriptr
+  - richelbilderbeek/nLTT
+  - richelbilderbeek/ribir
+  - richelbilderbeek/wiritttes
+  - rsetienne/PBD/PBD
   - beast-dev/RBeast
 
 after_success:
