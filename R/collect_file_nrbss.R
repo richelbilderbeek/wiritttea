@@ -79,12 +79,12 @@ collect_file_nrbss <- function(
     pi <- df$beast_run[i] # posterior index
     si <- df$state[i] # state index
     # st: species tree
-    st <- wiritttea::get_species_tree_by_index(file = file, sti = sti)
+    st <- wiritttes::get_species_tree_by_index(file = file, sti = sti)
     testit::assert(class(st) == "phylo")
     testit::assert(si >= 1)
     testit::assert(si <= length(get_posterior(file, sti = sti, ai = ai, pi = pi)$trees)) # nolint
     # pt: posterior state tree, of type phylo
-    pt <- wiritttea::get_posterior(file, sti = sti, ai = ai, pi = pi)$trees[[si]]
+    pt <- wiritttes::get_posterior(file, sti = sti, ai = ai, pi = pi)$trees[[si]]
     testit::assert(class(pt) == "phylo")
     testit::assert(length(st$tip.label) == length(pt$tip.label))
     testit::assert(all.equal(sort(st$tip.label), sort(pt$tip.label)))

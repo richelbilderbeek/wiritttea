@@ -44,7 +44,7 @@ Now the parameter files are created with the desired parameters:
 ```{r}
 n_beast_runs <- 2
 
-save_parameters_to_file(
+wiritttes::save_parameters_to_file(
   rng_seed = 2,
   sirg = 0.5,
   siri = 0.5,
@@ -74,17 +74,17 @@ do_simulation(filename, cache_beast_output = TRUE)
 ## Show the posterior
 
 ```{r}
-posteriors <- get_posteriors(read_file(filename))
+posteriors <- wiritttes::get_posteriors(read_file(filename))
 testit::assert(length(posteriors) == 2 * n_beast_runs)
-testit::assert(RBeast::is_posterior(wiritttea::get_posterior(file = read_file(filename), sti = 1, ai = 1, pi = 1)))
-testit::assert(RBeast::is_posterior(wiritttea::get_posterior(file = read_file(filename), sti = 1, ai = 1, pi = 2)))
-testit::assert(RBeast::is_posterior(wiritttea::get_posterior(file = read_file(filename), sti = 2, ai = 1, pi = 1)))
-testit::assert(RBeast::is_posterior(wiritttea::get_posterior(file = read_file(filename), sti = 2, ai = 1, pi = 2)))
+testit::assert(RBeast::is_posterior(wiritttes::get_posterior(file = read_file(filename), sti = 1, ai = 1, pi = 1)))
+testit::assert(RBeast::is_posterior(wiritttes::get_posterior(file = read_file(filename), sti = 1, ai = 1, pi = 2)))
+testit::assert(RBeast::is_posterior(wiritttes::get_posterior(file = read_file(filename), sti = 2, ai = 1, pi = 1)))
+testit::assert(RBeast::is_posterior(wiritttes::get_posterior(file = read_file(filename), sti = 2, ai = 1, pi = 2)))
 
-phylogenies_1 <- wiritttea::get_posterior(file = read_file(filename), sti = 1, ai = 1, pi = 1)$trees
-phylogenies_2 <- wiritttea::get_posterior(file = read_file(filename), sti = 1, ai = 1, pi = 2)$trees
-phylogenies_3 <- wiritttea::get_posterior(file = read_file(filename), sti = 2, ai = 1, pi = 1)$trees
-phylogenies_4 <- wiritttea::get_posterior(file = read_file(filename), sti = 2, ai = 1, pi = 2)$trees
+phylogenies_1 <- wiritttes::get_posterior(file = read_file(filename), sti = 1, ai = 1, pi = 1)$trees
+phylogenies_2 <- wiritttes::get_posterior(file = read_file(filename), sti = 1, ai = 1, pi = 2)$trees
+phylogenies_3 <- wiritttes::get_posterior(file = read_file(filename), sti = 2, ai = 1, pi = 1)$trees
+phylogenies_4 <- wiritttes::get_posterior(file = read_file(filename), sti = 2, ai = 1, pi = 2)$trees
 
 testit::assert(length(phylogenies_1) > 0)
 testit::assert(length(phylogenies_2) > 0)

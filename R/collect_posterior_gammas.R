@@ -31,7 +31,7 @@ collect_posterior_gammas <- function(filename) {
   for (sti in 1:2) {
     for (j in seq(1, n_alignments)) {
       for (k in seq(1, n_beast_runs)) {
-        phylogenies <- wiritttea::get_posteriors(file)[[index]][[1]]$trees
+        phylogenies <- wiritttes::get_posteriors(file)[[index]][[1]]$trees
         gamma_statistics <- wiritttea::collect_gamma_statistics(phylogenies)
 
         # Remove id column

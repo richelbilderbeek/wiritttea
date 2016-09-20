@@ -21,7 +21,7 @@ test_that("collect_n_species_trees: use case #2", {
 test_that("collect_n_species_trees: empty_file", {
   # An empty file does not have sampled species trees yet
   filename <- "test-collect_n_species_trees.RDa"
-  save_parameters_to_file(
+  wiritttes::save_parameters_to_file(
     rng_seed = 42,
     sirg = 0.1,
     siri = 0.1,

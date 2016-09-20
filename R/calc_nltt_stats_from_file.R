@@ -39,8 +39,11 @@ calc_nltt_stats_from_file <- function(filename) {
 
   index <- 1
   for (sti in 1:2) {
-    focal_phylogeny <- get_species_tree_by_index(file = file, sti = sti)
-    testit::assert(is_phylogeny(focal_phylogeny))
+    focal_phylogeny <- wiritttes::get_species_tree_by_index(
+      file = file, sti = sti
+    )
+
+    testit::assert(class(focal_phylogeny) == "phylo")
     for (ai in 1:napst) {
       for (pi in 1:nppa) {
 

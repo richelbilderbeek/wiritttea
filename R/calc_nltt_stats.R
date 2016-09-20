@@ -16,14 +16,14 @@ calc_nltt_stats <- function(
   phylogeny,
   others
 ) {
-  if (!is_phylogeny(phylogeny)) {
+  if (class(phylogeny) != "phylo") {
     stop("phylogeny must be a phylogeny")
   }
   if (length(others) == 0) {
     stop("must supply others")
   }
   for (q in others) {
-    if (!is_phylogeny(q)) {
+    if (class(q) != "phylo") {
       stop("others must be phylogenies")
     }
   }

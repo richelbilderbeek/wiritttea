@@ -11,14 +11,15 @@
 #' @author Richel Bilderbeek
 #' @export
 are_identical_phylogenies <- function(p, q) {
-  if (!is_phylogeny(p)) {
+
+  if (class(p) != "phylo") {
     stop(
-      "are_identical_phylogenies: p must be a phylogeny"
+      "p must be a phylogeny"
     )
   }
-  if (!is_phylogeny(q)) {
+  if (class(q) != "phylo") {
     stop(
-      "are_identical_phylogenies: q must be a phylogeny"
+      "q must be a phylogeny"
     )
   }
   return (ape::all.equal.phylo(p, q))

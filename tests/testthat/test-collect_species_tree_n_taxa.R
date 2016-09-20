@@ -30,7 +30,7 @@ test_that("collect_species_tree_n_taxa: abuse", {
 test_that("collect_species_tree_n_taxa: empty file should raise error", {
 
   filename <- "test-collect_species_tree_n_taxa.RDa"
-  save_parameters_to_file(
+  wiritttes::save_parameters_to_file(
     rng_seed = 42,
     sirg = 0.1,
     siri = 0.1,

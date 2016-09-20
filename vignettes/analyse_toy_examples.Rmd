@@ -81,7 +81,7 @@ Here the parameter files are created with the desired parameters:
 
 ```{r create_parameter_files}
 filenames <- paste0("analyse_toy_examples_", seq(1, 4), ".RDa")
-create_test_parameter_files(filenames = filenames)
+wiritttes::create_test_parameter_files(filenames = filenames)
 ```
 
   * `analyse_toy_examples_1.RDa`: protractedness is absent, thus speciation completion rate is high, in this case `1.0e6`
@@ -237,7 +237,7 @@ It can be seen that the values for ESS (Effective Sample Size) are above 200 and
 A posterior contains many phylogenies. 
 
 ```{r}
-phylogenies <- get_posteriors(read_file(filename))[[1]][[1]]$trees
+phylogenies <- wiritttes::get_posteriors(read_file(filename))[[1]][[1]]$trees
 # To get the densiTree function working, phylogenies must be of class multiphylo
 class(phylogenies) <- "multiPhylo"
 ```
@@ -482,7 +482,7 @@ A posterior contains many phylogenies. To visualize these,
 they are extracted from a `.trees` file here:
 
 ```{r}
-phylogenies <- get_posteriors(read_file(filename))[[1]][[1]]$trees
+phylogenies <- wiritttes::get_posteriors(read_file(filename))[[1]][[1]]$trees
 # To get the densiTree function working, phylogenies must be of class multiphylo
 class(phylogenies) <- "multiPhylo"
 ```

@@ -29,10 +29,12 @@ collect_species_tree_gammas <- function(
     phylogeny <- NA
     g <- NA
     tryCatch(
-      phylogeny <- wiritttea::get_species_tree_by_index(file = file, sti = sti),
+      phylogeny <- wiritttes::get_species_tree_by_index(file = file, sti = sti),
       error = function(msg) {} # nolint
     )
-    if (is_phylogeny(phylogeny)) {
+
+
+    if (class(phylogeny) == "phylo") {
       g <- ape::gammaStat(phylogeny)
     }
 

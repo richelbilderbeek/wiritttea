@@ -8,4 +8,4 @@
 #SBATCH --job-name=create_test_parameter_files
 #SBATCH --output=create_test_parameter_files.log
 module load R/3.3.1-foss-2016a
-time Rscript -e 'library(Cer2016); create_test_parameter_files()'
+time Rscript -e 'library(wiritttes); create_test_parameter_files()'

@@ -55,7 +55,7 @@ collect_file_esses <- function(
         tryCatch(
           min_ess <- min(
             RBeast::calc_esses(
-              traces = wiritttea::get_posterior(
+              traces = wiritttes::get_posterior(
                 file, sti = sti, ai = ai, pi = pi
               )$estimates,
               sample_interval = 1000

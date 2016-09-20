@@ -29,7 +29,7 @@ collect_species_tree_nltts <- function(
 
   for (sti in 1:2) {
     nltt_values <- nLTT::get_nltt_values(
-      list(get_species_tree_by_index(file = file, sti = sti)),
+      list(wiritttes::get_species_tree_by_index(file = file, sti = sti)),
       dt = dt
     )
 

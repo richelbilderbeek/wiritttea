@@ -101,7 +101,7 @@ phytools::plotSimmap(
 I will use a sampled species tree as my true tree:
 
 ```{r}
-true_tree <-get_species_tree_by_index(file = file, sti = 1)
+true_tree <- wiritttes::get_species_tree_by_index(file = file, sti = 1)
 plot(true_tree)
 ```
 
@@ -128,7 +128,7 @@ This toy example has only one posterior file:
 Extracting the trees from that posterior:
 
 ```{r}
-posterior_trees <- get_posteriors(file)[[1]][[1]]$trees
+posterior_trees <- wiritttes::get_posteriors(file)[[1]][[1]]$trees
 n_trees <- length(posterior_trees)
 print(paste0("There are ", n_trees))
 ```
@@ -174,7 +174,7 @@ I will use that tree as my true tree (sorry for all those square
 brackets):
 
 ```
-true_tree <- get_species_tree_by_index(file = file, sti = 1)
+true_tree <- wiritttes::get_species_tree_by_index(file = file, sti = 1)
 plot(true_tree)
 ```
 

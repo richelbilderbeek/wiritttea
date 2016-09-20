@@ -21,7 +21,7 @@ test_that("collect_n_alignments: use case #2", {
 test_that("collect_n_alignments: empty_file", {
   # An empty file does not have sampled species trees yet
   filename <- "test-collect_n_alignments.RDa"
-  save_parameters_to_file(
+  wiritttes::save_parameters_to_file(
     rng_seed = 42,
     sirg = 0.1,
     siri = 0.1,
