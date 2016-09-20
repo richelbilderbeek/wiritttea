@@ -28,7 +28,8 @@ Imports:
   PBD,
   phangorn,
   phytools,
-  RBeast
+  RBeast,
+  wiritttes
 Suggests:
   ape,
   coda,
@@ -36,6 +37,7 @@ Suggests:
   ggplot2,
   gridExtra,
   Hmisc,
+  knitr,
   lintr,
   lubridate,
   plyr,
@@ -44,8 +46,7 @@ Suggests:
   stringr,
   testit,
   testthat,
-  tidyr,
-  knitr
+  tidyr
 Remotes:
   beast-dev/RBeast,
   jimhester/covr,
