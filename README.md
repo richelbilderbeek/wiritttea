@@ -1,28 +1,28 @@
-# Cer2016
+# wiritttea
 
-[![Build Status](https://travis-ci.org/richelbilderbeek/Cer2016.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Cer2016)
-[![codecov.io](https://codecov.io/github/richelbilderbeek/Cer2016/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/Cer2016?branch=master)
+[![Build Status](https://travis-ci.org/richelbilderbeek/wiritttea.svg?branch=master)](https://travis-ci.org/richelbilderbeek/wiritttea)
+[![codecov.io](https://codecov.io/github/richelbilderbeek/wiritttea/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/wiritttea?branch=master)
 [![gplv3](http://www.gnu.org/graphics/gplv3-88x31.png)](http://www.gnu.org/licenses/gpl.html)
 
 Community Ecology Research course 2016.
 
-## Installing `Cer2016`
+## Installing `wiritttea`
 
-The `Cer2016` package is absent on CRAN.
+The `wiritttea` package is absent on CRAN.
 
 An easy way is to install it from GitHub. Within R, do:
 
 ```
-devtools::install_github("richelbilderbeek/Cer2016")
+devtools::install_github("richelbilderbeek/wiritttea")
 ```
 
-## Using `Cer2016` as a package dependency
+## Using `wiritttea` as a package dependency
 
-If your package uses `Cer2016`, add the following to the `DESCRIPTION` its `Remotes` section:
+If your package uses `wiritttea`, add the following to the `DESCRIPTION` its `Remotes` section:
 
 ```
 Remotes:
-  richelbilderbeek/Cer2016
+  richelbilderbeek/wiritttea
 ```
 
 ## Update the package source on Peregrine
@@ -34,12 +34,12 @@ module load git; git pull
 ## Copy all files from Peregrine to local computer
 
 ```
-scp p230198@peregrine.hpc.rug.nl:/home/p230198/GitHubs/Cer2016/scripts/*.* ~/Peregrine
+scp p230198@peregrine.hpc.rug.nl:/home/p230198/GitHubs/wiritttea/scripts/*.* ~/Peregrine
 ```
 
 ## Workflow
 
-On Peregrine, from the `Cer2016` root folder:
+On Peregrine, from the `wiritttea` root folder:
 
 ```
 cd scripts
@@ -67,7 +67,7 @@ The benefit of these `csv` files is that they will speed up local analysis.
 ### Analysing data
 
 ```
-scp p230198@peregrine.hpc.rug.nl:/home/p230198/GitHubs/Cer2016/inst/exdata/*.csv ~/GitHubs/Cer2016/inst/extdata
+scp p230198@peregrine.hpc.rug.nl:/home/p230198/GitHubs/wiritttea/inst/exdata/*.csv ~/GitHubs/wiritttea/inst/extdata
 ```
 
 ## How to create the test examples?
@@ -89,10 +89,10 @@ Steps are shown below.
 From the GNU/Linux terminal, or using Windows Git Bash:
 
 ```
-git clone https://github.com/richelbilderbeek/Cer2016
+git clone https://github.com/richelbilderbeek/wiritttea
 ```
 
-This will create a folder called `Cer2016`. 
+This will create a folder called `wiritttea`. 
 
 You may also need to do this, for GNU/Linux:
 
