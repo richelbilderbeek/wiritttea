@@ -68,7 +68,7 @@ The simulation has multiple steps. The last step is adding the
 posterior to the parameter file.
 
 ```{r}
-do_simulation(filename, cache_beast_output = TRUE)
+wiritttes::do_simulation(filename, cache_beast_output = TRUE)
 ```
 
 ## Show the posterior

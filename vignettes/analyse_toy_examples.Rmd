@@ -595,8 +595,8 @@ In the next examples, we add replicates to the data.
 Doing the rest:
 
 ```{r}
-do_simulation(filenames[3])
-do_simulation(filenames[4])
+wiritttes::do_simulation(filenames[3])
+wiritttes::do_simulation(filenames[4])
 ```
 
 This example is an extension of the examples 1, with the differences that:
