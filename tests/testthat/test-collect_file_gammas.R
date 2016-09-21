@@ -10,7 +10,7 @@ test_that("collect_file_gammas: basic test", {
   )
   expect_equal(
     names(df$species_tree_gammas),
-    c("species_tree", "gamma_stat")
+    c("sti", "gamma_stat")
   )
   expect_equal(nrow(df$species_tree_gammas), 2)
   expect_equal(nrow(df$posterior_gammas), 80)
@@ -25,15 +25,7 @@ test_that("collect_file_gammas: abuse", {
 
   expect_error(
     collect_file_gammas(filename = "inva.lid"),
-    "invalid file 'inva.lid'"
-  )
-
-  expect_error(
-    collect_file_gammas(
-      filename = "1.RDa",
-      verbose = "Not true nor false"
-    ),
-    "verbose should be TRUE or FALSE"
+    "invalid file"
   )
 
 })

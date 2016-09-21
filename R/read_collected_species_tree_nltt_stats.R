@@ -3,7 +3,7 @@
 #'   statistics. Default value is 'inst/extdata/collected_nltt_stats.csv'
 #' @return a dataframe
 #' @examples
-#'   df <- read_collected_nltt_stats()
+#'   df <- read_collected_species_tree_nltt_stats()
 #'   expected_names <- c("filename", "sti", "ai", "pi", "si", "nltt_stat")
 #'   testit::assert(names(df) == expected_names)
 #'   testit::assert(is.factor(df$filename))
@@ -13,8 +13,8 @@
 #'   testit::assert(is.factor(df$si))
 #' @author Richel Bilderbeek
 #' @export
-read_collected_nltt_stats <- function(
-  filename = wiritttea::find_path("collected_nltt_stats.csv")
+read_collected_species_tree_nltt_stats <- function(
+  filename = wiritttea::find_path("collect_files_species_tree_nltts.csv")
   ) {
   if (!file.exists(filename)) {
     stop("file not found")

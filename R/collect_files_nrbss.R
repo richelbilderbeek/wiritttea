@@ -1,7 +1,6 @@
 #' Collects the NRBS values of all phylogenies belonging to a
 #' multiple parameter file in the melted/uncast/long form
 #' @param filenames names of the parameter file
-#' @param verbose give verbose output, should be TRUE or FALSE
 #' @return A dataframes of NRBS values
 #' @examples
 #'   filenames <- c(
@@ -10,28 +9,16 @@
 #'   )
 #'   df <- collect_files_nrbss(filenames)
 #'   expected <- c(
-#'     "filename", "species_tree", "alignment",
-#'     "beast_run", "state", "nrbs"
+#'     "filename", "sti", "ai",
+#'     "pi", "si", "nrbs"
 #'   )
 #'   testit::assert(names(df) == expected)
 #'   testit::assert(nrow(df) == 160)
 #' @export
-collect_files_nrbss <- function(
-  filenames,
-  verbose = FALSE
-) {
+collect_files_nrbss <- function(filenames) {
 
-  if (verbose != TRUE && verbose != FALSE) {
-    stop(
-      "collect_files_nrbss: ",
-      "verbose should be TRUE or FALSE"
-    )
-  }
   if (length(filenames) < 1) {
-    stop(
-      "collect_files_nrbss: ",
-      "there must be at least one filename supplied"
-    )
+    stop("there must be at least one filename supplied")
   }
 
   # Species trees
@@ -40,9 +27,7 @@ collect_files_nrbss <- function(
     this_df <- NULL
     tryCatch(
       this_df <- collect_file_nrbss(filename),
-      error = function(msg) {
-        if (verbose) message(msg)
-      }
+      error = function(msg) {} # nolint
     )
     if (is.null(this_df)) {
       this_df <- data.frame(

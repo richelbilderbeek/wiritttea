@@ -5,14 +5,12 @@
 \title{Determines if the input is a BEAST2 posterior,
 as parsed by olli's rBEAST package its function beast2out.read.trees}
 \usage{
-are_identical_trees_posteriors(p, q, verbose = FALSE)
+are_identical_trees_posteriors(p, q)
 }
 \arguments{
 \item{p}{the first posterior}
 
 \item{q}{the second posterior}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 TRUE or FALSE

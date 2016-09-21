@@ -12,10 +12,6 @@ test_that("collect_files_n_alignments: basic use", {
 })
 
 test_that("collect_n_alignments: abuse", {
-  expect_error(
-    collect_files_n_alignments(filename = "inva.lid", verbose = "TRUE nor FALSe"), # nolint
-    "verbose should be TRUE or FALSE"
-  )
 
   expect_error(
     collect_files_n_alignments(filename = c()),

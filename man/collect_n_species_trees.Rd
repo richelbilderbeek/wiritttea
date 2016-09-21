@@ -4,12 +4,10 @@
 \alias{collect_n_species_trees}
 \title{Collect the number of sampled species trees in a parameter file}
 \usage{
-collect_n_species_trees(filename, verbose = FALSE)
+collect_n_species_trees(filename)
 }
 \arguments{
 \item{filename}{name of the file containing the parameters and results}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 a data frame

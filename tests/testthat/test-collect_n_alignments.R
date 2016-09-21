@@ -46,13 +46,9 @@ test_that("collect_n_alignments: empty_file", {
 
 
 test_that("collect_n_alignments: abuse", {
-  expect_error(
-    collect_n_alignments(filename = "inva.lid", verbose = "TRUE nor FALSe"),
-    "verbose should be TRUE or FALSE"
-  )
 
   expect_error(
     collect_n_alignments(filename = "inva.lid"),
-    "invalid filename 'inva.lid'"
+    "invalid file"
   )
 })

@@ -4,12 +4,10 @@
 \alias{collect_n_posteriors}
 \title{Collect the number of posteriors in a parameter file}
 \usage{
-collect_n_posteriors(filename, verbose = FALSE)
+collect_n_posteriors(filename)
 }
 \arguments{
 \item{filename}{name of the file containing the parameters and results}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 a data frame

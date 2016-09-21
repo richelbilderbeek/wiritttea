@@ -74,7 +74,7 @@ These are the incipient species trees:
 colors <- stats::setNames(c("gray", "black"), c("i", "g"))
 
 for (filename in filenames) {
-  testit::assert(is_valid_file(filename))
+  testit::assert(wiritttes::is_valid_file(filename))
   testit::assert(length(read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
   print(filename)
   phytools::plotSimmap(

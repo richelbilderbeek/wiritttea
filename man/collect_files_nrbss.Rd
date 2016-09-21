@@ -5,12 +5,10 @@
 \title{Collects the NRBS values of all phylogenies belonging to a
 multiple parameter file in the melted/uncast/long form}
 \usage{
-collect_files_nrbss(filenames, verbose = FALSE)
+collect_files_nrbss(filenames)
 }
 \arguments{
 \item{filenames}{names of the parameter file}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 A dataframes of NRBS values
@@ -26,8 +24,8 @@ multiple parameter file in the melted/uncast/long form
   )
   df <- collect_files_nrbss(filenames)
   expected <- c(
-    "filename", "species_tree", "alignment",
-    "beast_run", "state", "nrbs"
+    "filename", "sti", "ai",
+    "pi", "si", "nrbs"
   )
   testit::assert(names(df) == expected)
   testit::assert(nrow(df) == 160)

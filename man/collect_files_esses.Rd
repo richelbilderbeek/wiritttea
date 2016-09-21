@@ -5,12 +5,10 @@
 \title{Collects the ESSes of all phylogenies belonging to the
 parameter files in the melted/uncast/long form}
 \usage{
-collect_files_esses(filenames, verbose = FALSE)
+collect_files_esses(filenames)
 }
 \arguments{
 \item{filenames}{names of the parameter files}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 A dataframe of ESSes for all files their posterior

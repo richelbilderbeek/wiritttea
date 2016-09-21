@@ -1,7 +1,6 @@
 #' Collects the number of alignments of all phylogenies belonging to a
 #' multiple parameter file in the melted/uncast/long form
 #' @param filenames names of the parameter file
-#' @param verbose give verbose output, should be TRUE or FALSE
 #' @return A dataframe with all number of sampled alignments of all files
 #' @examples
 #'   filenames <- c(
@@ -13,21 +12,9 @@
 #'   testit::assert(nrow(df) == length(filenames))
 #'   testit::assert(df$n_alignments == c(2, 4))
 #' @export
-collect_files_n_alignments <- function(
-  filenames,
-  verbose = FALSE
-) {
+collect_files_n_alignments <- function(filenames) {
   if (length(filenames) < 1) {
-    stop(
-      "collect_files_n_alignments: ",
-      "there must be at least one filename supplied"
-    )
-  }
-  if (verbose != TRUE && verbose != FALSE) {
-    stop(
-      "collect_files_n_alignments: ",
-      "verbose should be TRUE or FALSE"
-    )
+    stop("there must be at least one filename supplied")
   }
 
   # alignments
@@ -36,12 +23,9 @@ collect_files_n_alignments <- function(
     this_n_alignments <- NULL
     tryCatch(
       this_n_alignments <- collect_n_alignments(
-        filename = filename,
-        verbose = verbose
+        filename = filename
       ),
-      error = function(msg) {
-        if (verbose) message(msg)
-      }
+      error = function(msg) {} # nolint
     )
     if (is.null(this_n_alignments)) {
       this_n_alignments <- data.frame(

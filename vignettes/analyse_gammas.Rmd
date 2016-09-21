@@ -49,7 +49,7 @@ df_parameters <- read_collected_parameters()
 df_comparison <- merge(
   x = df_species_trees, 
   y = df_posterior, 
-  by = c("filename", "species_tree"), 
+  by = c("filename", "sti"), 
   all = TRUE
 )
 df_comparison$diff <- df_comparison$gamma_stat.x - 

@@ -46,13 +46,9 @@ test_that("collect_n_species_trees: empty_file", {
 
 
 test_that("collect_n_species_trees: abuse", {
-  expect_error(
-    collect_n_species_trees(filename = "inva.lid", verbose = "TRUE nor FALSe"), # nolint
-    "verbose should be TRUE or FALSE"
-  )
 
   expect_error(
     collect_n_species_trees(filename = "inval.lid"),
-    "collect_n_species_trees: invalid filename 'inval.lid'"
+    "invalid file"
   )
 })

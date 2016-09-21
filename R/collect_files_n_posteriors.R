@@ -1,7 +1,6 @@
 #' Collects the number of posteriors of all phylogenies belonging to a
 #' multiple parameter file in the melted/uncast/long form
 #' @param filenames names of the parameter file
-#' @param verbose give verbose output, should be TRUE or FALSE
 #' @return A dataframe with all number of sampled posteriors of all files
 #' @examples
 #'  filenames <- c(
@@ -13,16 +12,8 @@
 #'  testit::assert(nrow(df) == length(filenames))
 #'  testit::assert(df$n_posteriors == c(2, 8))
 #' @export
-collect_files_n_posteriors <- function(
-  filenames,
-  verbose = FALSE
-) {
-  if (verbose != TRUE && verbose != FALSE) {
-    stop(
-      "collect_files_n_posteriors: ",
-      "verbose should be TRUE or FALSE"
-    )
-  }
+collect_files_n_posteriors <- function(filenames) {
+
   if (length(filenames) < 1) {
     stop(
       "collect_files_n_posteriors: ",
@@ -36,12 +27,9 @@ collect_files_n_posteriors <- function(
     this_n_posteriors <- NULL
     tryCatch(
       this_n_posteriors <- collect_n_posteriors(
-        filename = filename,
-        verbose = verbose
+        filename = filename
       ),
-      error = function(msg) {
-        if (verbose) message(msg)
-      }
+      error = function(msg) {} # nolint
     )
     if (is.null(this_n_posteriors)) {
       this_n_posteriors <- data.frame(

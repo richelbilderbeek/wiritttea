@@ -4,12 +4,10 @@
 \alias{file_has_valid_parameters}
 \title{Checks if a file is a valid parameter file}
 \usage{
-file_has_valid_parameters(file, verbose = FALSE)
+file_has_valid_parameters(file)
 }
 \arguments{
 \item{file}{a file that has been openened by read_file}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 TRUE or FALSE

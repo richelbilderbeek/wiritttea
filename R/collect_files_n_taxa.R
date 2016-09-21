@@ -1,30 +1,19 @@
 #' Collects the number of taxa of all phylogenies belonging to a
 #' multiple parameter file in the melted/uncast/long form
 #' @param filenames names of the parameter file
-#' @param verbose give verbose output, should be TRUE or FALSE
 #' @return A dataframe with all number of taxa of all files
 #' @examples
 #'   filenames <- c(
 #'    find_path("toy_example_1.RDa"),
 #'    find_path("toy_example_2.RDa")
 #'  )
-#'  df <- collect_files_n_taxa(filenames, verbose = FALSE)
+#'  df <- collect_files_n_taxa(filenames)
 #'  testit::assert(names(df) == c("filename", "n_taxa"))
 #'  testit::assert(nrow(df) == length(filenames))
 #' @export
-collect_files_n_taxa <- function(
-  filenames,
-  verbose = FALSE
-) {
+collect_files_n_taxa <- function(filenames) {
 
-  if (verbose != TRUE && verbose != FALSE) {
-    stop(
-      "collect_files_n_taxa: ",
-      "verbose should be TRUE or FALSE"
-    )
-  }
-
-    if (length(filenames) < 1) {
+  if (length(filenames) < 1) {
     stop(
       "collect_files_n_taxa: ",
       "there must be at least one filename supplied"
@@ -37,12 +26,9 @@ collect_files_n_taxa <- function(
     this_n_taxa <- NULL
     tryCatch(
       this_n_taxa <- collect_species_tree_n_taxa(
-        filename = filename,
-        verbose = verbose
+        filename = filename
       ),
-      error = function(msg) {
-        if (verbose) message(msg)
-      }
+      error = function(msg) {} # nolint
     )
     if (is.null(this_n_taxa)) {
       this_n_taxa <- data.frame(

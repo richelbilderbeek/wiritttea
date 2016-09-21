@@ -6,7 +6,7 @@ csv_filename_nrbss <- "../inst/extdata/collected_nrbss.csv"
 fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
-df <- collect_files_nrbss(fns, verbose = FALSE)
+df <- collect_files_nrbss(fns)
 write.csv(
   x = df,
   file = csv_filename_nrbss,

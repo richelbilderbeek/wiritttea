@@ -1,6 +1,5 @@
 #' Collects the parameters of its input files
 #' @param filenames names of the parameter files
-#' @param verbose give verbose output, should be TRUE or FALSE
 #' @return a data.frame, one per parameter file. If all filenames are invalid,
 #'   a simpler data.frame is returned
 #' @examples
@@ -13,22 +12,13 @@
 #'  testit::assert(nrow(df) == 3)
 #' @export
 #' @author Richel Bilderbeek
-collect_parameters <- function(
-  filenames,
-  verbose = FALSE
-) {
-  if (verbose != TRUE && verbose != FALSE) {
-    stop(
-      "collect_parameters: ",
-      "verbose should be TRUE or FALSE"
-    )
-  }
+collect_parameters <- function(filenames) {
 
   parameter_names <- NULL
 
   # Find parameter filenames
   for (filename in filenames) {
-    if (!is_valid_file(filename = filename, verbose = verbose)) {
+    if (!wiritttes::is_valid_file(filename = filename)) {
       next
     }
     file <- wiritttea::read_file(filename)

@@ -1,6 +1,5 @@
 #' Collect the number of posteriors in a parameter file
 #' @param filename name of the file containing the parameters and results
-#' @param verbose give verbose output, should be TRUE or FALSE
 #' @return a data frame
 #' @examples
 #'  filename <- find_path("toy_example_3.RDa")
@@ -11,23 +10,10 @@
 #'  testit::assert(df$n_posteriors[1] == 8)
 #' @export
 #' @author Richel Bilderbeek
-collect_n_posteriors <- function(
-  filename,
-  verbose = FALSE
-) {
-  # Order dependency: check verbose first,
-  # otherwise is_valid_file will stop
-  if (verbose != TRUE && verbose != FALSE) {
-    stop(
-      "collect_n_posteriors: ",
-      "verbose should be TRUE or FALSE"
-    )
-  }
-  if (!is_valid_file(filename = filename, verbose = verbose)) {
-    stop(
-      "collect_n_posteriors: ",
-      "invalid filename '", filename, "'"
-    )
+collect_n_posteriors <- function(filename) {
+
+  if (!wiritttes::is_valid_file(filename = filename)) {
+    stop("invalid file")
   }
 
   file <- wiritttea::read_file(filename)

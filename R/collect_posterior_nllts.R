@@ -9,8 +9,8 @@ collect_posterior_nltts <- function(
   filename,
   dt
 ) {
-  if (!is_valid_file(filename)) {
-    stop("invalid filename")
+  if (!wiritttes::is_valid_file(filename)) {
+    stop("invalid file")
   }
 
   file <- wiritttea::read_file(filename)
@@ -29,9 +29,9 @@ collect_posterior_nltts <- function(
 
         n_nltt_values <- nrow(nltt_values)
         this_df <- data.frame(
-          species_tree = rep(sti, n_nltt_values),
-          alignment = rep(j, n_nltt_values),
-          beast_run = rep(k, n_nltt_values)
+          sti = rep(sti, n_nltt_values),
+          ai = rep(j, n_nltt_values),
+          pi = rep(k, n_nltt_values)
         )
         this_df <- cbind(this_df, nltt_values)
         if (is.null(df)) {
@@ -45,8 +45,8 @@ collect_posterior_nltts <- function(
   }
   testit::assert(!is.null(df$nltt))
   testit::assert(names(df)
-    ==  c("species_tree", "alignment", "beast_run", "id", "t", "nltt")
+    ==  c("sti", "ai", "pi", "id", "t", "nltt")
   )
-  names(df) <- c("species_tree", "alignment", "beast_run", "state", "t", "nltt")
+  names(df) <- c("sti", "ai", "pi", "si", "t", "nltt")
   df
 }

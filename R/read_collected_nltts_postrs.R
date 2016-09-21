@@ -4,8 +4,8 @@
 #'   df <- read_collected_nltts_postrs()
 #'   testit::assert(names(df) ==
 #'     c(
-#'       "filename", "species_tree", "alignment",
-#'       "beast_run", "state", "t", "nltt"
+#'       "filename", "sti", "ai",
+#'       "pi", "si", "t", "nltt"
 #'     )
 #'   )
 #' @author Richel Bilderbeek

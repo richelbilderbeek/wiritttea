@@ -5,12 +5,10 @@
 \title{Collects the number of alignments of all phylogenies belonging to a
 multiple parameter file in the melted/uncast/long form}
 \usage{
-collect_files_n_alignments(filenames, verbose = FALSE)
+collect_files_n_alignments(filenames)
 }
 \arguments{
 \item{filenames}{names of the parameter file}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 A dataframe with all number of sampled alignments of all files

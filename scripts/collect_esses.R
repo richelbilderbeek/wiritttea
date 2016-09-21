@@ -7,7 +7,7 @@ fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
 
-df <- collect_files_esses(fns, verbose = FALSE)
+df <- collect_files_esses(fns)
 write.csv(
   x = df,
   file = csv_filename_esses,

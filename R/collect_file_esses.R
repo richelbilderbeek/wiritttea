@@ -2,26 +2,20 @@
 #' parameter file in the melted/uncast/long form
 #'
 #' @param filename name of the parameter file
-#' @param verbose give verbose output, should be TRUE or FALSE
 #' @return A dataframe of ESSes for each posterior
 #' @examples
 #'   filename <- find_path("toy_example_3.RDa")
 #'   df <- collect_file_esses(filename)
 #'   testit::assert(nrow(df) == 8)
 #' @export
-collect_file_esses <- function(
-  filename,
-  verbose = FALSE
-) {
-  if (verbose != TRUE && verbose != FALSE) {
-    stop("verbose should be TRUE or FALSE")
-  }
+collect_file_esses <- function(filename) {
+
   if (length(filename) != 1) {
     stop(
       "there must be exactly one filename supplied"
     )
   }
-  if (!is_valid_file(filename = filename, verbose = verbose)) {
+  if (!wiritttes::is_valid_file(filename = filename)) {
     stop(
       "invalid file '", filename, "'"
     )

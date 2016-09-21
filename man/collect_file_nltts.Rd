@@ -5,15 +5,13 @@
 \title{Collects the nLTTs of all phylogenies belonging to a
 parameter file in the melted/uncast/long form}
 \usage{
-collect_file_nltts(filename, dt = 0.001, verbose = FALSE)
+collect_file_nltts(filename, dt = 0.001)
 }
 \arguments{
 \item{filename}{name of the parameter file}
 
 \item{dt}{the resolution of the nLTT plot,
 must be in range <0,1>, default is 0.001}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 A dataframe of gamma statistics of each phylogeny in time
@@ -28,7 +26,7 @@ parameter file in the melted/uncast/long form
   df <- collect_file_nltts(filename, dt = dt)
   testit::assert(names(df) == c("species_tree_nltts", "posterior_nltts"))
   testit::assert(names(df$species_tree_nltts)
-    == c("species_tree", "t", "nltt")
+    == c("sti", "t", "nltt")
   )
   testit::assert(nrow(df$species_tree_nltts) > 2)
   testit::assert(nrow(df$posterior_nltts) > 80)

@@ -5,12 +5,10 @@
 \title{Collects the NRBS values between species trees and
 posteriors in a parameter file in the melted/uncast/long form}
 \usage{
-collect_file_nrbss(filename, verbose = FALSE)
+collect_file_nrbss(filename)
 }
 \arguments{
 \item{filename}{name of the parameter file}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 A dataframe of NRBS values between each species tree and their posteriors
@@ -22,7 +20,7 @@ posteriors in a parameter file in the melted/uncast/long form
 \examples{
   filename <- find_path("toy_example_3.RDa")
   df <- collect_file_nrbss(filename)
-  testit::assert(names(df) == c("species_tree", "alignment", "beast_run", "state", "nrbs"))
+  testit::assert(names(df) == c("sti", "ai", "pi", "si", "nrbs"))
   testit::assert(nrow(df) == 80)
 }
 

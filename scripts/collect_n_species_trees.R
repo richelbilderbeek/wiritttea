@@ -3,7 +3,7 @@ folder <- "/home/p230198/GitHubs/wiritttea/scripts"
 fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
-df <- wiritttea::collect_files_n_species_trees(fns, verbose = TRUE)
+df <- wiritttea::collect_files_n_species_trees(fns)
 
 write.csv(
   x = df,

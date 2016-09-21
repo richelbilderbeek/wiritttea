@@ -5,12 +5,10 @@
 \title{Collects the number of posteriors of all phylogenies belonging to a
 multiple parameter file in the melted/uncast/long form}
 \usage{
-collect_files_n_posteriors(filenames, verbose = FALSE)
+collect_files_n_posteriors(filenames)
 }
 \arguments{
 \item{filenames}{names of the parameter file}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 A dataframe with all number of sampled posteriors of all files

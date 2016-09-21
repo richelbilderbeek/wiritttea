@@ -15,16 +15,9 @@ test_that("collect_species_tree_n_taxa: abuse", {
     collect_species_tree_n_taxa(
       filename = "inva.lid"
     ),
-    "invalid filename 'inva.lid'"
+    "invalid file"
   )
 
-  expect_error(
-    collect_species_tree_n_taxa(
-      filename = filename,
-      verbose = "invalid"
-    ),
-    "verbose should be TRUE or FALSE"
-  )
 })
 
 test_that("collect_species_tree_n_taxa: empty file should raise error", {
@@ -48,7 +41,7 @@ test_that("collect_species_tree_n_taxa: empty file should raise error", {
 
   # Mute output
   sink("/dev/null") # nolint
-  df <- collect_species_tree_n_taxa(filename = filename, verbose = TRUE)
+  df <- collect_species_tree_n_taxa(filename = filename)
   sink() # nolint
 
   expect_true(is.na(df$n_taxa[1]))

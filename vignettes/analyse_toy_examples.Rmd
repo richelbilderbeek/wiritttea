@@ -123,7 +123,7 @@ Here we simulate the 'true' incipient species tree:
 
 ```{r}
 filename <- filenames[1]
-testit::assert(is_valid_file(filename))
+testit::assert(wiritttes::is_valid_file(filename))
 add_pbd_output(filename)
 ```
 
@@ -403,7 +403,7 @@ Here we simulate the 'true' incipient species tree:
 
 ```{r}
 filename <- filenames[2]
-testit::assert(is_valid_file(filename))
+testit::assert(wiritttes::is_valid_file(filename))
 add_pbd_output(filename)
 ```
 

@@ -6,20 +6,15 @@ test_that("collect_files_nrbss: use", {
     find_path("toy_example_3.RDa"),
     find_path("toy_example_4.RDa")
   )
-  df <- collect_files_nrbss(filenames, verbose = FALSE)
+  df <- collect_files_nrbss(filenames)
   expect_equal(
     names(df),
-    c("filename", "species_tree", "alignment", "beast_run", "state", "nrbs")
+    c("filename", "sti", "ai", "pi", "si", "nrbs")
   )
   expect_equal(nrow(df), 160)
 })
 
 test_that("collect_files_nrbss: abuse", {
-
-  expect_error(
-    collect_files_nrbss(filenames = "inval.lid", verbose = "TRUE nor FALSE"),
-    "verbose should be TRUE or FALSE"
-  )
 
   expect_error(
     collect_files_nrbss(filenames = c()),

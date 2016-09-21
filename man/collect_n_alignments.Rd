@@ -4,12 +4,10 @@
 \alias{collect_n_alignments}
 \title{Collect the number of alignments in a parameter file}
 \usage{
-collect_n_alignments(filename, verbose = FALSE)
+collect_n_alignments(filename)
 }
 \arguments{
 \item{filename}{name of the file containing the parameters and results}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 a data frame

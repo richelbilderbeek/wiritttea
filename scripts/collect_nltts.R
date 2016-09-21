@@ -9,7 +9,7 @@ fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
 
-df <- collect_files_nltts(fns, dt = dt, verbose = FALSE)
+df <- collect_files_nltts(fns, dt = dt)
 write.csv(
   x = df$species_tree_nltts,
   file = csv_filename_species_trees,

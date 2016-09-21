@@ -49,13 +49,9 @@ test_that("collect_n_posteriors: empty_file", {
 
 
 test_that("collect_n_posteriors: abuse", {
-  expect_error(
-    collect_n_posteriors(filename = "inva.lid", verbose = "TRUE nor FALSe"), # nolint
-    "verbose should be TRUE or FALSE"
-  )
 
   expect_error(
     collect_n_posteriors(filename = "inval.lid"),
-    "invalid filename 'inval.lid'"
+    "invalid file"
   )
 })

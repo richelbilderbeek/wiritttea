@@ -2,35 +2,20 @@
 #' posteriors in a parameter file in the melted/uncast/long form
 #'
 #' @param filename name of the parameter file
-#' @param verbose give verbose output, should be TRUE or FALSE
 #' @return A dataframe of NRBS values between each species tree and their posteriors
 #' @examples
 #'   filename <- find_path("toy_example_3.RDa")
 #'   df <- collect_file_nrbss(filename)
-#'   testit::assert(names(df) == c("species_tree", "alignment", "beast_run", "state", "nrbs"))
+#'   testit::assert(names(df) == c("sti", "ai", "pi", "si", "nrbs"))
 #'   testit::assert(nrow(df) == 80)
 #' @export
-collect_file_nrbss <- function(
-  filename,
-  verbose = FALSE
-) {
+collect_file_nrbss <- function(filename) {
+
   if (length(filename) != 1) {
-    stop(
-      "collect_file_nrbss: ",
-      "there must be exactly one filename supplied"
-    )
+    stop("there must be exactly one filename supplied")
   }
-  if (verbose != TRUE && verbose != FALSE) {
-    stop(
-      "collect_file_nrbss: ",
-      "verbose should be TRUE or FALSE"
-    )
-  }
-  if (!is_valid_file(filename = filename, verbose = verbose)) {
-    stop(
-      "collect_file_nrbss: ",
-      "invalid file '", filename, "'"
-    )
+  if (!wiritttes::is_valid_file(filename = filename)) {
+    stop("invalid file")
   }
 
   file <- wiritttea::read_file(filename)
@@ -91,9 +76,7 @@ collect_file_nrbss <- function(
     df$nrbs[i] <- NA
     tryCatch(
       df$nrbs[i] <- nrbs(st, pt),
-      error = function(msg) {
-        if (verbose) message(msg)
-      }
+      error = function(msg) {} # nolint
     )
   }
 

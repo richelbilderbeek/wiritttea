@@ -4,12 +4,10 @@
 \alias{collect_parameters}
 \title{Collects the parameters of its input files}
 \usage{
-collect_parameters(filenames, verbose = FALSE)
+collect_parameters(filenames)
 }
 \arguments{
 \item{filenames}{names of the parameter files}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 a data.frame, one per parameter file. If all filenames are invalid,

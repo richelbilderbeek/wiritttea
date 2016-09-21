@@ -5,12 +5,10 @@
 \title{Collects the number of sampled species trees of all phylogenies belonging to a
 multiple parameter file in the melted/uncast/long form}
 \usage{
-collect_files_n_species_trees(filenames, verbose = FALSE)
+collect_files_n_species_trees(filenames)
 }
 \arguments{
 \item{filenames}{names of the parameter file}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 A dataframe with all number of sampled species trees of all files
@@ -24,7 +22,7 @@ multiple parameter file in the melted/uncast/long form
    find_path("toy_example_1.RDa"),
    find_path("toy_example_2.RDa")
  )
- df <- collect_files_n_species_trees(filenames, verbose = FALSE)
+ df <- collect_files_n_species_trees(filenames)
  testit::assert(names(df) == c("filename", "n_species_trees"))
  testit::assert(nrow(df) == length(filenames))
 }

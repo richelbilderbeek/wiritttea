@@ -5,12 +5,10 @@
 \title{Collects the gamma statistics of all phylogenies belonging to a
 parameter file in the melted/uncast/long form}
 \usage{
-collect_file_gammas(filename, verbose = FALSE)
+collect_file_gammas(filename)
 }
 \arguments{
 \item{filename}{name of the parameter file}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 A dataframe of gamma statistics of each phylogeny in time
@@ -24,7 +22,7 @@ parameter file in the melted/uncast/long form
   df <- collect_file_gammas(filename)
   testit::assert(names(df) == c("species_tree_gammas", "posterior_gammas"))
   testit::assert(names(df$species_tree_gammas)
-    == c("species_tree", "gamma_stat")
+    == c("sti", "gamma_stat")
   )
   testit::assert(nrow(df$species_tree_gammas) == 2)
   testit::assert(nrow(df$posterior_gammas) == 80)

@@ -6,7 +6,7 @@ csv_filename_posterior     <- "../inst/extdata/collected_gammas_posterior.csv"
 fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
-df <- collect_files_gammas(fns, verbose = FALSE)
+df <- collect_files_gammas(fns)
 write.csv(
   x = df$species_tree_gamma_stats,
   file = csv_filename_species_trees,

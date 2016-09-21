@@ -6,16 +6,14 @@
 #'   filename <- find_path("toy_example_3.RDa")
 #'   df <- collect_posterior_gammas(filename)
 #'   testit::assert(names(df) ==
-#'     c("species_tree", "alignment", "beast_run", "gamma_stat")
+#'     c("sti", "ai", "pi", "gamma_stat")
 #'   )
 #'   testit::assert(nrow(df) == 80)
 #' @author Richel Bilderbeek
 collect_posterior_gammas <- function(filename) {
-  if (!is_valid_file(filename)) {
-    stop(
-      "collect_posterior_gammas: ",
-      "invalid filename"
-    )
+
+  if (!wiritttes::is_valid_file(filename)) {
+    stop("invalid file")
   }
 
   id <- NULL; rm(id) # nolint, should fix warning: collect_posterior_gammas: no visible binding for global variable ‘id’

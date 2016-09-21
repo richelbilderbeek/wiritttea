@@ -10,18 +10,13 @@ test_that("collect_file_nltts: use", {
   )
   expect_equal(
     names(df$species_tree_nltts),
-    c("species_tree", "t", "nltt")
+    c("sti", "t", "nltt")
   )
   expect_true(nrow(df$species_tree_nltts) > 2)
   expect_true(nrow(df$posterior_nltts) > 80)
 })
 
 test_that("collect_file_nltts: abuse", {
-
-  expect_error(
-    collect_file_nltts(filename = "NA", verbose = "not TRUE nor FALSE"),
-    "verbose should be TRUE or FALSE"
-  )
 
   expect_error(
     collect_file_nltts(filename = c("inva", "lid")),

@@ -5,7 +5,7 @@ test_that("read_collected_nltts_strees: use", {
   expect_true(
     identical(
       names(df),
-      c("filename", "species_tree", "t", "nltt")
+      c("filename", "sti", "t", "nltt")
     )
   )
 })

@@ -4,12 +4,10 @@
 \alias{collect_species_tree_n_taxa}
 \title{Collect the number of taxa of the species trees}
 \usage{
-collect_species_tree_n_taxa(filename, verbose = FALSE)
+collect_species_tree_n_taxa(filename)
 }
 \arguments{
 \item{filename}{name of the file containing the parameters and results}
-
-\item{verbose}{give verbose output, should be TRUE or FALSE}
 }
 \value{
 a data frame

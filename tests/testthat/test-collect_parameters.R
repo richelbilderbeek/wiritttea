@@ -6,7 +6,7 @@ test_that("collect_parameters: use", {
   df <- collect_parameters(filenames = filenames)
 })
 
-test_that("collect_parameters: invalid filenames return an empty data.frame", {
+test_that("collect_parameters: invalid file return an empty data.frame", {
 
   df <- collect_parameters(filenames = c("inva.lid"))
   expect_equal(class(df), "data.frame")
@@ -14,13 +14,6 @@ test_that("collect_parameters: invalid filenames return an empty data.frame", {
 })
 
 test_that("collect_parameters: abuse", {
-
-  # verbose
-  expect_error(
-    collect_parameters(filenames = c(), verbose = "TRUE nor FALSE"),
-    "verbose should be TRUE or FALSE"
-  )
-
 
   # Create a 'corrupt file'
   filename <- "test-collect_parameters.RDa"

@@ -1,15 +1,10 @@
 #' Creates a nice knitr::table to show one or more parameter files
 #' @param filenames names of the parameter files
-#' @param verbose give verbose output, should be TRUE or FALSE
 #' @export
 #' @author Richel Bilderbeek
-show_parameter_files <- function(
-  filenames,
-  verbose = FALSE
-) {
+show_parameter_files <- function(filenames) {
   df <- collect_parameters(
-    filenames = filenames,
-    verbose = verbose
+    filenames = filenames
   )
   my_table <- knitr::kable(df)
   my_table

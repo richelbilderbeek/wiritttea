@@ -16,7 +16,7 @@ calc_nltt_stats_from_files <- function(filenames) {
 
   # Check all files
   for (filename in filenames) {
-    if (!wiritttea::is_valid_file(filename)) {
+    if (!wiritttes::is_valid_file(filename)) {
       stop("invalid file '",
         filename, "'"
       )
