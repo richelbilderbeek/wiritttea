@@ -22,8 +22,3 @@ test_that("find_paths: use", {
   expect_equal(paths[1], path1)
   expect_equal(paths[2], path2)
 })
-
-test_that("find_beast_jar_path: basic test", {
-  path <- find_beast_jar_path()
-  expect_true(file.exists(path))
-})
