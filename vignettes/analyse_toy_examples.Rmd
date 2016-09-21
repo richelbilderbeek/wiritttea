@@ -296,7 +296,7 @@ First, I collect the gamma statistics from the species
 tree(s) with outgroup(s):
 
 ```{r}
-true_gamma_statistics <- collect_species_tree_gammas(filename = filename)
+true_gamma_statistics <- collect_file_species_tree_gammas(filename = filename)
 knitr::kable(head(true_gamma_statistics))
 ```
 
@@ -306,7 +306,7 @@ have one species tree.
 Then, I collect the gamma statistics from the posterior(s):
 
 ```{r}
-posterior_gamma_statistics <- collect_posterior_gammas(
+posterior_gamma_statistics <- collect_file_posterior_gammas(
   filename = filename
 )
 knitr::kable(head(posterior_gamma_statistics))
@@ -321,14 +321,14 @@ First, I collect the nLTT values from the species
 tree(s) with outgroup(s):
 
 ```{r}
-true_nltt_values <- collect_species_tree_nltts(filename = filename, dt = dt)
+true_nltt_values <- collect_file_species_tree_nltts(filename = filename, dt = dt)
 knitr::kable(head(true_nltt_values))
 ```
 
 Then, I collect the nLTT values from the posterior(s):
 
 ```{r}
-posterior_nltt_values <- collect_posterior_nltts(
+posterior_nltt_values <- collect_file_posterior_nltts(
   filename = filename, dt = dt
 )
 knitr::kable(head(posterior_nltt_values))
@@ -521,14 +521,14 @@ First, I collect the nLTT values from the species
 tree(s) with outgroup(s):
 
 ```{r}
-true_nltt_values <- collect_species_tree_nltts(filename = filename, dt = dt)
+true_nltt_values <- collect_file_species_tree_nltts(filename = filename, dt = dt)
 knitr::kable(head(true_nltt_values))
 ```
 
 Then, I collect the nLTT values from the posterior(s):
 
 ```{r}
-posterior_nltt_values <- collect_posterior_nltts(
+posterior_nltt_values <- collect_file_posterior_nltts(
   filename = filename, dt = dt
 )
 knitr::kable(head(posterior_nltt_values))

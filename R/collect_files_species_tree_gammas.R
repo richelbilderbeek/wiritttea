@@ -28,7 +28,7 @@ collect_files_species_tree_gammas <- function(filenames) {
   for (filename in filenames) {
     this_stgs <- NULL
     tryCatch(
-      this_stgs <- collect_species_tree_gammas(filename),
+      this_stgs <- collect_file_species_tree_gammas(filename),
       error = function(msg) {} # nolint
     )
     if (is.null(this_stgs)) {

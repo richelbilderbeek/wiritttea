@@ -16,7 +16,7 @@ collect_files_posterior_nltts <- function(filenames, dt) {
   for (filename in filenames) {
     this_pns <- NULL
     tryCatch(
-      this_pns <- wiritttea::collect_posterior_nltts(
+      this_pns <- wiritttea::collect_file_posterior_nltts(
         filename = filename, dt = dt
       ),
       error = function(msg) {} # nolint

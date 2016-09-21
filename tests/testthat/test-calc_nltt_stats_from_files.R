@@ -17,7 +17,9 @@ test_that("calc_nltt_stats_from_files: fix #112", {
   nltt_stats <- calc_nltt_stats_from_files(
     filenames = c(filename)
   )
-  # Th tenth posterior always has an nLTT statistics of 0.0
+  # The tenth posterior always has an nLTT statistics of 0.0,
+  # unless the file has not calculated the posteriors.
+  # If the latter is the case, nltt_stat will be NA
   expect_true(sum(nltt_stats[ nltt_stats$si == 10, ]$nltt_stat) > 0)
 })
 

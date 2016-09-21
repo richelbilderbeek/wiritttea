@@ -3,13 +3,13 @@
 #' @return a data frame
 #' @examples
 #'  filename <- find_path("toy_example_1.RDa")
-#'  df <- collect_species_tree_gammas(filename)
+#'  df <- collect_file_species_tree_gammas(filename)
 #'  testit::assert(names(df) == c("sti", "gamma_stat"))
 #'  testit::assert(nrow(df) == 2)
 #'  testit::assert(abs(df$gamma_stat - -0.7585369) < 0.0001)
 #' @export
 #' @author Richel Bilderbeek
-collect_species_tree_gammas <- function(filename) {
+collect_file_species_tree_gammas <- function(filename) {
 
   if (!wiritttes::is_valid_file(filename)) {
     stop("invalid file")

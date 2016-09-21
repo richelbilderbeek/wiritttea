@@ -6,12 +6,12 @@
 #' @examples
 #'   dt <- 0.1
 #'   filename <- find_path("toy_example_3.RDa")
-#'   df <- collect_species_tree_nltts(filename, dt = dt)
+#'   df <- collect_file_species_tree_nltts(filename, dt = dt)
 #'   testit::assert(names(df) == c("sti", "t", "nltt"))
 #'   testit::assert(nrow(df) == 2 * (1 + (1/dt)))
 #' @author Richel Bilderbeek
 #' @export
-collect_species_tree_nltts <- function(
+collect_file_species_tree_nltts <- function(
   filename,
   dt
 ) {
@@ -19,7 +19,7 @@ collect_species_tree_nltts <- function(
     stop("invalid file")
   }
 
-  id <- NULL; rm(id) # nolint, should fix warning: collect_species_tree_nltts: no visible binding for global variable ‘id’
+  id <- NULL; rm(id) # nolint, should fix warning: collect_file_species_tree_nltts: no visible binding for global variable ‘id’
 
   file <- wiritttea::read_file(filename)
 

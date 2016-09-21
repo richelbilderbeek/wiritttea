@@ -5,10 +5,7 @@
 #' @return a data frame
 #' @author Richel Bilderbeek
 #' @export
-collect_posterior_nltts <- function(
-  filename,
-  dt
-) {
+collect_file_posterior_nltts <- function(filename, dt) {
   if (!wiritttes::is_valid_file(filename)) {
     stop("invalid file")
   }

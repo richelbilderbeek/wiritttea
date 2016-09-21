@@ -4,19 +4,19 @@
 #' @export
 #' @examples
 #'   filename <- find_path("toy_example_3.RDa")
-#'   df <- collect_posterior_gammas(filename)
+#'   df <- collect_file_posterior_gammas(filename)
 #'   testit::assert(names(df) ==
 #'     c("sti", "ai", "pi", "gamma_stat")
 #'   )
 #'   testit::assert(nrow(df) == 80)
 #' @author Richel Bilderbeek
-collect_posterior_gammas <- function(filename) {
+collect_file_posterior_gammas <- function(filename) {
 
   if (!wiritttes::is_valid_file(filename)) {
     stop("invalid file")
   }
 
-  id <- NULL; rm(id) # nolint, should fix warning: collect_posterior_gammas: no visible binding for global variable ‘id’
+  id <- NULL; rm(id) # nolint, should fix warning: collect_file_posterior_gammas: no visible binding for global variable ‘id’
 
   file <- wiritttea::read_file(filename)
   parameters <- file$parameters

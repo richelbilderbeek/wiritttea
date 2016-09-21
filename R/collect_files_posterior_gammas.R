@@ -28,7 +28,7 @@ collect_files_posterior_gammas <- function(filenames) {
   for (filename in filenames) {
     this_pgs <- NULL
     tryCatch(
-      this_pgs <- collect_posterior_gammas(filename),
+      this_pgs <- collect_file_posterior_gammas(filename),
       error = function(msg) {} # nolint
     )
     if (is.null(this_pgs)) {
