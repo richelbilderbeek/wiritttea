@@ -6,7 +6,7 @@
 #'   filename <- find_path("toy_example_3.RDa")
 #'   df <- collect_file_posterior_gammas(filename)
 #'   testit::assert(names(df) ==
-#'     c("sti", "ai", "pi", "gamma_stat")
+#'     c("sti", "ai", "pi", "si", "gamma_stat")
 #'   )
 #'   testit::assert(nrow(df) == 80)
 #' @author Richel Bilderbeek
@@ -30,13 +30,15 @@ collect_file_posterior_gammas <- function(filename) {
     for (j in seq(1, n_alignments)) {
       for (k in seq(1, n_beast_runs)) {
         phylogenies <- wiritttes::get_posteriors(file)[[index]][[1]]$trees
+
+        # 'id' column will be changed to 'si' in the end
         gamma_statistics <- wiritttea::collect_gamma_statistics(phylogenies)
 
         # Remove id column
-        gamma_statistics <- subset(
-          gamma_statistics,
-          select = -c(id) # nolint Putting 'gamma_statistics$' before ID will break the code
-        )
+        #gamma_statistics <- subset(
+        #  gamma_statistics,
+        #  select = -c(id) # nolint Putting 'gamma_statistics$' before ID will break the code
+        #)
         testit::assert(!is.null(gamma_statistics$gamma))
 
         n_gamma_statistics <- nrow(gamma_statistics)
@@ -55,6 +57,8 @@ collect_file_posterior_gammas <- function(filename) {
       }
     }
   }
+
+  df <- plyr::rename(df, c("id" = "si"))
   testit::assert(!is.null(df$gamma))
   df
 }

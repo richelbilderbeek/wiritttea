@@ -27,7 +27,7 @@ Number of filenames: `r nrow(df)`
 Putting the head of the data frame in a table:
 
 ```{r}
-knitr::kable(head(df))
+knitr::kable(t(head(df)))
 ```
 
 What kind of data is `df`?

@@ -37,7 +37,8 @@ df_species_trees <- read.csv(
  row.names = 1
 )
 
-df_posterior <- read.csv(
+df_posterior <- read_collected_gammas_postrs()
+read.csv(
  file = csv_filename_posterior, 
  header = TRUE, 
  stringsAsFactors = FALSE, 

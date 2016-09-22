@@ -19,7 +19,7 @@ Collect the gamma statistics of the BEAST2 posteriors
   filename <- find_path("toy_example_3.RDa")
   df <- collect_file_posterior_gammas(filename)
   testit::assert(names(df) ==
-    c("sti", "ai", "pi", "gamma_stat")
+    c("sti", "ai", "pi", "si", "gamma_stat")
   )
   testit::assert(nrow(df) == 80)
 }

@@ -9,7 +9,7 @@ test_that("collect_files_posterior_gammas: use", {
   df <- collect_files_posterior_gammas(filenames)
   expect_equal(
     names(df),
-    c("filename", "sti", "ai", "pi", "gamma_stat")
+    c("filename", "sti", "ai", "pi", "si", "gamma_stat")
   )
   expect_equal(nrow(df), 160)
 })
