@@ -15,7 +15,7 @@
 #' @export
 read_collected_nltt_stats <- function(
   filename = wiritttea::find_path(
-    "collected_files_nltt_stats.csv"
+    "collect_files_nltt_stats.csv"
   )
 ) {
   if (!file.exists(filename)) {

@@ -14,10 +14,7 @@
 collect_files_n_taxa <- function(filenames) {
 
   if (length(filenames) < 1) {
-    stop(
-      "collect_files_n_taxa: ",
-      "there must be at least one filename supplied"
-    )
+    stop("there must be at least one filename supplied")
   }
 
   # Species trees

@@ -1,7 +1,6 @@
 context("alignments_same_distr")
 
 test_that("dataset is too small sometimes", {
-  skip("not now")
   # Collect the nLTT stats
   nltt_stats_raw <- read_collected_nltt_stats()
   # Remove the NAs

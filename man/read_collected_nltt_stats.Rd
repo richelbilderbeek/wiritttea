@@ -5,7 +5,7 @@
 \title{Read all the collected nLTT statistics of all simulations}
 \usage{
 
-  read_collected_nltt_stats(filename = wiritttea::find_path("collected_files_nltt_stats.csv"))
+  read_collected_nltt_stats(filename = wiritttea::find_path("collect_files_nltt_stats.csv"))
 }
 \arguments{
 \item{filename}{the name of the CSV containing the collected nLTT
