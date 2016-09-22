@@ -42,7 +42,7 @@ test_that("collect_files_parameters: is add_outgroup really gone?", {
   filenames <- paste0("collect_files_parameters_", seq(1, 4), ".RDa")
   wiritttes::create_test_parameter_files(filenames = filenames)
   for (filename in filenames) {
-    file <- read_file(filename)
+    file <- wiritttes::read_file(filename)
     expect_true("rng_seed" %in% names(file$parameters[2, , 2]))
     expect_false("add_outgroup" %in% names(file$parameters[2, , 2]))
   }

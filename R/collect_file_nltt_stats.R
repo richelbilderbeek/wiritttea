@@ -13,9 +13,9 @@ collect_file_nltt_stats <- function(filename) {
   file <- wiritttes::read_file(filename)
 
   nst <- 2 # Number of species trees
-  napst <- wiritttea::extract_napst(file) # number of alignments per species tree
-  nppa <- wiritttea::extract_nppa(file) # number of number of posteriors per alignment # nolint
-  nspp <- wiritttea::extract_nspp(file) # number of states per posterior
+  napst <- wiritttes::extract_napst(file) # number of alignments per species tree
+  nppa <- wiritttes::extract_nppa(file) # number of number of posteriors per alignment # nolint
+  nspp <- wiritttes::extract_nspp(file) # number of states per posterior
   n_rows <- nst * napst * nppa * nspp
 
 

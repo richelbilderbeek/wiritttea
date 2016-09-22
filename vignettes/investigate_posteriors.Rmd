@@ -13,7 +13,7 @@ vignette: >
 library(wiritttea)
 options(warn = 2)
 filename <- find_path("toy_example_4.RDa")
-file <- read_file(filename)
+file <- wiritttes::read_file(filename)
 posterior_1 <- wiritttes::get_posterior_by_index(file, 1)$trees
 posterior_2 <- wiritttes::get_posterior_by_index(file, 2)$trees
 posterior_3 <- wiritttes::get_posterior_by_index(file, 3)$trees

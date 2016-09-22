@@ -5,7 +5,7 @@
 #'   must be in range <0,1>, default is 0.001
 #' @return A dataframe
 #' @export
-collect_files_species_tree_nltt <- function(filenames, dt = 0.001) {
+collect_files_species_tree_nltts <- function(filenames, dt = 0.001) {
 
   if (length(filenames) < 1) {
     stop(

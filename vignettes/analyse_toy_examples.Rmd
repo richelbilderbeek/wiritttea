@@ -131,12 +131,12 @@ This is how the incipient species tree looks like:
 
 ```{r}
 colors <- stats::setNames(c("gray", "black"), c("i", "g"))
-testit::assert(length(read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
+testit::assert(length(wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
 phytools::plotSimmap(
-  read_file(filename)$pbd_output$igtree.extant, 
+  wiritttes::read_file(filename)$pbd_output$igtree.extant, 
   colors = colors
 )
-n_taxa_istree <- length(read_file(filename)$pbd_output$igtree.extant$tip.label)
+n_taxa_istree <- length(wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label)
 ```
 
 There are `r n_taxa_istree` taxa in the incipient species tree. 
@@ -147,7 +147,7 @@ Now, we plot the nLTT plot of this phylogeny:
 
 ```{r}
 nltt_values <- get_nltt_values(
-  phylogenies = list(read_file(filename)$pbd_output$tree), 
+  phylogenies = list(wiritttes::read_file(filename)$pbd_output$tree), 
   dt = 0.001
 )
 qplot(
@@ -179,7 +179,7 @@ Here we observe the sample species tree:
 ```{r}
 plot_species_tree(filename)
 plot_species_tree_nltt(filename, dt = 0.001)
-n_taxa_sstree <- length(read_file(filename)$species_trees[[1]][[1]]$tip.label)
+n_taxa_sstree <- length(wiritttes::read_file(filename)$species_trees[[1]][[1]]$tip.label)
 ```
 
 
@@ -210,7 +210,7 @@ plot_alignments(filename)
 n_taxa_alignment <- length(
   labels(
     get_alignment_by_index(
-      file = read_file(filename), 
+      file = wiritttes::read_file(filename), 
       i = 1
     )
   )
@@ -237,7 +237,7 @@ It can be seen that the values for ESS (Effective Sample Size) are above 200 and
 A posterior contains many phylogenies. 
 
 ```{r}
-phylogenies <- wiritttes::get_posteriors(read_file(filename))[[1]][[1]]$trees
+phylogenies <- wiritttes::get_posteriors(wiritttes::read_file(filename))[[1]][[1]]$trees
 # To get the densiTree function working, phylogenies must be of class multiphylo
 class(phylogenies) <- "multiPhylo"
 ```
@@ -411,9 +411,9 @@ This is how the incipient species tree looks like:
 
 ```{r}
 colors <- stats::setNames(c("gray", "black"), c("i", "g"))
-testit::assert(length(read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
+testit::assert(length(wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
 phytools::plotSimmap(
-  read_file(filename)$pbd_output$igtree.extant, 
+  wiritttes::read_file(filename)$pbd_output$igtree.extant, 
   colors = colors
 )
 ```
@@ -422,7 +422,7 @@ Now, we plot the nLTT plot of this phylogeny:
 
 ```{r}
 nltt_values <- get_nltt_values(
-  phylogenies = list(read_file(filename)$pbd_output$tree), 
+  phylogenies = list(wiritttes::read_file(filename)$pbd_output$tree), 
   dt = 0.001
 )
 qplot(
@@ -482,7 +482,7 @@ A posterior contains many phylogenies. To visualize these,
 they are extracted from a `.trees` file here:
 
 ```{r}
-phylogenies <- wiritttes::get_posteriors(read_file(filename))[[1]][[1]]$trees
+phylogenies <- wiritttes::get_posteriors(wiritttes::read_file(filename))[[1]][[1]]$trees
 # To get the densiTree function working, phylogenies must be of class multiphylo
 class(phylogenies) <- "multiPhylo"
 ```

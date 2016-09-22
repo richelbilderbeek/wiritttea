@@ -16,6 +16,7 @@ collect_all <- function(folder = "~/GitHubs/wiritttea/inst/extdata")
   collect_functions <- ls(getNamespace("wiritttea"), pattern = "collect_files_")
   for (f in collect_functions)
   {
+    print(f)
     df <- do.call(f, list(filenames = rda_files))
     testit::assert(class(df) == "data.frame")
     csv_filename <- paste0(folder, "/", f, ".csv")

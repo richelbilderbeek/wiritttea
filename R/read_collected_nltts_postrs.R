@@ -20,8 +20,8 @@ read_collected_nltts_postrs <- function() {
    stringsAsFactors = FALSE,
    row.names = 1
   )
-  df$species_tree <- as.factor(df$species_tree)
-  df$alignment <- as.factor(df$alignment)
-  df$beast_run <- as.factor(df$beast_run)
+  df$sti <- as.factor(df$sti)
+  df$ai <- as.factor(df$ai)
+  df$pi <- as.factor(df$pi)
   df
 }

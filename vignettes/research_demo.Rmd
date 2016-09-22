@@ -75,10 +75,10 @@ colors <- stats::setNames(c("gray", "black"), c("i", "g"))
 
 for (filename in filenames) {
   testit::assert(wiritttes::is_valid_file(filename))
-  testit::assert(length(read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
+  testit::assert(length(wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
   print(filename)
   phytools::plotSimmap(
-    read_file(filename)$pbd_output$igtree.extant, 
+    wiritttes::read_file(filename)$pbd_output$igtree.extant, 
     colors = colors
   )
 }
@@ -192,10 +192,10 @@ ggplot2::ggplot(
 
 
 ```{r fig.width = 7, fig.height = 7}
-phylogenies_11 <- wiritttes::get_posterior(file = read_file(filenames[1]), sti = 1, ai = 1, pi = 1)$trees
-phylogenies_12 <- wiritttes::get_posterior(file = read_file(filenames[1]), sti = 2, ai = 1, pi = 1)$trees
-phylogenies_21 <- wiritttes::get_posterior(file = read_file(filenames[2]), sti = 1, ai = 1, pi = 1)$trees
-phylogenies_22 <- wiritttes::get_posterior(file = read_file(filenames[2]), sti = 2, ai = 1, pi = 1)$trees
+phylogenies_11 <- wiritttes::get_posterior(file = wiritttes::read_file(filenames[1]), sti = 1, ai = 1, pi = 1)$trees
+phylogenies_12 <- wiritttes::get_posterior(file = wiritttes::read_file(filenames[1]), sti = 2, ai = 1, pi = 1)$trees
+phylogenies_21 <- wiritttes::get_posterior(file = wiritttes::read_file(filenames[2]), sti = 1, ai = 1, pi = 1)$trees
+phylogenies_22 <- wiritttes::get_posterior(file = wiritttes::read_file(filenames[2]), sti = 2, ai = 1, pi = 1)$trees
 
 class(phylogenies_11) <- "multiPhylo"
 class(phylogenies_12) <- "multiPhylo"

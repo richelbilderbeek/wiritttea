@@ -43,7 +43,7 @@ The function `read_file` reads the file (it also checks
 if the file does indeed exist):
 
 ```{r}
-file <- read_file(filename)
+file <- wiritttes::read_file(filename)
 ```
 
 `file`, which is a file, has a (hopefully) convenient structure.
@@ -91,7 +91,7 @@ The incipient species tree looks like this:
 
 ```{r}
 colors <- stats::setNames(c("gray", "black"), c("i", "g"))
-testit::assert(length(read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
+testit::assert(length(wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
 phytools::plotSimmap(
   file$pbd_output$igtree.extant, 
   colors = colors
@@ -167,7 +167,7 @@ library(wiritttea)
 library(phytools)
 library(apTreeshape) # For colless
 filename <- find_path("toy_example_1.RDa")
-file <- read_file(filename)
+file <- wiritttes::read_file(filename)
 ```
 
 I will use that tree as my true tree (sorry for all those square

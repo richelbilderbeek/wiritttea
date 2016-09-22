@@ -18,7 +18,7 @@ collect_file_nrbss <- function(filename) {
     stop("invalid file")
   }
 
-  file <- wiritttea::read_file(filename)
+  file <- wiritttes::read_file(filename)
 
   n_species_trees <- 2
   n_alignments <- as.numeric(
@@ -27,7 +27,7 @@ collect_file_nrbss <- function(filename) {
   n_beast_runs <- as.numeric(
     file$parameters$n_beast_runs[2]
   )
-  n_states <- extract_nspp(file)
+  n_states <- wiritttes::extract_nspp(file)
   n_rows <- n_species_trees * n_alignments * n_beast_runs * n_states
 
   # Create an empty data frame like this:
@@ -59,15 +59,15 @@ collect_file_nrbss <- function(filename) {
 
   for (i in 1:n_rows) {
 
-    sti <- df$species_tree[i] # species tree index
-    ai <- df$alignment[i] # alignment index
-    pi <- df$beast_run[i] # posterior index
-    si <- df$state[i] # state index
+    sti <- df$sti[i] # species tree index
+    ai <- df$ai[i] # alignment index
+    pi <- df$pi[i] # posterior index
+    si <- df$si[i] # state index
     # st: species tree
     st <- wiritttes::get_species_tree_by_index(file = file, sti = sti)
     testit::assert(class(st) == "phylo")
     testit::assert(si >= 1)
-    testit::assert(si <= length(get_posterior(file, sti = sti, ai = ai, pi = pi)$trees)) # nolint
+    testit::assert(si <= length(wiritttes::get_posterior(file, sti = sti, ai = ai, pi = pi)$trees)) # nolint
     # pt: posterior state tree, of type phylo
     pt <- wiritttes::get_posterior(file, sti = sti, ai = ai, pi = pi)$trees[[si]]
     testit::assert(class(pt) == "phylo")
