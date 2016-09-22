@@ -21,7 +21,7 @@ collect_file_esses <- function(filename) {
     )
   }
 
-  file <- wiritttea::read_file(filename)
+  file <- wiritttes::read_file(filename)
   parameters <- file$parameters
   n_species_trees <- 2
   n_alignments <- as.numeric(parameters$n_alignments[2])

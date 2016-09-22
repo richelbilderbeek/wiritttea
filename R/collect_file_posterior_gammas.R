@@ -18,7 +18,7 @@ collect_file_posterior_gammas <- function(filename) {
 
   id <- NULL; rm(id) # nolint, should fix warning: collect_file_posterior_gammas: no visible binding for global variable ‘id’
 
-  file <- wiritttea::read_file(filename)
+  file <- wiritttes::read_file(filename)
   parameters <- file$parameters
   n_alignments <- as.numeric(parameters$n_alignments[2])
   n_beast_runs <- as.numeric(parameters$n_beast_runs[2])
@@ -41,9 +41,9 @@ collect_file_posterior_gammas <- function(filename) {
 
         n_gamma_statistics <- nrow(gamma_statistics)
         this_df <- data.frame(
-          species_tree = rep(sti, n_gamma_statistics),
-          alignment = rep(j, n_gamma_statistics),
-          beast_run = rep(k, n_gamma_statistics)
+          sti = rep(sti, n_gamma_statistics),
+          ai = rep(j, n_gamma_statistics),
+          pi = rep(k, n_gamma_statistics)
         )
         this_df <- cbind(this_df, gamma_statistics)
         if (is.null(df)) {

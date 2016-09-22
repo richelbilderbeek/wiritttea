@@ -14,7 +14,7 @@ collect_file_species_tree_gammas <- function(filename) {
   if (!wiritttes::is_valid_file(filename)) {
     stop("invalid file")
   }
-  file <- wiritttea::read_file(filename)
+  file <- wiritttes::read_file(filename)
 
   df <- NULL
 
@@ -33,7 +33,7 @@ collect_file_species_tree_gammas <- function(filename) {
 
     # Remove id column
     this_df <- data.frame(
-      species_tree = sti,
+      sti = sti,
       gamma_stat = g
     )
     if (is.null(df)) {

@@ -47,14 +47,14 @@ echo "jobid: "$jobid
 # Check parameter file creation success
 ##########################
 
-cmd="sbatch --dependency=afterany:$jobid collect_parameters.sh"
+cmd="sbatch --dependency=afterany:$jobid collect_files_parameters.sh"
 echo "cmd: "$cmd
 jobid=`$cmd | cut -d ' ' -f 4`
 echo "jobid: "$jobid
 
 ##########################
 # Add pbd_sim_output
-# This is a parallel job, 
+# This is a parallel job,
 # which is started in run_1.sh
 ##########################
 

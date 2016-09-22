@@ -16,7 +16,7 @@ collect_species_tree_n_taxa <- function(filename) {
     stop("invalid file")
   }
 
-  file <- wiritttea::read_file(filename)
+  file <- wiritttes::read_file(filename)
 
   # pbd_output$recontree must be present, return NA if absent
   if (is.null(file) || is.null(names(file$pbd_output))

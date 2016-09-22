@@ -21,7 +21,7 @@ collect_file_species_tree_nltts <- function(
 
   id <- NULL; rm(id) # nolint, should fix warning: collect_file_species_tree_nltts: no visible binding for global variable ‘id’
 
-  file <- wiritttea::read_file(filename)
+  file <- wiritttes::read_file(filename)
 
   df <- NULL
 
@@ -40,7 +40,7 @@ collect_file_species_tree_nltts <- function(
 
     n_nltt_values <- nrow(nltt_values)
     this_df <- data.frame(
-      species_tree = rep(sti, n_nltt_values)
+      sti = rep(sti, n_nltt_values)
     )
     this_df <- cbind(this_df, nltt_values)
     if (is.null(df)) {
@@ -50,7 +50,7 @@ collect_file_species_tree_nltts <- function(
     }
   }
   testit::assert(!is.null(df$nltt))
-  df$species_tree <- as.factor(df$species_tree)
-  testit::assert(names(df) == c("sti", "t", "nltt"))
+  df$sti <- as.factor(df$sti)
+
   df
 }

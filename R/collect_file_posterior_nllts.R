@@ -10,7 +10,7 @@ collect_file_posterior_nltts <- function(filename, dt) {
     stop("invalid file")
   }
 
-  file <- wiritttea::read_file(filename)
+  file <- wiritttes::read_file(filename)
   parameters <- file$parameters
   n_alignments <- as.numeric(parameters$n_alignments[2])
   n_beast_runs <- as.numeric(parameters$n_beast_runs[2])

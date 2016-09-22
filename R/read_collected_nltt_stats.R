@@ -1,9 +1,9 @@
 #' Read all the collected nLTT statistics of all simulations
 #' @param filename the name of the CSV containing the collected nLTT
-#'   statistics. Default value is 'inst/extdata/collected_nltt_stats.csv'
+#'   statistics. Default value is 'inst/extdata/collected_files_nltt_stats.csv'
 #' @return a dataframe
 #' @examples
-#'   df <- read_collected_posterior_nltt_stats()
+#'   df <- read_collected_nltt_stats()
 #'   expected_names <- c("filename", "sti", "ai", "pi", "si", "nltt_stat")
 #'   testit::assert(names(df) == expected_names)
 #'   testit::assert(is.factor(df$filename))
@@ -13,9 +13,9 @@
 #'   testit::assert(is.factor(df$si))
 #' @author Richel Bilderbeek
 #' @export
-read_collected_posterior_nltt_stats <- function(
+read_collected_nltt_stats <- function(
   filename = wiritttea::find_path(
-    "collected_files_posterior_nltt_stats.csv"
+    "collected_files_nltt_stats.csv"
   )
 ) {
   if (!file.exists(filename)) {

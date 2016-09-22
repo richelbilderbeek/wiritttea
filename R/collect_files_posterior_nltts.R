@@ -5,7 +5,7 @@
 #'   must be in range <0,1>, default is 0.001
 #' @return A list with two dataframes of nLTTs
 #' @export
-collect_files_posterior_nltts <- function(filenames, dt) {
+collect_files_posterior_nltts <- function(filenames, dt = 0.001) {
 
   if (length(filenames) < 1) {
     stop("there must be at least one filename supplied")

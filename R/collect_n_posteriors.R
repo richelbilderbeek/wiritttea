@@ -16,7 +16,7 @@ collect_n_posteriors <- function(filename) {
     stop("invalid file")
   }
 
-  file <- wiritttea::read_file(filename)
+  file <- wiritttes::read_file(filename)
   n <- sum(!is.na(file$posteriors))
   return (data.frame(n_posteriors = n))
 }

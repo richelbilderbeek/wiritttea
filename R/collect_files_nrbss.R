@@ -31,7 +31,11 @@ collect_files_nrbss <- function(filenames) {
     )
     if (is.null(this_df)) {
       this_df <- data.frame(
-        species_tree = NA, alignment = NA, beast_run = NA, state = NA, nrbs = NA
+        sti = NA,
+        ai = NA,
+        pi = NA,
+        si = NA,
+        nrbs = NA
       )
     }
     # Prepend a col with the filename

@@ -8,11 +8,11 @@
 #'    find_path("toy_example_2.RDa"),
 #'    find_path("toy_example_3.RDa")
 #'  )
-#'  df <- collect_parameters(filenames)
+#'  df <- collect_files_parameters(filenames)
 #'  testit::assert(nrow(df) == 3)
 #' @export
 #' @author Richel Bilderbeek
-collect_parameters <- function(filenames) {
+collect_files_parameters <- function(filenames) {
 
   parameter_names <- NULL
 
@@ -21,7 +21,7 @@ collect_parameters <- function(filenames) {
     if (!wiritttes::is_valid_file(filename = filename)) {
       next
     }
-    file <- wiritttea::read_file(filename)
+    file <- wiritttes::read_file(filename)
     parameter_names <- names(file$parameters)
     break
   }
@@ -43,7 +43,7 @@ collect_parameters <- function(filenames) {
   for (filename in filenames) {
     file <- NULL
     tryCatch(
-      file <- wiritttea::read_file(filename),
+      file <- wiritttes::read_file(filename),
       error = function(msg) { } # nolint msg should be unused
     )
     if (!is.null(file)) {

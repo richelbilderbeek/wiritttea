@@ -33,9 +33,9 @@ collect_files_posterior_gammas <- function(filenames) {
     )
     if (is.null(this_pgs)) {
       this_pgs <- data.frame(
-        species_tree = NA,
-        alignment = NA,
-        beast_run = NA,
+        sti = NA,
+        ai = NA,
+        pi = NA,
         gamma_stat = NA
       )
     }

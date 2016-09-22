@@ -26,7 +26,7 @@ collect_files_nltt_stats <- function(filenames) {
   # Calculate the number of rows needed
   n_rows <- 0
   for (filename in filenames) {
-    file <- wiritttea::read_file(filename)
+    file <- wiritttes::read_file(filename)
     nst <- 2 # Number of species trees
     napst <- wiritttea::extract_napst(file) # number of alignments per species tree # nolint
     nppa <- wiritttea::extract_nppa(file) # number of number of posteriors per alignment # nolint

@@ -1,25 +1,25 @@
-context("collect_parameters")
+context("collect_files_parameters")
 
-test_that("collect_parameters: use", {
+test_that("collect_files_parameters: use", {
   # Testing
   filenames <- find_paths(paste0("toy_example_", seq(1, 4), ".RDa"))
-  df <- collect_parameters(filenames = filenames)
+  df <- collect_files_parameters(filenames = filenames)
 })
 
-test_that("collect_parameters: invalid file return an empty data.frame", {
+test_that("collect_files_parameters: invalid file return an empty data.frame", {
 
-  df <- collect_parameters(filenames = c("inva.lid"))
+  df <- collect_files_parameters(filenames = c("inva.lid"))
   expect_equal(class(df), "data.frame")
   expect_equal(df$message, "No valid files supplied")
 })
 
-test_that("collect_parameters: abuse", {
+test_that("collect_files_parameters: abuse", {
 
   # Create a 'corrupt file'
-  filename <- "test-collect_parameters.RDa"
+  filename <- "test-collect_files_parameters.RDa"
   cat("I am not a valid file\n", file = filename)
 
-  df <- collect_parameters(
+  df <- collect_files_parameters(
     filenames = c(
       filename,
       find_path("toy_example_1.RDa")
@@ -37,9 +37,9 @@ test_that("collect_parameters: abuse", {
 })
 
 # Checks a refactoring
-test_that("collect_parameters: is add_outgroup really gone?", {
+test_that("collect_files_parameters: is add_outgroup really gone?", {
   # Testing
-  filenames <- paste0("collect_parameters_", seq(1, 4), ".RDa")
+  filenames <- paste0("collect_files_parameters_", seq(1, 4), ".RDa")
   wiritttes::create_test_parameter_files(filenames = filenames)
   for (filename in filenames) {
     file <- read_file(filename)

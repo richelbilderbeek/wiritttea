@@ -32,7 +32,7 @@ collect_files_species_tree_gammas <- function(filenames) {
       error = function(msg) {} # nolint
     )
     if (is.null(this_stgs)) {
-      this_stgs <- data.frame(species_tree = NA, gamma_stat = NA)
+      this_stgs <- data.frame(sti = NA, gamma_stat = NA)
     }
     # Prepend a col with the filename
     this_filenames <- rep(basename(filename), times = nrow(this_stgs))

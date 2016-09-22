@@ -3,10 +3,10 @@ folder <- "/home/p230198/GitHubs/wiritttea/scripts"
 fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
-df <- wiritttea::collect_parameters(fns)
+df <- wiritttea::collect_files_parameters(fns)
 write.csv(
   x = df,
-  file = "../inst/extdata/collected_parameters.csv",
+  file = "../inst/extdata/collect_files_parameters.csv",
   row.names = TRUE
 )
 

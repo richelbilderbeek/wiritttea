@@ -3,7 +3,7 @@ context("alignments_same_distr")
 test_that("dataset is too small sometimes", {
   skip("not now")
   # Collect the nLTT stats
-  nltt_stats_raw <- read_collected_species_tree_nltt_stats()
+  nltt_stats_raw <- read_collected_nltt_stats()
   # Remove the NAs
   nltt_stats <- nltt_stats_raw[!is.na(nltt_stats_raw$nltt_stat), ]
   df <- alignments_same_distr_nltt_stat(nltt_stats)

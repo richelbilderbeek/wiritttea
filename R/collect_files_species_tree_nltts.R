@@ -3,9 +3,9 @@
 #' @param filenames names of the parameter file
 #' @param dt the resolution of the nLTT plot,
 #'   must be in range <0,1>, default is 0.001
-#' @return A list with two dataframes of nLTTs
+#' @return A dataframe
 #' @export
-collect_files_species_tree_nltt_stats <- function(filenames, dt) {
+collect_files_species_tree_nltt <- function(filenames, dt = 0.001) {
 
   if (length(filenames) < 1) {
     stop(
@@ -23,7 +23,9 @@ collect_files_species_tree_nltt_stats <- function(filenames, dt) {
       error = function(msg) {} # nolint
     )
     if (is.null(this_stns)) {
-      this_stns <- data.frame(species_tree = NA, t = NA, nltt = NA)
+      this_stns <- data.frame(
+        sti = NA, t = NA, nltt = NA
+      )
     }
     # Prepend a col with the filename
     this_filenames <- rep(basename(filename), times = nrow(this_stns))

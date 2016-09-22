@@ -51,7 +51,7 @@ wiritttes::create_test_parameter_files(filenames = filenames)
 Here we can view them:
 
 ```{r}
-knitr::kable(collect_parameters(filenames = filenames))
+knitr::kable(collect_files_parameters(filenames = filenames))
 ```
 
 Note that they all have a different random number generator seed. Because

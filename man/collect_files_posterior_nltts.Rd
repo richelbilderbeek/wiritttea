@@ -5,7 +5,7 @@
 \title{Collects the nLTT statistics of all phylogenies belonging to a
 multiple parameter file in the melted/uncast/long form}
 \usage{
-collect_files_posterior_nltts(filenames, dt)
+collect_files_posterior_nltts(filenames, dt = 0.001)
 }
 \arguments{
 \item{filenames}{names of the parameter file}

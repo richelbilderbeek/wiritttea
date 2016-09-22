@@ -49,10 +49,10 @@ collect_file_nrbss <- function(filename) {
   # 2 2 2 1 NA
   # 2 2 2 2 NA
   df <- data.frame(
-    species_tree = rep(seq(1, n_species_trees), each = n_alignments * n_beast_runs * n_states), # nolint
-    alignment = rep(seq(1, n_alignments), each = n_states * n_beast_runs, times = n_species_trees), # nolint
-    beast_run = rep(seq(1, n_beast_runs), each = n_states, times = n_species_trees * n_alignments), # nolint
-    state = rep(seq(1, n_states), n_species_trees * n_beast_runs * n_alignments), # nolint
+    sti = rep(seq(1, n_species_trees), each = n_alignments * n_beast_runs * n_states), # nolint
+    ai = rep(seq(1, n_alignments), each = n_states * n_beast_runs, times = n_species_trees), # nolint
+    pi = rep(seq(1, n_beast_runs), each = n_states, times = n_species_trees * n_alignments), # nolint
+    si = rep(seq(1, n_states), n_species_trees * n_beast_runs * n_alignments), # nolint
     nrbs = rep(NA, n_rows),
     stringsAsFactors = FALSE
   )

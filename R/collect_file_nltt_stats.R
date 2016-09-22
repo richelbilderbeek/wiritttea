@@ -10,7 +10,7 @@
 #'   testit::assert(names(nltt_stats) == expected_names)
 #' @author Richel Bilderbeek
 collect_file_nltt_stats <- function(filename) {
-  file <- wiritttea::read_file(filename)
+  file <- wiritttes::read_file(filename)
 
   nst <- 2 # Number of species trees
   napst <- wiritttea::extract_napst(file) # number of alignments per species tree
@@ -50,7 +50,7 @@ collect_file_nltt_stats <- function(filename) {
         # Some files may lack a posterior
         posterior <- NA
         tryCatch(
-          posterior <- get_posterior(file = file, sti = sti, ai = ai, pi = pi),
+          posterior <- wiritttes::get_posterior(file = file, sti = sti, ai = ai, pi = pi),
           error = function(msg) {
             print(paste0("File ", filename, " lacks a posterior"))
           }
@@ -62,7 +62,9 @@ collect_file_nltt_stats <- function(filename) {
         if (length(posterior) > 1 || !is.na(posterior)) {
           posterior_trees <- posterior$trees
           # If possible, extract the nLTT statistics
-          if (length(posterior_trees) > 1 || !is.na(posterior_trees)) {
+          if (length(posterior_trees) > 1 ||
+              (!is.null(posterior_trees) && !is.na(posterior_trees))
+            ) {
             nltt_stats <- wiritttea::collect_nltt_stats(
               phylogeny = focal_phylogeny,
               others = posterior_trees

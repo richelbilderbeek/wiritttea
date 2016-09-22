@@ -16,7 +16,7 @@ collect_n_alignments <- function(filename) {
     stop("invalid file")
   }
 
-  file <- wiritttea::read_file(filename)
+  file <- wiritttes::read_file(filename)
   n <- sum(!is.na(file$alignments))
   return (data.frame(n_alignments = n))
 }
