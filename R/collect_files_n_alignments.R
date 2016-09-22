@@ -22,7 +22,7 @@ collect_files_n_alignments <- function(filenames) {
   for (filename in filenames) {
     this_n_alignments <- NULL
     tryCatch(
-      this_n_alignments <- collect_n_alignments(
+      this_n_alignments <- collect_file_n_alignments(
         filename = filename
       ),
       error = function(msg) {} # nolint

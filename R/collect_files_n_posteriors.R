@@ -26,7 +26,7 @@ collect_files_n_posteriors <- function(filenames) {
   for (filename in filenames) {
     this_n_posteriors <- NULL
     tryCatch(
-      this_n_posteriors <- collect_n_posteriors(
+      this_n_posteriors <- collect_file_n_posteriors(
         filename = filename
       ),
       error = function(msg) {} # nolint

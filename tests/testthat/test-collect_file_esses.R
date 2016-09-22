@@ -1,6 +1,6 @@
 context("collect_file_esses")
 
-test_that("use", {
+test_that("collect_file_esses: use", {
 
   filename <- find_path("toy_example_4.RDa")
   df <- collect_file_esses(filename)

@@ -26,7 +26,7 @@ txt=${txt:1}
 # Collect n posteriors
 ############################
 
-cmd="sbatch --dependency=afterany:$txt collect_n_posteriors.sh"
+cmd="sbatch --dependency=afterany:$txt collect_files_n_posteriors.sh"
 echo "cmd: "$cmd
 jobid=`$cmd | cut -d ' ' -f 4`
 echo "jobid: "$jobid

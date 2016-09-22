@@ -11,7 +11,7 @@ test_that("collect_files_n_alignments: basic use", {
   expect_equal(df$n_alignments, c(2, 4))
 })
 
-test_that("collect_n_alignments: abuse", {
+test_that("collect_files_n_alignments: abuse", {
 
   expect_error(
     collect_files_n_alignments(filename = c()),

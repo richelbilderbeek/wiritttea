@@ -26,14 +26,14 @@ txt=${txt:1}
 # Collect n alignments
 ############################
 
-cmd="sbatch --dependency=afterany:$txt collect_n_alignments.sh"
+cmd="sbatch --dependency=afterany:$txt collect_files_n_alignments.sh"
 echo "cmd: "$cmd
 jobid=`$cmd | cut -d ' ' -f 4`
 echo "jobid: "$jobid
 
 ##########################
 # Add posteriors
-# This is a parallel job, 
+# This is a parallel job,
 # which is started in run_4.sh
 ##########################
 

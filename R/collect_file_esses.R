@@ -24,8 +24,8 @@ collect_file_esses <- function(filename) {
   file <- wiritttes::read_file(filename)
   parameters <- file$parameters
   n_species_trees <- 2
-  n_alignments <- as.numeric(parameters$n_alignments[2])
-  n_beast_runs <- as.numeric(parameters$n_beast_runs[2])
+  n_alignments <- wiritttes::extract_napst(file)
+  n_beast_runs <- wiritttes::extract_nppa(file)
   n_rows <- n_species_trees * n_alignments * n_beast_runs
 
   df <- data.frame(
@@ -55,9 +55,7 @@ collect_file_esses <- function(filename) {
               sample_interval = 1000
             )
           ),
-          error = function(msg) {
-            # OK
-          }
+          error = function(msg) {} # nolint
         )
 
         df$min_ess[index] <- min_ess
