@@ -14,8 +14,10 @@
 #' @author Richel Bilderbeek
 #' @export
 read_collected_posterior_nltt_stats <- function(
-  filename = wiritttea::find_path("collect_files_posterior_nltts.csv")
-  ) {
+  filename = wiritttea::find_path(
+    "collected_files_posterior_nltt_stats.csv"
+  )
+) {
   if (!file.exists(filename)) {
     stop("file not found")
   }

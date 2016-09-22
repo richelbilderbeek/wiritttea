@@ -51,5 +51,6 @@ collect_file_species_tree_nltts <- function(
   }
   testit::assert(!is.null(df$nltt))
   df$species_tree <- as.factor(df$species_tree)
+  testit::assert(names(df) == c("sti", "t", "nltt"))
   df
 }

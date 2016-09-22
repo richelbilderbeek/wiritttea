@@ -14,7 +14,7 @@
 #' @author Richel Bilderbeek
 #' @export
 read_collected_species_tree_nltt_stats <- function(
-  filename = wiritttea::find_path("collect_files_species_tree_nltts.csv")
+  filename = wiritttea::find_path("collect_files_species_tree_nltt_stats.csv")
   ) {
   if (!file.exists(filename)) {
     stop("file not found")

@@ -7,7 +7,7 @@ fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
 
-df <- calc_nltt_stats_from_files(fns)
+df <- collect_files_nltt_stats(fns)
 
 write.csv(
   x = df,

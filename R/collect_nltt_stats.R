@@ -5,14 +5,14 @@
 #' @return A data frame
 #' @author Richel Bilderbeek
 #' @examples
-#'   nltt_stats <- calc_nltt_stats(
+#'   nltt_stats <- collect_nltt_stats(
 #'     phylogeny = ape::rcoal(10),
 #'     others = c(ape::rcoal(10), ape::rcoal(10))
 #'   )
 #'   testit::assert(names(nltt_stats) == c("id", "nltt_stat"))
 #'   testit::assert(is.factor(nltt_stats$id))
 #' @export
-calc_nltt_stats <- function(
+collect_nltt_stats <- function(
   phylogeny,
   others
 ) {

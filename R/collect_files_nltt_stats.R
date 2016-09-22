@@ -3,7 +3,7 @@
 #' @return a distribution of nLTT statistics
 #' @export
 #' @examples
-#'   nltt_stats <- calc_nltt_stats_from_files(
+#'   nltt_stats <- collect_files_nltt_stats(
 #'     filenames = c(
 #'       find_path("toy_example_1.RDa"),
 #'       find_path("toy_example_2.RDa")
@@ -12,7 +12,7 @@
 #'   expected_names <- c("filename", "sti", "ai", "pi", "si", "nltt_stat")
 #'   testit::assert(names(nltt_stats) == expected_names)
 #' @author Richel Bilderbeek
-calc_nltt_stats_from_files <- function(filenames) {
+collect_files_nltt_stats <- function(filenames) {
 
   # Check all files
   for (filename in filenames) {
@@ -51,7 +51,7 @@ calc_nltt_stats_from_files <- function(filenames) {
   # super[3:4, c("y", "z")] <- sub2                                                # nolint
   index <- 1
   for (filename in filenames) {
-    nltt_stats <- wiritttea::calc_nltt_stats_from_file(
+    nltt_stats <- wiritttea::collect_file_nltt_stats(
       filename = filename
     )
     df[

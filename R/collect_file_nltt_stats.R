@@ -3,13 +3,13 @@
 #' @return a distribution of nLTT statistics
 #' @export
 #' @examples
-#'   nltt_stats <- calc_nltt_stats_from_file(
+#'   nltt_stats <- collect_file_nltt_stats(
 #'     filename = find_path("toy_example_1.RDa")
 #'   )
 #'   expected_names <- c("sti", "ai", "pi", "si", "nltt_stat")
 #'   testit::assert(names(nltt_stats) == expected_names)
 #' @author Richel Bilderbeek
-calc_nltt_stats_from_file <- function(filename) {
+collect_file_nltt_stats <- function(filename) {
   file <- wiritttea::read_file(filename)
 
   nst <- 2 # Number of species trees
@@ -63,7 +63,7 @@ calc_nltt_stats_from_file <- function(filename) {
           posterior_trees <- posterior$trees
           # If possible, extract the nLTT statistics
           if (length(posterior_trees) > 1 || !is.na(posterior_trees)) {
-            nltt_stats <- wiritttea::calc_nltt_stats(
+            nltt_stats <- wiritttea::collect_nltt_stats(
               phylogeny = focal_phylogeny,
               others = posterior_trees
             )

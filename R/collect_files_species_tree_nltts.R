@@ -5,7 +5,7 @@
 #'   must be in range <0,1>, default is 0.001
 #' @return A list with two dataframes of nLTTs
 #' @export
-collect_files_species_tree_nltts <- function(filenames, dt) {
+collect_files_species_tree_nltt_stats <- function(filenames, dt) {
 
   if (length(filenames) < 1) {
     stop(

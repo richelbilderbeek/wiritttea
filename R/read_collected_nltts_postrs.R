@@ -12,7 +12,7 @@
 #' @export
 read_collected_nltts_postrs <- function() {
 
-  filename <- wiritttea::find_path("collected_nltts_posterior.csv")
+  filename <- wiritttea::find_path("collected_files_nltts_posterior.csv")
   testit::assert(file.exists(filename))
   df <- utils::read.csv(
    file = filename,

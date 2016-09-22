@@ -23,10 +23,10 @@ collect_files_posterior_nltts <- function(filenames, dt) {
     )
     if (is.null(this_pns)) {
       this_pns <- data.frame(
-        species_tree = NA,
-        alignment = NA,
-        beast_run = NA,
-        state = NA,
+        sti = NA,
+        ai = NA,
+        pi = NA,
+        si = NA,
         t = NA,
         nltt = NA
       )

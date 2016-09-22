@@ -1,7 +1,7 @@
-context("calc_nltt_stats_from_file")
+context("collect_file_nltt_stats")
 
-test_that("calc_nltt_stats_from_file: use", {
-  nltt_stats <- calc_nltt_stats_from_file(
+test_that("collect_file_nltt_stats: use", {
+  nltt_stats <- collect_file_nltt_stats(
     filename = find_path("toy_example_1.RDa")
   )
   expect_equivalent(

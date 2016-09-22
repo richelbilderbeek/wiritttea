@@ -11,7 +11,7 @@
 #' @author Richel Bilderbeek
 #' @export
 read_collected_esses <- function() {
-  filename <- wiritttea::find_path("collected_esses.csv")
+  filename <- wiritttea::find_path("collected_files_esses.csv")
   testit::assert(file.exists(filename))
   df <- utils::read.csv(
     file = filename,

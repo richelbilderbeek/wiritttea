@@ -1,7 +1,7 @@
-context("calc_nltt_stats")
+context("collect_nltt_stats")
 
-test_that("calc_nltt_stats use", {
-  nltt_stats <- calc_nltt_stats(
+test_that("collect_nltt_stats use", {
+  nltt_stats <- collect_nltt_stats(
     phylogeny = ape::rcoal(10),
     others = c(ape::rcoal(10), ape::rcoal(10))
   )
@@ -9,10 +9,10 @@ test_that("calc_nltt_stats use", {
   expect_equal(nrow(nltt_stats), 2)
 })
 
-test_that("calc_nltt_stats: abuse", {
+test_that("collect_nltt_stats: abuse", {
 
   expect_error(
-    nltt_stats <- calc_nltt_stats(
+    nltt_stats <- collect_nltt_stats(
       phylogeny = "Not a phylogeny",
       others = c(ape::rcoal(10), ape::rcoal(10))
     ),
@@ -20,7 +20,7 @@ test_that("calc_nltt_stats: abuse", {
   )
 
   expect_error(
-    nltt_stats <- calc_nltt_stats(
+    nltt_stats <- collect_nltt_stats(
       phylogeny = ape::rcoal(10),
       others = c()
     ),
@@ -28,7 +28,7 @@ test_that("calc_nltt_stats: abuse", {
   )
 
   expect_error(
-    nltt_stats <- calc_nltt_stats(
+    nltt_stats <- collect_nltt_stats(
       phylogeny = ape::rcoal(10),
       others = c(ape::rcoal(10), "Not a phylogeny")
     ),
