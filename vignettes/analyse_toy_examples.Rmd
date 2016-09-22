@@ -92,7 +92,7 @@ wiritttes::create_test_parameter_files(filenames = filenames)
 Here the parameters are shown in a nicer format:
 
 ```{r}
-show_parameter_files(filenames)
+knitr::kable(t(head(read_collected_parameters())))
 ```
 
 The parameter settings used in this example are identical, 
@@ -124,7 +124,7 @@ Here we simulate the 'true' incipient species tree:
 ```{r}
 filename <- filenames[1]
 testit::assert(wiritttes::is_valid_file(filename))
-add_pbd_output(filename)
+wiritttes::add_pbd_output(filename)
 ```
 
 This is how the incipient species tree looks like:
@@ -171,7 +171,7 @@ constant-rate birth death model, there exist no multiple individuals
 per species. To being able to root our phylogenies in later steps, an outgroup is added as well.
 
 ```{r}
-add_species_trees(filename)  
+wiritttes::add_species_trees(filename)  
 ```
 
 Here we observe the sample species tree:

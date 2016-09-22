@@ -23,7 +23,7 @@ options(warn = 2)
 
 Read the collected times:
 
-```{r}
+```
 time_data <- read_collected_times()
 testit::assert(names(time_data) == c("per_file", "full_process"))
 df_per_file <- time_data$per_file
@@ -32,19 +32,19 @@ df_process <- time_data$full_process
 
 Show (part of) the times per file:
 
-```{r}
+```
 knitr::kable(head(df_per_file))
 ```
 
 Show (part of) the times for the whole process:
 
-```{r}
+```
 knitr::kable(head(df_process))
 ```
 
 See the effect of speciation initiation rate:
 
-```{r fig.width = 7, fig.height = 7}
+```
 ggplot2::ggplot(
   df_per_file, 
   ggplot2::aes(
@@ -57,7 +57,7 @@ ggplot2::ggplot(
 
 See the effect of speciation completion rate:
 
-```{r fig.width = 7, fig.height = 7}
+```
 ggplot2::ggplot(
   df_per_file, 
   ggplot2::aes(
@@ -70,7 +70,7 @@ ggplot2::ggplot(
 
 See the effect of extinction rate:
 
-```{r fig.width = 7, fig.height = 7}
+```
 ggplot2::ggplot(
   df_per_file, 
   ggplot2::aes(
@@ -83,7 +83,7 @@ ggplot2::ggplot(
 
 See effect of sequence length:
 
-```{r fig.width = 7, fig.height = 7}
+```
 ggplot2::ggplot(
   df_per_file, 
   ggplot2::aes(
@@ -96,7 +96,7 @@ ggplot2::ggplot(
 
 Collect some data to see the effect of number of taxa and sequence length:
 
-```{r fig.width = 7, fig.height = 7}
+```
 df_n_taxa <- read_collected_n_taxa()
 df_time_per_taxa <- merge(x = df_per_file, y = df_n_taxa, by = "filename", all = TRUE)
 
@@ -106,7 +106,7 @@ df_time_per_taxa <- df_time_per_taxa[
 
 See the effect of number of taxa:
 
-```{r fig.width = 7, fig.height = 7}
+```
 ggplot2::ggplot(
   df_time_per_taxa, 
   ggplot2::aes(
@@ -121,7 +121,7 @@ ggplot2::ggplot(
 
 See the effect of number of taxa and sequence length:
 
-```{r fig.width = 7, fig.height = 7}
+```
 ggplot2::ggplot(
   df_time_per_taxa, 
   ggplot2::aes(
@@ -143,7 +143,7 @@ ggplot2::ggplot(
 
 Plot the variety between runs in a boxplot:
 
-```{r fig.width = 7, fig.height = 7}
+```
 ggplot2::ggplot(
   df_process, 
   ggplot2::aes(
@@ -156,7 +156,7 @@ ggplot2::ggplot(
 
 Aggregate by process:
 
-```{r}
+```
 df_process <- stats::aggregate(df_process$real_time_sec, by = list(df_process$process_name), FUN=sum)
 names(df_process) <- c("process_name", "real_time_sec")
 knitr::kable(head(df_process))
@@ -164,7 +164,7 @@ knitr::kable(head(df_process))
 
 Stacked bar:
 
-```{r fig.width = 7, fig.height = 7}
+```
 ggplot2::ggplot(
   df_process, 
   ggplot2::aes(
@@ -181,7 +181,7 @@ ggplot2::ggplot(
 
 Pie chart:
 
-```{r fig.width = 7, fig.height = 7}
+```
 ggplot2::ggplot(
   df_process, 
   ggplot2::aes(

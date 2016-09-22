@@ -205,7 +205,7 @@ ggplot2::ggplot(
 All on one heap:
 
 ```{r fig.width = 7, fig.height = 7}
-if (1 == 2) {
+if (1 == 1) {
   ggplot2::ggplot(
     data = nltt_stats,
     ggplot2::aes(
