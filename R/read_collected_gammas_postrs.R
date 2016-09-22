@@ -20,7 +20,6 @@ read_collected_gammas_postrs <- function() {
    stringsAsFactors = FALSE,
    row.names = 1
   )
-  names(df)
   df$filename <- as.factor(df$filename)
   df$sti <- as.factor(df$sti)
   df$ai <- as.factor(df$ai)
