@@ -37,6 +37,19 @@ module load git; git pull
 scp p230198@peregrine.hpc.rug.nl:/home/p230198/GitHubs/wiritttea/scripts/*.* ~/Peregrine
 ```
 
+## Copy all files from Peregrine to FTP
+
+```
+scp p230198@peregrine.hpc.rug.nl:/home/p230198/GitHubs/wiritttea/scripts/*.RDa ftp.richelbilderbeek.nl
+
+my_pass="secret"
+
+for filename in `ls *.RDa`
+do
+  curl -T $filename ftp://ftp.richelbilderbeek.nl --user richelbilderbeek.nl:my_pass
+done
+```
+
 ## Workflow
 
 On Peregrine, from the `wiritttea` root folder:
