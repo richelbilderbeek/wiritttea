@@ -176,7 +176,7 @@ wiritttes::add_species_trees(filename)
 
 Here we observe the sample species tree:
 
-```{r}
+```
 plot_species_tree(filename)
 plot_species_tree_nltt(filename, dt = 0.001)
 n_taxa_sstree <- length(wiritttes::read_file(filename)$species_trees[[1]][[1]]$tip.label)
@@ -259,7 +259,7 @@ pop up most in the posterior.
 
 To refresh our mind, the true sampled species tree is:
 
-```{r}
+```
 plot_species_tree(filename)
 plot_species_tree_nltt(filename, dt = dt)
 ```
@@ -447,7 +447,7 @@ add_species_trees(filename)
 
 Here we observe the sample species tree:
 
-```{r}
+```
 plot_species_tree(filename)
 plot_species_tree_nltt(filename, dt = 0.001)
 ```
@@ -504,7 +504,7 @@ pop up most in the posterior.
 
 To refresh our mind, the true sampled species tree is:
 
-```{r}
+```
 plot_species_tree(filename)
 plot_species_tree_nltt(filename, dt = dt)
 ```

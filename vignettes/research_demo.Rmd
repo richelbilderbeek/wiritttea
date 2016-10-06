@@ -97,7 +97,7 @@ for (filename in filenames) {
 These are the phylogenies with one subspecies
 per species:
 
-```{r fig.width = 7, fig.height = 7}
+```
 for (filename in filenames) {
   print(filename)
   plot_species_tree(filename)
