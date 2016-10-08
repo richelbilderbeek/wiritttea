@@ -64,7 +64,7 @@ Here we simulate the 'true' incipient species tree:
 
 ```{r}
 for (filename in filenames) {
-  add_pbd_output(filename)  
+  wiritttes::add_pbd_output(filename)  
 }
 ```
 
@@ -90,7 +90,7 @@ Per incipient species tree, we take the youngest and oldest representative per s
 
 ```{r}
 for (filename in filenames) {
-  add_species_trees(filename)  
+  wiritttes::add_species_trees(filename)  
 }
 ```
 
@@ -108,14 +108,14 @@ for (filename in filenames) {
 
 ```{r}
 for (filename in filenames) {
-  add_alignments(filename)  
+  wiritttes::add_alignments(filename)  
 }
 ```
 
 ```{r fig.width = 7, fig.height = 7}
 for (filename in filenames) {
   print(filename)
-  plot_alignments(filename)
+  #plot_alignments(filename)
 }
 ```
 
@@ -123,32 +123,29 @@ for (filename in filenames) {
 
 ```{r add_posteriors}
 for (filename in filenames) {
-  add_posteriors(
-    filename, 
-    skip_if_output_present = TRUE
-  )
+  wiritttes::add_posteriors(filename)
 }
 ```
 
 Let's view the two posteriors of the first two files:
 
 ```{r fig.width = 7, fig.height = 7}
-plot_posterior_nltts(filenames[1])
-plot_posterior_nltts(filenames[2])
+#plot_posterior_nltts(filenames[1])
+#plot_posterior_nltts(filenames[2])
 ```
 
 The third and fourth parameter files have had two BEAST2 runs per alignment.
 We can see how similar these are:
 
 ```{r fig.width = 7, fig.height = 7}
-plot_posterior_nltts(filenames[3])
-plot_posterior_nltts(filenames[4])
+#plot_posterior_nltts(filenames[3])
+#plot_posterior_nltts(filenames[4])
 ```
 
 ## nLTT statistics
 
 ```{r}
-nltt_stats <- collect_files_nltt_stats(filenames = filenames)
+nltt_stats <- wiritttea::collect_files_nltt_stats(filenames = filenames)
 nltt_stats$sti <- plyr::revalue(nltt_stats$sti, c("1"="youngest", "2"="oldest"))
 knitr::kable(head(nltt_stats))
 ```
