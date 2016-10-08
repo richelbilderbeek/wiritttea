@@ -9,6 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r echo = FALSE}
+# Warnings are errors
+options(warn = 2)
+```
+
 There are multiple phylogeny summary statistics:
 
  * [Femke and Jolien summary statistic]

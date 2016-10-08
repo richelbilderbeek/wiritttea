@@ -9,16 +9,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r echo = FALSE}
+# Warnings are errors
+options(warn = 2)
+```
+
 # Goal
 
 This vignette demonstrates the sampling used.
 
 # Introduction
-
-```{r}
-options(warn = 2)
-```
-
 
 ```{r fig.width = 7, fig.height = 7}
 newick <- "(((A,B),A),A);"
@@ -27,16 +27,6 @@ ape::plot.phylo(phylogeny, edge.width = 3, cex = 2)
 ```
 
 # Demonstration
-
-Load the packages we will need:
-
-```{r}
-library(wiritttea)
-library(ggplot2)
-library(phytools)
-library(nLTT)
-library(plyr)
-```
 
 Here we will simulate a protracted birth-death process:
 
@@ -58,7 +48,7 @@ pbd_sim_output <- PBD::pbd_sim(
   plotit = TRUE
 )
 names(pbd_sim_output)
-testit::assert(is_pbd_sim_output(pbd_sim_output))
+testit::assert(ribir::is_pbd_sim_output(pbd_sim_output))
 ```
 
 Most of these trees are uninteresting for this demonstration. I will zoom in
@@ -87,7 +77,7 @@ The nLTT plots are expected to differ. Here we extract the nLTT plot is data:
 
 ```{r}
 df <- nLTT::get_nltt_values(species_trees, dt = 0.01)
-df$id <- revalue(df$id, c("1" = "youngest", "2" = "oldest"))
+df$id <- plyr::revalue(df$id, c("1" = "youngest", "2" = "oldest"))
 names(df)
 ```
 
