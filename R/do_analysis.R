@@ -4,7 +4,8 @@
 #' @param folder path of the folder containing the RDa files
 #' @return nothing
 #' @examples
-#'   do_analysis()
+#'   folder <- system.file("extdata", package = "wiritttea")
+#'   do_analysis(folder)
 #' @export
 do_analysis <- function(folder = "~/GitHubs/wiritttea/inst/extdata")
 {

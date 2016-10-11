@@ -8,10 +8,7 @@
 collect_files_species_tree_nltts <- function(filenames, dt = 0.001) {
 
   if (length(filenames) < 1) {
-    stop(
-      "collect_files_nltts: ",
-      "there must be at least one filename supplied"
-    )
+    stop("there must be at least one filename supplied")
   }
 
   # Species trees

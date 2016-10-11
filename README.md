@@ -135,6 +135,15 @@ In Linux, you can install it with:
 ./install_beast2.sh
 ```
 
+## Install Java
+
+Try first to install the `rJava` package
+
+
+```
+R CMD javareconf
+```
+
 ## Resources
 
  * [My 2015-11-23 TRES presentation](https://github.com/richelbilderbeek/Science/blob/master/Bilderbeek20151123TresMeeting/20151123TresMeeting.pdf)
