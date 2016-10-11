@@ -7,7 +7,7 @@ fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
 df <- collect_files_nrbss(fns)
-write.csv(
+utils::write.csv(
   x = df,
   file = csv_filename_nrbss,
   row.names = TRUE

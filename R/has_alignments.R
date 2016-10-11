@@ -13,14 +13,14 @@ has_alignments <- function(file) {
     for (ai in 1:n_alignments) {
       alignment <- NA
       tryCatch(
-        alignment <- get_alignment(
+        alignment <- wiritttes::get_alignment(
           file = file,
           sti = sti,
           ai = ai
         ),
         error = function(msg) {} # nolint
       )
-      v <- c(v, wiritttea::is_alignment(alignment))
+      v <- c(v, ribir::is_alignment(alignment))
     }
   }
   v

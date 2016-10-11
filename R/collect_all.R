@@ -20,7 +20,7 @@ collect_all <- function(folder = "~/GitHubs/wiritttea/inst/extdata")
     df <- do.call(f, list(filenames = rda_files))
     testit::assert(class(df) == "data.frame")
     csv_filename <- paste0(folder, "/", f, ".csv")
-    write.csv(
+    utils::write.csv(
       x = df,
       file = csv_filename,
       row.names = TRUE

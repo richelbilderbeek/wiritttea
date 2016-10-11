@@ -66,13 +66,13 @@ names(df_process) <- c("process_name", "real_time_sec")
 df_process$process_name <- as.factor(df_process$process_name)
 
 # Write data to CSVs
-write.csv(
+utils::write.csv(
   x = df,
   file = "../inst/extdata/collected_times_per_file.csv",
   row.names = TRUE
 )
 
-write.csv(
+utils::write.csv(
   x = df_process,
   file = "../inst/extdata/collected_times_for_process.csv",
   row.names = TRUE

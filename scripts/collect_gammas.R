@@ -7,12 +7,12 @@ fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
 df <- collect_files_gammas(fns)
-write.csv(
+utils::write.csv(
   x = df$species_tree_gamma_stats,
   file = csv_filename_species_trees,
   row.names = TRUE
 )
-write.csv(
+utils::write.csv(
   x = df$posterior_gamma_stats,
   file = csv_filename_posterior,
   row.names = TRUE

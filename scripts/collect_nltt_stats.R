@@ -9,7 +9,7 @@ fns <- paste(
 
 df <- collect_files_nltt_stats(fns)
 
-write.csv(
+utils::write.csv(
   x = df,
   file = csv_filename_nltt_stat,
   row.names = TRUE
