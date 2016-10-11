@@ -6,7 +6,7 @@
 #'  df <- collect_file_species_tree_gammas(filename)
 #'  testit::assert(names(df) == c("sti", "gamma_stat"))
 #'  testit::assert(nrow(df) == 2)
-#'  testit::assert(abs(df$gamma_stat - -0.7585369) < 0.0001)
+#'  testit::assert(!is.na(df$gamma_stat))
 #' @export
 #' @author Richel Bilderbeek
 collect_file_species_tree_gammas <- function(filename) {

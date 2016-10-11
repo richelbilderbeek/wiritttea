@@ -29,6 +29,7 @@ Imports:
   phangorn,
   phytools,
   RBeast,
+  ribir,
   wiritttes
 Suggests:
   ape,
