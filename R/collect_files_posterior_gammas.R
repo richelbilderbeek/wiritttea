@@ -10,7 +10,7 @@
 #'  df <- collect_files_posterior_gammas(filenames)
 #'  testit::assert(
 #'    names(df) ==
-#'    c("filename", "sti", "gamma_stat")
+#'    c("filename", "sti", "ai", "pi", "si", "gamma_stat")
 #'  )
 #'  testit::assert(nrow(df) == 160)
 #' @export
