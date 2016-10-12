@@ -12,7 +12,7 @@
 
 <meta name="author" content="Richel Bilderbeek" />
 
-<meta name="date" content="2016-10-11" />
+<meta name="date" content="2016-10-12" />
 
 <title>Analyse nLTT statistics</title>
 
@@ -52,7 +52,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 <h1 class="title toc-ignore">Analyse nLTT statistics</h1>
 <h4 class="author"><em>Richel Bilderbeek</em></h4>
-<h4 class="date"><em>2016-10-11</em></h4>
+<h4 class="date"><em>2016-10-12</em></h4>
 
 
 
@@ -64,8 +64,6 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2>Setup</h2>
 <p>Loading this package</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(wiritttea)
-<span class="co">#library(dplyr)</span>
-<span class="co">#library(tidyr)</span>
 <span class="kw">options</span>(<span class="dt">warn =</span> <span class="dv">2</span>)</code></pre>
 </div>
 <div id="show-the-distribution-of-nltt-statistics" class="section level2">
@@ -372,13 +370,13 @@ testit::<span class="kw">assert</span>(<span class="st">&quot;filename&quot;</sp
 df &lt;-<span class="st"> </span><span class="kw">merge</span>(df, df_same_dist, <span class="dt">by =</span> <span class="st">&quot;filename&quot;</span>)
 testit::<span class="kw">assert</span>(<span class="st">&quot;filename&quot;</span> %in%<span class="st"> </span><span class="kw">names</span>(df))
 <span class="kw">head</span>(df)</code></pre>
-<pre><code>##            filename rng_seed sirg siri       scr erg eri age mutation_rate
-## 1 toy_example_1.RDa        1  0.5  0.5 1000000.0 0.1 0.1   5          0.01
-## 2 toy_example_1.RDa        1  0.5  0.5 1000000.0 0.1 0.1   5          0.01
-## 3 toy_example_2.RDa        2  0.5  0.5       0.1 0.1 0.1   5          0.01
-## 4 toy_example_2.RDa        2  0.5  0.5       0.1 0.1 0.1   5          0.01
-## 5 toy_example_3.RDa        3  0.5  0.5 1000000.0 0.1 0.1   5          0.01
-## 6 toy_example_3.RDa        3  0.5  0.5 1000000.0 0.1 0.1   5          0.01
+<pre><code>##            filename rng_seed sirg siri   scr erg eri age mutation_rate
+## 1 toy_example_1.RDa        1  0.5  0.5 1e+06 0.1 0.1   5          0.01
+## 2 toy_example_1.RDa        1  0.5  0.5 1e+06 0.1 0.1   5          0.01
+## 3 toy_example_2.RDa        2  0.5  0.5 1e-01 0.1 0.1   5          0.01
+## 4 toy_example_2.RDa        2  0.5  0.5 1e-01 0.1 0.1   5          0.01
+## 5 toy_example_3.RDa        3  0.5  0.5 1e+06 0.1 0.1   5          0.01
+## 6 toy_example_3.RDa        3  0.5  0.5 1e+06 0.1 0.1   5          0.01
 ##   n_alignments sequence_length nspp n_beast_runs n_taxa sti ai same_distr
 ## 1            1            1000   10            1     21   1  1         NA
 ## 2            1            1000   10            1     21   2  1         NA
