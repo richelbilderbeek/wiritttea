@@ -299,7 +299,7 @@ First, I collect the gamma statistics from the species
 tree(s) with outgroup(s):
 
 ```{r}
-true_gamma_statistics <- collect_file_species_tree_gammas(filename = filename)
+true_gamma_statistics <- collect_file_stree_gammas(filename = filename)
 knitr::kable(head(true_gamma_statistics))
 ```
 

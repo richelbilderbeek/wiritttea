@@ -13,9 +13,9 @@ collect_file_nltt_stats <- function(filename) {
   file <- wiritttes::read_file(filename)
 
   nst <- 2 # Number of species trees
-  napst <- wiritttes::extract_napst(file) # number of alignments per species tree
+  napst <- wiritttes::extract_napst(file) # number of alignments per species tree # nolint
   nppa <- wiritttes::extract_nppa(file) # number of number of posteriors per alignment # nolint
-  nspp <- wiritttes::extract_nspp(file) # number of states per posterior
+  nspp <- wiritttes::extract_nspp(file) # number of states per posterior # nolint
   n_rows <- nst * napst * nppa * nspp
 
 
@@ -50,8 +50,9 @@ collect_file_nltt_stats <- function(filename) {
         # Some files may lack a posterior
         posterior <- NA
         tryCatch(
-          posterior <- wiritttes::get_posterior(file = file, sti = sti, ai = ai, pi = pi),
-          error = function(msg) {
+          posterior <- wiritttes::get_posterior(
+            file = file, sti = sti, ai = ai, pi = pi
+          ), error = function(msg) {
             print(paste0("File ", filename, " lacks a posterior"))
           }
         )

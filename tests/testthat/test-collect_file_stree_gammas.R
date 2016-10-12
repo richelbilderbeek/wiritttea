@@ -1,8 +1,8 @@
-context("collect_file_species_tree_gammas")
+context("collect_file_stree_gammas")
 
-test_that("collect_file_species_tree_gammas toy example 1", {
+test_that("collect_file_stree_gammas toy example 1", {
   filename <- find_path("toy_example_1.RDa")
-  df <- collect_file_species_tree_gammas(filename)
+  df <- collect_file_stree_gammas(filename)
   expect_equal(names(df),
     c("sti", "gamma_stat")
   )
@@ -11,9 +11,9 @@ test_that("collect_file_species_tree_gammas toy example 1", {
   expect_false(is.na(df$gamma_stat[2]))
 })
 
-test_that("collect_file_species_tree_gammas toy example 3", {
+test_that("collect_file_stree_gammas toy example 3", {
   filename <- find_path("toy_example_3.RDa")
-  df <- collect_file_species_tree_gammas(filename)
+  df <- collect_file_stree_gammas(filename)
   expect_equal(names(df),
     c("sti", "gamma_stat")
   )
@@ -22,10 +22,10 @@ test_that("collect_file_species_tree_gammas toy example 3", {
   expect_false(is.na(df$gamma_stat[2]))
 })
 
-test_that("collect_file_species_tree_gammas: abuse", {
+test_that("collect_file_stree_gammas: abuse", {
 
   expect_error(
-    collect_file_species_tree_gammas(filename = "inva.lid"),
+    collect_file_stree_gammas(filename = "inva.lid"),
     "invalid file"
   )
 })

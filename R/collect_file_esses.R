@@ -22,7 +22,6 @@ collect_file_esses <- function(filename) {
   }
 
   file <- wiritttes::read_file(filename)
-  parameters <- file$parameters
   n_species_trees <- 2
   n_alignments <- wiritttes::extract_napst(file)
   n_beast_runs <- wiritttes::extract_nppa(file)

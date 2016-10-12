@@ -7,14 +7,14 @@
 #'    find_path("toy_example_3.RDa"),
 #'    find_path("toy_example_4.RDa")
 #'  )
-#'  df <- collect_files_species_tree_gammas(filenames)
+#'  df <- collect_files_stree_gammas(filenames)
 #'  testit::assert(
 #'    names(df) ==
 #'    c("filename", "sti", "gamma_stat")
 #'  )
 #'  testit::assert(nrow(df) == 4)
 #' @export
-collect_files_species_tree_gammas <- function(filenames) {
+collect_files_stree_gammas <- function(filenames) {
 
   if (length(filenames) < 1) {
     stop(
@@ -28,7 +28,7 @@ collect_files_species_tree_gammas <- function(filenames) {
   for (filename in filenames) {
     this_stgs <- NULL
     tryCatch(
-      this_stgs <- collect_file_species_tree_gammas(filename),
+      this_stgs <- collect_file_stree_gammas(filename),
       error = function(msg) {} # nolint
     )
     if (is.null(this_stgs)) {

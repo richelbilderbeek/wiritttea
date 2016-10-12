@@ -69,7 +69,9 @@ collect_file_nrbss <- function(filename) {
     testit::assert(si >= 1)
     testit::assert(si <= length(wiritttes::get_posterior(file, sti = sti, ai = ai, pi = pi)$trees)) # nolint
     # pt: posterior state tree, of type phylo
-    pt <- wiritttes::get_posterior(file, sti = sti, ai = ai, pi = pi)$trees[[si]]
+    pt <- wiritttes::get_posterior(
+      file, sti = sti, ai = ai, pi = pi
+    )$trees[[si]]
     testit::assert(class(pt) == "phylo")
     testit::assert(length(st$tip.label) == length(pt$tip.label))
     testit::assert(all.equal(sort(st$tip.label), sort(pt$tip.label)))

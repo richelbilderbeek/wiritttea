@@ -44,9 +44,9 @@ collect_files_nltt_stats <- function(filenames) {
   )
 
   # Merging, a bit like this example code:
-  # sub1 <- data.frame(y = c(1,2), z = c(3,4))                                     # nolint
-  # sub2 <- data.frame(y = c(5,6), z = c(7,8))                                     # nolint
-  # super <- data.frame(x = rep(c(1,2), each = 2), y = rep(NA, 4), z = rep(NA, 4)) # nolint
+  # sub1 <- data.frame(y = c(1, 2), z = c(3, 4))                                     # nolint
+  # sub2 <- data.frame(y = c(5, 6), z = c(7, 8))                                     # nolint
+  # super <- data.frame(x = rep(c(1, 2), each = 2), y = rep(NA, 4), z = rep(NA, 4)) # nolint
   # super[1:2, c("y", "z")] <- sub1                                                # nolint
   # super[3:4, c("y", "z")] <- sub2                                                # nolint
   index <- 1

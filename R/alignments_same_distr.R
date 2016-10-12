@@ -7,10 +7,10 @@
 #' @return data frame
 #' @examples
 #'   nltt_stats <- read_collected_nltt_stats()
-#'   df <- alignments_same_distr_nltt_stat(nltt_stats)
+#'   df <- aligns_same_distr_nltt_stat(nltt_stats)
 #'   testit::assert(all(names(df) == c("filename", "sti", "same_distr")))
 #' @export
-alignments_same_distr_nltt_stat <- function(df) {
+aligns_same_distr_nltt_stat <- function(df) {
   filename <- NULL; rm(filename)
   sti <- NULL; rm(sti)
   ai <- NULL; rm(ai)

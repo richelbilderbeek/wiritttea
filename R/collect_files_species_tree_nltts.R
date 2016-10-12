@@ -5,7 +5,7 @@
 #'   must be in range <0,1>, default is 0.001
 #' @return A dataframe
 #' @export
-collect_files_species_tree_nltts <- function(filenames, dt = 0.001) {
+collect_files_stree_nltts <- function(filenames, dt = 0.001) {
 
   if (length(filenames) < 1) {
     stop("there must be at least one filename supplied")
@@ -16,7 +16,9 @@ collect_files_species_tree_nltts <- function(filenames, dt = 0.001) {
   for (filename in filenames) {
     this_stns <- NULL
     tryCatch(
-      this_stns <- collect_file_species_tree_nltts(filename = filename, dt = dt),
+      this_stns <- collect_file_species_tree_nltts(
+        filename = filename, dt = dt
+      ),
       error = function(msg) {} # nolint
     )
     if (is.null(this_stns)) {
