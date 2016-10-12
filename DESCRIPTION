@@ -23,11 +23,8 @@ Requires:
   tools,
   TreeSim
 Imports:
-  beastscriptr,
   nLTT,
-  PBD,
   phangorn,
-  phytools,
   RBeast,
   ribir,
   wiritttes
