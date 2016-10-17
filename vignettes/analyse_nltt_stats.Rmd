@@ -27,11 +27,14 @@ wiritttes::get_posterior(file, sti = 1, ai = 1, pi = 1)
 Loading this package
 
 ```{r}
-rda_files <- list.files("~/Peregrine", pattern = "article_0_.*_1_2_1\\.RDa", full.names = TRUE)
+# Analyse a subset only
+rda_files <- list.files("~/Peregrine", pattern = "article_0_.*_1_2_.\\.RDa", full.names = TRUE)
+
+# Extract the parameters
 parameters <- wiritttea::collect_files_parameters(rda_files)
+
+# Extract the nLTT statistics
 df <- wiritttea::collect_files_nltt_stats(rda_files)
-
-
 filename <- "collect_files_nltt_stats.csv"
 
 utils::write.csv(
@@ -42,28 +45,27 @@ utils::write.csv(
 nltt_stats_raw <- wiritttea::read_collected_nltt_stats(filename)
 nltt_stats <- nltt_stats_raw[!is.na(nltt_stats_raw$nltt_stat), ]
 
-names(nltt_stats)
+# Merge nLTT statistics and parameters
 parameters$filename <- rownames(parameters)
-names(parameters)
 df <- merge(nltt_stats, parameters, by = "filename")
 df$scr <- as.factor(df$scr)
-is.factor(df$scr)
-
+df$mutation_rate <- as.factor(df$mutation_rate)
+df$sequence_length <- as.factor(df$sequence_length)
+testit::assert(is.factor(df$scr))
 ```
 
 ## Show the distribution of nLTT statistics
 
 
 ```{r fig.width = 7, fig.height = 7}
-
 ggplot2::ggplot(
+) + ggplot2::facet_grid(mutation_rate ~ sequence_length
+) + ggplot2::geom_boxplot(
   data = df,
   ggplot2::aes(
-    x = df$nltt_stat,
-    fill = df$scr
+    x = scr,
+    y = nltt_stat
   )
-) + ggplot2::geom_density(alpha = 0.5
-) + ggplot2::scale_x_continuous(
-  name = "nLTT statistic", limits = c(0.0, 0.1)
-) + ggplot2::ggtitle("Distribution of nLTT statistics")
+  , alpha = 0.5
+)
 ```
