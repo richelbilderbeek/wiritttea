@@ -1,0 +1,69 @@
+---
+title: "Analyse nLTT statistics"
+author: "Richel Bilderbeek"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analyse nLTTs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Abstract
+
+This vignette shows how analyse the nLTT statistics.
+
+I use this to check if `rJava` is installed correctly. 
+If not, this will give an error:
+
+```{r}
+options(warn = 2)
+file <- wiritttes::read_file("~/Peregrine/article_0_0_0_0_0.RDa")
+wiritttes::get_posterior(file, sti = 1, ai = 1, pi = 1)
+```
+
+## Setup
+
+Loading this package
+
+```{r}
+rda_files <- list.files("~/Peregrine", pattern = "article_0_.*_1_2_1\\.RDa", full.names = TRUE)
+parameters <- wiritttea::collect_files_parameters(rda_files)
+df <- wiritttea::collect_files_nltt_stats(rda_files)
+
+
+filename <- "collect_files_nltt_stats.csv"
+
+utils::write.csv(
+  x = df,
+  file = filename,
+  row.names = TRUE
+)
+nltt_stats_raw <- wiritttea::read_collected_nltt_stats(filename)
+nltt_stats <- nltt_stats_raw[!is.na(nltt_stats_raw$nltt_stat), ]
+
+names(nltt_stats)
+parameters$filename <- rownames(parameters)
+names(parameters)
+df <- merge(nltt_stats, parameters, by = "filename")
+df$scr <- as.factor(df$scr)
+is.factor(df$scr)
+
+```
+
+## Show the distribution of nLTT statistics
+
+
+```{r fig.width = 7, fig.height = 7}
+
+ggplot2::ggplot(
+  data = df,
+  ggplot2::aes(
+    x = df$nltt_stat,
+    fill = df$scr
+  )
+) + ggplot2::geom_density(alpha = 0.5
+) + ggplot2::scale_x_continuous(
+  name = "nLTT statistic", limits = c(0.0, 0.1)
+) + ggplot2::ggtitle("Distribution of nLTT statistics")
+```
