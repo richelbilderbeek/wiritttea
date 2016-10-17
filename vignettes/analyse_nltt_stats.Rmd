@@ -28,22 +28,15 @@ Loading this package
 
 ```{r}
 # Analyse a subset only
-rda_files <- list.files("~/Peregrine", pattern = "article_0_.*_1_[012]_.\\.RDa", full.names = TRUE)
+rda_files <- list.files("~/Peregrine", pattern = "article_.*\\.RDa", full.names = TRUE)
 
 # Extract the parameters
 parameters <- wiritttea::collect_files_parameters(rda_files)
 
-# Extract the nLTT statistics
-df <- wiritttea::collect_files_nltt_stats(rda_files)
-filename <- "collect_files_nltt_stats.csv"
-
-utils::write.csv(
-  x = df,
-  file = filename,
-  row.names = TRUE
-)
-nltt_stats_raw <- wiritttea::read_collected_nltt_stats(filename)
+nltt_stats_raw <- wiritttea::read_collected_nltt_stats("~/Peregrine/collect_files_nltt_stats.csv")
 nltt_stats <- nltt_stats_raw[!is.na(nltt_stats_raw$nltt_stat), ]
+
+nltt_stats_sub <- dplyr::sample_n(nltt_stats, size = 10000)
 
 # Merge nLTT statistics and parameters
 parameters$filename <- rownames(parameters)
@@ -51,20 +44,39 @@ df <- merge(nltt_stats, parameters, by = "filename")
 df$scr <- as.factor(df$scr)
 df$mutation_rate <- as.factor(df$mutation_rate)
 df$sequence_length <- as.factor(df$sequence_length)
-testit::assert(is.factor(df$scr))
+df$sirg <- as.factor(df$sirg)
+df$siri <- as.factor(df$siri)
+
+df_sub <- merge(nltt_stats_sub, parameters, by = "filename")
+df_sub$scr <- as.factor(df_sub$scr)
+df_sub$mutation_rate <- as.factor(df_sub$mutation_rate)
+df_sub$sequence_length <- as.factor(df_sub$sequence_length)
+df_sub$sirg <- as.factor(df_sub$sirg)
+df_sub$siri <- as.factor(df_sub$siri)
 ```
 
 ## Show the distribution of nLTT statistics
 
 
 ```{r fig.width = 7, fig.height = 7}
+# ggplot2::ggplot(
+# ) + ggplot2::facet_grid(. ~ sirg
+# ) + ggplot2::geom_boxplot(
+#   data = df,
+#   ggplot2::aes(
+#     x = scr,
+#     y = nltt_stat
+#   )
+#   , alpha = 0.5
+# )
+# 
 ggplot2::ggplot(
-) + ggplot2::facet_grid(mutation_rate ~ sequence_length
-) + ggplot2::geom_boxplot(
+) + ggplot2::facet_grid(sequence_length ~ mutation_rate
+) + ggplot2::geom_density(
   data = df,
   ggplot2::aes(
-    x = scr,
-    y = nltt_stat
+    x = nltt_stat,
+    fill = scr
   )
   , alpha = 0.5
 )
