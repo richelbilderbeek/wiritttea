@@ -28,7 +28,7 @@ Loading this package
 
 ```{r}
 # Analyse a subset only
-rda_files <- list.files("~/Peregrine", pattern = "article_0_.*_1_2_.\\.RDa", full.names = TRUE)
+rda_files <- list.files("~/Peregrine", pattern = "article_0_.*_1_[12]_.\\.RDa", full.names = TRUE)
 
 # Extract the parameters
 parameters <- wiritttea::collect_files_parameters(rda_files)
