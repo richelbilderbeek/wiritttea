@@ -59,3 +59,4 @@ scripts/*.xml.state.new
 doc/*.eps
 doc/*.tex
 .nfs*
+collect_files_nltt_stats
