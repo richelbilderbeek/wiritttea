@@ -5,7 +5,6 @@
 ##########################
 rm *.txt
 rm *.log
-rm *.RDa
 rm *.csv
 rm *.pdf
 rm *.md
