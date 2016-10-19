@@ -18,17 +18,31 @@ If not, this will give an error:
 
 ```{r}
 options(warn = 2)
-file <- wiritttes::read_file("~/Peregrine/article_0_0_0_0_0.RDa")
-wiritttes::get_posterior(file, sti = 1, ai = 1, pi = 1)
+file <- wiritttes::read_file(
+  wiritttea::find_path("toy_example_1.RDa")
+)
+p <- wiritttes::get_posterior(file, sti = 1, ai = 1, pi = 1)
 ```
 
 ## Setup
 
 Loading this package
 
-```{r}
+```
 # Analyse a subset only
-rda_files <- list.files("~/Peregrine", pattern = "article_.*\\.RDa", full.names = TRUE)
+rda_files <- list.files(
+  "~/PereXgrine", pattern = "article_.*\\.RDa", full.names = TRUE
+)
+
+if (length(rda_files) == 0)
+{
+  rda_files <- list.files(
+    dirname(wiritttea::find_path("toy_example_1.RDa")), 
+    pattern = "toy_example_.*\\.RDa", 
+    full.names = TRUE
+  )
+}
+
 
 # Extract the parameters
 parameters <- wiritttea::collect_files_parameters(rda_files)
@@ -62,7 +76,8 @@ df_sub$eri <- as.factor(df_sub$eri)
 ## Show the distribution of nLTT statistics
 
 
-```{r fig.width = 7, fig.height = 7}
+```
+#```{r fig.width = 7, fig.height = 7}
 # ggplot2::ggplot(
 # ) + ggplot2::facet_grid(. ~ sirg
 # ) + ggplot2::geom_boxplot(
