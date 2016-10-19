@@ -1,15 +1,21 @@
 library(wiritttea)
 
 folder <- "/home/p230198/GitHubs/wiritttea/scripts"
-csv_filename_nrbss <- "../inst/extdata/collected_nrbss.csv"
 
 fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
 df <- collect_files_nrbss(fns)
+
 utils::write.csv(
   x = df,
-  file = csv_filename_nrbss,
+  file = "collect_files_nrbss.csv",
+  row.names = TRUE
+)
+
+utils::write.csv(
+  x = df,
+  file = "../inst/extdata/collect_files_nrbss.csv",
   row.names = TRUE
 )
 

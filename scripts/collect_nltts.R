@@ -1,8 +1,7 @@
 library(wiritttea)
 folder <- "/home/p230198/GitHubs/wiritttea/scripts"
 
-csv_filename_species_trees <- "../inst/extdata/collected_nltts_species_trees.csv"
-csv_filename_posterior <- "../inst/extdata/collected_nltts_posterior.csv"
+
 dt <- 0.1
 
 fns <- paste(
@@ -10,14 +9,28 @@ fns <- paste(
 )
 
 df <- collect_files_nltts(fns, dt = dt)
+
 utils::write.csv(
   x = df$species_tree_nltts,
-  file = csv_filename_species_trees,
+  file = "collect_files_nltts_trees.csv",
   row.names = TRUE
 )
+
+utils::write.csv(
+  x = df$species_tree_nltts,
+  file = "../inst/extdata/collect_files_nltts_trees.csv",
+  row.names = TRUE
+)
+
 utils::write.csv(
   x = df$posterior_nltts,
-  file = csv_filename_posterior,
+  file = "collect_files_nltts_posterior.csv",
+  row.names = TRUE
+)
+
+utils::write.csv(
+  x = df$posterior_nltts,
+  file = "../inst/extdata/collect_files_nltts_posterior.csv",
   row.names = TRUE
 )
 

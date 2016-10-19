@@ -68,7 +68,19 @@ df_process$process_name <- as.factor(df_process$process_name)
 # Write data to CSVs
 utils::write.csv(
   x = df,
+  file = "collect_times_per_file.csv",
+  row.names = TRUE
+)
+
+utils::write.csv(
+  x = df,
   file = "../inst/extdata/collected_times_per_file.csv",
+  row.names = TRUE
+)
+
+utils::write.csv(
+  x = df,
+  file = "collect_times_for_process.csv",
   row.names = TRUE
 )
 

@@ -7,7 +7,13 @@ df <- wiritttea::collect_files_n_species_trees(fns)
 
 utils::write.csv(
   x = df,
-  file = "../inst/extdata/collected_n_species_trees.csv",
+  file = "collect_files_n_species_trees.csv",
+  row.names = TRUE
+)
+
+utils::write.csv(
+  x = df,
+  file = "../inst/extdata/collect_files_n_species_trees.csv",
   row.names = TRUE
 )
 

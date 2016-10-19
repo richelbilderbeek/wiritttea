@@ -1,6 +1,5 @@
 library(wiritttea)
 folder <- "/home/p230198/GitHubs/wiritttea/scripts"
-csv_filename_nltt_stat <- "../inst/extdata/collected_nltt_stats.csv"
 
 # filenames
 fns <- paste(
@@ -11,7 +10,13 @@ df <- collect_files_nltt_stats(fns)
 
 utils::write.csv(
   x = df,
-  file = csv_filename_nltt_stat,
+  file = "../inst/extdata/collect_files_nltt_stats.csv",
+  row.names = TRUE
+)
+
+utils::write.csv(
+  x = df,
+  file = "../inst/extdata/collect_files_nltt_stats.csv",
   row.names = TRUE
 )
 

@@ -4,6 +4,13 @@ fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
 df <- wiritttea::collect_files_parameters(fns)
+
+utils::write.csv(
+  x = df,
+  file = "collect_files_parameters.csv",
+  row.names = TRUE
+)
+
 utils::write.csv(
   x = df,
   file = "../inst/extdata/collect_files_parameters.csv",
