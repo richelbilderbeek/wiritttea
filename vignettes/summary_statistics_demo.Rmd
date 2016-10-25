@@ -83,8 +83,6 @@ species trees has states on the edges (`good` and
 `incipient`), it is not a phylogeny of class `phylo`
 but has additional data as well. 
 
-## Femke and Jolien summary statistic
-
 ## Gamma statistic
 
 The gamma statistic was introduced by Pybus and Harvey (2000).
@@ -160,6 +158,14 @@ abline(v = true_gamma, col = "red")
 It appears that all gamma statistics in the posterior are lower than the gamma statistic
 of the true tree.
 
+## nLTT statistic
+
+The nLTT statistic is a difference measure between two trees.
+
+## NRBS
+
+The NRBS is a difference measure between two trees.
+
 ## Colless statistic [DOES NOT WORK]
 
 The Colless statistic was introduced by Colless (1982).
@@ -206,31 +212,4 @@ Tree.result <- PDA.Tree(iris[train,5], iris[train,1:4])
 Tree.result
 plot(Tree.result$Tree.Struct)
 ```
-
-## [First summary statistic]
-
-Given a phylogeny [TODO: Use a BD or PBD phylogeny]
-
-```{r}
-library(ape)
-phylogeny <- rcoal(10)
-plot(phylogeny)
-```
-
-A possible summary statistic is ...
-
-The statistic is very in-/sensitive, as when we compare the phylogeny
-to itself, the values already differ????
-
-```{r}
-measurement_1 <- stats::runif(n = 1, max = sum(phylogeny$edge.length))
-measurement_2 <- stats::runif(n = 1, max = sum(phylogeny$edge.length))
-print(measurement_1)
-print(measurement_2)
-```
-
-
-
-
-
 
