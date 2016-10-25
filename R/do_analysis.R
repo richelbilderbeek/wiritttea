@@ -9,5 +9,5 @@
 #' @export
 do_analysis <- function(folder = "~/GitHubs/wiritttea/inst/extdata") {
 
-  collect_all(folder)
+  wiritttea::collect_all(folder)
 }
