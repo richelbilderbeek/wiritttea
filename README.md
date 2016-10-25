@@ -144,6 +144,11 @@ Try first to install the `rJava` package
 R CMD javareconf
 ```
 
+## Article
+
+The article-in-preparation can be found
+at the closed [wirittte_article GitHub](https://github.com/richelbilderbeek/wirittte_article)
+
 ## Resources
 
  * [My 2015-11-23 TRES presentation](https://github.com/richelbilderbeek/Science/blob/master/Bilderbeek20151123TresMeeting/20151123TresMeeting.pdf)
