@@ -324,7 +324,7 @@ First, I collect the nLTT values from the species
 tree(s) with outgroup(s):
 
 ```{r}
-true_nltt_values <- collect_file_species_tree_nltts(filename = filename, dt = dt)
+true_nltt_values <- collect_file_stree_nltts(filename = filename, dt = dt)
 knitr::kable(head(true_nltt_values))
 ```
 
@@ -524,7 +524,7 @@ First, I collect the nLTT values from the species
 tree(s) with outgroup(s):
 
 ```{r}
-true_nltt_values <- collect_file_species_tree_nltts(filename = filename, dt = dt)
+true_nltt_values <- collect_file_stree_nltts(filename = filename, dt = dt)
 knitr::kable(head(true_nltt_values))
 ```
 

@@ -16,7 +16,7 @@ collect_files_stree_nltts <- function(filenames, dt = 0.001) {
   for (filename in filenames) {
     this_stns <- NULL
     tryCatch(
-      this_stns <- collect_file_species_tree_nltts(
+      this_stns <- collect_file_stree_nltts(
         filename = filename, dt = dt
       ),
       error = function(msg) {} # nolint

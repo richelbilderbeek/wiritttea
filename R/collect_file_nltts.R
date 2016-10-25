@@ -29,7 +29,7 @@ collect_file_nltts <- function(filename, dt = 0.001) {
     )
   }
 
-  species_tree_nltts <- wiritttea::collect_file_species_tree_nltts(
+  species_tree_nltts <- wiritttea::collect_file_stree_nltts(
     filename = filename, dt = dt
   )
   posterior_nltts <- wiritttea::collect_file_posterior_nltts(
