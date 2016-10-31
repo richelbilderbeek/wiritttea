@@ -1,5 +1,5 @@
 library(wiritttea)
-folder <- "/home/p230198/GitHubs/wiritttea/scripts"
+folder <- "/data/p230198"
 
 # filenames
 fns <- paste(

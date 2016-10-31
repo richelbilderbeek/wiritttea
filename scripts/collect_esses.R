@@ -1,6 +1,5 @@
 library(wiritttea)
-folder <- "/home/p230198/GitHubs/wiritttea/scripts"
-#folder <- "/home/p230198/Peregrine"
+folder <- "/data/p230198"
 
 fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
