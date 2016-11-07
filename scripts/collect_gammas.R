@@ -5,28 +5,30 @@ folder <- "/data/p230198"
 fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
-df <- collect_files_gammas(fns)
+
+df_species_tree_gamma_stats <- collect_files_stree_gammas(fns)
+df_posterior_gamma_stats <- collect_files_posterior_gammas(fns)
 
 utils::write.csv(
-  x = df$species_tree_gamma_stats,
+  x = df_species_tree_gamma_stats,
   file = "collect_files_gammas_species_trees.csv",
   row.names = TRUE
 )
 
 utils::write.csv(
-  x = df$species_tree_gamma_stats,
+  x = df_species_tree_gamma_stats,
   file = "../inst/extdata/collect_files_gammas_species_trees.csv",
   row.names = TRUE
 )
 
 utils::write.csv(
-  x = df$posterior_gamma_stats,
+  x = df_posterior_gamma_stats,
   file = "collect_files_gammas_posterior.csv",
   row.names = TRUE
 )
 
 utils::write.csv(
-  x = df$posterior_gamma_stats,
+  x = df_posterior_gamma_stats,
   file = "../inst/extdata/collect_files_gammas_posterior.csv",
   row.names = TRUE
 )

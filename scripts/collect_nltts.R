@@ -8,28 +8,29 @@ fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
 
-df <- collect_files_nltts(fns, dt = dt)
+df_species_tree_nltts <- collect_files_stree_nltts(fns, dt = dt)
+df_posterior_nltts <- collect_files_posterior_nltts(fns, dt = dt)
 
 utils::write.csv(
-  x = df$species_tree_nltts,
+  x = df_species_tree_nltts,
   file = "collect_files_nltts_trees.csv",
   row.names = TRUE
 )
 
 utils::write.csv(
-  x = df$species_tree_nltts,
+  x = df_species_tree_nltts,
   file = "../inst/extdata/collect_files_nltts_trees.csv",
   row.names = TRUE
 )
 
 utils::write.csv(
-  x = df$posterior_nltts,
+  x = df_posterior_nltts,
   file = "collect_files_nltts_posterior.csv",
   row.names = TRUE
 )
 
 utils::write.csv(
-  x = df$posterior_nltts,
+  x = df_posterior_nltts,
   file = "../inst/extdata/collect_files_nltts_posterior.csv",
   row.names = TRUE
 )
