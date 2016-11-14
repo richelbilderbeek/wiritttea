@@ -28,29 +28,24 @@ p <- wiritttes::get_posterior(file, sti = 1, ai = 1, pi = 1)
 
 Loading this package
 
-```
+```{r}
 # Analyse a subset only
 rda_files <- list.files(
-  "~/PereXgrine", pattern = "article_.*\\.RDa", full.names = TRUE
+  "/data/p230198", pattern = "article_.*\\.RDa", full.names = TRUE
 )
 
 if (length(rda_files) == 0)
 {
-  rda_files <- list.files(
-    dirname(wiritttea::find_path("toy_example_1.RDa")), 
-    pattern = "toy_example_.*\\.RDa", 
-    full.names = TRUE
-  )
+  print("No data folder found")
+  knitr::knit_exit()
 }
-
 
 # Extract the parameters
 parameters <- wiritttea::collect_files_parameters(rda_files)
 
-nltt_stats_raw <- wiritttea::read_collected_nltt_stats("~/Peregrine/collect_files_nltt_stats.csv")
+nltt_stats_raw <- wiritttea::read_collected_nltt_stats("collect_files_nltt_stats.csv")
 nltt_stats <- nltt_stats_raw[!is.na(nltt_stats_raw$nltt_stat), ]
 
-nltt_stats_sub <- dplyr::sample_n(nltt_stats, size = 10000)
 
 # Merge nLTT statistics and parameters
 parameters$filename <- rownames(parameters)
@@ -63,20 +58,22 @@ df$siri <- as.factor(df$siri)
 df$erg <- as.factor(df$erg)
 df$eri <- as.factor(df$eri)
 
-df_sub <- merge(nltt_stats_sub, parameters, by = "filename")
-df_sub$scr <- as.factor(df_sub$scr)
-df_sub$mutation_rate <- as.factor(df_sub$mutation_rate)
-df_sub$sequence_length <- as.factor(df_sub$sequence_length)
-df_sub$sirg <- as.factor(df_sub$sirg)
-df_sub$siri <- as.factor(df_sub$siri)
-df_sub$erg <- as.factor(df_sub$erg)
-df_sub$eri <- as.factor(df_sub$eri)
+# Subset
+# nltt_stats_sub <- dplyr::sample_n(nltt_stats, size = 10000)
+# df_sub <- merge(nltt_stats_sub, parameters, by = "filename")
+# df_sub$scr <- as.factor(df_sub$scr)
+# df_sub$mutation_rate <- as.factor(df_sub$mutation_rate)
+# df_sub$sequence_length <- as.factor(df_sub$sequence_length)
+# df_sub$sirg <- as.factor(df_sub$sirg)
+# df_sub$siri <- as.factor(df_sub$siri)
+# df_sub$erg <- as.factor(df_sub$erg)
+# df_sub$eri <- as.factor(df_sub$eri)
 ```
 
 ## Show the distribution of nLTT statistics
 
 
-```
+```{r}
 #```{r fig.width = 7, fig.height = 7}
 # ggplot2::ggplot(
 # ) + ggplot2::facet_grid(. ~ sirg
