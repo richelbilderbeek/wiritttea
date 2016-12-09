@@ -2,8 +2,9 @@
 #' @return a data frame with all parameters
 #' @author Richel Bilderbeek
 #' @export
-read_collected_parameters <- function() {
-  csv_filename <- wiritttea::find_path("collect_files_parameters.csv")
+read_collected_parameters <- function(
+  csv_filename = wiritttea::find_path("collect_files_parameters.csv")
+) {
   testit::assert(file.exists(csv_filename))
   df <- utils::read.csv(
     file = csv_filename,

@@ -4,7 +4,8 @@
 \alias{read_collected_parameters}
 \title{Reads the file with the collected parameters}
 \usage{
-read_collected_parameters()
+
+  read_collected_parameters(csv_filename = wiritttea::find_path("collect_files_parameters.csv"))
 }
 \value{
 a data frame with all parameters
