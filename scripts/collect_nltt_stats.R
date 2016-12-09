@@ -10,7 +10,7 @@ df <- collect_files_nltt_stats(fns)
 
 utils::write.csv(
   x = df,
-  file = "../inst/extdata/collect_files_nltt_stats.csv",
+  file = "collect_files_nltt_stats.csv",
   row.names = TRUE
 )
 
