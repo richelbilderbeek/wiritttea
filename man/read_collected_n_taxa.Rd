@@ -4,7 +4,11 @@
 \alias{read_collected_n_taxa}
 \title{Reads the file with the collected number of taxa}
 \usage{
-read_collected_n_taxa()
+
+  read_collected_n_taxa(csv_filename = wiritttea::find_path("collect_files_n_taxa.csv"))
+}
+\arguments{
+\item{csv_filename}{name of the CSV file}
 }
 \value{
 a data frame with all parameters

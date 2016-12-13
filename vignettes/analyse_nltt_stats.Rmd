@@ -18,6 +18,10 @@ If not, this will give an error:
 
 ```{r}
 options(warn = 2)
+
+library(wiritttes)
+library(wiritttea)
+
 file <- wiritttes::read_file(
   wiritttea::find_path("toy_example_1.RDa")
 )
@@ -37,13 +41,16 @@ if (Sys.info()["nodename"] == "fwn-biol-132-102") {
   
   # Read nLTT stats
   nltt_stats_raw <- wiritttea::read_collected_nltt_stats("~/Peregrine/collect_files_nltt_stats.csv")
-  
+
+  n_taxa <- wiritttea::read_collected_n_taxa("~/Peregrine/collect_files_n_taxa.csv")
+
   # No NA's in my dataset please
   nltt_stats <- nltt_stats_raw[!is.na(nltt_stats_raw$nltt_stat), ]
   
   # Merge nLTT statistics and parameters
   parameters$filename <- rownames(parameters)
   df <- merge(nltt_stats, parameters, by = "filename")
+  df <- merge(n_taxa, df, by = "filename")
   df$scr <- as.factor(df$scr)
   df$mutation_rate <- as.factor(df$mutation_rate)
   df$sequence_length <- as.factor(df$sequence_length)
@@ -56,19 +63,10 @@ if (Sys.info()["nodename"] == "fwn-biol-132-102") {
 
 ## Show the distribution of nLTT statistics
 
+Here we have the bumps:
 
 ```{r fig.width = 7, fig.height = 7}
 if (Sys.info()["nodename"] == "fwn-biol-132-102") {
-  ggplot2::ggplot(
-  ) + ggplot2::facet_grid(. ~ sirg
-  ) + ggplot2::geom_boxplot(
-    data = df,
-    ggplot2::aes(
-      x = scr,
-      y = nltt_stat
-    )
-    , alpha = 0.5
-  )
   
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
@@ -80,5 +78,102 @@ if (Sys.info()["nodename"] == "fwn-biol-132-102") {
     )
     , alpha = 0.5
   )
+}
+```
+
+Rampal wondered if this is caused by DNA sequence length. 
+Here is short:
+
+```{r fig.width = 7, fig.height = 7}
+if (Sys.info()["nodename"] == "fwn-biol-132-102") {
+  
+  ggplot2::ggplot(
+  ) + ggplot2::facet_grid(siri ~ erg
+  ) + ggplot2::geom_density(
+    data = df[df$sequence_length == 1000, ],
+    ggplot2::aes(
+      x = nltt_stat,
+      fill = scr
+    )
+    , alpha = 0.5
+  )
+
+}
+```
+
+Short has bumps.
+
+Here is long:
+
+```{r fig.width = 7, fig.height = 7}
+if (Sys.info()["nodename"] == "fwn-biol-132-102") {
+  
+  ggplot2::ggplot(
+  ) + ggplot2::facet_grid(siri ~ erg
+  ) + ggplot2::geom_density(
+    data = df[df$sequence_length == 10000, ],
+    ggplot2::aes(
+      x = nltt_stat,
+      fill = scr
+    )
+    , alpha = 0.5
+  )
+
+}
+```
+
+Long has bumps.
+
+I predict it has to do with short trees. 
+
+Here I show the number of taxa in the simulated trees,
+for different speciation initiation rates:
+
+```{r}
+if (Sys.info()["nodename"] == "fwn-biol-132-102") {
+
+  ggplot2::ggplot(
+      df, 
+      ggplot2::aes(n_taxa, fill = siri)
+  ) + ggplot2::geom_histogram()
+}
+```
+
+Or facnier, in a facet grid:
+
+```{r}
+if (Sys.info()["nodename"] == "fwn-biol-132-102") {
+
+  ggplot2::ggplot(
+  ) + ggplot2::facet_grid(siri ~ erg
+  ) + ggplot2::geom_histogram(
+    data = df,
+    ggplot2::aes(
+      n_taxa,
+      fill = scr
+    )
+    , alpha = 0.5
+  )
+
+```
+
+
+```{r fig.width = 7, fig.height = 7}
+
+plot()
+
+if (Sys.info()["nodename"] == "fwn-biol-132-102") {
+  
+  ggplot2::ggplot(
+  ) + ggplot2::facet_grid(siri ~ erg
+  ) + ggplot2::geom_density(
+    data = df[df$sequence_length == 10000, ],
+    ggplot2::aes(
+      x = nltt_stat,
+      fill = scr
+    )
+    , alpha = 0.5
+  )
+
 }
 ```
