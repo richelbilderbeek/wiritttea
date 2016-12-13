@@ -157,7 +157,7 @@ if (is_local_computer()) {
 }
 ```
 
-Or facnier, in a facet grid:
+Or fancier, in a facet grid, as a histogram:
 
 ```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
@@ -165,6 +165,24 @@ if (is_local_computer()) {
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
   ) + ggplot2::geom_histogram(
+    data = df,
+    ggplot2::aes(
+      n_taxa,
+      fill = scr
+    )
+    , alpha = 0.5
+  )
+}
+```
+
+Or even fancier, in a facet grid, as a density plots:
+
+```{r fig.width = 7, fig.height = 7}
+if (is_local_computer()) {
+
+  ggplot2::ggplot(
+  ) + ggplot2::facet_grid(siri ~ erg
+  ) + ggplot2::geom_density(
     data = df,
     ggplot2::aes(
       n_taxa,
