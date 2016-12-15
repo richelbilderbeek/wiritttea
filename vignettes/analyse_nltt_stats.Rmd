@@ -29,16 +29,21 @@ p <- wiritttes::get_posterior(file, sti = 1, ai = 1, pi = 1)
 
 is_local_computer <- function()
 {
-  local_computer_names <- c("fwn-biol-132-102", "lubuntu")
+  local_computer_names <- c(
+    "fwn-biol-132-102", 
+    "pc-157-104", 
+    "lubuntu")
   return (sum(Sys.info()["nodename"] == local_computer_names) == 1)
 }
+
+is_local_computer()
 ```
 
 ## Setup
 
 Loading this package
 
-```{r}
+```{r cache=TRUE}
 if (is_local_computer()) {
   # Read parameters
   parameters <- wiritttea::read_collected_parameters(
@@ -248,5 +253,18 @@ if (is_local_computer()) {
 }
 ```
 
+Plot the number of taxa versus error:
 
+```{r fig.width = 7, fig.height = 7}
+if (is_local_computer()) {
+
+  ggplot2::ggplot(
+      df_zoom, 
+      ggplot2::aes(x = n_taxa, y = nltt_stat)
+  ) + ggplot2::geom_point(
+  ) + ggplot2::geom_smooth(method = "lm")
+  
+
+}
+```
 
