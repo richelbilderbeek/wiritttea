@@ -31,6 +31,7 @@ is_local_computer <- function()
 {
   local_computer_names <- c(
     "fwn-biol-132-102", 
+    "pc-157-103", 
     "pc-157-104", 
     "lubuntu")
   return (sum(Sys.info()["nodename"] == local_computer_names) == 1)
@@ -268,3 +269,72 @@ if (is_local_computer()) {
 }
 ```
 
+Plot the number of taxa versus error, seperated by SCR:
+
+
+```{r fig.width = 7, fig.height = 7}
+if (is_local_computer()) {
+
+  ggplot2::ggplot(
+      df_zoom, 
+      ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
+  ) + ggplot2::geom_point(
+  ) + ggplot2::geom_smooth(method = "lm")
+  
+
+}
+```
+
+For all data:
+
+```{r fig.width = 7, fig.height = 7}
+if (is_local_computer()) {
+
+  ggplot2::ggplot(
+      df, 
+      ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
+  ) + ggplot2::geom_point(
+  ) + ggplot2::geom_smooth(method = "lm")
+  
+
+}
+```
+
+
+Zoom in on mutation rate and DNA alignment length
+
+
+```{r fig.width = 7, fig.height = 7}
+if (is_local_computer()) {
+  names(df_zoom)
+  df_zoom_zoom <- df_zoom[
+    df_zoom$mutation_rate == 0.1 & df_zoom$sequence_length == 10000 & df_zoom$scr == 1e+06,
+  ]
+
+  ggplot2::ggplot(
+      df_zoom_zoom, 
+      ggplot2::aes(nltt_stat, fill = sti)
+  ) + ggplot2::geom_density(alpha = 0.5
+  ) + ggplot2::scale_y_continuous(limits = c(0, 100))
+
+  ggplot2::ggplot(
+  ) + ggplot2::facet_grid(sti ~ ai
+  ) + ggplot2::geom_density(
+    data = df_zoom_zoom,
+    ggplot2::aes(
+      x = nltt_stat,
+      fill = pi
+    )
+    , alpha = 0.5
+  ) + ggplot2::scale_y_continuous(limits = c(0, 100))
+
+  
+  ggplot2::ggplot(
+      df_zoom_zoom, 
+      ggplot2::aes(x = n_taxa, y = nltt_stat)
+  ) + ggplot2::geom_point(
+  ) + ggplot2::geom_smooth(method = "lm")
+  
+
+}
+```
