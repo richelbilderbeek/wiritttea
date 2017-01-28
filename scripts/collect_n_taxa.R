@@ -1,5 +1,6 @@
 library(wiritttea)
-folder <- "/data/p230198"
+#folder <- "/data/p230198"
+folder <- "~/Peregrine"
 fns <- paste(
   folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
 )
@@ -30,3 +31,4 @@ tryCatch(
 )
 
 warnings()
+
