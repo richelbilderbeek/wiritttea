@@ -3,9 +3,10 @@
 
 #include <string>
 #include <vector>
+#include "state.h"
 
 ///Get the filenames of files that have no species tree
-std::vector<std::string> get_species_tree_na(const std::vector<std::string>& filenames) noexcept;
+void set_species_tree_states(std::vector<state>& states) noexcept;
 
 ///Does this file have a species tree?
 bool has_species_tree(const std::string& filename) noexcept;

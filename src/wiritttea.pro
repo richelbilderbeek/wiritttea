@@ -32,4 +32,7 @@ QT -= core gui
 
 include(wiritttea.pri)
 
+#include(../../RibiLibraries/Rinside.pri)
+#include(../../RibiClasses/CppRibiRinside/CppRibiRinside.pri)
+
 SOURCES += main.cpp

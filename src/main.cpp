@@ -1,9 +1,11 @@
 #include <exception>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include "wiritttea.h"
 #include "helper.h"
+#include "state.h"
 
 void show_help()
 {
@@ -20,26 +22,45 @@ void show_help()
   ;
 }
 
+
 int main(int argc, char* argv[])
 {
   try
   {
-    std::vector<std::string> args;
+    std::vector<state> states;
     for (int i=1; i!=argc; ++i) //Skip the exe itself
     {
-      args.push_back(std::string(argv[i]));
+      states.push_back(state(std::string(argv[i])));
     }
+
     if (argc == 1)
     {
       show_help();
       return 0;
     }
-    std::cout << "No species trees: " << (argc - 1) << '\n';
-    const std::vector<std::string> filenames = get_species_tree_na(args);
-    for (const auto& filename: filenames)
+    std::cout << "No files: " << (argc - 1) << '\n';
+    set_species_tree_states(states);
     {
-      std::cout << filename << '\n';
+      std::ofstream f("incorrect_species_trees.csv");
+      for (const auto& state: states)
+      {
+        if (state.m_species_tree == tribool::na)
+        {
+          f << state.m_filename << '\n';
+        }
+      }
     }
+    {
+      std::ofstream f("correct_species_trees.csv");
+      for (const auto& state: states)
+      {
+        if (state.m_species_tree == tribool::ok)
+        {
+          f << state.m_filename << '\n';
+        }
+      }
+    }
+    //std::cout << "Done" << '\n';
   }
   catch (std::exception& e)
   {
