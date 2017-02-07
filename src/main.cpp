@@ -60,6 +60,13 @@ int main(int argc, char* argv[])
         }
       }
     }
+    {
+      std::ofstream f("n_taxa.csv");
+      for (const auto& state: states)
+      {
+        f << state.m_filename << ": " << state.m_n_taxa << '\n';
+      }
+    }
     //std::cout << "Done" << '\n';
   }
   catch (std::exception& e)

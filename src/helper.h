@@ -9,6 +9,10 @@
 ///(2) if file is still present after attempt
 void delete_file(const std::string& filename);
 
+///Deletes the file if it is present. Throws if:
+///the file is still present after attempt
+void delete_if_present(const std::string& filename);
+
 std::vector<std::string> file_to_vector(const std::string& filename);
 
 ///Checks if a file is present

@@ -5,6 +5,10 @@
 #include <vector>
 #include "state.h"
 
+///Count the number of taxa in the species tree
+///Returns zero if something went wrong
+int count_n_taxa(const std::string& filename) noexcept;
+
 ///Get the filenames of files that have no species tree
 void set_species_tree_states(std::vector<state>& states) noexcept;
 

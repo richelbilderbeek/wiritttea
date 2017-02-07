@@ -33,6 +33,14 @@ void delete_file(const std::string& filename)
   }
 }
 
+void delete_if_present(const std::string& filename)
+{
+  if (is_regular_file(filename))
+  {
+    delete_file(filename);
+  }
+}
+
 std::vector<std::string> file_to_vector(const std::string& filename)
 {
   if(!is_regular_file(filename))
