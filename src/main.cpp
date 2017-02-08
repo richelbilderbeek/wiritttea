@@ -61,6 +61,7 @@ int main(int argc, char* argv[])
         }
       }
     }
+    /*
     {
       std::ofstream f("parameters.csv");
       f << create_header_parameters() << '\n';
@@ -69,7 +70,15 @@ int main(int argc, char* argv[])
         f << state.m_parameters << '\n';
       }
     }
-    //std::cout << "Done" << '\n';
+    */
+    {
+      std::ofstream f("nltt_stats.csv");
+      f << create_header_nltt_stats();
+      for (const auto& state: states)
+      {
+        f << state.m_nltt_stats << '\n';
+      }
+    }
   }
   catch (std::exception& e)
   {

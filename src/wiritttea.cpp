@@ -55,19 +55,24 @@ void fill_states(std::vector<state>& states) noexcept
   for (state& s: states)
   {
     std::cout << s.m_filename << ": ";
+    /*
     {
       const bool ok = has_species_tree_safe(s.m_filename);
       s.m_species_tree = ok ? tribool::ok : tribool::na;
       std::cout << (ok ? "OK, ": "NA\n");
-      if (s.m_species_tree == tribool::na) continue;
     }
     {
       s.m_n_taxa = count_n_taxa_safe(s.m_filename);
       std::cout << s.m_n_taxa << ", ";
     }
     {
-      s.m_parameters = read_from_rda_safe(s.m_filename);
+      s.m_parameters = read_parameters_from_rda_safe(s.m_filename);
       std::cout << s.m_parameters << ", ";
+    }
+    */
+    {
+      s.m_nltt_stats = read_nltt_stats_from_rda_safe(s.m_filename);
+      std::cout << s.m_nltt_stats.size();
     }
     std::cout << '\n';
   }

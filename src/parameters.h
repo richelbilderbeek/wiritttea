@@ -87,11 +87,11 @@ std::string create_header_parameters() noexcept;
 parameters create_null_parameters() noexcept;
 
 ///Read the parameters from an RDa file
-parameters read_from_rda(const std::string& filename);
+parameters read_parameters_from_rda(const std::string& filename);
 
 ///Read the parameters from an RDa file
 ///Returns a null parameters set if an exception is thrown
-parameters read_from_rda_safe(const std::string& filename) noexcept;
+parameters read_parameters_from_rda_safe(const std::string& filename) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const parameters& p) noexcept;
 

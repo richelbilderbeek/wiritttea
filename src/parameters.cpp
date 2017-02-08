@@ -75,7 +75,7 @@ parameters create_null_parameters() noexcept
   );
 }
 
-parameters read_from_rda(const std::string& filename)
+parameters read_parameters_from_rda(const std::string& filename)
 {
   /*
   "","rng_seed","sirg","siri","scr","erg","eri","age","mutation_rate","n_alignments","sequence_length","nspp","n_beast_runs"
@@ -136,11 +136,11 @@ parameters read_from_rda(const std::string& filename)
 
 }
 
-parameters read_from_rda_safe(const std::string& filename) noexcept
+parameters read_parameters_from_rda_safe(const std::string& filename) noexcept
 {
   try
   {
-    return read_from_rda(filename);
+    return read_parameters_from_rda(filename);
   }
   catch (std::exception&)
   {
