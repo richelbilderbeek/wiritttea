@@ -8,7 +8,7 @@
 
 #include "helper.h"
 
-int count_n_taxa(const std::string& filename) noexcept
+int count_n_taxa(const std::string& filename)
 {
   const std::string r_filename{"tmp_count_n_taxa.R"};
   const std::string csv_filename{"tmp_count_n_taxa.csv"};
@@ -27,8 +27,7 @@ int count_n_taxa(const std::string& filename) noexcept
   };
   if (error)
   {
-    //throw std::runtime_error("command failed");
-    return 0;
+    throw std::runtime_error("Rscript failed");
   }
   const std::vector<std::string> lines = file_to_vector(csv_filename);
   assert(lines.size() == 2);
@@ -39,26 +38,42 @@ int count_n_taxa(const std::string& filename) noexcept
   return std::stoi(n_taxa);
 }
 
-void set_species_tree_states(std::vector<state>& states) noexcept
+int count_n_taxa_safe(const std::string& filename) noexcept
 {
-  for (state& s: states)
+  try
   {
-    if (s.m_species_tree == tribool::unknown)
-    {
-      const bool ok = has_species_tree(s.m_filename);
-      s.m_species_tree = ok ? tribool::ok : tribool::na;
-      std::cout << s.m_filename << ": " << (ok ? "OK": "NA") << '\n';
-    }
-    assert(s.m_species_tree != tribool::unknown);
-    if (s.m_n_taxa < 0)
-    {
-      s.m_n_taxa = count_n_taxa(s.m_filename);
-      std::cout << s.m_filename << ": " << s.m_n_taxa << '\n';
-    }
+    return count_n_taxa(filename);
+  }
+  catch (std::exception&)
+  {
+    return 0;
   }
 }
 
-bool has_species_tree(const std::string& filename) noexcept
+void fill_states(std::vector<state>& states) noexcept
+{
+  for (state& s: states)
+  {
+    std::cout << s.m_filename << ": ";
+    {
+      const bool ok = has_species_tree_safe(s.m_filename);
+      s.m_species_tree = ok ? tribool::ok : tribool::na;
+      std::cout << (ok ? "OK, ": "NA\n");
+      if (s.m_species_tree == tribool::na) continue;
+    }
+    {
+      s.m_n_taxa = count_n_taxa_safe(s.m_filename);
+      std::cout << s.m_n_taxa << ", ";
+    }
+    {
+      s.m_parameters = read_from_rda_safe(s.m_filename);
+      std::cout << s.m_parameters << ", ";
+    }
+    std::cout << '\n';
+  }
+}
+
+bool has_species_tree(const std::string& filename)
 {
   const std::string r_filename{"tmp_has_species_tree.R"};
   const std::string csv_filename{"tmp_has_species_tree.csv"};
@@ -77,8 +92,7 @@ bool has_species_tree(const std::string& filename) noexcept
   };
   if (error)
   {
-    //throw std::runtime_error("command failed");
-    return false;
+    throw std::runtime_error("Rscript failed");
   }
   const std::vector<std::string> lines = file_to_vector(csv_filename);
   assert(lines.size() == 2);
@@ -88,6 +102,18 @@ bool has_species_tree(const std::string& filename) noexcept
   if (n_taxa == "NA") return false;
   assert(std::stoi(n_taxa) > 0);
   return true;
+}
+
+bool has_species_tree_safe(const std::string& filename) noexcept
+{
+  try
+  {
+    return has_species_tree(filename);
+  }
+  catch (std::exception&)
+  {
+    return false;
+  }
 }
 
 bool has_species_tree_na(const std::string& filename) noexcept

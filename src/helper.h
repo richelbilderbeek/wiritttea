@@ -28,4 +28,7 @@ std::vector<std::string> seperate_string(
   const char seperator
 );
 
+///Show the current time
+void show_time() noexcept;
+
 #endif // PBD_HELPER_H

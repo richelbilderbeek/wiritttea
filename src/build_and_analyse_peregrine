@@ -11,6 +11,7 @@ module load git
 module load Qt
 module load GCC/5.1.0
 module load Boost
+module load R/3.3.1-foss-2016a
 qmake wiritttea_peregrine.pro
 make
 ./wiritttea_peregrine `ls /data/p230198/20170208/*.RDa` > cout.txt

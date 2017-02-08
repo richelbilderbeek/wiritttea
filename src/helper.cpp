@@ -3,6 +3,8 @@
 #include <boost/algorithm/string/find_iterator.hpp> //Line 248
 
 #include <cassert>
+#include <chrono>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 
@@ -104,4 +106,11 @@ std::vector<std::string> seperate_string(
     v.push_back(sub))
   {} //!OCLINT Indeed, this is an empty loop, and should be
   return v;
+}
+
+void show_time() noexcept
+{
+  const auto now = std::chrono::system_clock::now();
+  const auto now_c = std::chrono::system_clock::to_time_t(now);
+  std::cout << std::put_time(std::localtime(&now_c), "%c") << '\n';
 }
