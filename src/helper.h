@@ -13,6 +13,9 @@ void delete_file(const std::string& filename);
 ///the file is still present after attempt
 void delete_if_present(const std::string& filename);
 
+///Extract the filename from a full path
+std::string extract_filename(const std::string& filename);
+
 std::vector<std::string> file_to_vector(const std::string& filename);
 
 ///Checks if a file is present

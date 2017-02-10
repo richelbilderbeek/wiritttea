@@ -8,11 +8,15 @@
 class nltt_stats
 {
 public:
-  nltt_stats(std::vector<nltt_stat> v);
+  nltt_stats(
+    std::string filename,
+    std::vector<nltt_stat> v);
 
   int size() const noexcept { return m_v.size(); }
 
 private:
+
+  std::string m_filename;
   std::vector<nltt_stat> m_v;
 
   friend std::ostream& operator<<(std::ostream& os, const nltt_stats& p) noexcept;
@@ -45,6 +49,7 @@ nltt_stats read_nltt_stats_from_rda_safe(
 
 ///Read the nltt_stats from lines of text
 nltt_stats read_nltt_stats_from_text(
+  const std::string filename,
   const std::vector<std::string>& text);
 
 

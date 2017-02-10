@@ -44,6 +44,16 @@ void delete_if_present(const std::string& filename)
   }
 }
 
+std::string extract_filename(const std::string& s)
+{
+   const auto i = s.rfind('/', s.length());
+   if (i != std::string::npos)
+   {
+      return s.substr(i+1, s.length() - i);
+   }
+   //No path seperators
+   return s;
+}
 std::vector<std::string> file_to_vector(const std::string& filename)
 {
   if(!is_regular_file(filename))

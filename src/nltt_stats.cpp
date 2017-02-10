@@ -6,20 +6,23 @@
 
 #include "helper.h"
 
-nltt_stats::nltt_stats(std::vector<nltt_stat> v)
-  : m_v{v}
+nltt_stats::nltt_stats(
+  std::string filename,
+  std::vector<nltt_stat> v)
+  : m_filename{filename},
+    m_v{v}
 {
 
 }
 
 std::string create_header_nltt_stats() noexcept
 {
-  return create_header_nltt_stat();
+  return R"("","filename","sti","ai","pi","si","nltt_stat")";
 }
 
 nltt_stats create_null_nltt_stats() noexcept
 {
-  return nltt_stats( {} );
+  return nltt_stats("no.RDa", {} );
 }
 
 nltt_stats read_nltt_stats_from_rda(
@@ -47,10 +50,11 @@ nltt_stats read_nltt_stats_from_rda(
     throw std::runtime_error("R script failed");
   }
   const std::vector<std::string> lines = file_to_vector(tmp_csv_filename);
-  return read_nltt_stats_from_text(lines);
+  return read_nltt_stats_from_text(filename, lines);
 }
 
 nltt_stats read_nltt_stats_from_text(
+  const std::string filename,
   const std::vector<std::string>& text_with_header)
 {
   assert(!text_with_header.empty());
@@ -65,7 +69,7 @@ nltt_stats read_nltt_stats_from_text(
       return to_nltt_stat(line);
     }
   );
-  return v;
+  return nltt_stats(filename, v);
 }
 
 nltt_stats read_nltt_stats_from_rda_safe(
@@ -90,6 +94,32 @@ nltt_stats read_nltt_stats_from_rda_safe(
 
 std::ostream& operator<<(std::ostream& os, const nltt_stats& p) noexcept
 {
+  const auto& v = p.m_v;
+  const int sz = v.size();
+  for (int i=0; i!=sz; ++i)
+  {
+    os
+      << "\"" << (i + 1) << "\","
+      << "\"" << extract_filename(p.m_filename) << "\","
+      << v[i] << '\n';
+  }
+
+
+  /*
+
+  "","sti","ai","pi","si","nltt_stat"
+  "filename.txt",1,1,1,1,NA
+  "filename.txt",2,2,2,1000,NA
+
+  */
+
+  /*
+  const auto& v = p.m_v;
+  for (const auto& line: v)
+  {
+    os << "\"" << extract_filename(p.m_filename) << "\"," << line << '\n';
+  }
+  */
   /*
 
   "","sti","ai","pi","si","nltt_stat"
@@ -98,13 +128,10 @@ std::ostream& operator<<(std::ostream& os, const nltt_stats& p) noexcept
 
   */
   //First row starts with "1"
-  //os << create_header_nltt_stats();
-
-  const auto& v = p.m_v;
-  const int sz = v.size();
-  for (int i=0; i!=sz; ++i)
-  {
-    os << "\"" << (i + 1) << "\"," << v[i] << '\n';
-  }
+  //const int sz = v.size();
+  //for (int i=0; i!=sz; ++i)
+  //{
+  //  os << "\"" << (i + 1) << "\"," << v[i] << '\n';
+  //}
   return os;
 }
