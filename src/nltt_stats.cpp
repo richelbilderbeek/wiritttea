@@ -22,29 +22,31 @@ nltt_stats create_null_nltt_stats() noexcept
   return nltt_stats( {} );
 }
 
-nltt_stats read_nltt_stats_from_rda(const std::string& filename)
+nltt_stats read_nltt_stats_from_rda(
+  const std::string& filename,
+  const std::string& tmp_csv_filename,
+  const std::string& tmp_r_filename
+)
 {
-  const std::string csv_filename{"tmp_read_nltt_stats_from_rda.csv"};
-  const std::string r_filename{"tmp_read_nltt_stats_from_rda.R"};
-  delete_if_present(r_filename);
-  delete_if_present(csv_filename);
+  assert(!is_regular_file(tmp_r_filename));
+  assert(!is_regular_file(tmp_csv_filename));
   {
-    std::ofstream f(r_filename);
+    std::ofstream f(tmp_r_filename);
     f
       << "library(wiritttea)" << '\n'
       << "df <- wiritttea::collect_file_nltt_stats("
         << "filename = \"" << filename << "\")" << '\n'
-      << "write.csv(df, \"" << csv_filename << "\")" << '\n'
+      << "write.csv(df, \"" << tmp_csv_filename << "\")" << '\n'
     ;
   }
   const int error{
-    std::system((std::string("Rscript ") + r_filename).c_str())
+    std::system((std::string("Rscript ") + tmp_r_filename).c_str())
   };
   if (error)
   {
     throw std::runtime_error("R script failed");
   }
-  const std::vector<std::string> lines = file_to_vector(csv_filename);
+  const std::vector<std::string> lines = file_to_vector(tmp_csv_filename);
   return read_nltt_stats_from_text(lines);
 }
 
@@ -66,11 +68,19 @@ nltt_stats read_nltt_stats_from_text(
   return v;
 }
 
-nltt_stats read_nltt_stats_from_rda_safe(const std::string& filename) noexcept
+nltt_stats read_nltt_stats_from_rda_safe(
+  const std::string filename,
+  const std::string tmp_csv_filename,
+  const std::string tmp_r_filename
+) noexcept
 {
   try
   {
-    return read_nltt_stats_from_rda(filename);
+    return read_nltt_stats_from_rda(
+      filename,
+      tmp_csv_filename,
+      tmp_r_filename
+    );
   }
   catch (std::exception&)
   {

@@ -4,6 +4,7 @@
 #include <cassert>
 #include <fstream>
 #include <iostream>
+#include <future>
 #include <stdexcept>
 
 #include "helper.h"
@@ -52,9 +53,22 @@ int count_n_taxa_safe(const std::string& filename) noexcept
 
 void fill_states(std::vector<state>& states) noexcept
 {
+  int i=0;
   for (state& s: states)
   {
     std::cout << s.m_filename << ": ";
+    const std::string tmp_csv_filename{
+        std::string("tmp_fill_states_")
+      + std::to_string(i)
+      + std::string(".csv")
+    };
+    const std::string tmp_r_filename{
+        std::string("tmp_fill_states_")
+      + std::to_string(i)
+      + std::string(".R")
+    };
+    delete_if_present(tmp_csv_filename);
+    delete_if_present(tmp_r_filename);
     /*
     {
       const bool ok = has_species_tree_safe(s.m_filename);
@@ -71,11 +85,60 @@ void fill_states(std::vector<state>& states) noexcept
     }
     */
     {
-      s.m_nltt_stats = read_nltt_stats_from_rda_safe(s.m_filename);
+      s.m_nltt_stats = read_nltt_stats_from_rda_safe(
+        s.m_filename,
+        tmp_csv_filename,
+        tmp_r_filename
+      );
       std::cout << s.m_nltt_stats.size();
     }
     std::cout << '\n';
   }
+}
+
+void fill_states_parallel(std::vector<state>& states) noexcept
+{
+  std::vector<std::future<nltt_stats>> new_states;
+  const int sz = states.size();
+
+  std::clog << "Start all threads\n";
+  {
+    new_states.reserve(sz);
+    int i=0;
+    for (state& s: states)
+    {
+      const std::string tmp_csv_filename{
+          std::string("tmp_fill_states_")
+        + std::to_string(i)
+        + std::string(".csv")
+      };
+      const std::string tmp_r_filename{
+          std::string("tmp_fill_states_")
+        + std::to_string(i)
+        + std::string(".R")
+      };
+      delete_if_present(tmp_csv_filename);
+      delete_if_present(tmp_r_filename);
+      new_states.push_back(
+        std::async(
+          std::launch::async,
+          read_nltt_stats_from_rda_safe,
+          s.m_filename,
+          tmp_csv_filename,
+          tmp_r_filename
+        )
+      );
+      ++i;
+    }
+  }
+  assert(new_states.size() == states.size());
+
+  std::clog << "Convert futures to states\n";
+  for (int i=0; i!=sz; ++i)
+  {
+    states[i].m_nltt_stats = new_states[i].get();
+  }
+
 }
 
 bool has_species_tree(const std::string& filename)

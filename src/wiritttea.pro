@@ -39,3 +39,5 @@ include(wiritttea.pri)
 #include(../../RibiClasses/CppRibiRinside/CppRibiRinside.pri)
 
 SOURCES += main.cpp
+
+QMAKE_CXXFLAGS += -pthread

@@ -25,7 +25,6 @@ void show_help()
 
 int main(int argc, char* argv[])
 {
-  show_time();
   try
   {
     std::vector<state> states;
@@ -40,7 +39,8 @@ int main(int argc, char* argv[])
       return 0;
     }
     std::cout << "No files: " << (argc - 1) << '\n';
-    fill_states(states);
+    //fill_states(states);
+    fill_states_parallel(states);
     {
       std::ofstream f("incorrect_species_trees.csv");
       for (const auto& state: states)
@@ -83,15 +83,12 @@ int main(int argc, char* argv[])
   catch (std::exception& e)
   {
     std::cerr << "Error: " << e.what() << '\n';
-    show_time();
     return 1;
   }
   catch (...)
   {
     std::cerr << "Error: Unknown\n";
-    show_time();
     return 1;
   }
-  show_time();
 }
 

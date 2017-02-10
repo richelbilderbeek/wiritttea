@@ -15,6 +15,7 @@ int count_n_taxa_safe(const std::string& filename) noexcept;
 
 ///Get the filenames of files that have no species tree
 void fill_states(std::vector<state>& states) noexcept;
+void fill_states_parallel(std::vector<state>& states) noexcept;
 
 ///Does this file have a species tree?
 ///Will throw if something goes wrong

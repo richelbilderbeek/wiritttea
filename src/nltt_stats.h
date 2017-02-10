@@ -25,15 +25,28 @@ std::string create_header_nltt_stats() noexcept;
 nltt_stats create_null_nltt_stats() noexcept;
 
 ///Read the nltt_stats from an RDa file
-nltt_stats read_nltt_stats_from_rda(const std::string& filename);
+/// @param filename the name of the RDa file
+/// @param tmp_csv_filename name of a temporary .csv file created
+/// @param tmp_r_filename name of a temporary .R file created
+nltt_stats read_nltt_stats_from_rda(
+  const std::string& filename,
+  const std::string& tmp_csv_filename,
+  const std::string& tmp_r_filename
+);
+
+///Read the nltt_stats from an RDa file
+///Returns a null nltt_stats set if an exception is thrown
+///Do not use std::string& for thread safety
+nltt_stats read_nltt_stats_from_rda_safe(
+  const std::string filename,
+  const std::string tmp_csv_filename,
+  const std::string tmp_r_filename
+) noexcept;
 
 ///Read the nltt_stats from lines of text
 nltt_stats read_nltt_stats_from_text(
   const std::vector<std::string>& text);
 
-///Read the nltt_stats from an RDa file
-///Returns a null nltt_stats set if an exception is thrown
-nltt_stats read_nltt_stats_from_rda_safe(const std::string& filename) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const nltt_stats& p) noexcept;
 
