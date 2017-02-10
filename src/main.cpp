@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
     */
     {
       std::ofstream f("nltt_stats.csv");
-      f << create_header_nltt_stats();
+      f << create_header_nltt_stats() << '\n';
       for (const auto& state: states)
       {
         f << state.m_nltt_stats << '\n';
