@@ -7,6 +7,65 @@
 #include "helper.h"
 #include "state.h"
 
+void save_correct_trees(const std::vector<state>& states)
+{
+  std::ofstream f("correct_species_trees.csv");
+  for (const auto& state: states)
+  {
+    if (state.m_species_tree == tribool::ok)
+    {
+      f << state.m_filename << '\n';
+    }
+  }
+}
+
+void save_incorrect_trees(const std::vector<state>& states)
+{
+  std::ofstream f("incorrect_species_trees.csv");
+  for (const auto& state: states)
+  {
+    if (state.m_species_tree == tribool::na)
+    {
+      f << state.m_filename << '\n';
+    }
+  }
+}
+
+void save_n_taxa(const std::vector<state>& states)
+{
+  std::ofstream f("n_taxa.csv");
+  f << R"("","filename","n_taxa")" << '\n';
+  int i = 1;
+  for (const auto& state: states)
+  {
+    f << i << ','
+      << '"' << extract_filename(state.m_filename) << '"' << ','
+      << state.m_n_taxa << '\n';
+    ++i;
+  }
+}
+
+void save_nltt_stats(const std::vector<state>& states)
+{
+  std::ofstream f("nltt_stats.csv");
+  f << create_header_nltt_stats() << '\n';
+  for (const auto& state: states)
+  {
+    f << state.m_nltt_stats << '\n';
+  }
+}
+
+void save_parameters(const std::vector<state>& states)
+{
+  std::ofstream f("parameters.csv");
+  f << create_header_parameters() << '\n';
+  for (const auto& state: states)
+  {
+    f << state.m_parameters << '\n';
+  }
+}
+
+
 void show_help()
 {
   std::cout
@@ -39,46 +98,13 @@ int main(int argc, char* argv[])
       return 0;
     }
     std::cout << "No files: " << (argc - 1) << '\n';
-    //fill_states(states);
-    fill_states_parallel(states);
-    {
-      std::ofstream f("incorrect_species_trees.csv");
-      for (const auto& state: states)
-      {
-        if (state.m_species_tree == tribool::na)
-        {
-          f << state.m_filename << '\n';
-        }
-      }
-    }
-    {
-      std::ofstream f("correct_species_trees.csv");
-      for (const auto& state: states)
-      {
-        if (state.m_species_tree == tribool::ok)
-        {
-          f << state.m_filename << '\n';
-        }
-      }
-    }
-    /*
-    {
-      std::ofstream f("parameters.csv");
-      f << create_header_parameters() << '\n';
-      for (const auto& state: states)
-      {
-        f << state.m_parameters << '\n';
-      }
-    }
-    */
-    {
-      std::ofstream f("nltt_stats.csv");
-      f << create_header_nltt_stats() << '\n';
-      for (const auto& state: states)
-      {
-        f << state.m_nltt_stats << '\n';
-      }
-    }
+    fill_states(states);
+    //fill_states_parallel(states);
+    //save_incorrect_trees(states);
+    //save_correct_trees(states);
+    save_n_taxa(states);
+    //save_parameters(states);
+    //save_nltt_stats(states);
   }
   catch (std::exception& e)
   {

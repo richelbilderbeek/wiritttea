@@ -69,21 +69,23 @@ void fill_states(std::vector<state>& states) noexcept
     };
     delete_if_present(tmp_csv_filename);
     delete_if_present(tmp_r_filename);
-    /*
+    if (!"Is OK")
     {
       const bool ok = has_species_tree_safe(s.m_filename);
       s.m_species_tree = ok ? tribool::ok : tribool::na;
       std::cout << (ok ? "OK, ": "NA\n");
     }
+    if ("n_taxa")
     {
       s.m_n_taxa = count_n_taxa_safe(s.m_filename);
       std::cout << s.m_n_taxa << ", ";
     }
+    if (!"parameters")
     {
       s.m_parameters = read_parameters_from_rda_safe(s.m_filename);
       std::cout << s.m_parameters << ", ";
     }
-    */
+    if (!"nltt_stats")
     {
       s.m_nltt_stats = read_nltt_stats_from_rda_safe(
         s.m_filename,
