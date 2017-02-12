@@ -34,4 +34,7 @@ std::vector<std::string> seperate_string(
 ///Show the current time
 void show_time() noexcept;
 
+///Surround the string by quotes, 's' becomes '"s"'
+std::string surround_with_quotes(std::string s);
+
 #endif // PBD_HELPER_H

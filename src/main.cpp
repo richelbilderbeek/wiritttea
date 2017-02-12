@@ -34,14 +34,11 @@ void save_incorrect_trees(const std::vector<state>& states)
 void save_n_taxa(const std::vector<state>& states)
 {
   std::ofstream f("n_taxa.csv");
-  f << R"("","filename","n_taxa")" << '\n';
-  int i = 1;
+  f << R"("filename","n_taxa")" << '\n';
   for (const auto& state: states)
   {
-    f << i << ','
-      << '"' << extract_filename(state.m_filename) << '"' << ','
+    f << surround_with_quotes(extract_filename(state.m_filename)) << ','
       << state.m_n_taxa << '\n';
-    ++i;
   }
 }
 

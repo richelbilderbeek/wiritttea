@@ -125,3 +125,13 @@ void show_time() noexcept
   const auto now_c = std::chrono::system_clock::to_time_t(now);
   std::cout << std::put_time(std::localtime(&now_c), "%c") << '\n';
 }
+
+std::string surround_with_quotes(std::string s)
+{
+  std::string t;
+  t.reserve(s.size() + 2);
+  t.push_back('"');
+  t += s;
+  t.push_back('"');
+  return t;
+}
