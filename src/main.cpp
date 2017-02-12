@@ -19,6 +19,21 @@ void save_correct_trees(const std::vector<state>& states)
   }
 }
 
+void save_esses(const std::vector<state>& states)
+{
+  std::ofstream f("esses.csv");
+  f << create_header_ess() << '\n';
+  f << R"("filename", "sti", "ai", "pi", "min_ess")" << '\n';
+
+  for (const auto& state: states)
+  {
+    for (const auto& ess: state.m_esses)
+    {
+      f << ess << '\n';
+    }
+  }
+}
+
 void save_incorrect_trees(const std::vector<state>& states)
 {
   std::ofstream f("incorrect_species_trees.csv");
@@ -99,7 +114,8 @@ int main(int argc, char* argv[])
     //fill_states_parallel(states);
     //save_incorrect_trees(states);
     //save_correct_trees(states);
-    save_n_taxa(states);
+    save_esses(states);
+    //save_n_taxa(states);
     //save_parameters(states);
     //save_nltt_stats(states);
   }

@@ -1,15 +1,23 @@
 #ifndef STATE_H
 #define STATE_H
 
-#include "string"
+#include <array>
+#include <string>
+
+#include "esses.h"
 #include "parameters.h"
 #include "nltt_stats.h"
+
 enum class tribool { unknown, ok, na };
 
+///A parsed RDa file
 class state
 {
 public:
   state(const std::string& filename);
+
+  ///The Effective Sample Size
+  esses m_esses;
 
   ///Name fo the filename
   std::string m_filename;

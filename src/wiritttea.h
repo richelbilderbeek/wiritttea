@@ -4,6 +4,17 @@
 #include <string>
 #include <vector>
 #include "state.h"
+#include "esses.h"
+
+///Calculate the effective sample size
+///Throws if something went wrong
+esses calc_esses(const std::string& filename);
+
+///Calculate the effective sample size
+///Returns zero if something went wrong
+esses calc_esses_safe(const std::string& filename) noexcept;
+
+
 
 ///Count the number of taxa in the species tree
 ///Throws if something went wrong

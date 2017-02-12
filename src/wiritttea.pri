@@ -6,7 +6,9 @@ HEADERS += \
     $$PWD/state.h \
     parameters.h \
     nltt_stats.h \
-    nltt_stat.h
+    nltt_stat.h \
+    ess.h \
+    esses.h
 
 
 SOURCES += \
@@ -15,6 +17,8 @@ SOURCES += \
     $$PWD/state.cpp \
     parameters.cpp \
     nltt_stats.cpp \
-    nltt_stat.cpp
+    nltt_stat.cpp \
+    ess.cpp \
+    esses.cpp
 
 
