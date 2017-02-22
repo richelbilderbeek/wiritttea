@@ -11,6 +11,7 @@
 
 esses calc_esses(const std::string& filename)
 {
+  std::clog << "calc_esses on " << filename << '\n';
   const std::string r_filename{"tmp_calc_ess.R"};
   const std::string csv_filename{"tmp_calc_ess.csv"};
   delete_if_present(r_filename);

@@ -1,0 +1,253 @@
+---
+title: "Analyse nLTT statistics"
+author: "Richel Bilderbeek"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analyse nLTTs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Abstract
+
+This vignette shows how analyse the nLTT statistics.
+
+I use this to check if `rJava` is installed correctly. 
+If not, this will give an error:
+
+```{r}
+options(warn = 2)
+
+library(wiritttes)
+library(wiritttea)
+
+setwd("~/Downloads")
+df_all <- read.csv("20170212.csv", header = TRUE)
+names(df_all)
+
+# Sample
+df <- df_all
+#df <- df_all[sample(nrow(df_all), 10000), ]
+
+# Remove NAs
+df <- df[ !is.na(df$nltt_stat) , ]
+
+df$scr <- as.factor(df$scr)
+df$mutation_rate <- as.factor(df$mutation_rate)
+df$sequence_length <- as.factor(df$sequence_length)
+df$sirg <- as.factor(df$sirg)
+df$siri <- as.factor(df$siri)
+df$erg <- as.factor(df$erg)
+df$eri <- as.factor(df$eri)
+```
+
+## Show the distribution of nLTT statistics
+
+Here we have the distributions:
+
+```{r fig.width = 7, fig.height = 7}
+ggplot2::ggplot(
+) + ggplot2::facet_grid(siri ~ erg
+) + ggplot2::geom_density(
+  data = df,
+  ggplot2::aes(
+    x = nltt_stat,
+    fill = scr
+  )
+  , alpha = 0.5
+) + ggplot2::ggtitle("nLTT statistics distribution for different speciation initiation (rows) and extinction rates (columns)")
+```
+
+Rampal wondered if this is caused by DNA sequence length. 
+Here is short:
+
+```{r fig.width = 7, fig.height = 7}
+ggplot2::ggplot(
+) + ggplot2::facet_grid(siri ~ erg
+) + ggplot2::geom_density(
+  data = df[df$sequence_length == 1000, ],
+  ggplot2::aes(
+    x = nltt_stat,
+    fill = scr
+  )
+  , alpha = 0.5
+) + ggplot2::ggtitle("nLTT statistics distribution for different speciation initiation (rows) and extinction rates (columns), DNA length == 1000")
+```
+
+Here is long:
+
+```{r fig.width = 7, fig.height = 7}
+ggplot2::ggplot(
+) + ggplot2::facet_grid(siri ~ erg
+) + ggplot2::geom_density(
+  data = df[df$sequence_length == 10000, ],
+  ggplot2::aes(
+    x = nltt_stat,
+    fill = scr
+  )
+  , alpha = 0.5
+) + ggplot2::ggtitle("nLTT statistics distribution for different speciation initiation (rows) and extinction rates (columns), DNA length == 10K")
+```
+
+Here I show the number of taxa in the simulated trees,
+for different speciation initiation rates, first as a histogram:
+
+```{r fig.width = 7, fig.height = 7}
+ggplot2::ggplot(
+    df, 
+    ggplot2::aes(n_taxa, fill = siri)
+) + ggplot2::geom_histogram()
+```
+
+here as a density plot:
+
+```{r fig.width = 7, fig.height = 7}
+ggplot2::ggplot(
+    df, 
+    ggplot2::aes(n_taxa, fill = siri)
+) + ggplot2::geom_density()
+```
+
+Or fancier, in a facet grid, as a histogram:
+
+```{r fig.width = 7, fig.height = 7}
+ggplot2::ggplot(
+) + ggplot2::facet_grid(siri ~ erg
+) + ggplot2::geom_histogram(
+  data = df,
+  ggplot2::aes(
+    n_taxa,
+    fill = scr
+  )
+  , alpha = 0.5
+)
+```
+
+Or even fancier, in a facet grid, as a density plots:
+
+```{r fig.width = 7, fig.height = 7}
+ggplot2::ggplot(
+) + ggplot2::facet_grid(siri ~ erg
+) + ggplot2::geom_density(
+  data = df,
+  ggplot2::aes(
+    n_taxa,
+    fill = scr
+  )
+  , alpha = 0.5
+)
+```
+
+Plot the number of taxa versus error:
+
+```{r fig.width = 7, fig.height = 7}
+# Nah, uninformative
+ggplot2::ggplot(
+    df, 
+    ggplot2::aes(x = n_taxa, y = nltt_stat)
+) + ggplot2::geom_point(
+) + ggplot2::geom_smooth()
+
+# Yuck linear model
+ggplot2::ggplot(
+    df, 
+    ggplot2::aes(x = n_taxa, y = nltt_stat)
+) + ggplot2::geom_point(
+) + ggplot2::geom_smooth(method = "lm")
+
+```
+
+Plot the number of taxa versus error, seperated by SCR:
+
+
+```{r fig.width = 7, fig.height = 7}
+# No smoother
+ggplot2::ggplot(
+    df, 
+    ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
+) + ggplot2::geom_point(
+) + ggplot2::ggtitle("Effect of the number of taxa on the nLTT statistic")
+
+
+# Smoother
+ggplot2::ggplot(
+    df, 
+    ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
+) + ggplot2::geom_point(
+) + ggplot2::geom_smooth(
+) + ggplot2::ggtitle("Effect of the number of taxa on the nLTT statistic")
+
+# Yuck, linear model
+ggplot2::ggplot(
+    df, 
+    ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
+) + ggplot2::geom_point(
+) + ggplot2::geom_smooth(method = "lm"
+) + ggplot2::ggtitle("Effect of the number of taxa on the nLTT statistic")
+
+```
+
+```{r fig.width = 7, fig.height = 7}
+ggplot2::ggplot(
+    df[ df$n_taxa > 100, ], 
+    ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
+) + ggplot2::geom_point(
+) + ggplot2::geom_smooth(method = "lm"
+) + ggplot2::ggtitle("Effect of the number of taxa on the nLTT statistic, for n_taxa > 100")
+```
+
+```{r}
+ggplot2::ggplot(
+    df[ df$siri == 0.3, ], 
+    ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
+) + ggplot2::geom_point(
+) + ggplot2::geom_smooth(method = "lm"
+) + ggplot2::ggtitle("Effect of the number of taxa on the nLTT statistic, for siri == 0.3")
+
+ggplot2::ggplot(
+    df[ df$siri == 0.5, ], 
+    ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
+) + ggplot2::geom_point(
+) + ggplot2::geom_smooth(method = "lm"
+) + ggplot2::ggtitle("Effect of the number of taxa on the nLTT statistic, for siri == 0.5")
+
+```
+
+Zoom in on mutation rate and DNA alignment length
+
+
+```{r fig.width = 7, fig.height = 7}
+if (is_local_computer()) {
+  names(df_zoom)
+  df_zoom_zoom <- df_zoom[
+    df_zoom$mutation_rate == 0.1 & df_zoom$sequence_length == 10000 & df_zoom$scr == 1e+06,
+  ]
+
+  ggplot2::ggplot(
+      df_zoom_zoom, 
+      ggplot2::aes(nltt_stat, fill = sti)
+  ) + ggplot2::geom_density(alpha = 0.5
+  ) + ggplot2::scale_y_continuous(limits = c(0, 100))
+
+  ggplot2::ggplot(
+  ) + ggplot2::facet_grid(sti ~ ai
+  ) + ggplot2::geom_density(
+    data = df_zoom_zoom,
+    ggplot2::aes(
+      x = nltt_stat,
+      fill = pi
+    )
+    , alpha = 0.5
+  ) + ggplot2::scale_y_continuous(limits = c(0, 100))
+
+  
+  ggplot2::ggplot(
+      df_zoom_zoom, 
+      ggplot2::aes(x = n_taxa, y = nltt_stat)
+  ) + ggplot2::geom_point(
+  ) + ggplot2::geom_smooth(method = "lm")
+  
+
+}
+```
