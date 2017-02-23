@@ -44,19 +44,19 @@ ess create_null_ess() noexcept
 ess to_ess(const std::string& line)
 {
   const std::vector<std::string> words = seperate_string(line, ',');
-  if (words.size() != 5)
+  if (words.size() != 6)
   {
-    throw std::invalid_argument("Line must have five words");
+    throw std::invalid_argument("Line must have six words");
   }
   const int min_ess{
-    words[4] == "NA" ? 0 : std::stoi(words[4])
+    words[5] == "NA" ? 0 : std::stoi(words[5])
   };
   return ess(
-    std::stoi(words[2]), //ai
-    words[0], //filename
+    std::stoi(words[3]), //ai
+    words[1], //filename
     min_ess, //min_ess
-    std::stoi(words[3]), //pi
-    std::stoi(words[1]) //sti
+    std::stoi(words[4]), //pi
+    std::stoi(words[2]) //sti
   );
 }
 
