@@ -14,7 +14,12 @@ void delete_file(const std::string& filename);
 void delete_if_present(const std::string& filename);
 
 ///Extract the filename from a full path
+///e.g. '/home/richel/README.md' becomes 'README.md'
 std::string extract_filename(const std::string& filename);
+
+///Extract the path from a full path
+///e.g. '/home/richel/README.md' becomes '/home/richel'
+std::string extract_path(const std::string& filename);
 
 std::vector<std::string> file_to_vector(const std::string& filename);
 

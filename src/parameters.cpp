@@ -4,8 +4,10 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <stdexcept>
 
 #include "helper.h"
+#include "r_helper.h"
 
 parameters::parameters(
   const double age,
@@ -94,13 +96,7 @@ parameters read_parameters_from_rda(const std::string& filename)
       << "write.csv(df, \"" << csv_filename << "\")" << '\n'
     ;
   }
-  const int error{
-    std::system((std::string("Rscript ") + r_filename).c_str())
-  };
-  if (error)
-  {
-    throw std::runtime_error("R script failed");
-  }
+  run_r_script(r_filename);
   const std::vector<std::string> lines = file_to_vector(csv_filename);
   assert(lines.size() == 2);
   const std::vector<std::string> fields = seperate_string(lines[1], ',');

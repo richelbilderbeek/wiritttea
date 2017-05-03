@@ -24,4 +24,3 @@ Read all the collected gamma statistics of all posteriors
 \author{
 Richel Bilderbeek
 }
-

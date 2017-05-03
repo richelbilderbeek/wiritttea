@@ -23,4 +23,3 @@ created by the 'wirittttes' package
   folder <- system.file("extdata", package = "wiritttea")
   do_analysis(folder)
 }
-

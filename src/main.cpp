@@ -1,3 +1,4 @@
+#include <cassert>
 #include <exception>
 #include <iostream>
 #include <fstream>
@@ -5,6 +6,7 @@
 #include <vector>
 #include "wiritttea.h"
 #include "helper.h"
+#include "r_helper.h"
 #include "state.h"
 
 void save_correct_trees(const std::vector<state>& states)
@@ -96,6 +98,12 @@ void show_help()
 
 int main(int argc, char* argv[])
 {
+  assert(extract_filename("/home/richel/README.md") == "README.md");
+  assert(extract_path("/home/richel/README.md") == "/home/richel");
+
+  //Set R working directory to this file its path
+  set_r_cwd(extract_path(argv[0]));
+
   try
   {
     std::vector<state> states;

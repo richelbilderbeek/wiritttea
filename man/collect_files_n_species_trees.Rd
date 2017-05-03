@@ -26,4 +26,3 @@ multiple parameter file in the melted/uncast/long form
  testit::assert(names(df) == c("filename", "n_species_trees"))
  testit::assert(nrow(df) == length(filenames))
 }
-

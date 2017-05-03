@@ -1,3 +1,6 @@
+//Do not forget to set somewhere:
+//Sys.setenv("PKG_CXXFLAGS"="-std=c++11")
+
 #include "ess.h"
 
 #include <iostream>

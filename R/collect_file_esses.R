@@ -27,6 +27,11 @@ collect_file_esses <- function(filename) {
   n_beast_runs <- wiritttes::extract_nppa(file)
   n_rows <- n_species_trees * n_alignments * n_beast_runs
 
+  testit::assert(n_species_trees > 0)
+  testit::assert(n_alignments > 0)
+  testit::assert(n_beast_runs > 0)
+  testit::assert(n_rows > 0)
+
   df <- data.frame(
      filename = rep(basename(filename), n_rows),
      sti = rep(
@@ -46,14 +51,17 @@ collect_file_esses <- function(filename) {
 
         min_ess <- NA
         tryCatch(
-          min_ess <- min(
-            RBeast::calc_esses(
-              traces = wiritttes::get_posterior(
-                file, sti = sti, ai = ai, pi = pi
-              )$estimates,
-              sample_interval = 1000
+          {
+            posterior <- wiritttes::get_posterior(
+              file, sti = sti, ai = ai, pi = pi)
+            traces <- posterior$estimates
+            min_ess <- min(
+              RBeast::calc_esses(
+                traces = traces,
+                sample_interval = 1000
+              )
             )
-          ),
+          },
           error = function(msg) {} # nolint
         )
 

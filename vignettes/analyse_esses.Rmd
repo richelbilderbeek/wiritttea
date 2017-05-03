@@ -11,7 +11,15 @@ vignette: >
 
 ```{r}
 library(wiritttea)
-df <- read_collected_esses()
-knitr::kable(df)
-```
+my_filenames <- list.files("~/Peregrine20170205", pattern="*.RDa", full.names=TRUE)
+sub_filenames <- my_filenames
+write.csv(wiritttea::collect_files_esses(filenames = sub_filenames), "~/esses.csv")
 
+if (1==2){
+rprof_tmp_output <- "~/tmp_rprof"
+Rprof(rprof_tmp_output)
+wiritttea::collect_files_esses(filenames = sub_filenames)
+Rprof(NULL)
+summaryRprof(rprof_tmp_output)
+}
+```

@@ -29,4 +29,3 @@ multiple parameter file in the melted/uncast/long form
  )
  testit::assert(nrow(df) == 4)
 }
-

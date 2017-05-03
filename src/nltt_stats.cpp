@@ -5,6 +5,7 @@
 #include <fstream>
 
 #include "helper.h"
+#include "r_helper.h"
 
 nltt_stats::nltt_stats(
   std::string filename,
@@ -42,13 +43,7 @@ nltt_stats read_nltt_stats_from_rda(
       << "write.csv(df, \"" << tmp_csv_filename << "\")" << '\n'
     ;
   }
-  const int error{
-    std::system((std::string("Rscript ") + tmp_r_filename).c_str())
-  };
-  if (error)
-  {
-    throw std::runtime_error("R script failed");
-  }
+  run_r_script(tmp_r_filename);
   const std::vector<std::string> lines = file_to_vector(tmp_csv_filename);
   return read_nltt_stats_from_text(filename, lines);
 }
@@ -65,7 +60,7 @@ nltt_stats read_nltt_stats_from_text(
     std::begin(text),
     std::end(text),
     std::back_inserter(v),
-    [](const auto& line) {
+    [](const std::string& line) {
       return to_nltt_stat(line);
     }
   );

@@ -22,4 +22,3 @@ Finds the full path of a file
 \author{
 Richel Bilderbeek
 }
-

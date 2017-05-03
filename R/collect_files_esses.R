@@ -11,8 +11,9 @@
 collect_files_esses <- function(filenames) {
 
   if (length(filenames) == 0) {
+    print(paste("filenames: '", filenames, "'", sep = ""))
     stop(
-      "there must be exactly at least one filename supplied"
+      "there must be at least one filename supplied, "
     )
   }
   for (filename in filenames) {

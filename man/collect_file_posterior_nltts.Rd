@@ -21,4 +21,3 @@ Collect the nLTT values of the BEAST2 posteriors
 \author{
 Richel Bilderbeek
 }
-

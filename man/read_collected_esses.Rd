@@ -4,7 +4,8 @@
 \alias{read_collected_esses}
 \title{Read all the collected ESSes of all simulations' posteriors}
 \usage{
-read_collected_esses()
+
+  read_collected_esses(filename = wiritttea::find_path("collect_files_esses.csv"))
 }
 \value{
 a dataframe
@@ -24,4 +25,3 @@ Read all the collected ESSes of all simulations' posteriors
 \author{
 Richel Bilderbeek
 }
-

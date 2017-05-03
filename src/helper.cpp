@@ -54,6 +54,19 @@ std::string extract_filename(const std::string& s)
    //No path seperators
    return s;
 }
+
+std::string extract_path(const std::string& s)
+{
+   const auto i = s.rfind('/', s.length());
+   if (i != std::string::npos)
+   {
+      return s.substr(0, i);
+   }
+   //No path seperators
+   return "";
+}
+
+
 std::vector<std::string> file_to_vector(const std::string& filename)
 {
   if(!is_regular_file(filename))
@@ -123,7 +136,7 @@ void show_time() noexcept
 {
   const auto now = std::chrono::system_clock::now();
   const auto now_c = std::chrono::system_clock::to_time_t(now);
-  std::cout << std::put_time(std::localtime(&now_c), "%c") << '\n';
+  std::cout << now_c << '\n';
 }
 
 std::string surround_with_quotes(std::string s)

@@ -27,4 +27,3 @@ multiple parameter file in the melted/uncast/long form
  testit::assert(nrow(df) == length(filenames))
  testit::assert(df$n_posteriors == c(2, 8))
 }
-

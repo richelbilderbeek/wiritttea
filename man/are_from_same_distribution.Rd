@@ -21,4 +21,3 @@ TRUE or FALSE, or NA if cannot be calculated
 Checks if two samples are from the same distribution
 with a Mann-Whitney U test
 }
-

@@ -10,6 +10,9 @@
 ///Throws if something went wrong
 esses calc_esses(const std::string& filename);
 
+esses calc_esses_impl_1(const std::string& filename);
+esses calc_esses_impl_2(const std::string& filename);
+
 ///Calculate the effective sample size
 ///Returns zero if something went wrong
 esses calc_esses_safe(const std::string& filename) noexcept;

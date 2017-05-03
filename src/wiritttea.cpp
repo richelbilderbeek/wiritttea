@@ -8,10 +8,19 @@
 #include <stdexcept>
 
 #include "helper.h"
+#include "posterior.h"
+#include "r_helper.h"
 
 esses calc_esses(const std::string& filename)
 {
+  assert(is_regular_file(filename));
+  return calc_esses_impl_2(filename);
+}
+
+esses calc_esses_impl_1(const std::string& filename)
+{
   std::clog << "calc_esses on " << filename << '\n';
+  assert(is_regular_file(filename));
   const std::string r_filename{"tmp_calc_ess.R"};
   const std::string csv_filename{"tmp_calc_ess.csv"};
   delete_if_present(r_filename);
@@ -24,13 +33,7 @@ esses calc_esses(const std::string& filename)
       << "write.csv(df, \"" << csv_filename << "\")" << '\n'
     ;
   }
-  const int error{
-    std::system((std::string("Rscript ") + r_filename).c_str())
-  };
-  if (error)
-  {
-    throw std::runtime_error("Rscript failed");
-  }
+  run_r_script(r_filename);
   //"filename", "sti", "ai", "pi", "min_ess"
   const std::vector<std::string> all_lines = file_to_vector(csv_filename);
   const std::vector<std::string> lines = remove_first(all_lines);
@@ -45,6 +48,42 @@ esses calc_esses(const std::string& filename)
       return to_ess_safe(line);
     }
   );
+  return my_esses;
+}
+
+esses calc_esses_impl_2(const std::string& filename)
+{
+  assert(is_regular_file(filename));
+  const std::string r_filename{"tmp_calc_ess_impl_2.R"};
+  const std::string csv_filename{"tmp_calc_ess_impl_2.csv"};
+  delete_if_present(r_filename);
+  delete_if_present(csv_filename);
+  {
+    std::ofstream f(r_filename);
+    f
+      << "library(wiritttea)" << '\n'
+      << "file <- wiritttes::read_file(filename = \"" << filename << "\")" << '\n'
+      << "df <- wiritttes::get_posterior(file = file, sti = 1, ai = 1, pi = 1)$estimates" << '\n'
+      << "write.csv(df, \"" << csv_filename << "\")" << '\n'
+    ;
+  }
+  run_r_script(r_filename);
+  assert(is_regular_file(csv_filename));
+  const posterior p = load_posterior(csv_filename);
+
+  esses my_esses;
+  /*
+  my_esses.reserve(lines.size());
+  std::transform(
+    std::begin(lines),
+    std::end(lines),
+    std::back_inserter(my_esses),
+    [](const std::string& line)
+    {
+      return to_ess_safe(line);
+    }
+  );
+  */
   return my_esses;
 }
 
@@ -74,13 +113,7 @@ int count_n_taxa(const std::string& filename)
       << "write.csv(df, \"" << csv_filename << "\")" << '\n'
     ;
   }
-  const int error{
-    std::system((std::string("Rscript ") + r_filename).c_str())
-  };
-  if (error)
-  {
-    throw std::runtime_error("Rscript failed");
-  }
+  run_r_script(r_filename);
   const std::vector<std::string> lines = file_to_vector(csv_filename);
   assert(lines.size() == 2);
   const std::vector<std::string> fields = seperate_string(lines[1], ',');
@@ -216,13 +249,7 @@ bool has_species_tree(const std::string& filename)
       << "write.csv(df, \"" << csv_filename << "\")" << '\n'
     ;
   }
-  const int error{
-    std::system((std::string("Rscript ") + r_filename).c_str())
-  };
-  if (error)
-  {
-    throw std::runtime_error("Rscript failed");
-  }
+  run_r_script(r_filename);
   const std::vector<std::string> lines = file_to_vector(csv_filename);
   assert(lines.size() == 2);
   const std::vector<std::string> fields = seperate_string(lines[1], ',');
