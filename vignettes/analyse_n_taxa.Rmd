@@ -20,7 +20,22 @@ options(warn = 2)
 Loading the number of taxa:
 
 ```{r}
-df_n_taxa <- read_collected_n_taxa()
+my_filenames <- list.files("~/Peregrine20170205", pattern="*.RDa", full.names=TRUE)
+sub_filenames <- my_filenames
+df_n_taxa <- wiritttea::collect_files_n_taxa(filenames = sub_filenames)
+write.csv(df_n_taxa, "~/n_taxa.csv")
+```
+
+Profiling:
+
+```{r}
+if (1==1){
+rprof_tmp_output <- "~/tmp_rprof"
+Rprof(rprof_tmp_output)
+wiritttea::collect_files_n_taxa(filenames = sub_filenames)
+Rprof(NULL)
+summaryRprof(rprof_tmp_output)
+}
 ```
 
 Loading the parameters:
@@ -94,6 +109,7 @@ df_fail <- df[ is.na(df_n_taxa$n_taxa), ]
 Here we plot both successes and fails. The latter are only plot if present.
 
 ```{r fig.width = 7, fig.height = 7}
+if (1==2) {
 if (nrow(df_fail) == 0) {
   ggplot2::ggplot(data = df, ggplot2::aes(x = df$sirg, y = df$n_taxa, color = as.factor(df$erg))) + 
   ggplot2::geom_point(shape = 16) +
@@ -103,5 +119,6 @@ if (nrow(df_fail) == 0) {
   ggplot2::geom_point(shape = 16) +
   ggplot2::geom_jitter(data = df_fail, shape = 3, width = 0.02, height = 0.02, ggplot2::aes(x = df_fail$sirg, y = 0,   color = as.factor(df_fail$erg))) + 
   ggplot2::ggtitle("Effect of speciation and extinction rates on #taxa (crosses denote NA)") 
+}
 }
 ```
