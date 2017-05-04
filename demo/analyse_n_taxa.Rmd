@@ -20,7 +20,7 @@ options(warn = 2)
 Loading the number of taxa:
 
 ```{r}
-my_filenames <- list.files("~/Peregrine20170205", pattern="*.RDa", full.names=TRUE)
+my_filenames <- list.files("~/Peregrine20170208", pattern="*.RDa", full.names = TRUE)
 sub_filenames <- my_filenames
 df_n_taxa <- wiritttea::collect_files_n_taxa(filenames = sub_filenames)
 write.csv(df_n_taxa, "~/n_taxa.csv")
@@ -29,7 +29,7 @@ write.csv(df_n_taxa, "~/n_taxa.csv")
 Profiling:
 
 ```{r}
-if (1==1){
+if (1==2){
 rprof_tmp_output <- "~/tmp_rprof"
 Rprof(rprof_tmp_output)
 wiritttea::collect_files_n_taxa(filenames = sub_filenames)
@@ -41,9 +41,8 @@ summaryRprof(rprof_tmp_output)
 Loading the parameters:
 
 ```{r}
-df_parameters <- read_collected_parameters()
+df_parameters <- wiritttea::read_collected_parameters()
 ```
-
 
 ## The success rate
 
