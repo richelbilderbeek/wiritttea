@@ -50,7 +50,7 @@ collect_file_esses <- function(filename) {
       for (pi in seq(1, n_beast_runs)) {
 
         min_ess <- NA
-        tryCatch( {
+        tryCatch({
             posterior <- wiritttes::get_posterior(
               file, sti = sti, ai = ai, pi = pi)
             traces <- posterior$estimates

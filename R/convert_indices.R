@@ -31,7 +31,7 @@ a2i <- function(
   nstpist,
   napst
 ) {
-  i <- 1 + (sti - 1) + ( (ai - 1) * nstpist)
+  i <- 1 + (sti - 1) + ((ai - 1) * nstpist)
   return(i)
 }
 
@@ -61,7 +61,7 @@ p2i <- function(
   nppa
 ) {
   i <- 1 + (sti - 1) +
-    ( (ai - 1) * nstpist        ) +
-    ( (pi - 1) * nstpist * napst)
+    ((ai - 1) * nstpist) +
+    ((pi - 1) * nstpist * napst)
   return(i)
 }

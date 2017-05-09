@@ -130,12 +130,17 @@ This is how the incipient species tree looks like:
 
 ```{r}
 colors <- stats::setNames(c("gray", "black"), c("i", "g"))
-testit::assert(length(wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
+testit::assert(
+  length(
+    wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label
+  ) > 0
+)
 phytools::plotSimmap(
   wiritttes::read_file(filename)$pbd_output$igtree.extant, 
   colors = colors
 )
-n_taxa_istree <- length(wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label)
+n_taxa_istree <- length(
+  wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label)
 ```
 
 There are `r n_taxa_istree` taxa in the incipient species tree. 
@@ -150,7 +155,7 @@ nltt_values <- get_nltt_values(
   dt = 0.001
 )
 qplot(
-  t, nltt, data = nltt_values, geom = "blank", ylim = c(0,1),
+  t, nltt, data = nltt_values, geom = "blank", ylim = c(0, 1),
   main = "Example #1"
 ) + stat_summary(
   fun.data = "mean_cl_boot", color = "red", geom = "smooth"
@@ -239,8 +244,10 @@ It can be seen that the values for ESS (Effective Sample Size) are above 200 and
 A posterior contains many phylogenies. 
 
 ```{r}
-phylogenies <- wiritttes::get_posteriors(wiritttes::read_file(filename))[[1]][[1]]$trees
-# To get the densiTree function working, phylogenies must be of class multiphylo
+phylogenies <- wiritttes::get_posteriors(
+  wiritttes::read_file(filename))[[1]][[1]]$trees
+# To get the densiTree function working, 
+# phylogenies must be of class multiphylo
 class(phylogenies) <- "multiPhylo"
 ```
 
@@ -428,7 +435,7 @@ nltt_values <- get_nltt_values(
   dt = 0.001
 )
 qplot(
-  t, nltt, data = nltt_values, geom = "blank", ylim = c(0,1),
+  t, nltt, data = nltt_values, geom = "blank", ylim = c(0, 1),
   main = "Example #2 incipient species tree"
 ) + stat_summary(
   fun.data = "mean_cl_boot", color = "red", geom = "smooth"

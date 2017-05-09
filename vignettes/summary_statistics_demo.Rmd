@@ -70,7 +70,7 @@ in `file$species_tree`, let's plot it:
 
 ```{r}
 incipient_species_tree <- file$pbd_output$igtree.extant
-colors <- setNames(c("gray", "black"), c("i","g"))
+colors <- setNames(c("gray", "black"), c("i", "g"))
 phytools::plotSimmap(
   incipient_species_tree, 
   colors = colors
@@ -94,7 +94,11 @@ The incipient species tree looks like this:
 
 ```{r}
 colors <- stats::setNames(c("gray", "black"), c("i", "g"))
-testit::assert(length(wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label) > 0)
+testit::assert(
+  length(
+    wiritttes::read_file(filename)$pbd_output$igtree.extant$tip.label
+  ) > 0
+)
 phytools::plotSimmap(
   file$pbd_output$igtree.extant, 
   colors = colors
@@ -151,7 +155,7 @@ gamma_statistics <- rep(0, times = n_trees)
 for (i in seq(1:n_trees)) {
   gamma_statistics[i] <- ape::gammaStat(posterior_trees[[i]])
 }
-hist(gamma_statistics, xlim = c(-1,1))
+hist(gamma_statistics, xlim = c(-1, 1))
 abline(v = true_gamma, col = "red")
 ```
 

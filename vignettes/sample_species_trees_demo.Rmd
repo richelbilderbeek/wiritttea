@@ -68,7 +68,9 @@ stree_youngest <- pbd_sim_output$stree_youngest
 stree_oldest <- pbd_sim_output$stree_oldest
 species_trees <- c(stree_youngest, stree_oldest)
 for (species_tree in species_trees) {
-  title <- ifelse(identical(species_tree, stree_youngest), "youngest", "oldest")
+  title <- ifelse(
+    identical(species_tree, stree_youngest), "youngest", "oldest"
+  )
   ape::plot.phylo(species_tree, root.edge = TRUE, main = title)
 }
 ```
@@ -90,14 +92,18 @@ ggplot2::ggplot(
 ) + ggplot2::geom_step(
   direction = "vh", size = 2, alpha = 0.5
 ) + ggplot2::scale_x_continuous(
-  name = "Normalized time", limits = c(0,1)
-) + ggplot2::scale_y_continuous(name = "Normalized number of lineages", limits = c(0,1)
+  name = "Normalized time", limits = c(0, 1)
+) + ggplot2::scale_y_continuous(name = "Normalized number of lineages", 
+  limits = c(0, 1)
 ) + ggplot2::ggtitle("nLTT plots")
 ```
 
 Or we plot them as an average:
 
 ```{r fig.width = 7, fig.height = 7}
-ggplot2::qplot(t, nltt, data = df, geom = "blank", ylim = c(0, 1), main = "Average nLTT plot of phylogenies") + 
-  ggplot2::stat_summary(fun.data = "mean_cl_boot", color = "red", geom = "smooth")
+ggplot2::qplot(t, nltt, data = df, geom = "blank", ylim = c(0, 1), 
+  main = "Average nLTT plot of phylogenies") + 
+  ggplot2::stat_summary(
+    fun.data = "mean_cl_boot", color = "red", geom = "smooth"
+  )
 ```

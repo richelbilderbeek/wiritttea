@@ -49,7 +49,7 @@ Here we'll try to do something smart:
 
 ```{r}
 df_nd  <- data.frame(
-  method = rep("nd" , times = length(nd)), x = nd
+  method = rep("nd", times = length(nd)), x = nd
 )
 
 df_nnd <- data.frame(
