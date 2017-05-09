@@ -1,6 +1,7 @@
 #' Collects the number of taxa of all phylogenies in the
 #' melted/uncast/long form
-#' @param phylogenies the phylogenies, supplied as either a list or a multiPhylo object, where the phylogenies are of type 'phylo'
+#' @param phylogenies the phylogenies, supplied as either a list
+#'   or a multiPhylo object, where the phylogenies are of type 'phylo'
 #' @return A dataframe of the number of taxa of each phylogeny in time
 #' @author Richel Bilderbeek
 #' @examples

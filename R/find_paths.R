@@ -1,6 +1,7 @@
   #' Finds the full path of a file
 #' @param filename the name of a file
-#' @return the full path of the filename if an existing file could be found, stops otherwise
+#' @return the full path of the filename if an existing file could be found,
+#'   stops otherwise
 #' @examples
 #'   path <- find_path("toy_example_1.RDa")
 #'   testit::assert(file.exists(path))
@@ -25,9 +26,12 @@ find_path <- function(filename) {
 
 #' Finds the full path of files
 #' @param filenames the names of files
-#' @return the full path of the filenames if an existing file could be found, stops otherwise
+#' @return the full path of the filenames if an existing file could be found,
+#'   stops otherwise
 #' @examples
-#'   filenames <- wiritttea::find_paths(c("toy_example_1.RDa", "toy_example_2.RDa"))
+#'   filenames <- wiritttea::find_paths(
+#'     c("toy_example_1.RDa", "toy_example_2.RDa")
+#'   )
 #'   testit::assert(file.exists(filenames[1]))
 #'   testit::assert(file.exists(filenames[2]))
 #' @author Richel Bilderbeek

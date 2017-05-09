@@ -30,5 +30,5 @@ collect_species_tree_n_taxa <- function(filename) {
 
   # phylogeny must be put in a list or vector
   g <- wiritttea::collect_n_taxa(list(phylogeny))
-  return (data.frame(n_taxa = g$n_taxa))
+  return(data.frame(n_taxa = g$n_taxa))
 }

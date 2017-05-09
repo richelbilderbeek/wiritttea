@@ -6,7 +6,7 @@
 #' @export
 read_collected_times <- function() {
   print("Not now")
-  return ()
+  return()
 
   csv_filename_per_file <- wiritttea::find_path(
     "collected_times_per_file.csv"

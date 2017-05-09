@@ -1,11 +1,12 @@
 # Analyse the files' ESSes
 options(warn = 2) # Be strict
 path_data <- "~/Peregrine20170208"
-esses_filename <- "~/esses.csv"
+
+df_na
 
 # Create file if absent
 if (!file.exists(esses_filename)) {
-  my_filenames <- list.files(path_data, pattern="*.RDa", full.names=TRUE)
+  my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
   write.csv(wiritttea::collect_files_esses(filenames = my_filenames), esses_filename)
 }
 

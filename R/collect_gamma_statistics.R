@@ -1,6 +1,7 @@
 #' Collects the gamma statistics of all phylogenies in the
 #' melted/uncast/long form
-#' @param phylogenies the phylogenies, supplied as either a list or a multiPhylo object, where the phylogenies are of type 'phylo'
+#' @param phylogenies the phylogenies, supplied as either
+#'   a list or a multiPhylo object, where the phylogenies are of type 'phylo'
 #' @return A dataframe of gamma statistics of each phylogeny in time
 #' @export
 collect_gamma_statistics <- function(phylogenies) {

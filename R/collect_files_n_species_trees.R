@@ -1,5 +1,5 @@
-#' Collects the number of sampled species trees of all phylogenies belonging to a
-#' multiple parameter file in the melted/uncast/long form
+#' Collects the number of sampled species trees of all phylogenies
+#' belonging to a multiple parameter file in the melted/uncast/long form
 #' @param filenames names of the parameter file
 #' @return A dataframe with all number of sampled species trees of all files
 #' @examples

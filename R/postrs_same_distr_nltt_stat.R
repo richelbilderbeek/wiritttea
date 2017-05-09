@@ -41,7 +41,7 @@ postrs_same_distr_nltt_stat <- function(df) {
       dplyr::summarise(
         same_distr = are_from_same_distribution(A, B)
       )
-    return (df)
+    return(df)
   }
   stop("Invalid data frame")
 }

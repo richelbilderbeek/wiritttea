@@ -2,7 +2,8 @@
 #' posteriors in a parameter file in the melted/uncast/long form
 #'
 #' @param filename name of the parameter file
-#' @return A dataframe of NRBS values between each species tree and their posteriors
+#' @return A dataframe of NRBS values between
+#'   each species tree and their posteriors
 #' @examples
 #'   filename <- find_path("toy_example_3.RDa")
 #'   df <- collect_file_nrbss(filename)

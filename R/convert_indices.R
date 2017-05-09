@@ -32,7 +32,7 @@ a2i <- function(
   napst
 ) {
   i <- 1 + (sti - 1) + ( (ai - 1) * nstpist)
-  return (i)
+  return(i)
 }
 
 
@@ -63,5 +63,5 @@ p2i <- function(
   i <- 1 + (sti - 1) +
     ( (ai - 1) * nstpist        ) +
     ( (pi - 1) * nstpist * napst)
-  return (i)
+  return(i)
 }

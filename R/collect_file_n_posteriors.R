@@ -18,5 +18,5 @@ collect_file_n_posteriors <- function(filename) {
 
   file <- wiritttes::read_file(filename)
   n <- sum(!is.na(file$posteriors))
-  return (data.frame(n_posteriors = n))
+  return(data.frame(n_posteriors = n))
 }

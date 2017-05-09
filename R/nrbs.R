@@ -9,8 +9,12 @@
 #'   but can be changed to return the rooted value
 #' @author Richel Bilderbeek
 #' @references
-#'   Heled, Joseph, and Alexei J. Drummond. "Bayesian inference of species trees from multilocus data." Molecular biology and evolution 27.3 (2010): 570-580.
-#'   Kuhner, Mary K., and Joseph Felsenstein. "A simulation comparison of phylogeny algorithms under equal and unequal evolutionary rates." Molecular Biology and Evolution 11.3 (1994): 459-468.
+#'   Heled, Joseph, and Alexei J. Drummond. "Bayesian inference of species
+#'   trees from multilocus data." Molecular biology and
+#'   evolution 27.3 (2010): 570-580.
+#'   Kuhner, Mary K., and Joseph Felsenstein. "A simulation comparison of
+#'   phylogeny algorithms under equal and unequal evolutionary
+#'   rates." Molecular Biology and Evolution 11.3 (1994): 459-468.
 #' @export
 nrbs <- function(phylogeny1, phylogeny2) {
   if (class(phylogeny1) != "phylo") {

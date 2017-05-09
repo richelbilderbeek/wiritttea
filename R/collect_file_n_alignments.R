@@ -18,5 +18,5 @@ collect_file_n_alignments <- function(filename) {
 
   file <- wiritttes::read_file(filename)
   n <- sum(!is.na(file$alignments))
-  return (data.frame(n_alignments = n))
+  return(data.frame(n_alignments = n))
 }

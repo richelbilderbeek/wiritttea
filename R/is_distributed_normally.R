@@ -41,15 +41,15 @@ is_distributed_normally <- function(
   }
   if (all(values == values[1])) {
     # all values are identical
-    return (NA)
+    return(NA)
   }
   t <- stats::shapiro.test(x = values)
   if (t$p >= p_value) {
     # Cannot reject distribution is normal
-    return (TRUE)
+    return(TRUE)
   }
   if (t$p < 0.05) {
     # Reject distribution is normal
-    return (FALSE)
+    return(FALSE)
   }
 }

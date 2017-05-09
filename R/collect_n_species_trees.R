@@ -18,5 +18,5 @@ collect_n_species_trees <- function(filename) {
 
   file <- wiritttes::read_file(filename)
   n <- sum(!is.na(file$species_trees))
-  return (data.frame(n_species_trees = n))
+  return(data.frame(n_species_trees = n))
 }

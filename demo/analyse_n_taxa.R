@@ -1,11 +1,16 @@
 # Analyse the number of taxa
 options(warn = 2) # Be strict
-path_data <- "~/Peregrine20170208"
+path_data <- "~/Peregrine20170509"
 n_taxa_filename <- "~/n_taxa.csv"
 
 # Create file if absent
 if (!file.exists(n_taxa_filename)) {
-  my_filenames <- list.files(path_data, pattern="*.RDa", full.names=TRUE)
+  my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
+  #my_filenames <- c(
+  #  "/home/p230198/Peregrine20170509/article_1_3_0_3_0_958.RDa",
+  #  "/home/p230198/Peregrine20170509/article_1_3_0_3_1_972.RDa",
+  #  "/home/p230198/Peregrine20170509/article_1_3_0_3_1_976.RDa"
+  #)
   write.csv(wiritttea::collect_files_n_taxa(filenames = my_filenames), n_taxa_filename)
 }
 
@@ -13,8 +18,10 @@ if (!file.exists(n_taxa_filename)) {
 df_n_taxa <- wiritttea::read_collected_n_taxa(n_taxa_filename)
 
 # The success rate
-n_fail <- sum(is.na(df_n_taxa$n_taxa))
-n_success <- sum(!is.na(df_n_taxa$n_taxa))
+df_n_taxa_na <- df_n_taxa[is.na(df_n_taxa$n_taxa), ]
+
+n_fail <- sum(df_n_taxa_na)
+n_success <- nrow(df_n_taxa) - n_fail
 df_success <- data.frame(
   name = c("success", "fail"), n = c(n_success, n_fail)
 )
@@ -31,6 +38,32 @@ ggplot2::ggplot(
   ggplot2::scale_y_continuous("number of parameter sets") +
   ggplot2::coord_polar(theta = "y") +
   ggplot2::ggtitle("Incipient species trees created")
+
+# How do the failed PBD sims look like?
+for (i in 1:nrow(df_n_taxa_na)) {
+  filename <- paste(path_data,"/",df_n_taxa_na$filename[i], sep = "")
+  file <- wiritttes::read_file(filename)
+  print(file$pbd_output)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # What is the global distribution of number of taxa?
 

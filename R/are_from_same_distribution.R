@@ -7,7 +7,7 @@
 #' @export
 are_from_same_distribution <- function(a, b, alpha = 0.05) {
   if (length(a) == 0 || length(b) == 0) {
-    return (NA)
+    return(NA)
   }
 
   t <- NA
@@ -23,7 +23,7 @@ are_from_same_distribution <- function(a, b, alpha = 0.05) {
     }
   )
   if (length(t) > 1 || !is.na(t)) {
-    return (t$p.value > alpha)
+    return(t$p.value > alpha)
   }
-  return (NA)
+  return(NA)
 }
