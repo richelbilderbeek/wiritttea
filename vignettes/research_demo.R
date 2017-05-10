@@ -1,76 +1,23 @@
----
-title: "Research demo"
-author: "Richel Bilderbeek"
-date: "`r Sys.Date()`"
-output: 
-  rmarkdown::html_vignette:
-    toc: true
-vignette: >
-  %\VignetteIndexEntry{Research demo}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-This document describes my research. It does so by
-showing the workflow for toy examples.
-
-## Workflow
-
-Every experiment has the following steps:
-
- * Creating parameter files
- * Simulate one incipient species tree per parameter file
- * Construct two species trees from an incipient species tree
- * Per species tree, simulate one or more alignments
- * Per alignment, let BEAST2 infer a posterior once or more often
- * Compare the species tree to the posterior species trees
-
-## Creating parameter files
-
-We will need to load some libraries:
-
-```{r}
+## ------------------------------------------------------------------------
 library(wiritttea)
 library(ape)
 options(warn = 2)
-```
 
-
-We create four parameter files:
-
-```{r}
+## ------------------------------------------------------------------------
 filenames <- paste0("research_demo_", 1:4, ".RDa")
-```
 
-Now the parameter files are created:
-
-```{r}
+## ------------------------------------------------------------------------
 wiritttes::create_test_parameter_files(filenames = filenames)
-```
 
-Here we can view them:
-
-```{r}
+## ------------------------------------------------------------------------
 knitr::kable(collect_files_parameters(filenames = filenames))
-```
 
-Note that they all have a different random number generator seed. Because
-they do have different other parameters, this is no problem.
-
-
-### Simulate one incipient species tree per parameter file
-
-Here we simulate the 'true' incipient species tree:
-
-```{r}
+## ------------------------------------------------------------------------
 for (filename in filenames) {
   wiritttes::add_pbd_output(filename)  
 }
-```
 
-These are the incipient species trees:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 colors <- stats::setNames(c("gray", "black"), c("i", "g"))
 
 for (filename in filenames) {
@@ -86,81 +33,46 @@ for (filename in filenames) {
     colors = colors
   )
 }
-```
 
-## Per incipient species tree, take the youngest and oldest representative per species
-
-Per incipient species tree, we take the youngest and oldest representative per species:
-
-```{r}
+## ------------------------------------------------------------------------
 for (filename in filenames) {
   wiritttes::add_species_trees(filename)  
 }
-```
 
-These are the phylogenies with one subspecies
-per species:
-
-```
-for (filename in filenames) {
-  print(filename)
-  plot_species_tree(filename)
-}
-```
-
-## Add alignments
-
-```{r}
+## ------------------------------------------------------------------------
 for (filename in filenames) {
   wiritttes::add_alignments(filename)  
 }
-```
 
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 for (filename in filenames) {
   print(filename)
 }
-```
 
-## Add posteriors
-
-```{r add_posteriors}
+## ----add_posteriors------------------------------------------------------
 for (filename in filenames) {
   wiritttes::add_posteriors(filename)
 }
-```
 
-Let's view the two posteriors of the first two files:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 if (1 == 2) {
   plot_posterior_nltts(filenames[1])
   plot_posterior_nltts(filenames[2])
 }
-```
 
-The third and fourth parameter files have had two BEAST2 runs per alignment.
-We can see how similar these are:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 if (1 == 2) {
   plot_posterior_nltts(filenames[3])
   plot_posterior_nltts(filenames[4])
 }
-```
 
-## nLTT statistics
-
-```{r}
+## ------------------------------------------------------------------------
 nltt_stats <- wiritttea::collect_files_nltt_stats(filenames = filenames)
 nltt_stats$sti <- plyr::revalue(
   nltt_stats$sti, c("1"="youngest", "2"="oldest"))
 knitr::kable(head(nltt_stats))
-```
 
-All on one heap:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 ggplot2::ggplot(
   data = nltt_stats,
   ggplot2::aes(
@@ -174,11 +86,8 @@ ggplot2::ggplot(
   name = "nLTT statistic"
 ) + ggplot2::ggtitle("Distribution of nLTT statistics")
 
-```
 
-Seperated by species tree:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 ggplot2::ggplot(
   data = nltt_stats,
   ggplot2::aes(
@@ -193,10 +102,8 @@ ggplot2::ggplot(
   name = "nLTT statistic"
 ) + ggplot2::ggtitle("Distribution of nLTT statistics")
 
-```
 
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 phylogenies_11 <- wiritttes::get_posterior(
   file = wiritttes::read_file(filenames[1]), sti = 1, ai = 1, pi = 1)$trees
 phylogenies_12 <- wiritttes::get_posterior(
@@ -234,10 +141,7 @@ phangorn::densiTree(
   type = "cladogram", 
   alpha = 1
 )
-```
 
-## Cleaning up
-
-```{r}
+## ------------------------------------------------------------------------
 file.remove(filenames)
-```
+

@@ -1,36 +1,13 @@
----
-title: "sample_species_trees_from_pbd_output demo"
-author: "Richel Bilderbeek"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{sample_species_trees_from_pbd_output demo}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r echo = FALSE}
+## ----echo = FALSE--------------------------------------------------------
 # Warnings are errors
 options(warn = 2)
-```
 
-# Goal
-
-This vignette demonstrates the sampling used.
-
-# Introduction
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 newick <- "(((A,B),A),A);"
 phylogeny <- phytools::read.newick(text = newick)
 ape::plot.phylo(phylogeny, edge.width = 3, cex = 2)
-```
 
-# Demonstration
-
-Here we will simulate a protracted birth-death process:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 age <- 4
 seed <- 320
 set.seed(seed)
@@ -49,21 +26,13 @@ pbd_sim_output <- PBD::pbd_sim(
 )
 names(pbd_sim_output)
 testit::assert(ribir::is_pbd_sim_output(pbd_sim_output))
-```
 
-Most of these trees are uninteresting for this demonstration. I will zoom in
-on the middle tree of the top row, which are the extant good and
-incipient species:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 cols <- stats::setNames(c("gray", "black"), c("i", "g"))
 phytools::plotSimmap(pbd_sim_output$igtree.extant, colors = cols)
 ape::add.scale.bar()
-```
 
-From that tree, from each good species, we pick both the youngest and oldest:
-
-```{r}
+## ------------------------------------------------------------------------
 stree_youngest <- pbd_sim_output$stree_youngest 
 stree_oldest <- pbd_sim_output$stree_oldest
 species_trees <- c(stree_youngest, stree_oldest)
@@ -73,19 +42,13 @@ for (species_tree in species_trees) {
   )
   ape::plot.phylo(species_tree, root.edge = TRUE, main = title)
 }
-```
 
-The nLTT plots are expected to differ. Here we extract the nLTT plot is data:
-
-```{r}
+## ------------------------------------------------------------------------
 df <- nLTT::get_nltt_values(species_trees, dt = 0.01)
 df$id <- plyr::revalue(df$id, c("1" = "youngest", "2" = "oldest"))
 names(df)
-```
 
-Here we plot both nLTTs:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 ggplot2::ggplot(
   data = df,
   ggplot2::aes(x = t, y = nltt, colour = id)
@@ -96,14 +59,11 @@ ggplot2::ggplot(
 ) + ggplot2::scale_y_continuous(name = "Normalized number of lineages", 
   limits = c(0, 1)
 ) + ggplot2::ggtitle("nLTT plots")
-```
 
-Or we plot them as an average:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 ggplot2::qplot(t, nltt, data = df, geom = "blank", ylim = c(0, 1), 
   main = "Average nLTT plot of phylogenies") + 
   ggplot2::stat_summary(
     fun.data = "mean_cl_boot", color = "red", geom = "smooth"
   )
-```
+

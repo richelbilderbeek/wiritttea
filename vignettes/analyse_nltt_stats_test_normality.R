@@ -1,66 +1,24 @@
----
-title: "Are nLTT statistics distributed normally?"
-author: "Richel Bilderbeek"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Analyse nLTTs}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-## Abstract
-
-This vignette demonstrates that the nLTT statistics
-per posterior are not always distributed normally
-
-## Setup
-
-Loading this package
-
-```{r}
+## ------------------------------------------------------------------------
 library(wiritttea)
 options(warn = 2)
-```
 
-## Show the distribution of nLTT statistics
-
-```{r}
+## ------------------------------------------------------------------------
 nltt_stats_raw <- read_collected_nltt_stats()
 #nltt_stats_raw$sti <- plyr::revalue(nltt_stats_raw$sti, c("1"="youngest", "2"="oldest"))
 knitr::kable(head(nltt_stats_raw))
-```
 
-Remove the NA's:
-
-```{r}
+## ------------------------------------------------------------------------
 nltt_stats <- nltt_stats_raw[!is.na(nltt_stats_raw$nltt_stat), ]
-```
 
-## Are nLTT statistics distributed normally?
-
-Time to anwer the question [do nLTT statistics differ between posteriors?](https://github.com/richelbilderbeek/wiritttea/issues/103)
-
-First we need to know if nLTT statistics are normally 
-distributed per posterior, as this will influence are tests.
-
-To do, we will use the Shapiro-Wilk normality test, that
-assumes all measured values are different.
-
-How many nLTT statistics are distributed normally?
-
-```{r}
+## ------------------------------------------------------------------------
 df <- dplyr::summarise(
   dplyr::group_by(nltt_stats, filename, sti, ai, pi),
   idn = is_distributed_normally(nltt_stat)
 )
 
 knitr::kable(dplyr::tally(dplyr::group_by(df, idn)))
-```
 
-Also taking the number of taxa into account:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 df_parameters <- read_collected_parameters()
 df_parameters$filename <- rownames(df_parameters)
 
@@ -91,14 +49,8 @@ ggplot2::ggplot(
 ) + ggplot2::scale_y_continuous(
   "Number of posteriors"
 )
-```
 
-How do the nLTT distributions look like?
-
-First, the nLTTs of the posterior that is normally
-distributed with the highest number of taxa:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 # Collect the posteriors that have a normally distributed
 # nLTT statistic
 df_normal <- df[df$idn == "normal", ]
@@ -138,12 +90,8 @@ ggplot2::ggplot(
   ), 
   lty = 2
 )
-```
 
-I would like to see the distribution of a posterior with
-a high number of taxa, that is not distributed normally:
-
-```{r fig.width = 7, fig.height = 7}
+## ----fig.width = 7, fig.height = 7---------------------------------------
 # Collect the posteriors that have a normally distributed
 # nLTT statistic
 df_not_normal <- df[df$idn == "not normal", ]
@@ -181,6 +129,4 @@ ggplot2::ggplot(
   ), 
   lty = 2
 )
-```
-
 

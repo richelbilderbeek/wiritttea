@@ -23,7 +23,7 @@ public:
 };
 
 //Do not forget to set somewhere:
-//Sys.setenv("PKG_CXXFLAGS"="-std=c++11")
+//Sys.setenv("PKG_CXXFLAGS" = "-std=c++11")
 std::string create_header_ess() noexcept;
 
 ess create_null_ess() noexcept;
