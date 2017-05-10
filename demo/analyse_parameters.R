@@ -11,7 +11,7 @@ if (!file.exists(parameters_filename)) {
 }
 
 # Read the collected parameters
-df_parameters <- wirittea::read_collected_parameters(parameters_filename)
+df_parameters <- wiritttea::read_collected_parameters(parameters_filename)
 
 
 
