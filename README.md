@@ -1,10 +1,11 @@
 # wiritttea
 
-[![Build Status](https://travis-ci.org/richelbilderbeek/wiritttea.svg?branch=master)](https://travis-ci.org/richelbilderbeek/wiritttea)
-[![codecov.io](https://codecov.io/github/richelbilderbeek/wiritttea/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/wiritttea?branch=master)
-[![gplv3](http://www.gnu.org/graphics/gplv3-88x31.png)](http://www.gnu.org/licenses/gpl.html)
+Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.org)|[![Codecov logo](Codecov.png)](https://www.codecov.io)
+---|---|---
+master|[![Build Status](https://travis-ci.org/richelbilderbeek/wiritttea.svg?branch=master)](https://travis-ci.org/richelbilderbeek/wiritttea)|[![codecov.io](https://codecov.io/github/richelbilderbeek/wiritttea/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/wiritttea/branch/master)
+develop|[![Build Status](https://travis-ci.org/richelbilderbeek/wiritttea.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/wiritttea)|[![codecov.io](https://codecov.io/github/richelbilderbeek/wiritttea/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/wiritttea/branch/develop)
 
-Community Ecology Research course 2016.
+What If Reproductive Isolation Takes Time To Establish Analysis.
 
 ## Installing `wiritttea`
 
