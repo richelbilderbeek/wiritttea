@@ -10,7 +10,8 @@ find_path(filename)
 \item{filename}{the name of a file}
 }
 \value{
-the full path of the filename if an existing file could be found, stops otherwise
+the full path of the filename if an existing file could be found,
+  stops otherwise
 }
 \description{
 Finds the full path of a file

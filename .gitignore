@@ -62,3 +62,4 @@ doc/*.tex
 collect_files_nltt_stats
 build-*
 *.pro.user
+*.o

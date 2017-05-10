@@ -2,8 +2,8 @@
 % Please edit documentation in R/collect_files_n_species_trees.R
 \name{collect_files_n_species_trees}
 \alias{collect_files_n_species_trees}
-\title{Collects the number of sampled species trees of all phylogenies belonging to a
-multiple parameter file in the melted/uncast/long form}
+\title{Collects the number of sampled species trees of all phylogenies
+belonging to a multiple parameter file in the melted/uncast/long form}
 \usage{
 collect_files_n_species_trees(filenames)
 }
@@ -14,8 +14,8 @@ collect_files_n_species_trees(filenames)
 A dataframe with all number of sampled species trees of all files
 }
 \description{
-Collects the number of sampled species trees of all phylogenies belonging to a
-multiple parameter file in the melted/uncast/long form
+Collects the number of sampled species trees of all phylogenies
+belonging to a multiple parameter file in the melted/uncast/long form
 }
 \examples{
   filenames <- c(

@@ -11,7 +11,8 @@ collect_file_nrbss(filename)
 \item{filename}{name of the parameter file}
 }
 \value{
-A dataframe of NRBS values between each species tree and their posteriors
+A dataframe of NRBS values between
+  each species tree and their posteriors
 }
 \description{
 Collects the NRBS values between species trees and

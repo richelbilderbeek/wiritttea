@@ -1,4 +1,5 @@
 # Analyse the number of taxa
+library(wiritttea)
 options(warn = 2) # Be strict
 path_data <- "~/Peregrine20170509"
 n_taxa_filename <- "~/n_taxa.csv"

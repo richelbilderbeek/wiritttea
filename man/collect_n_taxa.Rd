@@ -8,7 +8,8 @@ melted/uncast/long form}
 collect_n_taxa(phylogenies)
 }
 \arguments{
-\item{phylogenies}{the phylogenies, supplied as either a list or a multiPhylo object, where the phylogenies are of type 'phylo'}
+\item{phylogenies}{the phylogenies, supplied as either a list
+or a multiPhylo object, where the phylogenies are of type 'phylo'}
 }
 \value{
 A dataframe of the number of taxa of each phylogeny in time
