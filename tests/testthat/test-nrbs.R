@@ -32,7 +32,7 @@ test_that("nrbs: abuse", {
   )
 
   p <- ape::rcoal(5)
-  p$tip.label <- paste0("s", 1:5)
+  p$tip.label <- paste0("s", 1:5) # nolint ape::phylo has tip.label
   q <- ape::rcoal(5)
   expect_error(
     nrbs(phylogeny1 = p, phylogeny2 = q),
@@ -42,8 +42,8 @@ test_that("nrbs: abuse", {
   p <- ape::rcoal(5)
   q <- ape::rcoal(5)
   new_labels <- c(NA, paste0("s", 1:4))
-  p$tip.label <- new_labels
-  q$tip.label <- new_labels
+  p$tip.label <- new_labels # nolint ape::phylo has tip.label
+  q$tip.label <- new_labels # nolint ape::phylo has tip.label
 
   expect_error(
     nrbs(phylogeny1 = p, phylogeny2 = q),
