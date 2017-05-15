@@ -1,4 +1,5 @@
 #' Read all the collected ESSes of all simulations' posteriors
+#' @param filename name of the CSV file
 #' @return a dataframe
 #' @examples
 #'   df <- read_collected_esses()

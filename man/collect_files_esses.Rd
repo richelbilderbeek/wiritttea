@@ -22,3 +22,4 @@ parameter files in the melted/uncast/long form
   df <- collect_files_esses(filenames)
   testit::assert(nrow(df) == 16)
 }
+

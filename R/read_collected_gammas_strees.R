@@ -1,4 +1,5 @@
 #' Read all the collected nLTT values of all species trees
+#' @param filename name of the CSV file
 #' @return a dataframe
 #' @examples
 #'   df <- read_collected_gammas_strees()

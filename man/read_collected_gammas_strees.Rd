@@ -6,6 +6,9 @@
 \usage{
 read_collected_gammas_strees()
 }
+\arguments{
+\item{filename}{name of the CSV file}
+}
 \value{
 a dataframe
 }
@@ -19,3 +22,4 @@ Read all the collected nLTT values of all species trees
 \author{
 Richel Bilderbeek
 }
+

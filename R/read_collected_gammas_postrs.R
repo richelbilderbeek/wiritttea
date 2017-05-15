@@ -1,4 +1,5 @@
 #' Read all the collected gamma statistics of all posteriors
+#' @param filename name of the CSV file
 #' @return a dataframe
 #' @examples
 #'   df <- read_collected_gammas_postrs()
@@ -10,9 +11,9 @@
 #'   )
 #' @author Richel Bilderbeek
 #' @export
-read_collected_gammas_postrs <- function() {
-
-  filename <- wiritttea::find_path("collect_files_posterior_gammas.csv")
+read_collected_gammas_postrs <- function(
+  filename = wiritttea::find_path("collect_files_posterior_gammas.csv")
+) {
   testit::assert(file.exists(filename))
   df <- utils::read.csv(
    file = filename,

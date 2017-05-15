@@ -6,7 +6,7 @@
 given folder. These .RDa files are in the format
 created by the 'wirittttes' package}
 \usage{
-do_analysis(folder = "~/GitHubs/wiritttea/inst/extdata")
+do_analysis(folder = system.file("extdata", package = "wiritttea"))
 }
 \arguments{
 \item{folder}{path of the folder containing the RDa files}
@@ -23,3 +23,4 @@ created by the 'wirittttes' package
   folder <- system.file("extdata", package = "wiritttea")
   do_analysis(folder)
 }
+

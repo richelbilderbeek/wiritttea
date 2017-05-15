@@ -7,7 +7,7 @@
 #'   folder <- system.file("extdata", package = "wiritttea")
 #'   do_analysis(folder)
 #' @export
-do_analysis <- function(folder = "~/GitHubs/wiritttea/inst/extdata") {
+do_analysis <- function(folder = system.file("extdata", package = "wiritttea")) {
 
   wiritttea::collect_all(folder)
 }

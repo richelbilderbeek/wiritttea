@@ -4,7 +4,11 @@
 \alias{read_collected_gammas_postrs}
 \title{Read all the collected gamma statistics of all posteriors}
 \usage{
-read_collected_gammas_postrs()
+
+  read_collected_gammas_postrs(filename = wiritttea::find_path("collect_files_posterior_gammas.csv"))
+}
+\arguments{
+\item{filename}{name of the CSV file}
 }
 \value{
 a dataframe
@@ -24,3 +28,4 @@ Read all the collected gamma statistics of all posteriors
 \author{
 Richel Bilderbeek
 }
+

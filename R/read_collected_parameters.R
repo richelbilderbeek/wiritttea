@@ -1,4 +1,5 @@
 #' Reads the file with the collected parameters
+#' @param csv_filename name of the CSV file
 #' @return a data frame with all parameters
 #' @author Richel Bilderbeek
 #' @export

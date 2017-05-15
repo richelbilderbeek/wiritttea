@@ -25,3 +25,4 @@ are of the same distribution
   df <- aligns_same_distr_nltt_stat(nltt_stats)
   testit::assert(all(names(df) == c("filename", "sti", "same_distr")))
 }
+

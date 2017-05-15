@@ -21,3 +21,4 @@ Checks if x is a single, whole-number variable
 \author{
 Richel Bilderbeek
 }
+

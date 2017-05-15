@@ -17,3 +17,4 @@ Reads the file with the collected times
 \author{
 Richel Bilderbeek
 }
+
