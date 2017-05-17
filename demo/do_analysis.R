@@ -5,7 +5,7 @@
 #' @return nothing
 #' @examples
 #'   folder <- system.file("extdata", package = "wiritttea")
-#'   do_analysis(folder)
+#'   wiritttea::do_analysis(folder)
 #' @export
 do_analysis <- function(folder = system.file("extdata", package = "wiritttea")) {
 

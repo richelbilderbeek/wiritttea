@@ -24,4 +24,3 @@ Read all the collected nLTT values of all posteriors
 \author{
 Richel Bilderbeek
 }
-

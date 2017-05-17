@@ -1,6 +1,8 @@
 #' Reads the file with the collected parameters
 #' @param csv_filename name of the CSV file
 #' @return a data frame with all parameters
+#' @usage read_collected_parameters(
+#'   csv_filename = wiritttea::find_path("collect_files_parameters.csv"))
 #' @author Richel Bilderbeek
 #' @export
 read_collected_parameters <- function(

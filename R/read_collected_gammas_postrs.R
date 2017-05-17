@@ -1,6 +1,8 @@
 #' Read all the collected gamma statistics of all posteriors
 #' @param filename name of the CSV file
 #' @return a dataframe
+#' @usage read_collected_gammas_postrs(
+#'   filename = wiritttea::find_path("collect_files_posterior_gammas.csv"))
 #' @examples
 #'   df <- read_collected_gammas_postrs()
 #'   testit::assert(names(df) ==

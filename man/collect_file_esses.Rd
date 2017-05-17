@@ -22,4 +22,3 @@ parameter file in the melted/uncast/long form
   df <- collect_file_esses(filename)
   testit::assert(nrow(df) == 8)
 }
-
