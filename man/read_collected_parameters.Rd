@@ -19,3 +19,4 @@ Reads the file with the collected parameters
 \author{
 Richel Bilderbeek
 }
+

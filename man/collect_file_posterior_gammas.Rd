@@ -26,3 +26,4 @@ Collect the gamma statistics of the BEAST2 posteriors
 \author{
 Richel Bilderbeek
 }
+

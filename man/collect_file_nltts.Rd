@@ -31,3 +31,4 @@ parameter file in the melted/uncast/long form
   testit::assert(nrow(df$species_tree_nltts) > 2)
   testit::assert(nrow(df$posterior_nltts) > 80)
 }
+

@@ -20,3 +20,4 @@ Convert an alignment (of type DNAbin) to a FASTA file
 \author{
 Richel Bilderbeek
 }
+

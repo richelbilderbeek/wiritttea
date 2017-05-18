@@ -47,3 +47,4 @@ Sees if the values of a distribution are normally distributed
 \author{
 Richel Bilderbeek
 }
+

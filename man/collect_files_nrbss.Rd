@@ -30,3 +30,4 @@ multiple parameter file in the melted/uncast/long form
   testit::assert(names(df) == expected)
   testit::assert(nrow(df) == 160)
 }
+

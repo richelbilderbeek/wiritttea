@@ -6,8 +6,9 @@
 #'   testit::assert(names(df) == c("filename", "sti", "gamma_stat"))
 #' @author Richel Bilderbeek
 #' @export
-read_collected_gammas_strees <- function() {
-  filename <- wiritttea::find_path("collect_files_species_tree_gammas.csv")
+read_collected_gammas_strees <- function(
+  filename = wiritttea::find_path("collect_files_species_tree_gammas.csv")) {
+
   testit::assert(file.exists(filename))
   df <- utils::read.csv(
    file = filename,

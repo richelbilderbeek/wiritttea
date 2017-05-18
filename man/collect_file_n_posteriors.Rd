@@ -26,3 +26,4 @@ Collect the number of posteriors in a parameter file
 \author{
 Richel Bilderbeek
 }
+

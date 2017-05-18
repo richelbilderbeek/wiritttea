@@ -20,3 +20,4 @@ A list with two dataframes of nLTTs
 Collects the nLTT statistics of all phylogenies belonging to a
 multiple parameter file in the melted/uncast/long form
 }
+

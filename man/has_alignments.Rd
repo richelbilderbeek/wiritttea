@@ -18,3 +18,4 @@ Checks if alignments are present
 \author{
 Richel Bilderbeek
 }
+
