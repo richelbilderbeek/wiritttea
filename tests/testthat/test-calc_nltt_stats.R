@@ -11,26 +11,26 @@ test_that("collect_nltt_stats use", {
 
 test_that("collect_nltt_stats: abuse", {
 
-  expect_error(
-    nltt_stats <- collect_nltt_stats(
+  testthat::expect_error(
+    nltt_stats <- wiritttea::collect_nltt_stats(
       phylogeny = "Not a phylogeny",
       others = c(ape::rcoal(10), ape::rcoal(10))
     ),
     "phylogeny must be a phylogeny"
   )
 
-  expect_error(
-    nltt_stats <- collect_nltt_stats(
+  testthat::expect_error(
+    nltt_stats <- wiritttea::collect_nltt_stats(
       phylogeny = ape::rcoal(10),
       others = c()
     ),
     "must supply others"
   )
 
-  expect_error(
-    nltt_stats <- collect_nltt_stats(
+  testthat::expect_error(
+    nltt_stats <- wiritttea::collect_nltt_stats(
       phylogeny = ape::rcoal(10),
-      others = c(ape::rcoal(10), "Not a phylogeny")
+      others = c(12, "Not a phylogeny")
     ),
     "others must be phylogenies"
   )

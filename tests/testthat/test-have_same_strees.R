@@ -38,13 +38,13 @@ test_that("have_same_strees use: create different trees", {
 
   # Create a parameter file
   filename <- "test-have_same_strees.RDa"
-  save_parameters_to_file(
+  wiritttes::save_parameters_to_file(
     rng_seed = 42,
     sirg = 0.5,
     siri = 0.5,
-    scr = 0.1, # Lower chance trees are equal
-    erg = 0.5,
-    eri = 0.5,
+    scr = 1.0, # Lower chance trees are equal
+    erg = 0.2,
+    eri = 0.2,
     age = 5,
     mutation_rate = 0.1,
     n_alignments = 1,
@@ -55,12 +55,22 @@ test_that("have_same_strees use: create different trees", {
   )
 
   # Simulate an incipient species tree
-  add_pbd_output(filename)
+  wiritttes::add_pbd_output(filename)
   # Add the species trees
-  add_species_trees(filename = filename)
-  testit::assert(has_species_trees(read_file(filename)))
+  wiritttes::add_species_trees(filename = filename)
+  testit::assert(wiritttes::has_species_trees(wiritttes::read_file(filename)))
+
+  # Check by hand here first that these are different
+  stree_youngest <- wiritttes::get_species_tree_youngest(wiritttes::read_file(filename))
+  stree_oldest <- wiritttes::get_species_tree_oldest(wiritttes::read_file(filename))
+  testit::assert(
+    !identical(
+      sort(as.vector(ape::branching.times(stree_youngest))),
+      sort(as.vector(ape::branching.times(stree_oldest)))
+    )
+  )
 
   # Probably equal
-  testit::assert(!have_same_strees(read_file(filename)))
+  testit::assert(!wiritttea::have_same_strees(wiritttes::read_file(filename)))
 
 })

@@ -37,5 +37,5 @@ have_same_strees <- function(file) {
   }
   brts_1 <- sort(ape::branching.times(wiritttes::get_species_tree_youngest(file)))
   brts_2 <- sort(ape::branching.times(wiritttes::get_species_tree_oldest(file)))
-  return(all.equal(brts_1, brts_2))
+  return(identical(brts_1, brts_2))
 }
