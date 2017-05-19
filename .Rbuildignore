@@ -12,3 +12,6 @@
 ^FAQ.md$
 ^install_beast2.sh$
 ^install_r_packages.R$
+^clean_vignettes$
+^install_beast2$
+^ql\.sh$

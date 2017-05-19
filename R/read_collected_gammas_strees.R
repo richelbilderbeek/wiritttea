@@ -1,6 +1,8 @@
 #' Read all the collected nLTT values of all species trees
 #' @param filename name of the CSV file
 #' @return a dataframe
+#' @usage read_collected_gammas_strees(
+#'    filename = wiritttea::find_path("collect_files_species_tree_gammas.csv"))
 #' @examples
 #'   df <- read_collected_gammas_strees()
 #'   testit::assert(names(df) == c("filename", "sti", "gamma_stat"))
