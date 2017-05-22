@@ -20,10 +20,10 @@ if (!file.exists(strees_filename)) {
   print("Collecting .RDa files")
   my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
 
-  print("Collecting # taxa")
+  print("Collecting strees_identical")
   df_strees <- wiritttea::collect_files_strees_identical(filenames = my_filenames)
 
-  print("Saving # taxa")
+  print("Saving strees_identical")
   write.csv(df_strees, strees_filename)
 }
 
