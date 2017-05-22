@@ -25,4 +25,3 @@ Calculates the nLTT statistics from a file
 \author{
 Richel Bilderbeek
 }
-

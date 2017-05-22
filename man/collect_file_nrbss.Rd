@@ -24,4 +24,3 @@ posteriors in a parameter file in the melted/uncast/long form
   testit::assert(names(df) == c("sti", "ai", "pi", "si", "nrbs"))
   testit::assert(nrow(df) == 80)
 }
-

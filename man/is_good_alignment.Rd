@@ -19,4 +19,3 @@ Checks if an alignment is good enough
 \author{
 Richel Bilderbeek
 }
-

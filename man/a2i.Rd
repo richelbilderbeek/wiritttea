@@ -44,4 +44,3 @@ Convert an alignment position to an index
 \author{
 Richel Bilderbeek
 }
-

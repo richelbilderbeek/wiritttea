@@ -34,4 +34,3 @@ Convert a posterior position to an index
 \author{
 Richel Bilderbeek
 }
-

@@ -4,8 +4,8 @@
 \alias{read_collected_gammas_strees}
 \title{Read all the collected nLTT values of all species trees}
 \usage{
-
-  read_collected_gammas_strees(filename = wiritttea::find_path("collect_files_species_tree_gammas.csv"))
+read_collected_gammas_strees(
+   filename = wiritttea::find_path("collect_files_stree_gammas.csv"))
 }
 \arguments{
 \item{filename}{name of the CSV file}
@@ -23,4 +23,3 @@ Read all the collected nLTT values of all species trees
 \author{
 Richel Bilderbeek
 }
-
