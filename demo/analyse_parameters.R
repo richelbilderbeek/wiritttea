@@ -1,8 +1,12 @@
 # Analyse the parametes
 library(wiritttea)
 options(warn = 2)
+
 path_data <- "~/Peregrine20170509"
 parameters_filename <- "~/parameters.csv"
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) > 0) path_data <- args[1]
+if (length(args) > 1) parameters_filename <- args[2]
 
 # Collect all parameters in a single file if absent, slow
 if (!file.exists(parameters_filename)) {
