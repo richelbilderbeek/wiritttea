@@ -2,14 +2,14 @@
 #' @param filename name of the CSV file
 #' @return a dataframe
 #' @usage read_collected_gammas_strees(
-#'    filename = wiritttea::find_path("collect_files_species_tree_gammas.csv"))
+#'    filename = wiritttea::find_path("collect_files_stree_gammas.csv"))
 #' @examples
 #'   df <- read_collected_gammas_strees()
 #'   testit::assert(names(df) == c("filename", "sti", "gamma_stat"))
 #' @author Richel Bilderbeek
 #' @export
 read_collected_gammas_strees <- function(
-  filename = wiritttea::find_path("collect_files_species_tree_gammas.csv")) {
+  filename = wiritttea::find_path("collect_files_stree_gammas.csv")) {
 
   testit::assert(file.exists(filename))
   df <- utils::read.csv(
