@@ -1,7 +1,8 @@
 # Analyse if the two sampled species trees are identical
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/Peregrine20170509"
+path_data <- "~/Peregrine20170523"
+path_data <- "~/GitHubs/wiritttes/inst/extdata"
 strees_filename <- "~/strees.csv"
 
 args <- commandArgs(trailingOnly = TRUE)
@@ -12,13 +13,12 @@ print(paste("path_data:", path_data))
 print(paste("strees_filename:", strees_filename))
 
 
-
 print("Create strees data file if absent")
 if (!file.exists(strees_filename)) {
   print("File is absent, recreating")
 
   print("Collecting .RDa files")
-  my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
+  my_filenames <- head(list.files(path_data, pattern = "*.RDa", full.names = TRUE))
 
   print("Collecting strees_identical")
   df_strees <- wiritttea::collect_files_strees_identical(filenames = my_filenames)
@@ -33,7 +33,7 @@ df_strees <- wiritttea::read_collected_strees_identical(strees_filename)
 print("Measure the success rate")
 tryCatch( {
   df_strees_na <- df_strees[is.na(df_strees$strees), ]
-  n_fail <- sum(df_strees_na)
+  n_fail <- nrow(df_strees_na)
   n_success <- nrow(df_strees) - n_fail
   df_success <- data.frame(
     name = c("success", "fail"), n = c(n_success, n_fail)

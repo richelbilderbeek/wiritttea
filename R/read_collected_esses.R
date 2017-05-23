@@ -21,7 +21,6 @@ read_collected_esses <- function(
     stringsAsFactors = FALSE,
     row.names = 1
   )
-  df
   df$filename <- as.factor(df$filename)
   df$sti <- as.factor(df$sti)
   df$ai <- as.factor(df$ai)

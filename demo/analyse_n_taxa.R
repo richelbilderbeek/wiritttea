@@ -1,7 +1,7 @@
 # Analyse the number of taxa
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/Peregrine20170509"
+path_data <- "~/Peregrine20170523"
 n_taxa_filename <- "~/n_taxa.csv"
 
 args <- commandArgs(trailingOnly = TRUE)
@@ -33,7 +33,7 @@ df_n_taxa <- wiritttea::read_collected_n_taxa(n_taxa_filename)
 print("Measure the success rate")
 tryCatch( {
   df_n_taxa_na <- df_n_taxa[is.na(df_n_taxa$n_taxa), ]
-  n_fail <- sum(df_n_taxa_na)
+  n_fail <- nrow(df_n_taxa_na)
   n_success <- nrow(df_n_taxa) - n_fail
   df_success <- data.frame(
     name = c("success", "fail"), n = c(n_success, n_fail)

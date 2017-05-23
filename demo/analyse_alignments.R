@@ -1,7 +1,9 @@
 # Analyse if the alignments are created successfully
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/Peregrine20170509"
+path_data <- "~/Peregrine20170523"
+
+path_data <- "~/GitHubs/wiritttea/inst/extdata"
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
@@ -15,7 +17,7 @@ my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
 #   "/home/p230198/Peregrine20170509/article_1_3_0_3_1_972.RDa",
 #   "/home/p230198/Peregrine20170509/article_1_3_0_3_1_976.RDa"
 # )
-
+df <- data.frame(filename = basename(my_filenames
 
 for (my_filename in my_filenames) {
   has_alignments <- FALSE
