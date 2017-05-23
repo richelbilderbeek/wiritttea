@@ -29,13 +29,13 @@ if (!file.exists(alignments_filename)) {
     tryCatch( {
         file <- wiritttes::read_file(my_filename) # Can fail
         n_alignments <- wiritttes::extract_napst(file) * 2
-        df$n_alignments_ok[i] <- 0
-        df$n_alignments_na[i] <- n_alignments
-
-        alignments <- wiritttes::has_alignments(file)
-        df$n_alignments_ok[i] <- length(which(alignments == TRUE))
-        df$n_alignments_na[i] <- length(which(alignments != TRUE))
-        gc() # Need to do so manually
+        for (j in seq(1, n_alignments)) {
+          alignments <- wiritttes::has_alignments(file)
+          wiritttea::is_good_alignment(
+          df$n_alignments_ok[i] <- length(which(alignments == TRUE))
+          df$n_alignments_na[i] <- length(which(alignments != TRUE))
+          gc() # Need to do so manually
+        }
       },
       error = function(cond) {} #nolint
     )
@@ -51,14 +51,13 @@ df_plottable <- df_problematic[!is.na(df_problematic$n_alignments_ok), ]
 
 if (1 == 2) {
 
-  for (filename in df_plottable$filename) {
-    file <- wiritttes::read_file(filename)
-    for (i in seq(1, 4)) {
+  for (filename in head(df_plottable$filename, n = 1)) {
+    file <- wiritttes::read_file(paste0(path_data, "/", filename))
+
+    for (i in seq(1, wiritttes::extract_napst(file))) {
       alignment <- wiritttes::get_alignment_by_index(file, i)
-
-
+      image(alignment)
     }
   }
-  article_1_1_0_3_1_729.RDa
 }
 
