@@ -28,10 +28,8 @@ for (i in seq_along(my_filenames)) {
       df$n_alignments_na[i] <- n_alignments
 
       alignments <- wiritttes::has_alignments(file)
-      df$n_ok[i] <- length(which(alignments == TRUE))
-      df$n_nas[i] <- length(which(alignments == TRUE))
-      df$n_nas_in_dist_matrix[i] <- length(which(alignments != TRUE))
-      df$n_zeroes_in_dist_matrix[i] <- length(which(alignments != TRUE))
+      df$n_alignments_ok[i] <- length(which(alignments == TRUE))
+      df$n_alignments_na[i] <- length(which(alignments != TRUE))
       gc() # Need to do so manually
     },
     error = function(cond) {} #nolint
