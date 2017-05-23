@@ -32,6 +32,7 @@ collect_files_strees_identical <- function(filenames) {
     tryCatch( {
       file <- wiritttes::read_file(filenames[i])
       df$strees_identical[i] <- have_same_strees(file)
+      gc() # Really needed to do manual garbage collection
     }, error = function(msg) {} # nolint
     )
   }

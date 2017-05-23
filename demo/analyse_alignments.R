@@ -2,31 +2,41 @@
 library(wiritttea)
 options(warn = 2) # Be strict
 path_data <- "~/Peregrine20170523"
-
-path_data <- "~/GitHubs/wiritttea/inst/extdata"
+#path_data <- "~/GitHubs/wiritttea/inst/extdata"
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
 
 print(paste("path_data:", path_data))
-
 my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
 
-# my_filenames <- c(
-#   "/home/p230198/Peregrine20170509/article_1_3_0_3_0_958.RDa",
-#   "/home/p230198/Peregrine20170509/article_1_3_0_3_1_972.RDa",
-#   "/home/p230198/Peregrine20170509/article_1_3_0_3_1_976.RDa"
-# )
-df <- data.frame(filename = basename(my_filenames
+df <- data.frame(
+  filename = basename(my_filenames),
+  n_alignments_ok = rep(NA, length(my_filenames)),
+  n_alignments_na = rep(NA, length(my_filenames))
+)
 
-for (my_filename in my_filenames) {
-  has_alignments <- FALSE
+for (i in seq_along(my_filenames)) {
+
+  my_filename <- my_filenames[i]
+  testit::assert(file.exists(my_filename))
+
   tryCatch( {
-      testit::assert(file.exists(my_filename))
       file <- wiritttes::read_file(my_filename) # Can fail
-      has_alignments <- all(wiritttes::has_alignments(file))
+      n_alignments <- wiritttes::extract_napst(file) * 2
+      df$n_alignments_ok[i] <- 0
+      df$n_alignments_na[i] <- n_alignments
+
+      alignments <- wiritttes::has_alignments(file)
+      df$n_ok[i] <- length(which(alignments == TRUE))
+      df$n_nas[i] <- length(which(alignments == TRUE))
+      df$n_nas_in_dist_matrix[i] <- length(which(alignments != TRUE))
+      df$n_zeroes_in_dist_matrix[i] <- length(which(alignments != TRUE))
+      gc() # Need to do so manually
     },
-    error = function(cond) {} # OK
+    error = function(cond) {} #nolint
   )
-  print(paste(my_filename, ": ", has_alignments, sep = ""))
 }
+
+write.csv(df, "~/alignments.csv")
+print(df)
