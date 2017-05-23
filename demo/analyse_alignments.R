@@ -17,23 +17,34 @@ if (!file.exists(alignments_filename)) {
 
   df <- data.frame(
     filename = basename(my_filenames),
-    n_alignments_ok = rep(NA, length(my_filenames)),
-    n_alignments_na = rep(NA, length(my_filenames))
+    n_alignments_ok = rep(0, length(my_filenames)),
+    n_alignments_zeroes = rep(0, length(my_filenames)),
+    n_alignments_na = rep(0, length(my_filenames))
   )
 
   for (i in seq_along(my_filenames)) {
 
     my_filename <- my_filenames[i]
+    #print(my_filename)
     testit::assert(file.exists(my_filename))
 
     tryCatch( {
         file <- wiritttes::read_file(my_filename) # Can fail
         n_alignments <- wiritttes::extract_napst(file) * 2
         for (j in seq(1, n_alignments)) {
-          alignments <- wiritttes::has_alignments(file)
-          wiritttea::is_good_alignment(
-          df$n_alignments_ok[i] <- length(which(alignments == TRUE))
-          df$n_alignments_na[i] <- length(which(alignments != TRUE))
+          #print(j)
+          alignment <- wiritttes::get_alignment_by_index(file, j)
+          m <- ape::dist.dna(x = alignment, model = "JC69", as.matrix = TRUE)
+          #print(m)
+          # Detect if there is at least one NA
+          if (!all(!is.na(m))) {
+            df$n_alignments_na[i] <- df$n_alignments_na[i] + 1
+          } else if (sum(m == 0.0) - nrow(m) > 0) {
+            # Detect zeroes, except those on the diagonal
+            df$n_alignments_zeroes[i] <- df$n_alignments_zeroes[i] + 1
+          } else {
+            df$n_alignments_ok[i] <- df$n_alignments_ok[i] + 1
+          }
           gc() # Need to do so manually
         }
       },
