@@ -1,14 +1,10 @@
-analyse_alignments.R   R script to analyse the quality of alignments
-analyse_alignments.sh   bash script to call analyse_alignments.R on the Peregrine cluster
-analyse_esses.R   R script to analyse the Effectice Sample Sizes
-analyse_nltt_stats_20170212.Rmd   R markdown file for investigation
-analyse_nltt_stats.Rmd   R markdown file for analysing the nLTT statistics
-analyse_n_taxa.R   R script to analyse the number of taxa
-analyse_n_taxa.sh   bash script to call analyse_n_taxa.R on the Peregrine cluster
-analyse_parameters.R   R script to analyse the parameters
-analyse_parameters.sh   bash script to call analyse_parameters.R on the Peregrine cluster
-analyse_posteriors.Rmd   R script to analyse the posteriors
-analyse_strees_identical.R   R script to see if the sampled species trees have equal branch lengths
-analyse_strees_identical.sh   bash script to call analyse_strees_identical.R on the Peregrine cluster
-do_analysis.R   do a full analys
-README.md   Description for GitHub
+analyse_alignments   Analyse the quality of alignments
+analyse_esses   Analyse the Effectice Sample Sizes
+analyse_nltt_stats_20170212   Investigation of nLTT statistics
+analyse_nltt_stats   R markdown file for analysing the nLTT statistics
+analyse_n_taxa   R script to analyse the number of taxa
+analyse_parameters   R script to analyse the parameters
+analyse_posteriors   R script to analyse the posteriors
+analyse_strees_identical   R script to see if the sampled species trees have equal branch lengths
+do_analysis   do a full analys
+README   Description for GitHub
