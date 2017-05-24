@@ -19,19 +19,15 @@ if (1 == 2) {
 }
 
 
-```{r}
 if (1 == 2) {
-df_n_taxa <- read.csv("~/n_taxa.csv")
+  df_n_taxa <- read.csv("~/n_taxa.csv")
 
-names(df_n_taxa)
-df_n_taxa$filename <- as.factor(df_n_taxa$filename)
+  names(df_n_taxa)
+  df_n_taxa$filename <- as.factor(df_n_taxa$filename)
 
-head(df_n_taxa)
-df_esses
+  head(df_n_taxa)
+  df_esses
 }
-```
-
-
 
 # Profiling
 if (1==2) {

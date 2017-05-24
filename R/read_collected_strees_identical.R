@@ -1,15 +1,17 @@
 #' Reads the file with the collected species trees being identical
 #' @param csv_filename name of the CSV file
 #' @return a data frame with all parameters
+#' @usage read_collected_strees_identical(
+#'   csv_filename = wiritttea::find_path("collect_files_strees_identical.csv"))
 #' @examples
 #'   csv_filename <- wiritttea::find_path("collect_files_strees_identical.csv")
 #'   strees_identical <- read_collected_strees_identical(csv_filename)
-#'   testit::assert(names(df) == c(
+#'   testit::assert(names(strees_identical) == c(
 #'     "filename", "strees_identical"
 #'     )
 #'   )
-#'   testit::assert(is.factor(df$filename))
-#'   testit::assert(is.factor(df$strees_identical))
+#'   testit::assert(is.factor(strees_identical$filename))
+#'   testit::assert(is.factor(strees_identical$strees_identical))
 #' @author Richel Bilderbeek
 #' @export
 read_collected_strees_identical <- function(
