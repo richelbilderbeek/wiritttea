@@ -20,6 +20,7 @@ collect_files_n_taxa <- function(filenames) {
   # Species trees
   n_taxa <- NULL
   for (filename in filenames) {
+    gc() # Yes, need to do this manually :-(
     this_n_taxa <- NULL
     tryCatch(
       this_n_taxa <- collect_species_tree_n_taxa(
