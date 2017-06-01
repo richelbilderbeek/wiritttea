@@ -1,22 +1,9 @@
----
-title: "Analyse nLTT statistics"
-author: "Richel Bilderbeek"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Analyse nLTTs}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
 ## Abstract
+# This vignette shows how analyse the nLTT statistics.
 
-This vignette shows how analyse the nLTT statistics.
+# I use this to check if `rJava` is installed correctly. 
+# If not, this will give an error:
 
-I use this to check if `rJava` is installed correctly. 
-If not, this will give an error:
-
-```{r}
 options(warn = 2)
 
 library(wiritttes)
@@ -38,13 +25,11 @@ is_local_computer <- function()
 }
 
 is_local_computer()
-```
 
 ## Setup
 
-Loading this package
+# Loading this package
 
-```{r cache=TRUE}
 if (is_local_computer()) {
   # Read parameters
   parameters <- wiritttea::read_collected_parameters(
@@ -75,9 +60,8 @@ if (is_local_computer()) {
 
 ## Show the distribution of nLTT statistics
 
-Here we have the bumps:
+# Here we have the bumps:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
   
   ggplot2::ggplot(
@@ -91,12 +75,10 @@ if (is_local_computer()) {
     , alpha = 0.5
   )
 }
-```
 
-Rampal wondered if this is caused by DNA sequence length. 
-Here is short:
+#Rampal wondered if this is caused by DNA sequence length. 
+#Here is short:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
   
   ggplot2::ggplot(
@@ -111,13 +93,11 @@ if (is_local_computer()) {
   )
 
 }
-```
 
-Short has bumps.
+# Short has bumps.
 
-Here is long:
+# Here is long:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
   
   ggplot2::ggplot(
@@ -132,16 +112,14 @@ if (is_local_computer()) {
   )
 
 }
-```
 
-Long has bumps.
+# Long has bumps.
 
-I predict it has to do with short trees. 
+# I predict it has to do with short trees. 
 
-Here I show the number of taxa in the simulated trees,
-for different speciation initiation rates, first as a histogram:
+# Here I show the number of taxa in the simulated trees,
+# for different speciation initiation rates, first as a histogram:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
 
   ggplot2::ggplot(
@@ -149,11 +127,9 @@ if (is_local_computer()) {
       ggplot2::aes(n_taxa, fill = siri)
   ) + ggplot2::geom_histogram()
 }
-```
 
-here as a density plot:
+# here as a density plot:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
 
   ggplot2::ggplot(
@@ -161,11 +137,9 @@ if (is_local_computer()) {
       ggplot2::aes(n_taxa, fill = siri)
   ) + ggplot2::geom_density()
 }
-```
 
-Or fancier, in a facet grid, as a histogram:
+# Or fancier, in a facet grid, as a histogram:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
 
   ggplot2::ggplot(
@@ -179,11 +153,9 @@ if (is_local_computer()) {
     , alpha = 0.5
   )
 }
-```
 
-Or even fancier, in a facet grid, as a density plots:
+# Or even fancier, in a facet grid, as a density plots:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
 
   ggplot2::ggplot(
@@ -197,10 +169,7 @@ if (is_local_computer()) {
     , alpha = 0.5
   )
 }
-```
 
-
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
   
   ggplot2::ggplot(
@@ -215,11 +184,9 @@ if (is_local_computer()) {
   )
 
 }
-```
 
-Zoom in on the bumps, focus on DNA sequence information:
+# Zoom in on the bumps, focus on DNA sequence information:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
   df_zoom <- df[df$sirg == 0.5 & df$eri == 0.0 ,]
   ggplot2::ggplot(
@@ -234,11 +201,9 @@ if (is_local_computer()) {
   )
 
 }
-```
 
-Rescale this to a density of 100:
+# Rescale this to a density of 100:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(sequence_length ~ mutation_rate
@@ -252,11 +217,9 @@ if (is_local_computer()) {
   ) + ggplot2::scale_y_continuous(limits = c(0, 100))
 
 }
-```
 
-Plot the number of taxa versus error:
+# Plot the number of taxa versus error:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
 
   ggplot2::ggplot(
@@ -267,12 +230,9 @@ if (is_local_computer()) {
   
 
 }
-```
 
-Plot the number of taxa versus error, seperated by SCR:
+# Plot the number of taxa versus error, seperated by SCR:
 
-
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
 
   ggplot2::ggplot(
@@ -283,11 +243,9 @@ if (is_local_computer()) {
   
 
 }
-```
 
-For all data:
+# For all data:
 
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
 
   ggplot2::ggplot(
@@ -298,13 +256,9 @@ if (is_local_computer()) {
   
 
 }
-```
 
+# Zoom in on mutation rate and DNA alignment length
 
-Zoom in on mutation rate and DNA alignment length
-
-
-```{r fig.width = 7, fig.height = 7}
 if (is_local_computer()) {
   names(df_zoom)
   df_zoom_zoom <- df_zoom[
@@ -337,4 +291,3 @@ if (is_local_computer()) {
   
 
 }
-```

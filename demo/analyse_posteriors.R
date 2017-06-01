@@ -1,15 +1,3 @@
----
-title: "Vignette Title"
-author: "Vignette Author"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r}
 library(RBeast)
 library(wiritttea)
 options(warn = 2)
@@ -48,9 +36,7 @@ testit::assert(wiritttes::are_identical_trees_posteriors(
   posterior_2, posterior_4) == FALSE)
 testit::assert(wiritttes::are_identical_trees_posteriors(
   posterior_3, posterior_4) == FALSE)
-```
 
-```{r fig.width=7, fig.height=7}
 multiphylo_1 <- posterior_1
 multiphylo_2 <- posterior_2
 multiphylo_3 <- posterior_3
@@ -63,4 +49,3 @@ phangorn::densiTree(multiphylo_1, type = "cladogram", alpha = 1)
 phangorn::densiTree(multiphylo_2, type = "cladogram", alpha = 1)
 phangorn::densiTree(multiphylo_3, type = "cladogram", alpha = 1)
 phangorn::densiTree(multiphylo_4, type = "cladogram", alpha = 1)
-```
