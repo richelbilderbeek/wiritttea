@@ -1,6 +1,5 @@
 analyse_alignments   Analyse the quality of alignments
 analyse_esses   Analyse the Effectice Sample Sizes
-analyse_nltt_stats_20170212   Investigation of nLTT statistics
 analyse_nltt_stats   R markdown file for analysing the nLTT statistics
 analyse_n_taxa   R script to analyse the number of taxa
 analyse_parameters   R script to analyse the parameters
