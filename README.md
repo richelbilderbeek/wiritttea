@@ -150,6 +150,13 @@ R CMD javareconf
 The article-in-preparation can be found
 at the closed [wirittte_article GitHub](https://github.com/richelbilderbeek/wirittte_article)
 
+## About the `demo` folder
+
+These are scripts that should not be checked by `R CMD check`.
+This is because they are used to analyse already-produced data in specific
+local folders. These scripts demonstrate how to use this package, but are not 
+part of the package's core functionality.
+
 ## Resources
 
  * [My 2015-11-23 TRES presentation](https://github.com/richelbilderbeek/Science/blob/master/Bilderbeek20151123TresMeeting/20151123TresMeeting.pdf)
