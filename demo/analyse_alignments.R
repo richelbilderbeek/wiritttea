@@ -57,6 +57,10 @@ if (!file.exists(alignments_filename)) {
 }
 
 df <- read.csv(alignments_filename)
+n_ok <- sum(df$n_alignments_ok)
+n_na <- sum(df$n_alignments_na)
+n_zeroes <- sum(df$n_alignments_zeroes)
+
 df_problematic <- df[is.na(df$n_alignments_ok) | df$n_alignments_na > 0, ]
 df_plottable <- df_problematic[!is.na(df_problematic$n_alignments_ok), ]
 
