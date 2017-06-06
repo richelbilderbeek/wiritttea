@@ -38,11 +38,16 @@ if (!file.exists(alignments_dmid_filename)) {
       file <- wiritttes::read_file(my_filename) # Can fail
       this_n_alignments <- wiritttes::extract_napst(file) * 2
       testit::assert(this_n_alignments == n_alignments)
-      ai <- row %% n_alignments
+      ai <- 1 + ((row - 1 ) %% n_alignments)
+      print(paste("ai:", ai))
       alignment <- wiritttes::get_alignment_by_index(file, ai)
+      print("alignment")
       m <- ape::dist.dna(x = alignment, model = "JC69", as.matrix = TRUE)
-      # Detect if there is at least one NA
-      df$dmid[row] <- calc_dmid(x)
+      print("m")
+      dmid <- wiritttea::calc_dmid(m)
+      print("dmid: ")
+      print(dmid)
+      df$dmid[row] <- dmid
     }, error = function(cond) {} #nolint
     )
     gc() # Need to do so manually
