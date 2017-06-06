@@ -9,10 +9,12 @@ Description: This package does the analysis on the
     statistics to do so.
 License: file LICENSE
 LazyData: TRUE
-Requires: adephylo,
+Requires: 
+    adephylo,
     ape,
     beastscriptr,
     dplyr,
+    Matrix,
     nLTT,
     PBD,
     phangorn,
