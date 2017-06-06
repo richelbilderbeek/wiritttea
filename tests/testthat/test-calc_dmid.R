@@ -39,4 +39,3 @@ test_that("no mutation, thus DMID is 0.0", {
     x = alignment_dnabin, model = "JC69", as.matrix = TRUE)
   testthat::expect_lt(calc_dmid(distance_matrix), 0.0001)
 })
-
