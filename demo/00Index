@@ -6,4 +6,3 @@ analyse_parameters   R script to analyse the parameters
 analyse_posteriors   R script to analyse the posteriors
 analyse_strees_identical   R script to see if the sampled species trees have equal branch lengths
 do_analysis   do a full analys
-README   Description for GitHub
