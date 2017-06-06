@@ -35,7 +35,9 @@ have_same_strees <- function(file) {
     stop("File lacks species trees. ",
       "These can be added by running wiritttes::add_species_trees")
   }
-  brts_1 <- sort(ape::branching.times(wiritttes::get_species_tree_youngest(file)))
-  brts_2 <- sort(ape::branching.times(wiritttes::get_species_tree_oldest(file)))
+  brts_1 <- sort(ape::branching.times(
+    wiritttes::get_species_tree_youngest(file)))
+  brts_2 <- sort(
+    ape::branching.times(wiritttes::get_species_tree_oldest(file)))
   return(identical(brts_1, brts_2))
 }

@@ -20,7 +20,7 @@ test_that("collect_files_nltt_stats: fix #112", {
   # The tenth posterior always has an nLTT statistics of 0.0,
   # unless the file has not calculated the posteriors.
   # If the latter is the case, nltt_stat will be NA
-  expect_true(sum(nltt_stats[ nltt_stats$si == 10, ]$nltt_stat) > 0)
+  expect_true(sum(nltt_stats[nltt_stats$si == 10, ]$nltt_stat) > 0)
 })
 
 

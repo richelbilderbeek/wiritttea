@@ -17,8 +17,8 @@ aligns_same_distr_nltt_stat <- function(df) {
   pi <- NULL; rm(pi)
   si <- NULL; rm(si)
   nltt_stat <- NULL; rm(nltt_stat)
-  A <- NULL; rm(A)
-  B <- NULL; rm(B)
+  A <- NULL; rm(A) # nolint nLTT package does not use snake_case
+  B <- NULL; rm(B) # nolint nLTT package does not use snake_case
 
   `%>%` <- dplyr::`%>%`
 

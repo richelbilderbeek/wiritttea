@@ -11,7 +11,7 @@ test_that("nrbs: identical trees have no difference", {
   phylogeny1 <- ape::rcoal(10)
   phylogeny2 <- phylogeny1
   difference <- nrbs(phylogeny1, phylogeny2)
-  expect_true(difference >= 0.0    )
+  expect_true(difference >= 0.00000)
   expect_true(difference  < 0.00001)
 })
 

@@ -61,8 +61,10 @@ test_that("have_same_strees use: create different trees", {
   testit::assert(wiritttes::has_species_trees(wiritttes::read_file(filename)))
 
   # Check by hand here first that these are different
-  stree_youngest <- wiritttes::get_species_tree_youngest(wiritttes::read_file(filename))
-  stree_oldest <- wiritttes::get_species_tree_oldest(wiritttes::read_file(filename))
+  stree_youngest <- wiritttes::get_species_tree_youngest(
+    wiritttes::read_file(filename))
+  stree_oldest <- wiritttes::get_species_tree_oldest(
+    wiritttes::read_file(filename))
   testit::assert(
     !identical(
       sort(as.vector(ape::branching.times(stree_youngest))),
