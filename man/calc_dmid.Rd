@@ -20,16 +20,24 @@ proportion of non-diagonal elements in a distance matrix having
 non-zero and non-NA values
 }
 \examples{
-  set.seed(42)
+  # Create a random phylogeny
+  set.seed(43)
   n_taxa <- 5
-  sequence_length <- 10 # nucleotides
-  mutation_rate <- 0.1 # mutations per nucleotide per unit of time
   phylogeny <- ape::rcoal(n = n_taxa)
+
+  # Create a random DNA alignment from the phylogeny
+  sequence_length <- 20 # nucleotides
+  mutation_rate <- 0.5 # mutations per nucleotide per unit of time
   alignment_phydat <- phangorn::simSeq(
     phylogeny, l = sequence_length, rate = mutation_rate)
   alignment_dnabin <- ape::as.DNAbin(alignment_phydat)
+
+  # Create a distance matrix from the alignment
   distance_matrix <- ape::dist.dna(
     x = alignment_dnabin, model = "JC69", as.matrix = TRUE)
-  testit::assert(calc_dmid(distance_matrix) > 0.0)
-  testit::assert(calc_dmid(distance_matrix) < 1.0)
+
+  # Because all non-diagonal elements of the matrix are non-zero and
+  # non-NA, the DMID is 1.0
+  testit::assert(wiritttea::calc_dmid(distance_matrix) > 0.999)
+  testit::assert(wiritttea::calc_dmid(distance_matrix) < 1.001)
 }
