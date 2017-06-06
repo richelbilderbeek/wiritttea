@@ -56,7 +56,6 @@ if (is_local_computer()) {
   df$erg <- as.factor(df$erg)
   df$eri <- as.factor(df$eri)
 }
-```
 
 ## Show the distribution of nLTT statistics
 
@@ -114,9 +113,9 @@ if (is_local_computer()) {
 }
 
 # Long has bumps.
-
+#
 # I predict it has to do with short trees. 
-
+#
 # Here I show the number of taxa in the simulated trees,
 # for different speciation initiation rates, first as a histogram:
 
