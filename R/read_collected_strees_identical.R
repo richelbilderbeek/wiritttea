@@ -14,7 +14,7 @@
 #'   testit::assert(is.factor(strees_identical$strees_identical))
 #' @author Richel Bilderbeek
 #' @export
-read_collected_strees_identical <- function(
+read_collected_strees_identical <- function( # nolint keep function at this length
   csv_filename = wiritttea::find_path("collect_files_strees_identical.csv")
 ) {
   testit::assert(file.exists(csv_filename))
