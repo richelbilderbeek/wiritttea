@@ -3,6 +3,7 @@
 export(a2i)
 export(aligns_same_distr_nltt_stat)
 export(are_from_same_distribution)
+export(calc_dmid)
 export(collect_all)
 export(collect_file_esses)
 export(collect_file_n_alignments)
