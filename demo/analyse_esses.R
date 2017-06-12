@@ -27,13 +27,26 @@ if (!file.exists(esses_filename)) {
 
   df <- data.frame(
     filename = rep(basename(my_filenames), each = nppf),
-    sti = rep(seq(1,2), times = n_files * napst * nppa),
-    ai = rep(seq(1, napst), each = nstpist, times = n_files * nppf),
-    dmid = rep(NA, length(my_filenames), each = nppf)
+    sti = rep(seq(1,2), each = napst * nppa, times = n_files),
+    ai = rep(seq(1, napst), each = nstpist, times = n_files * nppa),
+    pi = rep(seq(1, nppa), times = n_files * nstpist * napst * nppa),
+    ess = rep(NA, n_rows)
   )
 
+  for (i in seq_along(my_filenames))
+  {
+    my_filename <- my_filenames[i]
+    index_from <- ((i - 1) * nppf) + 1
+    index_to <- (i * nppf)
+    print(paste(my_filename, index_from, index_to))
+    tryCatch({
+      df_sub <- wiritttea::collect_file_esses(my_filename)
+      df[, index_from:index_to] <- df_sub
+    }, error = function(cond) {} # nolint
+    )
+  }
 
-  write.csv(wiritttea::collect_files_esses(filenames = my_filenames), esses_filename)
+  write.csv(df, esses_filename)
 }
 
 #Investigations
