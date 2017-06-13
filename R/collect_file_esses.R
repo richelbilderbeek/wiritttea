@@ -1,7 +1,8 @@
 #' Collects the ESSes of all phylogenies belonging to a
 #' parameter file in the melted/uncast/long form
 #'
-#' @param filename name of the parameter file
+#' @param filename name of the parameter file, can be read by
+#'   wiritttess:read_file
 #' @return A dataframe of ESSes for each posterior
 #' @examples
 #'   filename <- find_path("toy_example_3.RDa")
