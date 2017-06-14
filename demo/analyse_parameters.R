@@ -16,12 +16,3 @@ if (!file.exists(parameters_filename)) {
 
 # Read the collected parameters
 df_parameters <- wiritttea::read_collected_parameters(parameters_filename)
-
-# Profiling
-if (1==2){
-  rprof_tmp_output <- "~/tmp_rprof"
-  Rprof(rprof_tmp_output)
-  wiritttea::collect_files_parameters(filenames = sub_filenames)
-  Rprof(NULL)
-  summaryRprof(rprof_tmp_output)
-}

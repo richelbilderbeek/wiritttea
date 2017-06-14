@@ -12,62 +12,21 @@ print(paste("path_data:", path_data))
 print(paste("nltt_stats_filename:", nltt_stats_filename))
 
 if (!file.exists(nltt_stats_filename)) {
-  my_filenames <- head(list.files(path_data, pattern = "*.RDa", full.names = TRUE))
+  my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
 
   df_nltt_stats <- wiritttea::collect_files_nltt_stats(my_filenames)
   write.csv(df_nltt_stats, nltt_stats_filename)
 }
 
-if (1==2) {
+# Read nLTT stats
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+
+# How many NA's?
+library(dplyr)
+knitr::kable(nltt_stats  %>% count(is.na(nltt_stat)))
 
 
-
-## Abstract
-# This vignette shows how analyse the nLTT statistics.
-
-# I use this to check if `rJava` is installed correctly.
-# If not, this will give an error:
-
-options(warn = 2)
-
-library(wiritttes)
-library(wiritttea)
-
-file <- wiritttes::read_file(
-  wiritttea::find_path("toy_example_1.RDa")
-)
-p <- wiritttes::get_posterior(file, sti = 1, ai = 1, pi = 1)
-
-is_local_computer <- function()
-{
-  local_computer_names <- c(
-    "fwn-biol-132-102",
-    "pc-157-103",
-    "pc-157-104",
-    "lubuntu")
-  return (sum(Sys.info()["nodename"] == local_computer_names) == 1)
-}
-
-is_local_computer()
-
-## Setup
-
-# Loading this package
-
-if (is_local_computer()) {
-  # Read parameters
-  parameters <- wiritttea::read_collected_parameters(
-    "~/Peregrine/collect_files_parameters.csv"
-  )
-
-  # Read nLTT stats
-  nltt_stats_raw <- wiritttea::read_collected_nltt_stats("~/Peregrine/collect_files_nltt_stats.csv")
-
-  n_taxa <- wiritttea::read_collected_n_taxa("~/Peregrine/collect_files_n_taxa.csv")
-
-  # No NA's in my dataset please
-  nltt_stats <- nltt_stats_raw[!is.na(nltt_stats_raw$nltt_stat), ]
-
+if (1 == 2)
   # Merge nLTT statistics and parameters
   parameters$filename <- rownames(parameters)
   df <- merge(nltt_stats, parameters, by = "filename")
@@ -79,13 +38,10 @@ if (is_local_computer()) {
   df$siri <- as.factor(df$siri)
   df$erg <- as.factor(df$erg)
   df$eri <- as.factor(df$eri)
-}
 
-## Show the distribution of nLTT statistics
+  ## Show the distribution of nLTT statistics
 
-# Here we have the bumps:
-
-if (is_local_computer()) {
+  # Here we have the bumps:
 
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
@@ -97,12 +53,9 @@ if (is_local_computer()) {
     )
     , alpha = 0.5
   )
-}
 
-#Rampal wondered if this is caused by DNA sequence length.
-#Here is short:
-
-if (is_local_computer()) {
+  #Rampal wondered if this is caused by DNA sequence length.
+  #Here is short:
 
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
@@ -114,14 +67,9 @@ if (is_local_computer()) {
     )
     , alpha = 0.5
   )
+  # Short has bumps.
 
-}
-
-# Short has bumps.
-
-# Here is long:
-
-if (is_local_computer()) {
+  # Here is long:
 
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
@@ -134,36 +82,26 @@ if (is_local_computer()) {
     , alpha = 0.5
   )
 
-}
+  # Long has bumps.
+  #
+  # I predict it has to do with short trees.
+  #
+  # Here I show the number of taxa in the simulated trees,
+  # for different speciation initiation rates, first as a histogram:
 
-# Long has bumps.
-#
-# I predict it has to do with short trees.
-#
-# Here I show the number of taxa in the simulated trees,
-# for different speciation initiation rates, first as a histogram:
-
-if (is_local_computer()) {
 
   ggplot2::ggplot(
       df,
       ggplot2::aes(n_taxa, fill = siri)
   ) + ggplot2::geom_histogram()
-}
 
-# here as a density plot:
-
-if (is_local_computer()) {
-
+  # here as a density plot:
   ggplot2::ggplot(
       df,
       ggplot2::aes(n_taxa, fill = siri)
   ) + ggplot2::geom_density()
-}
 
-# Or fancier, in a facet grid, as a histogram:
-
-if (is_local_computer()) {
+  # Or fancier, in a facet grid, as a histogram:
 
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
@@ -175,12 +113,7 @@ if (is_local_computer()) {
     )
     , alpha = 0.5
   )
-}
-
-# Or even fancier, in a facet grid, as a density plots:
-
-if (is_local_computer()) {
-
+  # Or even fancier, in a facet grid, as a density plots:
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
   ) + ggplot2::geom_density(
@@ -191,9 +124,6 @@ if (is_local_computer()) {
     )
     , alpha = 0.5
   )
-}
-
-if (is_local_computer()) {
 
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
@@ -206,11 +136,7 @@ if (is_local_computer()) {
     , alpha = 0.5
   )
 
-}
-
-# Zoom in on the bumps, focus on DNA sequence information:
-
-if (is_local_computer()) {
+  # Zoom in on the bumps, focus on DNA sequence information:
   df_zoom <- df[df$sirg == 0.5 & df$eri == 0.0 ,]
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(sequence_length ~ mutation_rate
@@ -223,11 +149,7 @@ if (is_local_computer()) {
     , alpha = 0.5
   )
 
-}
-
-# Rescale this to a density of 100:
-
-if (is_local_computer()) {
+  # Rescale this to a density of 100:
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(sequence_length ~ mutation_rate
   ) + ggplot2::geom_density(
@@ -239,11 +161,7 @@ if (is_local_computer()) {
     , alpha = 0.5
   ) + ggplot2::scale_y_continuous(limits = c(0, 100))
 
-}
-
-# Plot the number of taxa versus error:
-
-if (is_local_computer()) {
+    # Plot the number of taxa versus error:
 
   ggplot2::ggplot(
       df_zoom,
@@ -252,12 +170,7 @@ if (is_local_computer()) {
   ) + ggplot2::geom_smooth(method = "lm")
 
 
-}
-
-# Plot the number of taxa versus error, seperated by SCR:
-
-if (is_local_computer()) {
-
+  # Plot the number of taxa versus error, seperated by SCR:
   ggplot2::ggplot(
       df_zoom,
       ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
@@ -265,24 +178,14 @@ if (is_local_computer()) {
   ) + ggplot2::geom_smooth(method = "lm")
 
 
-}
-
-# For all data:
-
-if (is_local_computer()) {
-
+  # For all data:
   ggplot2::ggplot(
       df,
       ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
   ) + ggplot2::geom_point(
   ) + ggplot2::geom_smooth(method = "lm")
 
-
-}
-
-# Zoom in on mutation rate and DNA alignment length
-
-if (is_local_computer()) {
+  # Zoom in on mutation rate and DNA alignment length
   names(df_zoom)
   df_zoom_zoom <- df_zoom[
     df_zoom$mutation_rate == 0.1 & df_zoom$sequence_length == 10000 & df_zoom$scr == 1e+06,
@@ -312,6 +215,4 @@ if (is_local_computer()) {
   ) + ggplot2::geom_point(
   ) + ggplot2::geom_smooth(method = "lm")
 
-
-}
 }
