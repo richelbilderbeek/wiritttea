@@ -8,7 +8,8 @@ parameter file in the melted/uncast/long form}
 collect_file_esses(filename)
 }
 \arguments{
-\item{filename}{name of the parameter file}
+\item{filename}{name of the parameter file, can be read by
+wiritttess:read_file}
 }
 \value{
 A dataframe of ESSes for each posterior

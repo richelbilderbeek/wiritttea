@@ -10,7 +10,7 @@ if (length(args) > 1) parameters_filename <- args[2]
 
 # Collect all parameters in a single file if absent, slow
 if (!file.exists(parameters_filename)) {
-  my_filenames <- list.files("~/Peregrine20170208", pattern = "*.RDa", full.names = TRUE)
+  my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
   write.csv(wiritttea::collect_files_parameters(filenames = my_filenames), parameters_filename)
 }
 
