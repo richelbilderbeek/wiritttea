@@ -113,14 +113,18 @@ collect_files_nltt_stats_dirty <- function(filenames) {
   dirty_filenames <- filenames[!wiritttes::are_valid_files(filenames)]
   df_clean <- collect_files_nltt_stats(clean_filenames)
   n_dirty <- length(dirty_filenames)
-  df_dirty <- data.frame(
-    filename = dirty_filenames,
-    sti = rep(NA, n_dirty),
-    ai = rep(NA, n_dirty),
-    pi = rep(NA, n_dirty),
-    si = rep(NA, n_dirty),
-    nltt_stat = rep(NA, n_dirty),
-  )
-  df <- rbind(df_clean, df_dirty)
-  df
+  if (n_dirty > 0) {
+    df_dirty <- data.frame(
+      filename = dirty_filenames,
+      sti = rep(NA, n_dirty),
+      ai = rep(NA, n_dirty),
+      pi = rep(NA, n_dirty),
+      si = rep(NA, n_dirty),
+      nltt_stat = rep(NA, n_dirty)
+    )
+    df <- rbind(df_clean, df_dirty)
+    df
+  } else {
+    df_clean
+  }
 }
