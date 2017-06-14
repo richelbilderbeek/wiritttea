@@ -2,6 +2,9 @@
 #' @param csv_filename name of the CSV file
 #' @return a data frame with all parameters
 #' @usage read_collected_parameters(
+#'   df <- wiritttea::read_collected_parameters(
+#'     wiritttea::find_path("collect_files_parameters.csv"))
+#' @examples
 #'   csv_filename <- wiritttea::find_path("collect_files_parameters.csv")
 #'   df <- wiritttea::read_collected_parameters(csv_filename)
 #'   testit::assert(nrow(df) == 4)
