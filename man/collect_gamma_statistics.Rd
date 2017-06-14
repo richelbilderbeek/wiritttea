@@ -18,3 +18,4 @@ A dataframe of gamma statistics of each phylogeny in time
 Collects the gamma statistics of all phylogenies in the
 melted/uncast/long form
 }
+

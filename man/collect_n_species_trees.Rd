@@ -26,3 +26,4 @@ Collect the number of sampled species trees in a parameter file
 \author{
 Richel Bilderbeek
 }
+

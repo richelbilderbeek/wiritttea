@@ -41,3 +41,4 @@ non-zero and non-NA values
   testit::assert(wiritttea::calc_dmid(distance_matrix) > 0.999)
   testit::assert(wiritttea::calc_dmid(distance_matrix) < 1.001)
 }
+

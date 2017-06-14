@@ -29,3 +29,4 @@ species trees) have the same branching times.
  )
  testit::assert(nrow(df) == 2)
 }
+
