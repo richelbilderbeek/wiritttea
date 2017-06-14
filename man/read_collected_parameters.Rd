@@ -4,8 +4,8 @@
 \alias{read_collected_parameters}
 \title{Reads the file with the collected parameters}
 \usage{
-wiritttea::read_collected_parameters(
-    csv_filename = wiritttea::find_path("collect_files_parameters.csv"))
+
+  read_collected_parameters(csv_filename = wiritttea::find_path("collect_files_parameters.csv"))
 }
 \arguments{
 \item{csv_filename}{name of the CSV file}

@@ -13,8 +13,12 @@ print(paste("nltt_stats_filename:", nltt_stats_filename))
 
 if (!file.exists(nltt_stats_filename)) {
   my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
+  my_filenames <- c(
+    "/home/p230198/Peregrine20170710/article_0_1_0_0_1_241.RDa",
+    "/home/p230198/Peregrine20170710/article_0_1_0_0_1_242.RDa"
+  )
 
-  df_nltt_stats <- wiritttea::collect_files_nltt_stats(my_filenames)
+  df_nltt_stats <- wiritttea::collect_files_nltt_stats_dirty(my_filenames)
   write.csv(df_nltt_stats, nltt_stats_filename)
 }
 
