@@ -1,7 +1,31 @@
+# Analyse the nLTT stats
+library(wiritttea)
+options(warn = 2) # Be strict
+path_data <- "~/Peregrine20170710"
+nltt_stats_filename <- "~/nltt_stats_20170710.csv"
+
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) > 0) path_data <- args[1]
+if (length(args) > 1) nltt_stats_filename <- args[2]
+
+print(paste("path_data:", path_data))
+print(paste("nltt_stats_filename:", nltt_stats_filename))
+
+if (!file.exists(nltt_stats_filename)) {
+  my_filenames <- head(list.files(path_data, pattern = "*.RDa", full.names = TRUE))
+
+  df_nltt_stats <- wiritttea::collect_files_nltt_stats(my_filenames)
+  write.csv(df_nltt_stats, nltt_stats_filename)
+}
+
+if (1==2) {
+
+
+
 ## Abstract
 # This vignette shows how analyse the nLTT statistics.
 
-# I use this to check if `rJava` is installed correctly. 
+# I use this to check if `rJava` is installed correctly.
 # If not, this will give an error:
 
 options(warn = 2)
@@ -17,9 +41,9 @@ p <- wiritttes::get_posterior(file, sti = 1, ai = 1, pi = 1)
 is_local_computer <- function()
 {
   local_computer_names <- c(
-    "fwn-biol-132-102", 
-    "pc-157-103", 
-    "pc-157-104", 
+    "fwn-biol-132-102",
+    "pc-157-103",
+    "pc-157-104",
     "lubuntu")
   return (sum(Sys.info()["nodename"] == local_computer_names) == 1)
 }
@@ -35,7 +59,7 @@ if (is_local_computer()) {
   parameters <- wiritttea::read_collected_parameters(
     "~/Peregrine/collect_files_parameters.csv"
   )
-  
+
   # Read nLTT stats
   nltt_stats_raw <- wiritttea::read_collected_nltt_stats("~/Peregrine/collect_files_nltt_stats.csv")
 
@@ -43,7 +67,7 @@ if (is_local_computer()) {
 
   # No NA's in my dataset please
   nltt_stats <- nltt_stats_raw[!is.na(nltt_stats_raw$nltt_stat), ]
-  
+
   # Merge nLTT statistics and parameters
   parameters$filename <- rownames(parameters)
   df <- merge(nltt_stats, parameters, by = "filename")
@@ -62,7 +86,7 @@ if (is_local_computer()) {
 # Here we have the bumps:
 
 if (is_local_computer()) {
-  
+
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
   ) + ggplot2::geom_density(
@@ -75,11 +99,11 @@ if (is_local_computer()) {
   )
 }
 
-#Rampal wondered if this is caused by DNA sequence length. 
+#Rampal wondered if this is caused by DNA sequence length.
 #Here is short:
 
 if (is_local_computer()) {
-  
+
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
   ) + ggplot2::geom_density(
@@ -98,7 +122,7 @@ if (is_local_computer()) {
 # Here is long:
 
 if (is_local_computer()) {
-  
+
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
   ) + ggplot2::geom_density(
@@ -114,7 +138,7 @@ if (is_local_computer()) {
 
 # Long has bumps.
 #
-# I predict it has to do with short trees. 
+# I predict it has to do with short trees.
 #
 # Here I show the number of taxa in the simulated trees,
 # for different speciation initiation rates, first as a histogram:
@@ -122,7 +146,7 @@ if (is_local_computer()) {
 if (is_local_computer()) {
 
   ggplot2::ggplot(
-      df, 
+      df,
       ggplot2::aes(n_taxa, fill = siri)
   ) + ggplot2::geom_histogram()
 }
@@ -132,7 +156,7 @@ if (is_local_computer()) {
 if (is_local_computer()) {
 
   ggplot2::ggplot(
-      df, 
+      df,
       ggplot2::aes(n_taxa, fill = siri)
   ) + ggplot2::geom_density()
 }
@@ -170,7 +194,7 @@ if (is_local_computer()) {
 }
 
 if (is_local_computer()) {
-  
+
   ggplot2::ggplot(
   ) + ggplot2::facet_grid(siri ~ erg
   ) + ggplot2::geom_density(
@@ -222,11 +246,11 @@ if (is_local_computer()) {
 if (is_local_computer()) {
 
   ggplot2::ggplot(
-      df_zoom, 
+      df_zoom,
       ggplot2::aes(x = n_taxa, y = nltt_stat)
   ) + ggplot2::geom_point(
   ) + ggplot2::geom_smooth(method = "lm")
-  
+
 
 }
 
@@ -235,11 +259,11 @@ if (is_local_computer()) {
 if (is_local_computer()) {
 
   ggplot2::ggplot(
-      df_zoom, 
+      df_zoom,
       ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
   ) + ggplot2::geom_point(
   ) + ggplot2::geom_smooth(method = "lm")
-  
+
 
 }
 
@@ -248,11 +272,11 @@ if (is_local_computer()) {
 if (is_local_computer()) {
 
   ggplot2::ggplot(
-      df, 
+      df,
       ggplot2::aes(x = n_taxa, y = nltt_stat, color = scr)
   ) + ggplot2::geom_point(
   ) + ggplot2::geom_smooth(method = "lm")
-  
+
 
 }
 
@@ -265,7 +289,7 @@ if (is_local_computer()) {
   ]
 
   ggplot2::ggplot(
-      df_zoom_zoom, 
+      df_zoom_zoom,
       ggplot2::aes(nltt_stat, fill = sti)
   ) + ggplot2::geom_density(alpha = 0.5
   ) + ggplot2::scale_y_continuous(limits = c(0, 100))
@@ -281,12 +305,13 @@ if (is_local_computer()) {
     , alpha = 0.5
   ) + ggplot2::scale_y_continuous(limits = c(0, 100))
 
-  
+
   ggplot2::ggplot(
-      df_zoom_zoom, 
+      df_zoom_zoom,
       ggplot2::aes(x = n_taxa, y = nltt_stat)
   ) + ggplot2::geom_point(
   ) + ggplot2::geom_smooth(method = "lm")
-  
 
+
+}
 }

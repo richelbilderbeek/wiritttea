@@ -24,7 +24,7 @@ Reads the file with the collected parameters
   testit::assert("rng_seed" \%in\% names(df))
   testit::assert("sirg" \%in\% names(df))
   testit::assert("siri" \%in\% names(df))
-  testit::assert("src" \%in\% names(df))
+  testit::assert("scr" \%in\% names(df))
   testit::assert("erg" \%in\% names(df))
   testit::assert("eri" \%in\% names(df))
   testit::assert("age" \%in\% names(df))
