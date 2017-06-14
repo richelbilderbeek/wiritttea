@@ -25,7 +25,8 @@ library(dplyr)
 knitr::kable(nltt_stats  %>% count(is.na(nltt_stat)))
 
 
-if (1 == 2)
+if (1 == 2) {
+
   # Merge nLTT statistics and parameters
   parameters$filename <- rownames(parameters)
   df <- merge(nltt_stats, parameters, by = "filename")
