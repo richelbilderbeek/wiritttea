@@ -4,7 +4,7 @@
 \alias{collect_files_alignments}
 \title{Collects the quality of the alignments of the files}
 \usage{
-collect_files_alignments(my_filenames)
+collect_files_alignments(filenames)
 }
 \arguments{
 \item{filenames}{names of the parameter files}

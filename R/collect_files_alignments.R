@@ -20,24 +20,24 @@
 #'     "n_alignments_na")
 #'   testit::assert(all.equal(names(df), expected_names))
 #' @export
-collect_files_alignments <- function(my_filenames) {
+collect_files_alignments <- function(filenames) {
 
-  if (length(my_filenames) == 0) {
+  if (length(filenames) == 0) {
     stop(
       "there must be at least one filename supplied, "
     )
   }
 
   df <- data.frame(
-    filename = basename(my_filenames),
-    n_alignments_ok = rep(0, length(my_filenames)),
-    n_alignments_zeroes = rep(0, length(my_filenames)),
-    n_alignments_na = rep(0, length(my_filenames))
+    filename = basename(filenames),
+    n_alignments_ok = rep(0, length(filenames)),
+    n_alignments_zeroes = rep(0, length(filenames)),
+    n_alignments_na = rep(0, length(filenames))
   )
 
-  for (i in seq_along(my_filenames)) {
+  for (i in seq_along(filenames)) {
 
-    my_filename <- my_filenames[i]
+    my_filename <- filenames[i]
     #print(my_filename)
     testit::assert(file.exists(my_filename))
 
