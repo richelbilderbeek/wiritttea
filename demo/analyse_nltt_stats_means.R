@@ -3,28 +3,54 @@ library(wiritttea)
 options(warn = 2) # Be strict
 path_data <- "~/GitHubs/wirittte_data/20170710"
 nltt_stats_filename <- "~/GitHubs/wirittte_data/nltt_stats_20170710.csv"
+parameters_filename <- "~/GitHubs/wirittte_data/parameters_20170710.csv"
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
 if (length(args) > 1) nltt_stats_filename <- args[2]
+if (length(args) > 2) parameters_filename <- args[3]
 
 print(paste("path_data:", path_data))
 print(paste("nltt_stats_filename:", nltt_stats_filename))
 
-
-if (!file.exists(nltt_stats_filename)) {
-  stop("Please run nltt_stats")
+if (!file.exists(parameters_filename)) {
+  stop("Please run analyse_parameters")
 }
 
-# Read nLTT stats
+if (!file.exists(nltt_stats_filename)) {
+  stop("Please run analyse_nltt_stats")
+}
+
+# Read parameters and nLTT stats
+parameters <- wiritttea::read_collected_parameters(parameters_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
 
-names(nltt_stats)
-
-# How many NA's?
+# Take the mean of the nLTT stats
 library(dplyr)
-knitr::kable(nltt_stats  %>% count(is.na(nltt_stat)))
+nltt_stat_means <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
+       summarise(mean=mean(nltt_stat), sd=sd(nltt_stat))
+testit::assert(all(names(nltt_stat_means)
+  == c("filename", "sti", "ai", "pi", "mean", "sd")))
 
+# Prepare parameters for merge
+parameters$filename <- row.names(parameters)
+parameters$filename <- as.factor(parameters$filename)
+
+# Connect the mean nLTT stats and parameters
+testit::assert("filename" %in% names(parameters))
+testit::assert("filename" %in% names(nltt_stat_means))
+df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
+
+# Drop sd for now
+df_pca <- subset(df, select = c(sirg, scr, erg, mean))
+print("SIRGs:"); dplyr::tally(group_by(df_pca, sirg))
+print("SCRs:"); dplyr::tally(group_by(df_pca, scr))
+print("ERGs:"); dplyr::tally(group_by(df_pca, erg))
+pca <- stats::princomp( ~ sirg + scr + erg, data = na.omit(df_pca), cor = TRUE)
+summary(pca)
+stats::biplot(pca, main = "Mean nLTT statistic")
+plot(pca)
+names(df)
 
 if (1 == 2) {
 
