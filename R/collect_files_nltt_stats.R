@@ -111,7 +111,7 @@ collect_files_nltt_stats <- function(filenames) {
 collect_files_nltt_stats_dirty <- function(filenames) {
   clean_filenames <- filenames[wiritttes::are_valid_files(filenames)]
   dirty_filenames <- filenames[!wiritttes::are_valid_files(filenames)]
-  df_clean <- collect_files_nltt_stats(clean_filenames)
+  df_clean <- wiritttea::collect_files_nltt_stats(clean_filenames)
   n_dirty <- length(dirty_filenames)
   if (n_dirty > 0) {
     df_dirty <- data.frame(
