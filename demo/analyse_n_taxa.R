@@ -1,8 +1,8 @@
 # Analyse the number of taxa
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/Peregrine20170523"
-n_taxa_filename <- "~/n_taxa.csv"
+path_data <- "~/GitHubs/wirittte_data/20170710"
+n_taxa_filename <- "~/GitHubs/wirittte_data/n_taxa_20170710.csv"
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
@@ -10,8 +10,6 @@ if (length(args) > 1) n_taxa_filename <- args[2]
 
 print(paste("path_data:", path_data))
 print(paste("n_taxa_filename:", n_taxa_filename))
-
-
 
 print("Create n_taxa data file if absent")
 if (!file.exists(n_taxa_filename)) {
@@ -38,7 +36,7 @@ tryCatch( {
   df_success <- data.frame(
     name = c("success", "fail"), n = c(n_success, n_fail)
   )
-  print(df_success)
+  knitr::kable(df_success)
   }, error = function(cond) {
     print("All simulations have NA for number of taxa")
   }

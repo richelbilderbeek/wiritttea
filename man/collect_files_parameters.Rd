@@ -28,4 +28,3 @@ Collects the parameters of its input files
 \author{
 Richel Bilderbeek
 }
-

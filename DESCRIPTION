@@ -55,7 +55,7 @@ Remotes: beast-dev/RBeast,
     richelbilderbeek/ribir,
     richelbilderbeek/wiritttes,
     MangoTheCat/goodpractice
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 URL: https://github.com/richelbilderbeek/wiritttea
 BugReports: https://github.com/richelbilderbeek/wiritttea/issues
 VignetteBuilder: knitr

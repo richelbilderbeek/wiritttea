@@ -25,4 +25,3 @@ Collect the gamma statistics of the species trees with outgroup
 \author{
 Richel Bilderbeek
 }
-

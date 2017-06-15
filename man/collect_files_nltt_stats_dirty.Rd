@@ -29,4 +29,3 @@ Calculates the nLTT statistics from multiple files that may be invalid
 \author{
 Richel Bilderbeek
 }
-

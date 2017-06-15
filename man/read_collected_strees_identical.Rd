@@ -29,4 +29,3 @@ Reads the file with the collected species trees being identical
 \author{
 Richel Bilderbeek
 }
-

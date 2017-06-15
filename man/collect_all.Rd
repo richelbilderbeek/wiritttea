@@ -26,4 +26,3 @@ created by the 'wirittttes' package
     testit::assert(length(list.files(folder, pattern = "\\\\.csv")) > 0)
   }
 }
-
