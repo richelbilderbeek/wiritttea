@@ -23,9 +23,7 @@
 collect_files_alignments <- function(filenames) {
 
   if (length(filenames) == 0) {
-    stop(
-      "there must be at least one filename supplied, "
-    )
+    stop("there must be at least one filename supplied")
   }
 
   df <- data.frame(
@@ -38,17 +36,14 @@ collect_files_alignments <- function(filenames) {
   for (i in seq_along(filenames)) {
 
     my_filename <- filenames[i]
-    #print(my_filename)
     testit::assert(file.exists(my_filename))
 
-    tryCatch( {
+    tryCatch({
         file <- wiritttes::read_file(my_filename) # Can fail
         n_alignments <- wiritttes::extract_napst(file) * 2
         for (j in seq(1, n_alignments)) {
-          #print(j)
           alignment <- wiritttes::get_alignment_by_index(file, j)
           m <- ape::dist.dna(x = alignment, model = "JC69", as.matrix = TRUE)
-          #print(m)
           # Detect if there is at least one NA
           if (!all(!is.na(m))) {
             df$n_alignments_na[i] <- df$n_alignments_na[i] + 1
