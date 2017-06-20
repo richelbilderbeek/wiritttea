@@ -64,7 +64,7 @@ anova(lm(mean ~ sirg + scr + erg, data = df))
 plot(lm(mean ~ sirg + scr + erg, data = df))
 
 lattice::wireframe(
-  mean ~ sirg + scr, data = na.omit(df),
+  mean ~ mean_durspec + erg, data = na.omit(df),
   drape = TRUE,
   colorkey = TRUE
 )
@@ -77,6 +77,8 @@ ggplot2::ggplot(
     ggplot2::xlab("Mean duration of speciation") +
     ggplot2::ylab("Mean nLTT statistic")
 
+mean_durspecs <- count(df, mean_durspec)
+print(mean_durspecs)
 
 ggplot2::ggplot(
 ) + ggplot2::facet_grid(scr ~ erg
@@ -84,10 +86,53 @@ ggplot2::ggplot(
   data = na.omit(df),
   ggplot2::aes(
     x = mean,
-    fill = scr
+    fill = mean_durspec
   )
   , alpha = 0.5
 )
+
+
+# Investigate mean duration of speciation
+if (1 == 2) {
+
+  df <- expand.grid(
+    lambda_2 = seq(0.1, 1.0, 0.1),
+    lambda_3 = seq(0.1, 1.0, 0.1),
+    mu_2 = seq(0.1, 1.0, 0.1)
+  )
+  df$mean_durspec <- rep(NA, nrow(df))
+
+  for (i in seq_along(df$mean_durspec)) {
+    df$mean_durspec[i] <- PBD::pbd_mean_durspec(
+      df$lambda_2[i], df$lambda_3[i], df$mu_2[i])
+  }
+
+  plotly::plot_ly(
+    data = df,
+    x = ~lambda_2,
+    y = ~lambda_3,
+    z = ~mu_2,
+    color = ~mean_durspec,
+    type = "scatter3d",
+    mode = "markers"
+  )
+
+
+  plot3D::scatter3D(x = df$lambda_2, y = df$lambda_3, z = df$mu_2, col = df$mean_durspec)
+
+  lattice::wireframe(
+    mean_durspec ~ lambda_2 + lambda_3 + mu_2, data = na.omit(df),
+    drape = TRUE,
+    colorkey = TRUE
+  )
+
+  lattice::wireframe(
+    mean ~ mean_durspec + erg, data = na.omit(df),
+    drape = TRUE,
+    colorkey = TRUE
+  )
+
+}
 
 if (1 == 2) {
 
