@@ -1,9 +1,9 @@
 # Analyse the nLTT stats
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/GitHubs/wirittte_data/20170710"
-nltt_stats_filename <- "~/GitHubs/wirittte_data/nltt_stats_20170710.csv"
-parameters_filename <- "~/GitHubs/wirittte_data/parameters_20170710.csv"
+path_data <- "~/GitHubs/Peregrine20170710"
+nltt_stats_filename <- "~/wirittte_data/nltt_stats_20170710.csv"
+parameters_filename <- "~/wirittte_data/parameters_20170710.csv"
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
@@ -31,6 +31,8 @@ nltt_stat_means <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
        summarise(mean=mean(nltt_stat), sd=sd(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))
+head(nltt_stat_means, n = 10)
+nrow(nltt_stat_means)
 
 # Prepare parameters for merge
 parameters$filename <- row.names(parameters)
@@ -40,17 +42,38 @@ parameters$filename <- as.factor(parameters$filename)
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(nltt_stat_means))
 df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
-
-# Drop sd for now
-df_pca <- subset(df, select = c(sirg, scr, erg, mean))
-print("SIRGs:"); dplyr::tally(group_by(df_pca, sirg))
-print("SCRs:"); dplyr::tally(group_by(df_pca, scr))
-print("ERGs:"); dplyr::tally(group_by(df_pca, erg))
-pca <- stats::princomp( ~ sirg + scr + erg, data = na.omit(df_pca), cor = TRUE)
-summary(pca)
-stats::biplot(pca, main = "Mean nLTT statistic")
-plot(pca)
+dplyr::summarize(df)
 names(df)
+head(df, n = 10)
+
+head(df)
+
+summary(lm(mean ~ sirg + scr + erg, data = df))
+anova(lm(mean ~ sirg + scr + erg, data = df))
+plot(lm(mean ~ sirg + scr + erg, data = df))
+
+lattice::wireframe(
+  mean ~ sirg + scr, data = na.omit(df),
+  drape = TRUE,
+  colorkey = TRUE
+)
+
+
+# Doing a PCA makes no sense
+if (1 == 2) {
+  # Drop sd for now
+  df_pca <- subset(df, select = c(sirg, scr, erg, mean))
+  names(df_pca)
+  nrow(df_pca)
+  print("SIRGs:"); dplyr::tally(group_by(df_pca, sirg))
+  print("SCRs:"); dplyr::tally(group_by(df_pca, scr))
+  print("ERGs:"); dplyr::tally(group_by(df_pca, erg))
+  pca <- stats::princomp( ~ sirg + scr + erg, data = na.omit(df_pca), cor = TRUE)
+  summary(pca)
+  stats::biplot(pca, main = "Mean nLTT statistic")
+  plot(pca)
+  names(df)
+}
 
 if (1 == 2) {
 
