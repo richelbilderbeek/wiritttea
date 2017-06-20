@@ -78,22 +78,6 @@ ggplot2::ggplot(
     ggplot2::ylab("Mean nLTT statistic")
 
 
-# Doing a PCA makes no sense
-if (1 == 2) {
-  # Drop sd for now
-  df_pca <- subset(df, select = c(sirg, scr, erg, mean))
-  names(df_pca)
-  nrow(df_pca)
-  print("SIRGs:"); dplyr::tally(group_by(df_pca, sirg))
-  print("SCRs:"); dplyr::tally(group_by(df_pca, scr))
-  print("ERGs:"); dplyr::tally(group_by(df_pca, erg))
-  pca <- stats::princomp( ~ sirg + scr + erg, data = na.omit(df_pca), cor = TRUE)
-  summary(pca)
-  stats::biplot(pca, main = "Mean nLTT statistic")
-  plot(pca)
-  names(df)
-}
-
 if (1 == 2) {
 
   # Merge nLTT statistics and parameters
