@@ -78,19 +78,18 @@ ggplot2::ggplot(
     ggplot2::ylab("Mean nLTT statistic")
 
 
-if (1 == 2) {
+ggplot2::ggplot(
+) + ggplot2::facet_grid(scr ~ erg
+) + ggplot2::geom_density(
+  data = na.omit(df),
+  ggplot2::aes(
+    x = mean,
+    fill = scr
+  )
+  , alpha = 0.5
+)
 
-  # Merge nLTT statistics and parameters
-  parameters$filename <- rownames(parameters)
-  df <- merge(nltt_stats, parameters, by = "filename")
-  df <- merge(n_taxa, df, by = "filename")
-  df$scr <- as.factor(df$scr)
-  df$mutation_rate <- as.factor(df$mutation_rate)
-  df$sequence_length <- as.factor(df$sequence_length)
-  df$sirg <- as.factor(df$sirg)
-  df$siri <- as.factor(df$siri)
-  df$erg <- as.factor(df$erg)
-  df$eri <- as.factor(df$eri)
+if (1 == 2) {
 
   ## Show the distribution of nLTT statistics
 
