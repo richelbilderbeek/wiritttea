@@ -2,7 +2,7 @@
 library(wiritttea)
 options(warn = 2) # Be strict
 path_data <- "~/Peregrine20170710"
-nltt_stats_filename <- "~/nltt_stats_20170710.csv"
+nltt_stats_filename <- "~/wirittte_data/nltt_stats_20170710.csv"
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
