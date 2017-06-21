@@ -26,18 +26,11 @@ parameters <- wiritttea::read_collected_parameters(parameters_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
 
 # Add mean duration of speciation to parameters
-parameters$mean_durspec <- rep(NA, nrow(parameters))
-
-for (i in seq_along(parameters$mean_durspec)) {
-  tryCatch({
-    parameters$mean_durspec[i] <- PBD::pbd_mean_durspec(
-    lambda_2 = parameters$scr[i],
-    lambda_3 = parameters$siri[i],
-    mu_2 = parameters$eri[i]
-  )
-  }, error = function(cond) {} # nolint
-  )
-}
+parameters$mean_durspec <- PBD::pbd_mean_durspecs(
+  eris = parameters$eri,
+  scrs = parameters$scr,
+  siris = parameters$siri
+)
 
 # Take the mean of the nLTT stats
 library(dplyr)
@@ -58,10 +51,6 @@ testit::assert("filename" %in% names(nltt_stat_means))
 df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
 names(df)
 head(df, n = 10)
-
-summary(lm(mean ~ sirg + scr + erg, data = df))
-anova(lm(mean ~ sirg + scr + erg, data = df))
-plot(lm(mean ~ sirg + scr + erg, data = df))
 
 lattice::wireframe(
   mean ~ mean_durspec + erg, data = na.omit(df),
@@ -94,6 +83,7 @@ ggplot2::ggplot(
 
 # Investigate mean duration of speciation
 if (1 == 2) {
+
 
   df <- expand.grid(
     lambda_2 = seq(0.1, 1.0, 0.1),
