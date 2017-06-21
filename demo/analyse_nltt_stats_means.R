@@ -52,34 +52,48 @@ df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
 names(df)
 head(df, n = 10)
 
-lattice::wireframe(
-  mean ~ mean_durspec + erg, data = na.omit(df),
-  drape = TRUE,
-  colorkey = TRUE
-)
+# Create model
+model <- lm(mean ~ erg + scr + siri + mean_durspec, data = df)
+plot(model)
 
-#
-ggplot2::ggplot(
-  data = na.omit(df),
-  ggplot2::aes(x = mean_durspec, y = mean)
-) + ggplot2::geom_point() +
-    ggplot2::xlab("Mean duration of speciation") +
-    ggplot2::ylab("Mean nLTT statistic")
+if (1 == 2) {
 
-mean_durspecs <- count(df, mean_durspec)
-print(mean_durspecs)
-
-ggplot2::ggplot(
-) + ggplot2::facet_grid(scr ~ erg
-) + ggplot2::geom_density(
-  data = na.omit(df),
-  ggplot2::aes(
-    x = mean,
-    fill = mean_durspec
+  plot3D::scatter3D(
+    x = df$mean_durspec, xlab = "Mean duration of speciation",
+    y = df$erg, ylab = "Extinction rate",
+    #y = df$scr, ylab = "Speciation completion rate",
+    #y = df$siri, ylab = "Speciation initiation rate",
+    z = df$mean, zlab = "Mean nLTT statistic"
   )
-  , alpha = 0.5
-)
 
+  lattice::wireframe(
+    mean ~ mean_durspec + erg, data = na.omit(df),
+    drape = TRUE,
+    colorkey = TRUE
+  )
+
+  #
+  ggplot2::ggplot(
+    data = na.omit(df),
+    ggplot2::aes(x = mean_durspec, y = mean)
+  ) + ggplot2::geom_point() +
+      ggplot2::xlab("Mean duration of speciation") +
+      ggplot2::ylab("Mean nLTT statistic")
+
+  mean_durspecs <- count(df, mean_durspec)
+  print(mean_durspecs)
+
+  ggplot2::ggplot(
+  ) + ggplot2::facet_grid(mean_durspec ~ erg
+  ) + ggplot2::geom_density(
+    data = na.omit(df),
+    ggplot2::aes(
+      x = mean,
+      fill = scr
+    )
+    , alpha = 0.5
+  )
+}
 
 # Investigate mean duration of speciation
 if (1 == 2) {
