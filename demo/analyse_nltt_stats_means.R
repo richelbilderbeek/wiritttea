@@ -32,6 +32,13 @@ parameters$mean_durspec <- PBD::pbd_mean_durspecs(
   siris = parameters$siri
 )
 
+# How evenly is the mean duration of speciation spaced?
+ggplot2::ggplot(
+  data = parameters,
+  ggplot2::aes(x = mean_durspec)) +
+  ggplot2::geom_histogram(bins = 300) +
+  ggplot2::ggtitle("Distribution of mean duration of speciation")
+
 # Take the mean of the nLTT stats
 library(dplyr)
 nltt_stat_means <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
@@ -52,13 +59,38 @@ df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
 names(df)
 head(df, n = 10)
 
+# Create x = sirg, y = erg surface plots for z = mean
+# for different values of scr
+# Nice jitter
+ggplot2::ggplot(
+  data = na.omit(df),
+  ggplot2::aes(x = sirg, y = erg, color = mean)
+) + ggplot2::geom_jitter()
+
+
+ggplot2::ggplot(
+  data = na.omit(df),
+  ggplot2::aes(x = sirg, y = erg, col = mean)
+) + ggplot2::facet_grid(scr ~ .) + ggplot2::geom_jitter()
+
+
+
+
 # Create non-linear model
 if (1 == 2) {
   df[is.finite(df$mean), ]
   df_clean <- na.omit(df[is.finite(df$mean) | is.finite(df$erg) | is.finite(df$scr) | is.finite(df$siri), ])
   df_clean$mean[ is.infinite(df_clean$mean) ]
   df_clean$mean[ is.na(df_clean$mean) ]
-  model <- loess(mean ~ erg + scr + siri, data = df_clean)
+  model <- nls(
+    mean ~ erg + scr + siri, data = df_clean,
+    start = c(
+      mean = 1.0,
+      erg = min(df_clean$erg),
+      scr = min(df_clean$scr),
+      siri = min(df_clean$siri)
+    )
+  )
   View(df_clean)
   sum(is.na(na.omit(df)))
   is.nan(df)

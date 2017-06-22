@@ -2,8 +2,8 @@
 library(wiritttea)
 options(warn = 2)
 
-path_data <- "~/Peregrine20170509"
-parameters_filename <- "~/parameters.csv"
+path_data <- "~/Peregrine20170710_clean"
+parameters_filename <- "~/parameters_20170710.csv"
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
 if (length(args) > 1) parameters_filename <- args[2]
