@@ -52,17 +52,159 @@ df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
 names(df)
 head(df, n = 10)
 
-# Create model
-model <- lm(mean ~ erg + scr + siri + mean_durspec, data = df)
-plot(model)
+# Create non-linear model
+if (1 == 2) {
+  df[is.finite(df$mean), ]
+  df_clean <- na.omit(df[is.finite(df$mean) | is.finite(df$erg) | is.finite(df$scr) | is.finite(df$siri), ])
+  df_clean$mean[ is.infinite(df_clean$mean) ]
+  df_clean$mean[ is.na(df_clean$mean) ]
+  model <- loess(mean ~ erg + scr + siri, data = df_clean)
+  View(df_clean)
+  sum(is.na(na.omit(df)))
+  is.nan(df)
+  Inf
 
+  par(mfrow=c(2,2))
+  plot(model)
+
+  # View influences
+  influence.measures(model)
+
+  influential_indices <- influence.measures(model)$is.inf
+  non_influential_indices <- !influential_indices
+
+  length(influential_indices)
+  length(non_influential_indices)
+  sum(influential_indices)
+  df_ni <- df[ influential_indices, ]
+  nrow(df)
+  nrow(df_ni)
+
+  model_2 <- lm(
+    mean ~
+    erg +
+    scr +
+    siri, data = na.omit(df_ni))
+  names(model_2)
+  length(model$fitted.values)
+  length(model_2$fitted.values)
+
+  par(mfrow=c(2,2))
+  plot(model_2)
+}
+
+# Create linear model
 if (1 == 2) {
 
+  model <- lm(mean ~ erg + scr + siri, data = df)
+  par(mfrow=c(2,2))
+  plot(model)
+
+  # View influences
+  influence.measures(model)
+
+  influential_indices <- influence.measures(model)$is.inf
+  non_influential_indices <- !influential_indices
+
+  length(influential_indices)
+  length(non_influential_indices)
+  sum(influential_indices)
+  df_ni <- df[ influential_indices, ]
+  nrow(df)
+  nrow(df_ni)
+
+  model_2 <- lm(
+    mean ~
+    erg +
+    scr +
+    siri, data = na.omit(df_ni))
+  names(model_2)
+  length(model$fitted.values)
+  length(model_2$fitted.values)
+
+  par(mfrow=c(2,2))
+  plot(model_2)
+}
+
+
+# Interesting plot
+if (1 == 2) {
   plot3D::scatter3D(
     x = df$mean_durspec, xlab = "Mean duration of speciation",
     y = df$erg, ylab = "Extinction rate",
+    z = df$mean, zlab = "Mean nLTT statistic"
+  )
+  names(df)
+  nltt_stat_per_spec_dur <- na.omit(na.omit(df) %>% group_by(erg, mean_durspec) %>%
+         summarise(mean=mean(mean)))
+  plot3D::scatter3D(
+    x = nltt_stat_per_spec_dur$mean_durspec, xlab = "Mean duration of speciation",
+    y = nltt_stat_per_spec_dur$erg, ylab = "Extinction rate",
+    z = nltt_stat_per_spec_dur$mean, zlab = "Mean nLTT statistic"
+  )
+  s <- akima::interp(
+    x = nltt_stat_per_spec_dur$mean_durspec,
+    y = nltt_stat_per_spec_dur$erg,
+    z = nltt_stat_per_spec_dur$mean,
+    nx = 20, ny = 20
+  )
+  image(s,
+    xlab = "Mean duration of speciation",
+    ylab = "Extinction rate",
+    main = "Mean nLTT statistic"
+  )
+  contour(s,
+    xlab = "Mean duration of speciation",
+    ylab = "Extinction rate",
+    main = "Mean nLTT statistic",
+    add = TRUE
+  )
+  persp(s,
+    xlab = "Mean duration of speciation",
+    ylab = "Extinction rate",
+    zlab = "Mean nLTT statistic"
+  )
+  rgl::persp3d(
+    x = s$x,
+    y = s$y,
+    z = s$z,
+    col = s$z,
+    xlab = "Mean duration of speciation",
+    ylab = "Extinction rate",
+    zlab = "Mean nLTT statistic"
+  )
+
+  rgl::surface3d(s$x,s$y,s$z)
+
+  plotly::plot_ly(
+    data = nltt_stat_per_spec_dur,
+    x = ~mean_durspec,
+    y = ~erg,
+    z = ~mean,
+    type = "scatter3d",
+    mode = "markers"
+  )
+
+  # m <- plot3D::mesh(
+  #   x = nltt_stat_per_spec_dur$mean_durspec, #xlab = "Mean duration of speciation",
+  #   y = nltt_stat_per_spec_dur$erg, #ylab = "Extinction rate",
+  #   z = nltt_stat_per_spec_dur$mean #, zlab = "Mean nLTT statistic"
+  # )
+  # names(m)
+  # plot3D::scatter3D(x = m$x, y = m$y, z = m$z)
+}
+
+if (1 == 2) {
+
+
+
+
+  plot3D::scatter3D(
+    x = df$scr, xlab = "Speciation completion rate",
+    #x = df$mean_durspec, xlab = "Mean duration of speciation",
+    #y = df$erg, ylab = "Extinction rate",
     #y = df$scr, ylab = "Speciation completion rate",
-    #y = df$siri, ylab = "Speciation initiation rate",
+    y = df$siri, ylab = "Speciation initiation rate",
     z = df$mean, zlab = "Mean nLTT statistic"
   )
 
