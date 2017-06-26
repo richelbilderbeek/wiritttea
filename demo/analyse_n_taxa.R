@@ -58,7 +58,7 @@ ggplot2::ggplot(
   ggplot2::coord_polar(theta = "y") +
   ggplot2::ggtitle("Incipient species trees created")
 
-# Read parameters and nLTT stats
+# Read parameters
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
 # Prepare parameters for merge
 parameters$filename <- row.names(parameters)

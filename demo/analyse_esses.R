@@ -1,7 +1,8 @@
 # Analyse the files' ESSes
 options(warn = 2) # Be strict
 path_data <- "~/Peregrine20170710"
-esses_filename <- "~/esses_20170710.csv"
+esses_filename <- "~/GitHubs/wirittte_data/esses_20170710.csv"
+parameters_filename <- "~/GitHubs/wirittte_data/parameters_20170710.csv"
 use_classic <- FALSE
 
 
@@ -166,3 +167,22 @@ ggplot2::ggplot(subset(df_esses, !is.na(min_ess)),
   ggplot2::geom_histogram() +
   ggplot2::labs(title = "Effective Sample Sizes", x = "Effective Sample Size", y = "Count")
 
+# What are ESSes dependent on SIRG?
+# Read parameters
+parameters <- wiritttea::read_collected_parameters(parameters_filename)
+# Prepare parameters for merge
+parameters$filename <- row.names(parameters)
+parameters$filename <- as.factor(parameters$filename)
+df <- merge(x = parameters, y = df_esses, by = "filename", all = TRUE)
+
+names(df)
+
+ggplot2::ggplot(
+  data = na.omit(df),
+  ggplot2::aes(min_ess, fill = as.factor(sirg))
+) + ggplot2::geom_histogram(alpha = 0.5)
+
+ggplot2::ggplot(
+  data = na.omit(df),
+  ggplot2::aes(min_ess, fill = as.factor(sirg))
+) + ggplot2::geom_density(alpha = 0.5)
