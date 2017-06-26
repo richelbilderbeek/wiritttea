@@ -3,6 +3,7 @@ library(wiritttea)
 options(warn = 2) # Be strict
 path_data <- "~/GitHubs/wirittte_data/20170710"
 n_taxa_filename <- "~/GitHubs/wirittte_data/n_taxa_20170710.csv"
+parameters_filename <- "~/GitHubs/wirittte_data/parameters_20170710.csv"
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
@@ -41,7 +42,6 @@ tryCatch( {
     print("All simulations have NA for number of taxa")
   }
 )
-if (1 == 2) {
 
 print("Plot  the success rate")
 ggplot2::ggplot(
@@ -58,4 +58,25 @@ ggplot2::ggplot(
   ggplot2::coord_polar(theta = "y") +
   ggplot2::ggtitle("Incipient species trees created")
 
-}
+# Read parameters and nLTT stats
+parameters <- wiritttea::read_collected_parameters(parameters_filename)
+# Prepare parameters for merge
+parameters$filename <- row.names(parameters)
+parameters$filename <- as.factor(parameters$filename)
+df <- merge(x = parameters, y = df_n_taxa, by = "filename", all = TRUE)
+
+# How many taxa per siri?
+ggplot2::ggplot(
+  data = na.omit(df),
+  ggplot2::aes(n_taxa, fill = as.factor(sirg))
+) + ggplot2::geom_histogram(alpha = 0.5)
+
+ggplot2::ggplot(
+  data = na.omit(df),
+  ggplot2::aes(n_taxa, fill = as.factor(sirg))
+) + ggplot2::geom_histogram(alpha = 0.5, na.rm = TRUE) + ggplot2::xlim(0, 1000)
+
+ggplot2::ggplot(
+  data = na.omit(df),
+  ggplot2::aes(n_taxa, fill = as.factor(sirg))
+) + ggplot2::geom_density(alpha = 0.5, na.rm = TRUE) + ggplot2::xlim(0, 1000)
