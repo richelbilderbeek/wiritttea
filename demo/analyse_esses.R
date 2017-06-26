@@ -175,8 +175,7 @@ parameters$filename <- row.names(parameters)
 parameters$filename <- as.factor(parameters$filename)
 df <- merge(x = parameters, y = df_esses, by = "filename", all = TRUE)
 
-names(df)
-
+# Plot the ESSes per SIRG?
 ggplot2::ggplot(
   data = na.omit(df),
   ggplot2::aes(min_ess, fill = as.factor(sirg))
@@ -186,3 +185,15 @@ ggplot2::ggplot(
   data = na.omit(df),
   ggplot2::aes(min_ess, fill = as.factor(sirg))
 ) + ggplot2::geom_density(alpha = 0.5)
+
+# Plot the ESSes per SIRG, per sequence length
+ggplot2::ggplot(
+  data = na.omit(df),
+  ggplot2::aes(min_ess, fill = as.factor(sirg))
+) + ggplot2::facet_grid(sequence_length ~ .) + ggplot2::geom_histogram(alpha = 0.5)
+
+ggplot2::ggplot(
+  data = na.omit(df),
+  ggplot2::aes(min_ess, fill = as.factor(sirg))
+) + ggplot2::facet_grid(sequence_length ~ .) + ggplot2::geom_density(alpha = 0.5)
+
