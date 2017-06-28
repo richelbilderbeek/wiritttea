@@ -1,10 +1,10 @@
 # Analyse the files' ESSes
 options(warn = 2) # Be strict
-path_data <- "~/Peregrine20170710"
-esses_filename <- "~/GitHubs/wirittte_data/esses_20170710.csv"
-parameters_filename <- "~/GitHubs/wirittte_data/parameters_20170710.csv"
+date <- "20170523"
+path_data <- paste0("~/Peregrine", date)
+esses_filename <- paste0("~/GitHubs/wirittte_data/esses_", date, ".csv")
+parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
 use_classic <- FALSE
-
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
