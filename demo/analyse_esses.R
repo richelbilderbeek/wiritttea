@@ -1,6 +1,6 @@
 # Analyse the files' ESSes
 options(warn = 2) # Be strict
-date <- "20170523"
+date <- "20170710"
 path_data <- paste0("~/Peregrine", date)
 esses_filename <- paste0("~/GitHubs/wirittte_data/esses_", date, ".csv")
 parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
