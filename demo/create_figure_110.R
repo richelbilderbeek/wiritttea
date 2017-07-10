@@ -58,7 +58,8 @@ print(paste0("Rows after: ", nrow(df)))
 
 print("Creating figure 110")
 
-svg("~/figure110.svg")
+#svg("~/figure110.svg")
+png("~/figure110.png")
 ggplot2::ggplot(
   data = na.omit(df), na.rm = TRUE,
   ggplot2::aes(x = 1, y = mean)
