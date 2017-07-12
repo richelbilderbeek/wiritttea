@@ -1,4 +1,4 @@
-# Analyse the nLTT stats
+# Quantification of the error BEAST2 makes on BD trees
 library(wiritttea)
 options(warn = 2) # Be strict
 path_data <- "~/GitHubs/Peregrine20170710"
