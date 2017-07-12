@@ -30,6 +30,21 @@ test_that("Cannot read FASTA file", {
   testthat::expect_equal(df$exit_status[1], "fasta")
 })
 
+test_that("add_posteriors encounters an invalid file", {
+  df <- wiritttea::collect_log_file_info(
+    filename = wiritttea::find_path("add_posteriors_invalid_file.log"))
+  testthat::expect_equal(df$exit_status[1], "invalid_file")
+})
+
+test_that("add_posteriors has absent BEAST2 .trees file", {
+  df <- wiritttea::collect_log_file_info(
+    filename = wiritttea::find_path("add_posteriors_trees_file_absent.log"))
+  testthat::expect_equal(df$exit_status[1], "trees")
+})
+
+
+
+
 
 
 

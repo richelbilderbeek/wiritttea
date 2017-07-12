@@ -22,12 +22,17 @@ collect_log_file_info <- function(filename) {
 
   text <- wiritttea::file_to_lines(filename)
   if (length(grep(pattern = "slurmstepd: error: Exceeded step memory limit at some point", x = text)) > 0) {
-    df$exit_status = "memory"
+    df$exit_status <- "memory"
   } else if (length(grep(pattern = "slurmstepd: error: get_exit_code task 0 died by signal", x = text)) > 0) {
-    df$exit_status = "died"
+    df$exit_status <- "died"
   } else if (length(grep(pattern = "\\.Call\\(\"rawStreamToDNAbin\", x\\)", x = text)) > 0) {
-    df$exit_status = "fasta"
+    df$exit_status <- "fasta"
+  } else if (length(grep(pattern = "Error in value\\[\\[3L\\]\\]\\(cond\\) : invalid file", x = text)) > 0) {
+    df$exit_status <- "invalid_file"
+  } else if (length(grep(pattern = "Error: file.exists\\(beast_trees_filename\\) is not TRUE", x = text)) > 0) {
+    df$exit_status <- "trees"
   }
+
 
 
 
