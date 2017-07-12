@@ -26,5 +26,5 @@ if (!file.exists(log_files_filename)) {
 }
 
 print("Load log files info")
-df_log_files <- wiritttea::read_collected_log_files(log_files_filename)
+df_log_files <- wiritttea::read_collected_log_files_info(log_files_filename)
 
