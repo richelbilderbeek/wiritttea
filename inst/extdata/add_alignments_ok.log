@@ -1,0 +1,50 @@
+slurmstepd: error: Unable to create TMPDIR [/local/11995268]: Permission denied
+slurmstepd: error: Setting TMPDIR to /tmp
+
+The following have been reloaded with a version change:
+  1) cURL/7.47.0-foss-2016a => cURL/7.49.1-foss-2016a
+  2) expat/2.1.0-foss-2016a => expat/2.2.0-foss-2016a
+  3) libxml2/2.9.3-foss-2016a => libxml2/2.9.4-foss-2016a
+
+
+real	0m2.510s
+user	0m2.038s
+sys	0m0.165s
+
+
+###############################################################################
+Peregrine Cluster
+Job 11995275 for user 'p230198'
+Finished at: Wed Jun 14 04:24:53 CEST 2017
+
+Job details:
+============
+
+Name                : add_alignments
+User                : p230198
+Partition           : nodes
+Nodes               : pg-node027
+Cores               : 1
+State               : RUNNING
+Submit              : 2017-06-14T04:23:55
+Start               : 2017-06-14T04:24:47
+End                 : --
+Reserved walltime   : 01:00:00
+Used walltime       : 00:00:06
+Used CPU time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 10G/node
+Max Mem used        : 0.00  ()
+Max Disk Write      : 0.00  ()
+Max Disk Read       : 0.00  ()
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################
