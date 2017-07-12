@@ -3,12 +3,13 @@
 #' @return A dataframe with all information of all log files
 #' @examples
 #'   filenames <- c(
-#'    find_path("toy_example_1.RDa"),
-#'    find_path("toy_example_2.RDa")
+#'    find_path("add_alignments_ok.log"),
+#'    find_path("add_alignments_exceeded_memory.log")
 #'  )
-#'  df <- collect_files_n_taxa(filenames)
+#'  df <- collect_log_files_info(filenames)
 #'  testit::assert(names(df) == c("filename", "exit_status"))
 #'  testit::assert(nrow(df) == length(filenames))
+#'  testit::assert(df$exit_status[1] != df$exit_status[2])
 #' @export
 collect_log_files_info <- function(filenames) {
 
@@ -31,7 +32,7 @@ collect_log_files_info <- function(filenames) {
         exit_status = NA
       )
     }
-    if (!is.null(n_taxa)) {
+    if (!is.null(log_files_info)) {
       log_files_info <- rbind(log_files_info, this_log_file_info)
     } else {
       log_files_info <- this_log_file_info
