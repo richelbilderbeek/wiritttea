@@ -35,6 +35,8 @@ collect_log_file_info <- function(filename) {
     df$exit_status <- "fasta_io"
   } else if (length(grep(pattern = "Error in data.frame\\(sequences, row.names = labels\\)", x = text)) > 0) {
     df$exit_status <- "alignment"
+  } else if (length(grep(pattern = "embedded nul\\(s\\) found in input", x = text)) > 0) {
+    df$exit_status <- "save_posterior"
   }
 
   testit::assert(names(df)

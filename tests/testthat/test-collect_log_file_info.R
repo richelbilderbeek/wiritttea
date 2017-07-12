@@ -54,6 +54,14 @@ test_that("add_posteriors has incorrect alignment", {
   testthat::expect_equal(df$exit_status[1], "alignment")
 })
 
+test_that("add_posteriors saving posterior fails", {
+  df <- wiritttea::collect_log_file_info(
+    filename = wiritttea::find_path("add_posteriors_save_posterior_failed.log"))
+  testthat::expect_equal(df$exit_status[1], "save_posterior")
+})
+
+
+
 
 
 
