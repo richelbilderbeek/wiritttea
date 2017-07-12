@@ -23,6 +23,8 @@ collect_log_file_info <- function(filename) {
   text <- wiritttea::file_to_lines(filename)
   if (length(grep(pattern = "slurmstepd: error: Exceeded step memory limit at some point", x = text)) > 0) {
     df$exit_status = "memory"
+  } else if (length(grep(pattern = "slurmstepd: error: get_exit_code task 0 died by signal", x = text)) > 0) {
+    df$exit_status = "died"
   }
 
   testit::assert(names(df)

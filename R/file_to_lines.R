@@ -18,7 +18,7 @@ file_to_lines <- function(filename) {
   while (TRUE) {
     line <- NA
     tryCatch(
-      line <- readLines(con, n = 1),
+      line <- readLines(con, warn = FALSE, n = 1),
       error = function(cond) {} # nolint
     )
     if (is.na(line) || length(line) == 0) {
@@ -32,7 +32,7 @@ file_to_lines <- function(filename) {
   text <- rep(NA, n_lines)
   con <- file(filename, "r")
   for (i in seq(1, n_lines)) {
-    text[i] <- readLines(con, n = 1)
+    text[i] <- readLines(con, warn = FALSE, n = 1)
   }
   close(con)
   text

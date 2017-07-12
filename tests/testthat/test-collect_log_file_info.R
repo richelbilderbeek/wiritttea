@@ -12,11 +12,19 @@ test_that("Alignment file: exceeds memory", {
   testthat::expect_equal(df$exit_status[1], "memory")
 })
 
-test_that("Unknown error", {
+test_that("No newline", {
   df <- wiritttea::collect_log_file_info(
-    filename = wiritttea::find_path("article_0_1_0_0_1_248_2_1_2.log"))
-  testthat::expect_equal(df$exit_status[1], "memory")
+    filename = wiritttea::find_path("article_no_newline.log"))
+  testthat::expect_equal(df$exit_status[1], "OK")
 })
+
+test_that("Died by signal", {
+  df <- wiritttea::collect_log_file_info(
+    filename = wiritttea::find_path("add_posteriors_died_by_signal.log"))
+  testthat::expect_equal(df$exit_status[1], "died")
+})
+
+
 
 
 
