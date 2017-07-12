@@ -31,6 +31,8 @@ collect_log_file_info <- function(filename) {
     df$exit_status <- "invalid_file"
   } else if (length(grep(pattern = "Error: file.exists\\(beast_trees_filename\\) is not TRUE", x = text)) > 0) {
     df$exit_status <- "trees"
+  } else if (length(grep(pattern = "In ape::read.FASTA\\(fasta_filename\\) :rm: write error: Input/output error", x = text)) > 0) {
+    df$exit_status <- "fasta_io"
   }
 
 

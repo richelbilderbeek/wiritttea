@@ -42,6 +42,14 @@ test_that("add_posteriors has absent BEAST2 .trees file", {
   testthat::expect_equal(df$exit_status[1], "trees")
 })
 
+test_that("add_posteriors has FASTA file I/O error", {
+  df <- wiritttea::collect_log_file_info(
+    filename = wiritttea::find_path("add_posteriors_fasta_io_error.log"))
+  testthat::expect_equal(df$exit_status[1], "fasta_io")
+})
+
+
+
 
 
 
