@@ -1,0 +1,46 @@
+Error: class(sequences_dnabin) == "DNAbin" is not TRUE
+In addition: Warning message:
+In ape::read.FASTA(fasta_filename) : failed to read sequences, returns NULL
+Execution halted
+
+real	2m24.834s
+user	0m7.029s
+sys	0m20.787s
+
+
+###############################################################################
+Peregrine Cluster
+Job 11820656 for user 'p230198'
+Finished at: Fri Jun  9 22:34:49 CEST 2017
+
+Job details:
+============
+
+Name                : add_posteriors
+User                : p230198
+Partition           : nodes
+Nodes               : pg-node068
+Cores               : 8
+State               : FAILED
+Submit              : 2017-05-31T23:41:48
+Start               : 2017-06-09T22:32:22
+End                 : 2017-06-09T22:34:48
+Reserved walltime   : 10-00:00:00
+Used walltime       :    00:02:26
+Used CPU time       :    00:00:29 (efficiency:  2.49%)
+% User (Computation): 26.81%
+% System (I/O)      : 73.19%
+Mem reserved        : 10G/node
+Max Mem used        : 229.79M (pg-node068)
+Max Disk Write      : 102.40K (pg-node068)
+Max Disk Read       : 22.88M (pg-node068)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################

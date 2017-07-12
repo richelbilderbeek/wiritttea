@@ -37,6 +37,8 @@ collect_log_file_info <- function(filename) {
     df$exit_status <- "alignment"
   } else if (length(grep(pattern = "embedded nul\\(s\\) found in input", x = text)) > 0) {
     df$exit_status <- "save_posterior"
+  } else if (length(grep(pattern = "Error: class\\(sequences_dnabin\\) == \"DNAbin\" is not TRUE", x = text)) > 0) {
+    df$exit_status <- "no_dnabin"
   }
 
   testit::assert(names(df)

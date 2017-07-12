@@ -60,6 +60,12 @@ test_that("add_posteriors saving posterior fails", {
   testthat::expect_equal(df$exit_status[1], "save_posterior")
 })
 
+test_that("add_posteriors read sequence is no DNAbin", {
+  df <- wiritttea::collect_log_file_info(
+    filename = wiritttea::find_path("add_posteriors_sequence_no_dnabin.log"))
+  testthat::expect_equal(df$exit_status[1], "no_dnabin")
+})
+
 
 
 
