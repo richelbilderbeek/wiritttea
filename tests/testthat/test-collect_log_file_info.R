@@ -24,6 +24,14 @@ test_that("Died by signal", {
   testthat::expect_equal(df$exit_status[1], "died")
 })
 
+test_that("Cannot read FASTA file", {
+  df <- wiritttea::collect_log_file_info(
+    filename = wiritttea::find_path("add_posteriors_cannot_read_fasta.log"))
+  testthat::expect_equal(df$exit_status[1], "fasta")
+})
+
+
+
 
 
 

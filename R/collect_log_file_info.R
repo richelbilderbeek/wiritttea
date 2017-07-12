@@ -25,7 +25,11 @@ collect_log_file_info <- function(filename) {
     df$exit_status = "memory"
   } else if (length(grep(pattern = "slurmstepd: error: get_exit_code task 0 died by signal", x = text)) > 0) {
     df$exit_status = "died"
+  } else if (length(grep(pattern = "\\.Call\\(\"rawStreamToDNAbin\", x\\)", x = text)) > 0) {
+    df$exit_status = "fasta"
   }
+
+
 
   testit::assert(names(df)
     == c("filename", "exit_status")

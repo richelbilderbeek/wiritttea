@@ -1,0 +1,63 @@
+  1) FFTW/3.3.4-gompi-2016a => FFTW/3.3.4-gompic-2.7.11
+  2) GCC/4.9.3-2.25 => GCC/4.8.4
+  3) OpenBLAS/0.2.15-GCC-4.9.3-2.25-LAPACK-3.6.0 => OpenBLAS/0.2.13-gompic-2.7.11-LAPACK-3.5.0
+  4) OpenMPI/1.10.3-GCC-4.9.3-2.25 => OpenMPI/1.8.4-gcccuda-2.7.11
+  5) ScaLAPACK/2.0.2-gompi-2016a-OpenBLAS-0.2.15-LAPACK-3.6.0 => ScaLAPACK/2.0.2-gompic-2.7.11-OpenBLAS-0.2.13-LAPACK-3.5.0
+  6) cURL/7.47.0-foss-2016a => cURL/7.49.1-foss-2016a
+  7) expat/2.1.0-foss-2016a => expat/2.2.0-foss-2016a
+  8) libxml2/2.9.3-foss-2016a => libxml2/2.9.4-foss-2016a
+ *** caught segfault ***
+address 0xe93b000, cause 'memory not mapped'
+
+Traceback:
+ 1: .Call("rawStreamToDNAbin", x)
+ 2: ape::read.FASTA(fasta_filename)
+ 3: beastscriptr::fasta_file_to_sequences(input_fasta_filename)
+ 4: beastscriptr::beast_scriptr(input_fasta_filename = temp_fasta_filename,     mcmc_chainlength = nspp * 1000, tree_prior = "birth_death",     output_xml_filename = beast_filename)
+ 5: alignment_to_beast_input_file(alignment = alignment, nspp = nspp,     rng_seed = rng_seed, beast_filename = beast_filename, temp_fasta_filename = temp_fasta_filename)
+ 6: alignment_to_beast_posterior(alignment = alignment, base_filename = basefilename,     nspp = nspp, rng_seed = new_seed)
+ 7: add_posteriors("article_1_3_0_0_0_942.RDa")
+An irrecoverable exception occurred. R is aborting now ...
+/var/spool/slurmd/job11820678/slurm_script: line 10:  2491 Segmentation fault      (core dumped) Rscript -e "library(wiritttes); add_posteriors(\"$1\")"
+
+real	0m40.069s
+user	0m2.603s
+sys	0m3.775s
+
+
+###############################################################################
+Peregrine Cluster
+Job 11820678 for user 'p230198'
+Finished at: Fri Jun  9 22:36:04 CEST 2017
+
+Job details:
+============
+
+Name                : add_posteriors
+User                : p230198
+Partition           : nodes
+Nodes               : pg-node159
+Cores               : 8
+State               : FAILED
+Submit              : 2017-05-31T23:41:49
+Start               : 2017-06-09T22:35:21
+End                 : 2017-06-09T22:36:03
+Reserved walltime   : 10-00:00:00
+Used walltime       :    00:00:42
+Used CPU time       :    00:00:07 (efficiency:  2.28%)
+% User (Computation): 44.23%
+% System (I/O)      : 55.77%
+Mem reserved        : 10G/node
+Max Mem used        : 163.35M (pg-node159)
+Max Disk Write      : 112.64K (pg-node159)
+Max Disk Read       : 19.50M (pg-node159)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################
