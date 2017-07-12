@@ -1,0 +1,46 @@
+Error in data.frame(sequences, row.names = labels) : 
+  row names supplied are of the wrong length
+Calls: add_posteriors ... alignment_to_beast_input_file -> <Anonymous> -> <Anonymous> -> data.frame
+Execution halted
+
+real	12m59.367s
+user	0m37.686s
+sys	1m15.104s
+
+
+###############################################################################
+Peregrine Cluster
+Job 11820752 for user 'p230198'
+Finished at: Fri Jun  9 23:04:25 CEST 2017
+
+Job details:
+============
+
+Name                : add_posteriors
+User                : p230198
+Partition           : nodes
+Nodes               : pg-node128
+Cores               : 8
+State               : FAILED
+Submit              : 2017-05-31T23:41:50
+Start               : 2017-06-09T22:51:20
+End                 : 2017-06-09T23:04:25
+Reserved walltime   : 10-00:00:00
+Used walltime       :    00:13:05
+Used CPU time       :    00:01:54 (efficiency:  1.82%)
+% User (Computation): 33.76%
+% System (I/O)      : 66.24%
+Mem reserved        : 10G/node
+Max Mem used        : 693.07M (pg-node128)
+Max Disk Write      : 3.56M (pg-node128)
+Max Disk Read       : 35.22M (pg-node128)
+
+
+Acknowledgements:
+=================
+
+Please see this page if you want to acknowledge Peregrine in your publications:
+
+https://redmine.hpc.rug.nl/redmine/projects/peregrine/wiki/ScientificOutput
+
+################################################################################
