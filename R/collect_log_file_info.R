@@ -16,7 +16,8 @@ collect_log_file_info <- function(filename) {
 
   df <- data.frame(
     filename = basename(filename),
-    exit_status = "OK"
+    exit_status = "OK",
+    stringsAsFactors = FALSE
   )
 
   text <- wiritttea::file_to_lines(filename)
@@ -24,8 +25,6 @@ collect_log_file_info <- function(filename) {
     df$exit_status = "memory"
   }
 
-  df$exit_status <- as.factor(df$exit_status)
-  testit::assert(is.factor(df$exit_status))
   testit::assert(names(df)
     == c("filename", "exit_status")
   )

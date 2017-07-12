@@ -21,10 +21,10 @@ if (!file.exists(log_files_filename)) {
   print("Collecting log files info")
   df_log_files <- wiritttea::collect_log_files_info(filenames = my_filenames)
 
-  print("Saving # taxa")
+  print("Saving log files info")
   write.csv(df_log_files, log_files_filename)
 }
 
-print("Load log files")
+print("Load log files info")
 df_log_files <- wiritttea::read_collected_log_files(log_files_filename)
 

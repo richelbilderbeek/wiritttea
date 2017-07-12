@@ -16,8 +16,12 @@ file_to_lines <- function(filename) {
   n_lines <- 0
   con <- file(filename, "r")
   while (TRUE) {
-    line <- readLines(con, n = 1)
-    if (length(line) == 0) {
+    line <- NA
+    tryCatch(
+      line <- readLines(con, n = 1),
+      error = function(cond) {} # nolint
+    )
+    if (is.na(line) || length(line) == 0) {
       break
     }
     n_lines <- n_lines + 1

@@ -18,30 +18,20 @@ collect_log_files_info <- function(filenames) {
   }
 
   # Log file info
-  log_files_info <- NULL
-  for (filename in filenames) {
-    this_log_file_info <- NULL
-    tryCatch(
-      this_log_file_info <- collect_log_file_info(
-        filename = filename
-      ),
-      error = function(msg) {} # nolint
-    )
-    if (is.null(this_log_file_info)) {
-      this_log_file_info <- data.frame(
-        exit_status = NA
-      )
-    }
-    if (!is.null(log_files_info)) {
-      log_files_info <- rbind(log_files_info, this_log_file_info)
-    } else {
-      log_files_info <- this_log_file_info
-    }
-  }
   df <- data.frame(
     filename = basename(filenames),
-    exit_status = log_files_info$exit_status
+    exit_status = rep(NA, length(filenames))
   )
+
+  for (i in seq_along(filenames)) {
+    filename <- filenames[i]
+    tryCatch(
+      df$exit_status[i] <- wiritttea::collect_log_file_info(
+        filename = filename
+      )$exit_status,
+      error = function(msg) {} # nolint
+    )
+  }
   testit::assert(nrow(df) == length(filenames))
   testit::assert(names(df) == c("filename", "exit_status"))
   return(df)
