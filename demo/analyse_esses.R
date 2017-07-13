@@ -44,8 +44,6 @@ test_create_log_filenames <- function() {
 }
 test_create_log_filenames()
 # Create file if absent
-
-# New approach, reads the files created by BEAST
 if (!file.exists(esses_filename)) {
 
   my_filenames <- list.files(
@@ -53,128 +51,9 @@ if (!file.exists(esses_filename)) {
     pattern = "article_.*\\.RDa",
     full.names = TRUE)
 
-  while (1) {
-    try(
-      df <- wiritttea::collect_files_esses(sample(my_filenames), show_progress = TRUE)
-    )
-  }
+  df <- wiritttea::collect_files_esses(my_filenames, show_progress = TRUE)
   write.csv(df, esses_filename)
 }
-
-if (!file.exists(esses_filename) && !use_classic) {
-
-  print("Use new approach")
-
-  my_filenames <- list.files(
-    path_data,
-    pattern = "article_.*\\.RDa",
-    full.names = TRUE)
-
-  # nstpist: Number of Species Trees Per Incipient Species Tree
-  nstpist <- 2
-  # napst: Number of Alignments per Species Tree
-  napst <- wiritttes::extract_napst(wiritttes::read_file(my_filenames[1]))
-  # nppa: Number of Posteriors per Alignment
-  nppa <- wiritttes::extract_nppa(wiritttes::read_file(my_filenames[1]))
-  # nppf: Number of Posteriors Per File
-  nppf <- nstpist * napst * nppa
-  n_files <- length(my_filenames)
-  n_rows <- n_files * nppf
-
-
-  df <- data.frame(
-    filename = rep(basename(my_filenames), each = nppf),
-    sti = rep(seq(1,2), each = napst * nppa, times = n_files),
-    ai = rep(seq(1, napst), each = nstpist, times = n_files * nppa),
-    pi = rep(seq(1, nppa), times = n_files * nstpist * napst),
-    posterior = rep(NA, n_rows),
-    likelihood = rep(NA, n_rows),
-    prior = rep(NA, n_rows),
-    treeLikelihood = rep(NA, n_rows),
-    TreeHeight = rep(NA, n_rows),
-    BirthDeath = rep(NA, n_rows),
-    birthRate2 = rep(NA, n_rows),
-    relativeDeathRate2 = rep(NA, n_rows)
-  )
-
-  index <- 1
-  for (i in seq_along(my_filenames)) {
-
-    rda_filename <- my_filenames[i]
-    log_filenames <- create_log_filenames(rda_filename, nstpist, napst, nppa)
-
-    for (log_filename in log_filenames) {
-
-      tryCatch({
-        estimates <- RBeast::parse_beast_log(log_filename)
-        min_ess <- min(
-          RBeast::calc_esses(
-            traces = estimates,
-            sample_interval = 1000
-          )
-        )
-        df$min_ess[index] <- min_ess
-      }, error = function(cond) {} # nolint
-      )
-      index <- index + 1
-    }
-  }
-
-  write.csv(df, esses_filename)
-}
-
-# Classic approach, takes 72 minutes per file
-if (!file.exists(esses_filename) && use_classic) {
-
-  print("Use classic approach")
-
-  my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
-
-  # Assume all files have the same number of alignments
-
-  # nstpist: Number of Species Trees Per Incipient Species Tree
-  nstpist <- 2
-  # napst: Number of Alignments per Species Tree
-  napst <- wiritttes::extract_napst(wiritttes::read_file(my_filenames[1]))
-  # nppa: Number of Posteriors per Alignment
-  nppa <- wiritttes::extract_nppa(wiritttes::read_file(my_filenames[1]))
-  # nppf: Number of Posteriors Per File
-  nppf <- nstpist * napst * nppa
-  n_files <- length(my_filenames)
-  n_rows <- n_files * nppf
-
-  df <- data.frame(
-    filename = rep(basename(my_filenames), each = nppf),
-    sti = rep(seq(1,2), each = napst * nppa, times = n_files),
-    ai = rep(seq(1, napst), each = nstpist, times = n_files * nppa),
-    pi = rep(seq(1, nppa), times = n_files * nstpist * napst),
-    posterior = rep(NA, n_rows),
-    likelihood = rep(NA, n_rows),
-    prior = rep(NA, n_rows),
-    treeLikelihood = rep(NA, n_rows),
-    TreeHeight = rep(NA, n_rows),
-    BirthDeath = rep(NA, n_rows),
-    birthRate2 = rep(NA, n_rows),
-    relativeDeathRate2 = rep(NA, n_rows)
-  )
-  testit::assert(names(df) == c("filename", "sti", "ai", "pi", "posterior", "likelihood", "prior", "treeLikelihood", "TreeHeight", "BirthDeath", "birthRate2", "relativeDeathRate2"))
-
-  for (i in seq_along(my_filenames))
-  {
-    my_filename <- my_filenames[i]
-    index_from <- ((i - 1) * nppf) + 1
-    index_to <- (i * nppf)
-    tryCatch({
-      df_sub <- wiritttea::collect_file_esses(my_filename)
-      df[index_from:index_to, ] <- df_sub
-    }, error = function(cond) {} # nolint
-    )
-  }
-
-  testit::assert(names(df) == c("filename", "sti", "ai", "pi", "posterior", "likelihood", "prior", "treeLikelihood", "TreeHeight", "BirthDeath", "birthRate2", "relativeDeathRate2"))
-  write.csv(df, esses_filename)
-}
-
 
 #Investigations
 df_esses <- wiritttea::read_collected_esses(esses_filename)
