@@ -72,13 +72,13 @@ collect_file_esses <- function(filename) {
 
         if (is.data.frame(this_esses)) {
           df$posterior[index] <- this_esses$posterior
-          df$likelihood <- this_esses$likelihood
-          df$prior <- this_esses$prior
-          df$treeLikelihood <- this_esses$treeLikelihood
-          df$TreeHeight <- this_esses$TreeHeight
-          df$BirthDeath <- this_esses$BirthDeath
-          df$birthRate2 <- this_esses$birthRate2
-          df$relativeDeathRate2 <- this_esses$relativeDeathRate2
+          df$likelihood[index] <- this_esses$likelihood
+          df$prior[index] <- this_esses$prior
+          df$treeLikelihood[index] <- this_esses$treeLikelihood
+          df$TreeHeight[index] <- this_esses$TreeHeight
+          df$BirthDeath[index] <- this_esses$BirthDeath
+          df$birthRate2[index] <- this_esses$birthRate2
+          df$relativeDeathRate2[index] <- this_esses$relativeDeathRate2
         }
         index <- index + 1
       }
