@@ -19,7 +19,7 @@ Collects the ESSes of all phylogenies belonging to a
 parameter file in the melted/uncast/long form
 }
 \examples{
-  filename <- find_path("toy_example_3.RDa")
-  df <- collect_file_esses(filename)
+  df <- wiritttea::collect_file_esses(
+    filename = wiritttea::find_path("toy_example_3.RDa"))
   testit::assert(nrow(df) == 8)
 }

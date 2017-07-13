@@ -33,8 +33,20 @@ collect_files_esses <- function(filenames) {
     df <- rbind(df, wiritttea::collect_file_esses(filename))
   }
 
-  testit::assert(names(df)
-    == c("filename", "sti", "ai", "pi", "min_ess")
+  testit::assert(names(df) == c(
+    "filename",
+    "sti",
+    "ai",
+    "pi",
+    "posterior",
+     "likelihood",
+     "prior",
+     "treeLikelihood",
+     "TreeHeight",
+     "BirthDeath",
+     "birthRate2",
+     "relativeDeathRate2"
+    )
   )
   df
 }

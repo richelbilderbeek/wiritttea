@@ -5,8 +5,8 @@
 #'   wiritttess:read_file
 #' @return A dataframe of ESSes for each posterior
 #' @examples
-#'   filename <- find_path("toy_example_3.RDa")
-#'   df <- collect_file_esses(filename)
+#'   df <- wiritttea::collect_file_esses(
+#'     filename = wiritttea::find_path("toy_example_3.RDa"))
 #'   testit::assert(nrow(df) == 8)
 #' @export
 collect_file_esses <- function(filename) {
@@ -41,8 +41,15 @@ collect_file_esses <- function(filename) {
      ai  = rep(
        seq(1, n_alignments), each = n_beast_runs, times = n_species_trees
      ),
-     pi  = rep(seq(1, n_beast_runs), times = n_species_trees * n_alignments),
-     min_ess = rep(NA, n_rows)
+     pi = rep(seq(1, n_beast_runs), times = n_species_trees * n_alignments),
+     posterior = rep(NA, n_rows),
+     likelihood = rep(NA, n_rows),
+     prior = rep(NA, n_rows),
+     treeLikelihood = rep(NA, n_rows),
+     TreeHeight = rep(NA, n_rows),
+     BirthDeath = rep(NA, n_rows),
+     birthRate2 = rep(NA, n_rows),
+     relativeDeathRate2 = rep(NA, n_rows)
   )
   index <- 1
 
@@ -50,28 +57,47 @@ collect_file_esses <- function(filename) {
     for (ai in seq(1, n_alignments)) {
       for (pi in seq(1, n_beast_runs)) {
 
-        min_ess <- NA
+        this_esses <- NA
         tryCatch({
             posterior <- wiritttes::get_posterior(
               file, sti = sti, ai = ai, pi = pi)
             traces <- posterior$estimates
-            min_ess <- min(
-              RBeast::calc_esses(
-                traces = traces,
-                sample_interval = 1000
-              )
+            this_esses <- RBeast::calc_esses(
+              traces = traces,
+              sample_interval = 1000
             )
           },
           error = function(msg) {} # nolint
         )
 
-        df$min_ess[index] <- min_ess
+        if (is.data.frame(this_esses)) {
+          df$posterior[index] <- this_esses$posterior
+          df$likelihood <- this_esses$likelihood
+          df$prior <- this_esses$prior
+          df$treeLikelihood <- this_esses$treeLikelihood
+          df$TreeHeight <- this_esses$TreeHeight
+          df$BirthDeath <- this_esses$BirthDeath
+          df$birthRate2 <- this_esses$birthRate2
+          df$relativeDeathRate2 <- this_esses$relativeDeathRate2
+        }
         index <- index + 1
       }
     }
   }
-  testit::assert(names(df)
-    == c("filename", "sti", "ai", "pi", "min_ess")
+  testit::assert(names(df) == c(
+    "filename",
+    "sti",
+    "ai",
+    "pi",
+    "posterior",
+    "likelihood",
+    "prior",
+    "treeLikelihood",
+    "TreeHeight",
+    "BirthDeath",
+    "birthRate2",
+    "relativeDeathRate2"
+    )
   )
   df
 }
