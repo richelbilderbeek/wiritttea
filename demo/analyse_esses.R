@@ -1,9 +1,8 @@
 # Analyse the files' ESSes
 options(warn = 2) # Be strict
 date <- "20170710"
-path_data <- paste0("~/Peregrine", date)
-esses_filename <- paste0("~/GitHubs/wirittte_data/esses_", date, ".csv")
-parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
+path_data <- paste0("~/wirittte_data/", date)
+esses_filename <- paste0("~/esses_", date, ".csv")
 use_classic <- FALSE
 
 args <- commandArgs(trailingOnly = TRUE)
@@ -47,6 +46,21 @@ test_create_log_filenames()
 # Create file if absent
 
 # New approach, reads the files created by BEAST
+if (!file.exists(esses_filename)) {
+
+  my_filenames <- list.files(
+    path_data,
+    pattern = "article_.*\\.RDa",
+    full.names = TRUE)
+
+  while (1) {
+    try(
+      df <- wiritttea::collect_files_esses(sample(my_filenames), show_progress = TRUE)
+    )
+  }
+  write.csv(df, esses_filename)
+}
+
 if (!file.exists(esses_filename) && !use_classic) {
 
   print("Use new approach")
@@ -73,7 +87,14 @@ if (!file.exists(esses_filename) && !use_classic) {
     sti = rep(seq(1,2), each = napst * nppa, times = n_files),
     ai = rep(seq(1, napst), each = nstpist, times = n_files * nppa),
     pi = rep(seq(1, nppa), times = n_files * nstpist * napst),
-    min_ess = rep(NA, n_rows)
+    posterior = rep(NA, n_rows),
+    likelihood = rep(NA, n_rows),
+    prior = rep(NA, n_rows),
+    treeLikelihood = rep(NA, n_rows),
+    TreeHeight = rep(NA, n_rows),
+    BirthDeath = rep(NA, n_rows),
+    birthRate2 = rep(NA, n_rows),
+    relativeDeathRate2 = rep(NA, n_rows)
   )
 
   index <- 1
@@ -127,9 +148,16 @@ if (!file.exists(esses_filename) && use_classic) {
     sti = rep(seq(1,2), each = napst * nppa, times = n_files),
     ai = rep(seq(1, napst), each = nstpist, times = n_files * nppa),
     pi = rep(seq(1, nppa), times = n_files * nstpist * napst),
-    min_ess = rep(NA, n_rows)
+    posterior = rep(NA, n_rows),
+    likelihood = rep(NA, n_rows),
+    prior = rep(NA, n_rows),
+    treeLikelihood = rep(NA, n_rows),
+    TreeHeight = rep(NA, n_rows),
+    BirthDeath = rep(NA, n_rows),
+    birthRate2 = rep(NA, n_rows),
+    relativeDeathRate2 = rep(NA, n_rows)
   )
-  testit::assert(names(df) == c("filename", "sti", "ai", "pi", "min_ess"))
+  testit::assert(names(df) == c("filename", "sti", "ai", "pi", "posterior", "likelihood", "prior", "treeLikelihood", "TreeHeight", "BirthDeath", "birthRate2", "relativeDeathRate2"))
 
   for (i in seq_along(my_filenames))
   {
@@ -143,7 +171,7 @@ if (!file.exists(esses_filename) && use_classic) {
     )
   }
 
-  testit::assert(names(df) == c("filename", "sti", "ai", "pi", "min_ess"))
+  testit::assert(names(df) == c("filename", "sti", "ai", "pi", "posterior", "likelihood", "prior", "treeLikelihood", "TreeHeight", "BirthDeath", "birthRate2", "relativeDeathRate2"))
   write.csv(df, esses_filename)
 }
 
@@ -155,20 +183,9 @@ df_esses <- wiritttea::read_collected_esses(esses_filename)
 library(dplyr)
 knitr::kable(df_esses  %>% count(is.na(min_ess)))
 
-# Plotting ESSes distributions
-#   as density plot
-ggplot2::ggplot(subset(df_esses, !is.na(min_ess)),
-  ggplot2::aes(min_ess)) +
-  ggplot2::geom_density(alpha = 0.25, ggplot2::aes(y = ..density..), position = 'identity') +
-  ggplot2::labs(title = "Effective Sample Sizes", x = "Effective Sample Size", y = "Density")
-#   as histogram
-ggplot2::ggplot(subset(df_esses, !is.na(min_ess)),
-  ggplot2::aes(min_ess)) +
-  ggplot2::geom_histogram() +
-  ggplot2::labs(title = "Effective Sample Sizes", x = "Effective Sample Size", y = "Count")
-
 # What are ESSes dependent on SIRG?
 # Read parameters
+parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
 # Prepare parameters for merge
 parameters$filename <- row.names(parameters)

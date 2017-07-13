@@ -5,10 +5,12 @@
 \title{Collects the ESSes of all phylogenies belonging to the
 parameter files in the melted/uncast/long form}
 \usage{
-collect_files_esses(filenames)
+collect_files_esses(filenames, show_progress = FALSE)
 }
 \arguments{
 \item{filenames}{names of the parameter files}
+
+\item{show_progress}{set to TRUE to show the progress}
 }
 \value{
 A dataframe of ESSes for all files their posterior
