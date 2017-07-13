@@ -3,12 +3,10 @@ options(warn = 2) # Be strict
 date <- "20170710"
 path_data <- paste0("~/wirittte_data/", date)
 esses_filename <- paste0("~/esses_", date, ".csv")
-use_classic <- FALSE
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
 if (length(args) > 1) esses_filename <- args[2]
-if (length(args) > 2) use_classic <- ifelse(args[3] == "TRUE", TRUE, FALSE)
 
 
 # nstpist: Number of Species Trees Per Incipient Species Tree
@@ -51,7 +49,8 @@ if (!file.exists(esses_filename)) {
     pattern = "article_.*\\.RDa",
     full.names = TRUE)
 
-  df <- wiritttea::collect_files_esses(my_filenames, show_progress = TRUE)
+  df <- wiritttea::collect_files_esses(
+    my_filenames, show_progress = TRUE)
   write.csv(df, esses_filename)
 }
 
