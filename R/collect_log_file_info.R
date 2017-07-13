@@ -1,7 +1,17 @@
 #' Collects information of a log file in the melted/uncast/long form
-#'
 #' @param filename name of the .log file
-#' @return A dataframe of log file info
+#' @return A dataframe of log file info. 
+#'   The `exit_status` column contains
+#'   exit statuses with the following values possible: 
+#'   `OK` means that no problems were encounters, 
+#'   `memory` denotes that there was more memory used than reserved, 
+#'   `died` means that the task died by a signal,
+#'   `invalid_file` is stated when the .RDa file to read from was invalid,
+#'   `alignment` and `no_dnabin` are caused from an unreadable or unmanagable alignment, 
+#'   `fasta` and `fasta_io` results from an unreadable FASTA file 
+#'   (a temporary created by `add_posterior`), 
+#'   `trees` results from an unreadable `.trees` file,
+#'   `save_posterior` is caused by a failure when saving a BEAST2 posterior
 #' @examples
 #'   filename <- wiritttea::find_path("add_alignments_ok.log")
 #'   df <- wiritttea::collect_log_file_info(filename)

@@ -10,7 +10,18 @@ collect_log_file_info(filename)
 \item{filename}{name of the .log file}
 }
 \value{
-A dataframe of log file info
+A dataframe of log file info. 
+  The `exit_status` column contains
+  exit statuses with the following values possible: 
+  `OK` means that no problems were encounters, 
+  `memory` denotes that there was more memory used than reserved, 
+  `died` means that the task died by a signal,
+  `invalid_file` is stated when the .RDa file to read from was invalid,
+  `alignment` and `no_dnabin` are caused from an unreadable or unmanagable alignment, 
+  `fasta` and `fasta_io` results from an unreadable FASTA file 
+  (a temporary created by `add_posterior`), 
+  `trees` results from an unreadable `.trees` file,
+  `save_posterior` is caused by a failure when saving a BEAST2 posterior
 }
 \description{
 Collects information of a log file in the melted/uncast/long form
