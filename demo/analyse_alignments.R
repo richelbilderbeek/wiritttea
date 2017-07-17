@@ -1,9 +1,9 @@
 # Analyse if the alignments are created successfully
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/Peregrine20170523"
-#path_data <- "~/GitHubs/wiritttea/inst/extdata"
-alignments_filename <- "~/alignments.csv"
+date <- "20170523"
+path_data <- paste0("~/wiritte_data/", date)
+alignments_filename <- paste0("~/alignments_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
