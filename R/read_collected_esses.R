@@ -1,9 +1,11 @@
 #' Read all the collected ESSes of all simulations' posteriors
-#' @param filename name of the CSV file
+#' @param filename name of the CSV file, as created by 'collect_files_esses'
 #' @return a dataframe
 #' @examples
 #'   df <- read_collected_esses()
-#'   expected_names <- c("filename", "sti", "ai", "pi", "min_ess")
+#'   expected_names <- c("filename", "sti", "ai", "pi", "posterior",
+#'     "likelihood", "prior", "treeLikelihood", "TreeHeight", "BirthDeath",
+#'     "birthRate2", "relativeDeathRate2")
 #'   testit::assert(names(df) == expected_names)
 #'   testit::assert(is.factor(df$filename))
 #'   testit::assert(is.factor(df$sti))
@@ -25,10 +27,22 @@ read_collected_esses <- function(
   df$sti <- as.factor(df$sti)
   df$ai <- as.factor(df$ai)
   df$pi <- as.factor(df$pi)
+
+  expected_names <- c("filename", "sti", "ai", "pi", "posterior", "likelihood", "prior", "treeLikelihood", "TreeHeight", "BirthDeath", "birthRate2", "relativeDeathRate2")
+
   testit::assert(names(df) == c(
-    "filename", "sti", "ai", "pi", "min_ess"
-    )
-  )
+    "filename",
+    "sti",
+    "ai",
+    "pi",
+    "posterior",
+    "likelihood",
+    "prior",
+    "treeLikelihood",
+    "TreeHeight",
+    "BirthDeath",
+    "birthRate2",
+    "relativeDeathRate2"))
   testit::assert(is.factor(df$filename))
   testit::assert(is.factor(df$sti))
   testit::assert(is.factor(df$ai))

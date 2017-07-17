@@ -12,24 +12,35 @@ if (!file.exists(esses_filename)) {
 
 #Investigations
 df_esses <- wiritttea::read_collected_esses(esses_filename)
+head(df_esses)
+
+# Melt data, convert to long form
+df_esses_long <- reshape2::melt(df_esses,
+  id = c("filename", "sti", "ai", "pi")
+)
+testit::assert(is.factor(df_esses_long$variable))
+
+df_esses_long <- dplyr::rename(df_esses_long, parameter = variable)
+df_esses_long <- dplyr::rename(df_esses_long, ess = value)
 
 
-mean_ess <- mean(na.omit(df_esses$min_ess))
-median_ess <- median(na.omit(df_esses$min_ess))
+head(df_esses_long)
+#mean_esses <- colMeans(df_esses)
+#median_ess <- median(na.omit(df_esses$min_ess))
+
 
 png("~/figure_113.png")
 #svg("~/figure_113.svg")
 ggplot2::ggplot(
-  data = subset(df_esses, !is.na(min_ess)),
-  ggplot2::aes(min_ess)) +
-  ggplot2::geom_histogram() +
+  data = na.omit(df_esses_long),
+  ggplot2::aes(x = ess, fill = parameter)) +
+  ggplot2::geom_histogram(alpha = 0.5, position = "identity", binwidth = 10) +
   ggplot2::labs(
-    title = "The distribution of Effective Sample Sizes",
+    title = "The distribution of Effective Sample Sizes per parameter estimate",
     x = "Effective Sample Size",
     y = "Count",
     caption = "Figure 113"
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
-  ggplot2::geom_vline(xintercept = median_ess, linetype = "dotted") +
-  ggplot2::geom_vline(xintercept = mean_ess, linetype = "dashed")
+  ggplot2::geom_vline(xintercept = 200, linetype = "dashed")
 dev.off()
