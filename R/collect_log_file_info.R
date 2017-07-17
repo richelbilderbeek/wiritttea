@@ -15,7 +15,7 @@
 #' @examples
 #'   filename <- wiritttea::find_path("add_alignments_ok.log")
 #'   df <- wiritttea::collect_log_file_info(filename)
-#'   testit::assert(names(df) == c("filename", "exit_status"))
+#'   testit::assert(names(df) == c("filename", "exit_status", "sys_time"))
 #'   testit::assert(nrow(df) == 1)
 #' @export
 collect_log_file_info <- function(filename) {
@@ -52,7 +52,7 @@ collect_log_file_info <- function(filename) {
   }
 
   testit::assert(names(df)
-    == c("filename", "exit_status")
+    == c("filename", "exit_status", "sys_time")
   )
   df
 }

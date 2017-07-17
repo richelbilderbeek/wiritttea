@@ -7,7 +7,7 @@
 #'    find_path("add_alignments_exceeded_memory.log")
 #'  )
 #'  df <- collect_log_files_info(filenames)
-#'  testit::assert(names(df) == c("filename", "exit_status"))
+#'  testit::assert(names(df) == c("filename", "exit_status", "sys_time"))
 #'  testit::assert(nrow(df) == length(filenames))
 #'  testit::assert(df$exit_status[1] != df$exit_status[2])
 #' @export
@@ -33,6 +33,6 @@ collect_log_files_info <- function(filenames) {
     )
   }
   testit::assert(nrow(df) == length(filenames))
-  testit::assert(names(df) == c("filename", "exit_status"))
+  testit::assert(names(df) == c("filename", "exit_status", "sys_time"))
   return(df)
 }
