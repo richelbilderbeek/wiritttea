@@ -2,7 +2,7 @@
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170523"
-path_data <- paste0("~/wiritte_data/", date)
+path_data <- paste0("~/wirittte_data/", date)
 alignments_filename <- paste0("~/alignments_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)

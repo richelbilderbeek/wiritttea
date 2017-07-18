@@ -28,21 +28,11 @@ read_collected_esses <- function(
   df$ai <- as.factor(df$ai)
   df$pi <- as.factor(df$pi)
 
-  expected_names <- c("filename", "sti", "ai", "pi", "posterior", "likelihood", "prior", "treeLikelihood", "TreeHeight", "BirthDeath", "birthRate2", "relativeDeathRate2")
+  expected_names <- c("filename", "sti", "ai", "pi", "posterior", "likelihood",
+    "prior", "treeLikelihood", "TreeHeight", "BirthDeath", "birthRate2",
+    "relativeDeathRate2")
 
-  testit::assert(names(df) == c(
-    "filename",
-    "sti",
-    "ai",
-    "pi",
-    "posterior",
-    "likelihood",
-    "prior",
-    "treeLikelihood",
-    "TreeHeight",
-    "BirthDeath",
-    "birthRate2",
-    "relativeDeathRate2"))
+  testit::assert(names(df) == expected_names)
   testit::assert(is.factor(df$filename))
   testit::assert(is.factor(df$sti))
   testit::assert(is.factor(df$ai))

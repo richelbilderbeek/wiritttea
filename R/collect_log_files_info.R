@@ -20,7 +20,8 @@ collect_log_files_info <- function(filenames) {
   # Log file info
   df <- data.frame(
     filename = basename(filenames),
-    exit_status = rep(NA, length(filenames))
+    exit_status = rep(NA, length(filenames)),
+    sys_time = rep(NA, length(filenames))
   )
 
   for (i in seq_along(filenames)) {
