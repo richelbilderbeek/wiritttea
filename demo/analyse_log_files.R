@@ -1,7 +1,7 @@
 # Analyse the log files
 library(wiritttea)
 options(warn = 2) # Be strict
-date <- "20170710"
+date <- "20170711"
 path_data <- paste0("~/wirittte_data/", date)
 log_files_filename <- paste0("~/log_files_info_", date, ".csv")
 
@@ -17,7 +17,7 @@ if (!file.exists(log_files_filename)) {
   print("File is absent, recreating")
 
   print("Collecting .log files")
-  my_filenames <- list.files(path_data, pattern = "(article|add).*[[:digit:]]\\.log", full.names = TRUE)
+  my_filenames <- list.files(path_data, pattern = "add.*[[:digit:]]\\.log", full.names = TRUE)
 
   print("Collecting log files info")
   df_log_files <- wiritttea::collect_log_files_info(filenames = my_filenames, show_progress = TRUE)
