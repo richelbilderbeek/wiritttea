@@ -53,13 +53,22 @@ collect_log_file_info <- function(filename) {
   }
 
 
-  if (length(grep(pattern = "sys\t", x = text)) > 0) {
-    line <- text[ grep(pattern = "sys\t", x = text) ]
-    t <- stringr::str_split(str = line, "\t")[[1]][2]
-    # "0m0.165s"
-    n_secs <- lubridate::period_to_seconds(lubridate::ms(t))
+  # "Used CPU time       :    01:36:11 ("
+  if (length(grep(pattern = "Used CPU time", x = text)) > 0) {
+    line <- text[ grep(pattern = "Used CPU time", x = text) ]
+    t <- stringr::str_extract(line, "[:digit:][:digit:]:[:digit:][:digit:]:[:digit:][:digit:]")
+    # "Used CPU time       :    01:36:11 ("
+    n_secs <- lubridate::period_to_seconds(lubridate::hms(t))
     df$sys_time <- n_secs
   }
+  # Old approach
+  # if (length(grep(pattern = "sys\t", x = text)) > 0) {
+  #   line <- text[ grep(pattern = "sys\t", x = text) ]
+  #   t <- stringr::str_split(str = line, "\t")[[1]][2]
+  #   # "0m0.165s"
+  #   n_secs <- lubridate::period_to_seconds(lubridate::ms(t))
+  #   df$sys_time <- n_secs
+  # }
 
   testit::assert(names(df)
     == c("filename", "exit_status", "sys_time")
