@@ -1,8 +1,9 @@
 # Analyse if the two sampled species trees are identical
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/Peregrine20170523"
-strees_filename <- "~/strees.csv"
+date <- "20170710"
+path_data <- paste0("~/wirittte_data/", date)
+strees_filename <- paste0("~/strees_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
