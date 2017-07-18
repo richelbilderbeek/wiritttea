@@ -1,5 +1,6 @@
 #' Collects the quality of the alignments of the files
 #' @param filenames names of the parameter files
+#' @param show_progress shows the progress if set to TRUE
 #' @return A dataframe with the columns 'filename', 'n_alignments_ok' (number
 #'   of alignments that have a distance matrix with only non-zero and non-NA
 #'   elements, except on the diagonal), 'n_alignments_zero' (number
@@ -20,7 +21,7 @@
 #'     "n_alignments_na")
 #'   testit::assert(all.equal(names(df), expected_names))
 #' @export
-collect_files_alignments <- function(filenames) {
+collect_files_alignments <- function(filenames, show_progress = FALSE) {
 
   if (length(filenames) == 0) {
     stop("there must be at least one filename supplied")
@@ -36,6 +37,10 @@ collect_files_alignments <- function(filenames) {
   for (i in seq_along(filenames)) {
 
     my_filename <- filenames[i]
+
+    if (show_progress == TRUE) {
+      print(my_filename)
+    }
     testit::assert(file.exists(my_filename))
 
     tryCatch({

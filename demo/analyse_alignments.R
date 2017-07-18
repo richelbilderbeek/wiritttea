@@ -14,7 +14,7 @@ print(paste("alignments_filename:", alignments_filename))
 
 if (!file.exists(alignments_filename)) {
   my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
-  df <- collect_files_alignments(my_filenames)
+  df <- wiritttea::collect_files_alignments(my_filenames, show_progress = TRUE)
   write.csv(df, alignments_filename)
 }
 
