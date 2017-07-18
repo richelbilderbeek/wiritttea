@@ -47,7 +47,8 @@ Suggests:
     testit,
     testthat,
     tidyr
-Remotes: beast-dev/RBeast,
+Remotes: 
+    beast-dev/RBeast,
     jimhester/covr,
     jimhester/lintr,
     richelbilderbeek/beastscriptr,
