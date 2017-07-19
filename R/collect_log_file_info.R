@@ -57,9 +57,16 @@ collect_log_file_info <- function(filename) {
   if (length(grep(pattern = "Used CPU time", x = text)) > 0) {
     line <- text[ grep(pattern = "Used CPU time", x = text) ]
     t <- stringr::str_extract(line, "[:digit:][:digit:]:[:digit:][:digit:]:[:digit:][:digit:]")
-    # "Used CPU time       :    01:36:11 ("
-    n_secs <- lubridate::period_to_seconds(lubridate::hms(t))
-    df$sys_time <- n_secs
+    # Only use the first hit
+    if (length(t) > 1) t <- t[1]
+    if (is.na(t)) {
+      # "Used CPU time       :    ---"
+      df$sys_time <- 0.0
+    } else {
+      # "Used CPU time       :    01:36:11 ("
+      n_secs <- lubridate::period_to_seconds(lubridate::hms(t))
+      df$sys_time <- n_secs
+    }
   }
   # Old approach
   # if (length(grep(pattern = "sys\t", x = text)) > 0) {

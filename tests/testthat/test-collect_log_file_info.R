@@ -6,11 +6,11 @@ test_that("OK alignment file is OK", {
   testthat::expect_equal(df$exit_status[1], "OK")
 })
 
-test_that("OK alignment file has a nonzero sys_time", {
+test_that("OK alignment file has a zero sys_time", {
   df <- wiritttea::collect_log_file_info(
     filename = wiritttea::find_path("add_alignments_ok.log"))
 
-  testthat::expect_true(df$sys_time > 0.0)
+  testthat::expect_true(df$sys_time == 0.0)
 })
 
 test_that("Alignment file: exceeds memory", {

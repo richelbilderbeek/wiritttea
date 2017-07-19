@@ -20,7 +20,7 @@ if (!file.exists(operators_filename)) {
   my_filenames <- list.files(path_data, pattern = ".*\\.xml\\.state", full.names = TRUE)
 
   print("Collecting operators")
-  df_operators <- wiritttea::collect_files_operators(filenames = my_filenames, show_progress = TRUE)
+  df_operators <- wiritttea::collect_files_operators(filenames = my_filenames)
 
   print("Saving operators")
   write.csv(df_operators, operators_filename)
