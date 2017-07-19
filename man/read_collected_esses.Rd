@@ -8,7 +8,7 @@
   read_collected_esses(filename = wiritttea::find_path("collect_files_esses.csv"))
 }
 \arguments{
-\item{filename}{name of the CSV file}
+\item{filename}{name of the CSV file, as created by 'collect_files_esses'}
 }
 \value{
 a dataframe
@@ -18,7 +18,9 @@ Read all the collected ESSes of all simulations' posteriors
 }
 \examples{
   df <- read_collected_esses()
-  expected_names <- c("filename", "sti", "ai", "pi", "min_ess")
+  expected_names <- c("filename", "sti", "ai", "pi", "posterior",
+    "likelihood", "prior", "treeLikelihood", "TreeHeight", "BirthDeath",
+    "birthRate2", "relativeDeathRate2")
   testit::assert(names(df) == expected_names)
   testit::assert(is.factor(df$filename))
   testit::assert(is.factor(df$sti))

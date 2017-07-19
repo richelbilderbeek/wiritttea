@@ -4,10 +4,12 @@
 \alias{collect_log_files_info}
 \title{Collects log file information in the melted/uncast/long form}
 \usage{
-collect_log_files_info(filenames)
+collect_log_files_info(filenames, show_progress = FALSE)
 }
 \arguments{
 \item{filenames}{names of the parameter file}
+
+\item{show_progress}{show progress if TRUE}
 }
 \value{
 A dataframe with all information of all log files
@@ -21,7 +23,7 @@ Collects log file information in the melted/uncast/long form
    find_path("add_alignments_exceeded_memory.log")
  )
  df <- collect_log_files_info(filenames)
- testit::assert(names(df) == c("filename", "exit_status"))
+ testit::assert(names(df) == c("filename", "exit_status", "sys_time"))
  testit::assert(nrow(df) == length(filenames))
  testit::assert(df$exit_status[1] != df$exit_status[2])
 }

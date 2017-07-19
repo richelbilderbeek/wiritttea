@@ -4,10 +4,12 @@
 \alias{collect_files_alignments}
 \title{Collects the quality of the alignments of the files}
 \usage{
-collect_files_alignments(filenames)
+collect_files_alignments(filenames, show_progress = FALSE)
 }
 \arguments{
 \item{filenames}{names of the parameter files}
+
+\item{show_progress}{shows the progress if set to TRUE}
 }
 \value{
 A dataframe with the columns 'filename', 'n_alignments_ok' (number
