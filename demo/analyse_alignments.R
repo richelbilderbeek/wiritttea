@@ -3,7 +3,7 @@ library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170523"
 path_data <- paste0("~/wirittte_data/", date)
-alignments_filename <- paste0("~/alignments_", date, ".csv")
+alignments_filename <- paste0("~/GitHubs/wirittte_data/alignments_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
@@ -18,23 +18,5 @@ if (!file.exists(alignments_filename)) {
   write.csv(df, alignments_filename)
 }
 
-df <- read.csv(alignments_filename)
-n_ok <- sum(df$n_alignments_ok)
-n_na <- sum(df$n_alignments_na)
-n_zeroes <- sum(df$n_alignments_zeroes)
-
-df_problematic <- df[is.na(df$n_alignments_ok) | df$n_alignments_na > 0, ]
-df_plottable <- df_problematic[!is.na(df_problematic$n_alignments_ok), ]
-
-if (1 == 2) {
-
-  for (filename in head(df_plottable$filename, n = 1)) {
-    file <- wiritttes::read_file(paste0(path_data, "/", filename))
-
-    for (i in seq(1, wiritttes::extract_napst(file))) {
-      alignment <- wiritttes::get_alignment_by_index(file, i)
-      image(alignment)
-    }
-  }
-}
-
+print("Load alignments data")
+df_alignments <- wiritttea::read_collected_alignments(alignments_filename)
