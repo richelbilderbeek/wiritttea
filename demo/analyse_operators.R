@@ -1,9 +1,9 @@
 # Analyse the BEAST2 operators, as found in the .xml.state files
 library(wiritttea)
 options(warn = 2) # Be strict
-date <- "20170710"
+date <- "20170711"
 path_data <- paste0("~/wirittte_data/", date)
-operators_filename <- paste0("~/operators_", date, ".csv")
+operators_filename <- paste0("~/GitHubs/wirittte_data/operators_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
@@ -20,11 +20,11 @@ if (!file.exists(operators_filename)) {
   my_filenames <- list.files(path_data, pattern = ".*\\.xml\\.state", full.names = TRUE)
 
   print("Collecting operators")
-  df_operators <- wiritttea::collect_files_operators(filenames = my_filenames, show_progress = TRUE)
+  df_operators <- wiritttea::collect_files_operators(filenames = my_filenames, show_progress = FALSE)
 
   print("Saving operators")
   write.csv(df_operators, operators_filename)
 }
 
-print("Load log files info")
-df_log_files <- wiritttea::read_collected_log_files_info(log_files_filename)
+print("Load operators")
+df_operators <- wiritttea::read_collected_operators(operators_filename)

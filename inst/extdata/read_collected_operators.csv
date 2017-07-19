@@ -1,0 +1,11 @@
+"","filename","operator","p","accept","reject","acceptFC","rejectFC","rejectIv","rejectOp"
+"1","collect_files_operators.xml.state","treeScaler.t",0.87614332922781,3072,35453,3038,34345,0,0
+"2","collect_files_operators.xml.state","treeRootScaler.t",0.859201841259394,3094,35233,3058,34177,3211,3211
+"3","collect_files_operators.xml.state","UniformOperator.t",NA,27007,357905,25984,347803,0,0
+"4","collect_files_operators.xml.state","SubtreeSlide.t",0.100520001869514,1863,191268,1844,185748,77416,77416
+"5","collect_files_operators.xml.state","narrow.t",NA,133,191647,0,186233,0,0
+"6","collect_files_operators.xml.state","wide.t",NA,4,38420,0,37300,19382,19382
+"7","collect_files_operators.xml.state","WilsonBalding.t",NA,8,38264,0,37138,5063,5063
+"8","collect_files_operators.xml.state","BirthRateScaler.t",0.352699740280874,10455,27885,9665,27559,0,0
+"9","collect_files_operators.xml.state","DeathRateScaler.t",0.195431877184133,13889,24401,12966,24211,5814,5814
+"10","collect_files_operators_empty.xml.state",NA,NA,NA,NA,NA,NA,NA,NA

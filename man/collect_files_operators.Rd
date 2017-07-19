@@ -5,8 +5,8 @@
 \title{Calculates the BEAST2 operators from multiple files}
 \usage{
 
-  collect_files_operators(filenames = rep(find_path("collect_files_operators.xml.state"),
-  2), show_progress = FALSE)
+  collect_files_operators(filenames = find_paths(c("collect_files_operators.xml.state",
+  "collect_files_operators_empty.xml.state")), show_progress = FALSE)
 }
 \arguments{
 \item{filenames}{the names of the .xml.state files}

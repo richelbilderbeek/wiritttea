@@ -20,6 +20,7 @@ test_that("good and empty file", {
         c("collect_files_operators.xml.state", "collect_files_operators_empty.xml.state"))
 
   )
+  #write.csv(df_operators, "~/read_collected_operators.csv")
 
   testthat::expect_equal(nrow(df_operators), 10)
 })
