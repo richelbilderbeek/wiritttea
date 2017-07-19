@@ -6,10 +6,12 @@
 \usage{
 
   collect_files_operators(filenames = rep(find_path("collect_files_operators.xml.state"),
-  2))
+  2), show_progress = FALSE)
 }
 \arguments{
 \item{filenames}{the names of the .xml.state files}
+
+\item{show_progress}{shows the progress if TRUE}
 }
 \value{
 a data frame with the operators' acceptances
