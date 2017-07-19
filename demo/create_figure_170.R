@@ -48,8 +48,8 @@ names(df)
 df$sti <- plyr::revalue(df$sti, c("1" = "?youngest", "2" = "?oldest"))
 
 print("Creating figure 170")
-png("~/figure170.png")
-# svg("~/figure170.svg")
+png("~/figure_170.png")
+# svg("~/figure_170.svg")
 
 ggplot2::ggplot(
   data = na.omit(df),

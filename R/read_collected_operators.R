@@ -14,6 +14,7 @@ read_collected_operators <- function(
     row.names = 1
   )
   df$filename <- as.factor(df$filename)
+  df$operator <- as.factor(df$operator)
   df
 
 }

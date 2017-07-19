@@ -59,8 +59,8 @@ mean_bd_error <- mean(na.omit(df[ df$scr == scr_bd, ]$mean))
 
 print("Creating figure 130")
 
-png("~/figure130.png")
-#svg("~/figure130.svg")
+png("~/figure_130.png")
+#svg("~/figure_130.svg")
 ggplot2::ggplot(
   data = na.omit(df),
   ggplot2::aes(x = mean_durspec, y = mean)

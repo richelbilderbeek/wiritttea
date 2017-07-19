@@ -53,8 +53,8 @@ names(df)
 head(df, n = 10)
 
 print("Creating figure 140")
-#svg("~/figure140.svg")
-png("~/figure140.png")
+#svg("~/figure_140.svg")
+png("~/figure_140.png")
 ggplot2::ggplot(
   data = na.omit(df),
   ggplot2::aes(x = as.factor(scr), y = mean)

@@ -65,8 +65,8 @@ esses$ess_type <- as.factor(esses$ess_type)
 df <- merge(x = df, y = esses, by = c("filename", "sti", "ai", "pi"), all = TRUE)
 
 print("Creating figure 150")
-svg("~/figure150.svg")
-png("~/figure150.png")
+svg("~/figure_150.svg")
+png("~/figure_150.png")
 ggplot2::ggplot(
   data = na.omit(df),
   ggplot2::aes(x = as.factor(scr), y = mean, fill = ess_type)
