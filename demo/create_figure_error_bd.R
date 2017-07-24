@@ -1,17 +1,16 @@
-# Quantification of the error BEAST2 makes on BD trees
+# Create 'figure_error_bd'
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/GitHubs/Peregrine20170710"
-nltt_stats_filename <- "~/wirittte_data/nltt_stats_20170710.csv"
-parameters_filename <- "~/GitHubs/wirittte_data/parameters_20170710.csv"
+date <- "20170710"
+nltt_stats_filename <- paste0("~/wirittte_data/nltt_stats_", date, ".csv")
+parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) > 0) path_data <- args[1]
-if (length(args) > 1) nltt_stats_filename <- args[2]
-if (length(args) > 2) parameters_filename <- args[3]
+if (length(args) > 0) nltt_stats_filename <- args[1]
+if (length(args) > 1) parameters_filename <- args[2]
 
-print(paste("path_data:", path_data))
 print(paste("nltt_stats_filename:", nltt_stats_filename))
+print(paste("parameters_filename:", parameters_filename))
 
 if (!file.exists(parameters_filename)) {
   stop(
@@ -56,18 +55,17 @@ scr_bd <- max(na.omit(df$scr))
 df <- df[ df$scr == scr_bd, ]
 print(paste0("Rows after: ", nrow(df)))
 
-print("Creating figure 110")
+print("Creating figure")
 
-#svg("~/figure_110.svg")
-png("~/figure_110.png")
+svg("~/figure_error_bd.svg")
 ggplot2::ggplot(
-  data = na.omit(df), na.rm = TRUE,
-  ggplot2::aes(x = 1, y = mean)
+  data = na.omit(df),
+  ggplot2::aes(x = mean)
 ) +
-  ggplot2::geom_boxplot() +
+  ggplot2::geom_histogram(binwidth = 0.001) +
   ggplot2::facet_grid(erg ~ sirg) +
-  ggplot2::scale_x_discrete("") +
-  ggplot2::scale_y_continuous("Mean nLTT statistic") +
+  ggplot2::scale_x_continuous("Mean nLTT statistic") +
+  ggplot2::scale_y_continuous("Count") +
   ggplot2::ggtitle("Mean nLTT statistics\nfor different extinction (columns)\nand speciation inition rates (rows)") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
