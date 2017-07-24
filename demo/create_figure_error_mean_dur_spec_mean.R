@@ -1,17 +1,16 @@
-# Create figure 130
+# Create 'figure_error_expected_mean_dur_spec_mean' (tailing mean: use the mean nLTT statistic)
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/GitHubs/Peregrine20170710"
-nltt_stats_filename <- "~/wirittte_data/nltt_stats_20170710.csv"
-parameters_filename <- "~/GitHubs/wirittte_data/parameters_20170710.csv"
+date <- "20170710"
+nltt_stats_filename <- paste0("~/wirittte_data/nltt_stats_", date, ".csv")
+parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) > 0) path_data <- args[1]
-if (length(args) > 1) nltt_stats_filename <- args[2]
-if (length(args) > 2) parameters_filename <- args[3]
+if (length(args) > 0) nltt_stats_filename <- args[1]
+if (length(args) > 1) parameters_filename <- args[2]
 
-print(paste("path_data:", path_data))
 print(paste("nltt_stats_filename:", nltt_stats_filename))
+print(paste("parameters_filename:", parameters_filename))
 
 if (!file.exists(parameters_filename)) {
   stop("Please run analyse_parameters")
@@ -57,17 +56,21 @@ scr_bd <- max(na.omit(df$scr))
 mean_bd_error <- mean(na.omit(df[ df$scr == scr_bd, ]$mean))
 
 
-print("Creating figure 130")
+print("Creating figure")
 
-png("~/figure_130.png")
-#svg("~/figure_130.svg")
+svg("~/figure_error_expected_mean_dur_spec_mean.svg")
 ggplot2::ggplot(
   data = na.omit(df),
   ggplot2::aes(x = mean_durspec, y = mean)
 ) + ggplot2::geom_point() +
-    ggplot2::xlab("Mean duration of speciation (million years)") +
-    ggplot2::ylab("Mean nLTT statistic") +
-    ggplot2::geom_hline(yintercept = mean_bd_error, linetype = "dotted") +
-    ggplot2::ggtitle("Mean nLTT statistic for different duration of speciations") +
-    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+  ggplot2::geom_hline(yintercept = mean_bd_error, linetype = "dotted") +
+  ggplot2::xlab("Expected mean duration of speciation (million years)") +
+  ggplot2::ylab("Mean nLTT statistic") +
+  ggplot2::labs(
+    title = "Mean nLTT statistic for different duration of speciations",
+    caption  = "figure_error_expected_mean_dur_spec_mean"
+  ) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+
 dev.off()

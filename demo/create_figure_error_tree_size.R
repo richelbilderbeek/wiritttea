@@ -58,11 +58,11 @@ ggplot2::ggplot(
   ggplot2::aes(x = n_taxa, y = mean)
 ) + ggplot2::geom_point() +
   ggplot2::geom_smooth() +
-    ggplot2::xlab("Number of taxa") +
-    ggplot2::ylab("Mean nLTT statistic") +
-    ggplot2::labs(
-      title = "The effect of number of taxa on mean nLTT statistic",
-      caption  = "Figure 'error_tree_size'"
-    ) +
-    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+  ggplot2::xlab("Number of taxa") +
+  ggplot2::ylab("Mean nLTT statistic") +
+  ggplot2::labs(
+    title = "The effect of number of taxa on mean nLTT statistic",
+    caption  = "Figure 'error_tree_size'"
+  ) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
