@@ -1,4 +1,4 @@
-# Create 'figure_error_bd'
+# Create 'figure_error_bd_mean'
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
@@ -28,14 +28,23 @@ print("Read parameters and nLTT stats")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
 
+print("Take the mean of the nLTT stats")
+library(dplyr)
+nltt_stat_means <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
+       summarise(mean=mean(nltt_stat), sd=sd(nltt_stat))
+testit::assert(all(names(nltt_stat_means)
+  == c("filename", "sti", "ai", "pi", "mean", "sd")))
+head(nltt_stat_means, n = 10)
+nrow(nltt_stat_means)
+
 print("Prepare parameters for merge")
 parameters$filename <- row.names(parameters)
 parameters$filename <- as.factor(parameters$filename)
 
 print("Connect the mean nLTT stats and parameters")
 testit::assert("filename" %in% names(parameters))
-testit::assert("filename" %in% names(nltt_stats))
-df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
+testit::assert("filename" %in% names(nltt_stat_means))
+df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
 names(df)
 head(df, n = 10)
 
@@ -47,19 +56,16 @@ df <- df[ df$scr == scr_bd, ]
 print(paste0("Rows after: ", nrow(df)))
 
 print("Creating figure")
-svg("~/figure_error_bd.svg")
+
+svg("~/figure_error_bd_mean.svg")
 ggplot2::ggplot(
   data = na.omit(df),
-  ggplot2::aes(x = nltt_stat)
+  ggplot2::aes(x = mean)
 ) +
   ggplot2::geom_histogram(binwidth = 0.001) +
   ggplot2::facet_grid(erg ~ sirg) +
-  ggplot2::labs(
-    title =
-      "nLTT statistics\nfor different extinction (columns)\nand speciation inition rates (rows)",
-    x = "nLTT statistic",
-    y = "Count",
-    caption = "figure_error_bd.svg"
-  ) +
+  ggplot2::scale_x_continuous("Mean nLTT statistic") +
+  ggplot2::scale_y_continuous("Count") +
+  ggplot2::ggtitle("Mean nLTT statistics\nfor different extinction (columns)\nand speciation inition rates (rows)") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
