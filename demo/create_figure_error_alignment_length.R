@@ -1,4 +1,4 @@
-# Create figure 150
+# Create 'figure_error_alignment_length'
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
@@ -30,46 +30,46 @@ if (!file.exists(esses_filename)) {
 # Read parameters and nLTT stats
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
-esses <- wiritttea::read_collected_esses(esses_filename)
-
-# Take the mean of the nLTT stats
-library(dplyr)
-nltt_stat_means <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
-       summarise(mean=mean(nltt_stat), sd=sd(nltt_stat))
-testit::assert(all(names(nltt_stat_means)
-  == c("filename", "sti", "ai", "pi", "mean", "sd")))
-head(nltt_stat_means, n = 10)
-nrow(nltt_stat_means)
 
 # Prepare parameters for merge
 parameters$filename <- row.names(parameters)
 parameters$filename <- as.factor(parameters$filename)
 
+# Select only those columns that we need
+names(parameters)
+parameters <- dplyr::select(parameters, c(sirg, scr, erg, sequence_length, filename))
+names(nltt_stats)
+nltt_stats <- dplyr::select(nltt_stats, c(filename, nltt_stat))
+
 # Connect the mean nLTT stats and parameters
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(nltt_stat_means))
-df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
-
-
-# Merge with the ESSes
-df <- merge(x = df, y = esses, by = c("filename", "sti", "ai", "pi"), all = TRUE)
+df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
 
 head(df)
 
-print("Creating figure 240")
-svg("~/figure_240.svg")
-png("~/figure_240.png")
+print("Creating figure")
+
+svg("~/figure_error_alignment_length.svg")
+n_samples <- 342800
+n_data <- nrow(na.omit(df))
+
 ggplot2::ggplot(
-  data = na.omit(df),
-  ggplot2::aes(x = as.factor(scr), y = mean, fill = as.factor(sequence_length))
-) + ggplot2::geom_boxplot() +
+  data = dplyr::sample_n(na.omit(df), n_samples),
+  ggplot2::aes(x = as.factor(scr), y = nltt_stat, fill = as.factor(sequence_length))
+) + ggplot2::geom_boxplot(outlier.alpha = 0.1, outlier.size = 0.5) +
     ggplot2::facet_grid(erg ~ sirg) +
     ggplot2::xlab("Speciation completion rate (probability per lineage per million years)") +
-    ggplot2::ylab("Mean nLTT statistics") +
+    ggplot2::ylab("nLTT statistic") +
     ggplot2::labs(
-      fill = "Sequence/nlength (bp)",
-      title = "The effect of alignment length on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initaion rates (columns)\nand extinction rates (rows)",
-      caption  = "Figure 240"
+      title = paste0(
+        "The effect of alignment length on nLTT statistic for\n",
+        "different speciation completion rates (x axis boxplot),\n",
+        "speciation initaion rates (columns)\n",
+        "and extinction rates (rows) (n = ", n_samples, "/", n_data, ")"
+      ),
+      fill = "Sequence\nlength (bp)",
+      caption  = "figure_error_alignment_length_mean"
     ) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
