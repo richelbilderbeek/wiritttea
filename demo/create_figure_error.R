@@ -1,0 +1,58 @@
+# Create 'figure_error_bd'
+library(wiritttea)
+options(warn = 2) # Be strict
+date <- "20170710"
+nltt_stats_filename <- paste0("~/wirittte_data/nltt_stats_", date, ".csv")
+parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
+
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) > 0) nltt_stats_filename <- args[1]
+if (length(args) > 1) parameters_filename <- args[2]
+
+print(paste("nltt_stats_filename:", nltt_stats_filename))
+print(paste("parameters_filename:", parameters_filename))
+
+if (!file.exists(parameters_filename)) {
+  stop(
+    "File '", parameters_filename, "' not found, ",
+    "please run analyse_parameters"
+  )
+}
+
+if (!file.exists(nltt_stats_filename)) {
+  stop("File '", nltt_stats_filename, "' not found, ",
+    "please run analyse_nltt_stats")
+}
+
+print("Read parameters and nLTT stats")
+parameters <- wiritttea::read_collected_parameters(parameters_filename)
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+
+print("Prepare parameters for merge")
+parameters$filename <- row.names(parameters)
+parameters$filename <- as.factor(parameters$filename)
+
+print("Connect the mean nLTT stats and parameters")
+testit::assert("filename" %in% names(parameters))
+testit::assert("filename" %in% names(nltt_stats))
+df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
+names(df)
+head(df, n = 10)
+
+print("Creating figure")
+svg("~/figure_error.svg")
+ggplot2::ggplot(
+  data = na.omit(df),
+  ggplot2::aes(x = nltt_stat)
+) +
+  ggplot2::geom_histogram(binwidth = 0.001) +
+  ggplot2::facet_grid(erg ~ sirg) +
+  ggplot2::labs(
+    title =
+      "nLTT statistics\nfor different extinction (columns)\nand speciation inition rates (rows)",
+    x = "nLTT statistic",
+    y = "Count",
+    caption = "figure_error_bd.svg"
+  ) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+dev.off()
