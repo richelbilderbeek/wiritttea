@@ -1,4 +1,4 @@
-# Table 190: Which estimated parameter has the lowest ESS?
+# Create figure_lowest_ess: Which estimated parameter has the lowest ESS?
 options(warn = 2) # Be strict
 date <- "20170710"
 esses_filename <- paste0("~/GitHubs/wirittte_data/esses_", date, ".csv")
@@ -41,9 +41,8 @@ for (i in seq(1, nrow(df_esses))) {
 df_esses$lowest <- as.factor(df_esses$lowest)
 
 # Make a histogram
-# Create figure 190
-png("~/figure_190.png")
-# svg("~/figure_190.svg")
+
+svg("~/figure_lowest_ess.svg")
 ggplot2::ggplot(
   data = df_esses,
   ggplot2::aes(x = lowest, fill = lowest)
@@ -52,5 +51,5 @@ ggplot2::ggplot(
   ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)) +
   ggplot2::ggtitle("Parameters with lowest ESS") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
-  ggplot2::labs(caption = "Figure 190")
+  ggplot2::labs(caption = "figure_lowest_ess")
 dev.off()

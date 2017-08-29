@@ -1,4 +1,4 @@
-# Creaet figure 220: quality of the alignments
+# Create figure_alignment_qualities: quality of the alignments
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
@@ -29,9 +29,7 @@ df <- data.frame(
 )
 df$status <- as.factor(df$status)
 
-png("~/figure_220.png")
-# svg("~/figure_220.svg")
-
+svg("~/figure_alignment_qualities.svg")
 ggplot2::ggplot(
   data = df,
   ggplot2::aes(x = status, y = n, fill = status)
@@ -43,6 +41,4 @@ ggplot2::ggplot(
     caption  = "Figure 220"
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-
-
 dev.off()

@@ -1,3 +1,4 @@
+# Create figure_strees_different
 # Analyse if the two sampled species trees are identical
 library(wiritttea)
 options(warn = 2) # Be strict
@@ -19,8 +20,7 @@ df_strees <- wiritttea::read_collected_strees_identical(strees_filename)
 
 head(df_strees)
 
-png("~/figure_210.png")
-# svg("~/figure_210.svg")
+svg("~/figure_strees_different.svg")
 ggplot2::ggplot(
   df_strees,
   ggplot2::aes(x = strees_identical, fill = strees_identical)
@@ -28,7 +28,7 @@ ggplot2::ggplot(
     ggplot2::xlab("") +
     ggplot2::labs(
     title = "How often do sampled species trees differ?",
-    caption  = "Figure 210",
+    caption  = "strees_different",
     fill = "Are the\nsampled\nspecies tree\ndifferent?") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()

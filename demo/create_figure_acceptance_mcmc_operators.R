@@ -17,8 +17,7 @@ print("Load operators")
 df_operators <- wiritttea::read_collected_operators(operators_filename)
 
 
-png("~/figure_180.png")
-# svg("~/figure_180.svg")
+svg("~/figure_acceptance_mcmc_operators.svg")
 
 ggplot2::ggplot(
   na.omit(df_operators),
@@ -29,7 +28,7 @@ ggplot2::ggplot(
     title = "Operator acceptances",
     x = "Operator",
     y = "Acceptance",
-    caption = "Figure 180"
+    caption = "figure_acceptance_mcmc_operators"
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
   ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)) +

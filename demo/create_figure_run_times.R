@@ -1,4 +1,4 @@
-# Figure 200: distribution of runtimes
+# figure_run_times: distribution of runtimes
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
@@ -17,8 +17,7 @@ if (!file.exists(log_files_filename)) {
 print("Load log files info")
 df_log_files <- wiritttea::read_collected_log_files_info(log_files_filename)
 
-png("~/figure_200.png")
-# svg("~/figure_200.svg")
+svg("~/figure_run_times.svg")
 ggplot2::ggplot(
   data = df_log_files[ df_log_files$sys_time > 600,  ],
   ggplot2::aes(x = sys_time, fill = exit_status)
@@ -29,5 +28,4 @@ ggplot2::ggplot(
     fill = "Exit status",
     caption = "Figure 200"
   ) + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-
 dev.off()
