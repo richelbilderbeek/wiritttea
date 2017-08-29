@@ -1,4 +1,4 @@
-# Create figure 130
+# Create figure 170
 library(wiritttea)
 options(warn = 2) # Be strict
 path_data <- "~/GitHubs/Peregrine20170710"
@@ -25,13 +25,6 @@ if (!file.exists(nltt_stats_filename)) {
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
 
-# Add mean duration of speciation to parameters
-parameters$mean_durspec <- PBD::pbd_mean_durspecs(
-  eris = parameters$eri,
-  scrs = parameters$scr,
-  siris = parameters$siri
-)
-
 # Take the mean of the nLTT stats
 library(dplyr)
 nltt_stat_means <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
@@ -49,19 +42,21 @@ parameters$filename <- as.factor(parameters$filename)
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(nltt_stat_means))
 df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
-names(df)
-head(df, n = 10)
 
-print("Creating figure 140")
-#svg("~/figure_140.svg")
-png("~/figure_140.png")
+names(df)
+
+df$sti <- plyr::revalue(df$sti, c("1" = "?youngest", "2" = "?oldest"))
+
+svg("~/figure_error_sampling_representative.svg")
 ggplot2::ggplot(
   data = na.omit(df),
-  ggplot2::aes(x = as.factor(scr), y = mean)
+  ggplot2::aes(x = as.factor(scr), y = mean, fill = sti)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +
     ggplot2::xlab("Speciation completion rate (probability per lineage per million years)") +
     ggplot2::ylab("Mean nLTT statistics") +
-    ggplot2::ggtitle("Mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initaion rates (columns)\nand extinction rates (rows)") +
+    ggplot2::labs(fill = "Sampling") +
+    ggplot2::labs(caption = "Figure 170") +
+    ggplot2::ggtitle("The effect of sampling on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initaion rates (columns)\nand extinction rates (rows)") +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
