@@ -40,7 +40,7 @@ print("Connect the ESSes and parameters")
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(df_esses))
 df <- merge(x = parameters, y = df_esses_long, by = "filename", all = TRUE)
-
+head(df)
 
 svg("~/figure_ess_distribution.svg")
 
@@ -55,6 +55,25 @@ ggplot2::ggplot(
     x = "Effective Sample Size",
     y = "Count",
     caption = "figure_ess_distribution.svg"
+  ) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
+  ggplot2::geom_vline(xintercept = 200, linetype = "dotted")
+
+dev.off()
+
+svg("~/figure_ess_distribution_likelihood.svg")
+
+ggplot2::ggplot(
+  data = df[ df$parameter == "likelihood", ],
+  ggplot2::aes(x = ess)) +
+  ggplot2::geom_histogram(alpha = 0.5, position = "identity", binwidth = 50, na.rm = TRUE, color = "black") +
+  ggplot2::facet_grid(erg ~ scr) +
+  ggplot2::coord_cartesian(ylim = c(0, 100)) +
+  ggplot2::labs(
+    title = "Tree likelihood ESS distribution",
+    x = "Tree likelihood ESS",
+    y = "Count",
+    caption = "figure_ess_distribution_likelihood.svg"
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
   ggplot2::geom_vline(xintercept = 200, linetype = "dotted")
