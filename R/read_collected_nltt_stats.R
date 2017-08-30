@@ -1,7 +1,12 @@
 #' Read all the collected nLTT statistics of all simulations
 #' @param filename the name of the CSV containing the collected nLTT
 #'   statistics. Default value is 'inst/extdata/collected_files_nltt_stats.csv'
-#' @return a dataframe
+#' @return a dataframe, with columns `filename` (name of the file),
+#'   `sti` (species tree index), `ai` (alignment index), `pi` (posterior
+#'   index), `si` (state index) and `nltt_stat` (the nLTT statistic between
+#'   that posteriors's state and the nLTT of the original
+#'   species tree (which is either 'youngest' for `sti` equals 1, or
+#'   'oldest' for `sti` equals 2)
 #' @examples
 #'   df <- read_collected_nltt_stats()
 #'   expected_names <- c("filename", "sti", "ai", "pi", "si", "nltt_stat")

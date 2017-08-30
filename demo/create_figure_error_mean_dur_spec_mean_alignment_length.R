@@ -1,4 +1,4 @@
-# Create 'figure_error_expected_mean_dur_spec_mean' (tailing mean: use the mean nLTT statistic)
+# Create 'figure_error_expected_mean_dur_spec_mean_alignment_length'
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
@@ -53,25 +53,28 @@ head(df, n = 10)
 
 # Calculate mean BD error
 scr_bd <- max(na.omit(df$scr))
-mean_bd_error <- mean(na.omit(df[ df$scr == scr_bd, ]$mean))
+mean_bd_error_1000  <- mean(na.omit(df[ df$scr == scr_bd & df$sequence_length == 1000, ]$mean))
+mean_bd_error_10000 <- mean(na.omit(df[ df$scr == scr_bd & df$sequence_length == 10000, ]$mean))
 
 
 print("Creating figure")
 
-svg("~/figure_error_expected_mean_dur_spec_mean.svg")
+svg("~/figure_error_expected_mean_dur_spec_mean_alignment_length.svg")
 ggplot2::ggplot(
   data = na.omit(df),
-  ggplot2::aes(x = mean_durspec, y = mean)
+  ggplot2::aes(x = mean_durspec, y = mean, color = as.factor(sequence_length))
 ) + ggplot2::geom_point() +
-  ggplot2::geom_smooth(method = "loess", color = "red") +
-  ggplot2::geom_smooth(method = "lm", color = "blue") +
-  ggplot2::geom_hline(yintercept = mean_bd_error, linetype = "dotted") +
+  ggplot2::geom_smooth(method = "loess", size = 0.5) +
+  ggplot2::geom_smooth(method = "lm", size = 0.5) +
+  ggplot2::geom_hline(yintercept = mean_bd_error_1000, linetype = "dashed", color = scales::hue_pal()(2)[1]) +
+  ggplot2::geom_hline(yintercept = mean_bd_error_10000, linetype = "dashed", color = scales::hue_pal()(2)[2]) +
   ggplot2::xlab("Expected mean duration of speciation (million years)") +
   ggplot2::ylab("Mean nLTT statistic") +
   ggplot2::labs(
     title = "Mean nLTT statistic for different duration of speciations",
-    caption  = "figure_error_expected_mean_dur_spec_mean"
+    caption  = "figure_error_expected_mean_dur_spec_mean_alignment_length"
   ) +
+  ggplot2::labs(color = "DNA\nalignment\nlength\n(base pairs)") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 

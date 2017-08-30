@@ -1,4 +1,5 @@
-# Create 'figure_error_bd'
+# Create 'figure_error', a global and coarse overview of the nLTT statistic distribution
+# of all simulations
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
@@ -24,35 +25,87 @@ if (!file.exists(nltt_stats_filename)) {
     "please run analyse_nltt_stats")
 }
 
-print("Read parameters and nLTT stats")
+print("Read parameters")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
-nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+
+print("Add mean duration of speciation to parameters")
+parameters$mean_durspec <- PBD::pbd_mean_durspecs(
+  eris = parameters$eri,
+  scrs = parameters$scr,
+  siris = parameters$siri
+)
 
 print("Prepare parameters for merge")
 parameters$filename <- row.names(parameters)
 parameters$filename <- as.factor(parameters$filename)
+parameters <- subset(parameters, select = c(filename, mean_durspec) )
 
-print("Connect the mean nLTT stats and parameters")
+print("Read nLTT stats")
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+
+print("Prepare nLTT stats for merge")
+nltt_stats <- subset(nltt_stats, select = c(filename, nltt_stat) )
+# head(nltt_stats)
+
+print("Connect the nLTT stats and parameters")
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(nltt_stats))
 df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
 names(df)
 head(df, n = 10)
 
-print("Creating figure")
+my_colors <- hsv(scales::rescale(sort(unique(df$mean_durspec)), to = c(0.0, 5.0/6.0)))
+
+print("Creating figures")
+
 svg("~/figure_error.svg")
 ggplot2::ggplot(
   data = na.omit(df),
-  ggplot2::aes(x = nltt_stat)
+  ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
 ) +
-  ggplot2::geom_histogram(binwidth = 0.001) +
-  ggplot2::facet_grid(erg ~ sirg) +
+  ggplot2::geom_histogram(binwidth = 0.0001) +
+  ggplot2::scale_fill_manual(values = my_colors) +
   ggplot2::labs(
-    title =
-      "nLTT statistics\nfor different extinction (columns)\nand speciation inition rates (rows)",
+    title = "nLTT statistic distribution",
     x = "nLTT statistic",
     y = "Count",
-    caption = "figure_error_bd.svg"
-  ) +
+    caption = "figure_error.svg"
+  ) + ggplot2::guides(fill = FALSE) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+dev.off()
+
+
+
+svg("~/figure_error_head.svg")
+ggplot2::ggplot(
+  data = df[na.omit(df)$nltt_stat < 0.05, ],
+  ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
+) +
+  ggplot2::geom_histogram(binwidth = 0.0001) +
+  ggplot2::scale_fill_manual(values = my_colors) +
+  ggplot2::coord_cartesian(xlim = c(0.0, 0.05)) +
+  ggplot2::labs(
+    title = "nLTT statistic distribution",
+    x = "nLTT statistic",
+    y = "Count",
+    caption = "figure_error_head.svg"
+  ) + ggplot2::guides(fill = FALSE) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+dev.off()
+
+svg("~/figure_error_tail.svg")
+ggplot2::ggplot(
+  data = df[na.omit(df)$nltt_stat > 0.05, ],
+  ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
+) +
+  ggplot2::geom_histogram(binwidth = 0.001) +
+  ggplot2::scale_fill_manual(values = my_colors) +
+  ggplot2::coord_cartesian(xlim = c(0.05, 0.35)) +
+  ggplot2::labs(
+    title = "nLTT statistic distribution",
+    x = "nLTT statistic",
+    y = "Count",
+    caption = "figure_error_tail.svg"
+  ) + ggplot2::guides(fill = FALSE) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()

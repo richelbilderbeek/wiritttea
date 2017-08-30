@@ -1,4 +1,4 @@
-# Create 'figure_error_expected_mean_dur_spec'
+# Create 'figure_error_expected_mean_dur_spec_alignment_length'
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
@@ -37,7 +37,7 @@ parameters$filename <- as.factor(parameters$filename)
 
 # Only select the columns we need
 names(parameters)
-parameters <- dplyr::select(parameters, c(filename, mean_durspec, scr))
+parameters <- dplyr::select(parameters, c(filename, mean_durspec, scr, sequence_length))
 
 head(nltt_stats)
 nltt_stats <- dplyr::select(nltt_stats, c(filename, nltt_stat))
@@ -52,29 +52,31 @@ head(df, n = 10)
 
 # Calculate mean BD error
 scr_bd <- max(na.omit(df$scr))
-mean_bd_error <- mean(na.omit(df[ df$scr == scr_bd, ]$nltt_stat))
-
+mean_bd_error_1000  <- mean(na.omit(df[ df$scr == scr_bd & df$sequence_length == 1000 , ]$nltt_stat))
+mean_bd_error_10000 <- mean(na.omit(df[ df$scr == scr_bd & df$sequence_length == 10000, ]$nltt_stat))
 
 print("Creating figure")
 
-svg("~/figure_error_expected_mean_dur_spec.svg")
+svg("~/figure_error_expected_mean_dur_spec_alignment_length.svg")
 set.seed(42)
-n_sampled <- 2000
+n_sampled <- 5000
 n_data_points <- nrow(na.omit(df))
 ggplot2::ggplot(
   data = dplyr::sample_n(na.omit(df), size = n_sampled), # Out of 7M
-  ggplot2::aes(x = mean_durspec, y = nltt_stat)
-) + ggplot2::geom_jitter(width = 0.01, alpha = 0.01) +
-  ggplot2::geom_smooth(method = "loess", color = "red") +
-  ggplot2::geom_smooth(method = "lm", color = "blue") +
-  ggplot2::geom_hline(yintercept = mean_bd_error, linetype = "dotted") +
+  ggplot2::aes(x = mean_durspec, y = nltt_stat, color = as.factor(sequence_length))
+) + ggplot2::geom_jitter(width = 0.01, alpha = 0.2) +
+  ggplot2::geom_smooth(method = "loess") +
+  ggplot2::geom_smooth(method = "lm") +
+  ggplot2::geom_hline(yintercept = mean_bd_error_1000, linetype = "dotted", color = scales::hue_pal()(2)[1]) +
+  ggplot2::geom_hline(yintercept = mean_bd_error_10000, linetype = "dotted", color = scales::hue_pal()(2)[2]) +
   ggplot2::coord_cartesian(ylim = c(0, 0.1)) +
   ggplot2::xlab("Expected mean duration of speciation (million years)") +
   ggplot2::ylab("nLTT statistic") +
   ggplot2::labs(
     title = paste0("nLTT statistic for different expected mean duration of speciation (n = ", n_sampled, " / ", n_data_points, ")"),
-    caption  = "figure_error_expected_mean_dur_spec"
+    caption  = "figure_error_expected_mean_dur_spec_alignment_length"
   ) +
+  ggplot2::labs(color = "DNA\nalignment\nlength\n(base pairs)") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 
