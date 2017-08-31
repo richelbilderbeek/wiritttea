@@ -43,7 +43,7 @@ nltt_stats <- dplyr::select(nltt_stats, c(filename, nltt_stat))
 
 # Connect the mean nLTT stats and parameters
 testit::assert("filename" %in% names(parameters))
-testit::assert("filename" %in% names(nltt_stat_means))
+testit::assert("filename" %in% names(nltt_stats))
 df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
 
 head(df)

@@ -1,10 +1,11 @@
 # Create figure 150
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/GitHubs/Peregrine20170710"
-nltt_stats_filename <- "~/wirittte_data/nltt_stats_20170710.csv"
-parameters_filename <- "~/GitHubs/wirittte_data/parameters_20170710.csv"
-esses_filename <- "~/GitHubs/wirittte_data/esses_20170710.csv"
+date <- "20170710"
+path_data <- paste0("~/GitHubs/Peregrine", date, "")
+nltt_stats_filename <- paste0("~/wirittte_data/nltt_stats_", date, ".csv")
+parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
+esses_filename <- paste0("~/GitHubs/wirittte_data/esses_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]
@@ -52,10 +53,11 @@ testit::assert("filename" %in% names(nltt_stat_means))
 df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
 
 # Calculate median ESS
-median_ess <- median(na.omit(esses$min_ess))
+names(esses)
+median_ess <- median(na.omit(esses$treeLikelihood))
 
 # Calculate the types
-esses$ess_type <- esses$min_ess > median_ess
+esses$ess_type <- esses$treeLikelihood > median_ess
 # Convert: TRUE -> OK
 esses$ess_type[ esses$ess_type == TRUE ] <- "High"
 esses$ess_type[ esses$ess_type == FALSE ] <- "Low"
@@ -70,8 +72,12 @@ ggplot2::ggplot(
   ggplot2::aes(x = as.factor(scr), y = mean, fill = ess_type)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +
-    ggplot2::xlab("Speciation completion rate (probability per lineage per million years)") +
-    ggplot2::ylab("Mean nLTT statistics") +
-    ggplot2::ggtitle("The effect of a low and high ESS on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)") +
+    ggplot2::xlab(latex2exp::TeX("$\\lambda$ (probability per lineage per million years)")) +
+    ggplot2::ylab(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$")) +
+    ggplot2::labs(
+      title = "The effect of a low and high ESS of tree likelihood on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)",
+      caption  = "figure_error_low_high_ess.svg"
+    ) +
+    ggplot2::labs(fill = latex2exp::TeX("ESS tree\nlikelihood")) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
