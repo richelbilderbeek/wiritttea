@@ -59,20 +59,33 @@ mean_bd_error <- mean(na.omit(df[ df$scr == scr_bd, ]$mean))
 print("Creating figure")
 
 svg("~/figure_error_expected_mean_dur_spec_mean.svg")
+
+options(warn = 1) # Allow points falling out of range
+
+
 ggplot2::ggplot(
   data = na.omit(df),
   ggplot2::aes(x = mean_durspec, y = mean)
 ) + ggplot2::geom_point() +
-  ggplot2::geom_smooth(method = "loess", color = "red") +
-  ggplot2::geom_smooth(method = "lm", color = "blue") +
+  ggplot2::geom_smooth(method = "lm", color = "blue", size = 0.5, alpha = 0.25) +
+  ggpmisc::stat_poly_eq(
+    formula = y ~ x,
+    eq.with.lhs = paste(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$"), "~`=`~"),
+    eq.x.rhs = latex2exp::TeX(" \\bar{t_{ds}}"),
+    ggplot2::aes(label = paste(..eq.label.., ..adj.rr.label.., sep = "~~~~")),
+    color = "blue",
+    parse = TRUE) +
+  ggplot2::geom_smooth(method = "loess", color = "red", size = 0.5, alpha = 0.25) +
   ggplot2::geom_hline(yintercept = mean_bd_error, linetype = "dotted") +
-  ggplot2::xlab("Expected mean duration of speciation (million years)") +
-  ggplot2::ylab("Mean nLTT statistic") +
+  ggplot2::scale_y_continuous(limits = c(0, 0.05)) + # Will have some outliers unplotted
+  ggplot2::xlab(latex2exp::TeX(" t_\\bar{ds}} (million years)")) +
+  ggplot2::ylab(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$")) +
   ggplot2::labs(
     title = "Mean nLTT statistic for different duration of speciations",
     caption  = "figure_error_expected_mean_dur_spec_mean"
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
+options(warn = 2) # Be strict
 
 dev.off()
