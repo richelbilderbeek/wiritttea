@@ -60,6 +60,6 @@ ggplot2::ggplot(
     ggplot2::facet_grid(erg ~ sirg) +
     ggplot2::xlab("Speciation completion rate (probability per lineage per million years)") +
     ggplot2::ylab("Mean nLTT statistics") +
-    ggplot2::ggtitle("Mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initaion rates (columns)\nand extinction rates (rows)") +
+    ggplot2::ggtitle("Mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)") +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()

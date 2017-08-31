@@ -87,7 +87,7 @@ ggplot2::ggplot(
     ggplot2::geom_hline(yintercept = nltt_stat_cutoff, linetype = "dotted") +
     ggplot2::labs(fill = "Sampling") +
     ggplot2::labs(caption = paste0("(n = ", sample_size,"/", n_nltt_stats_all,"), figure_error_sampling_representative")) +
-    ggplot2::ggtitle("The effect of sampling on nLTT statistic values for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initaion rates (columns)\nand extinction rates (rows)") +
+    ggplot2::ggtitle("The effect of sampling on nLTT statistic values for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)") +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
 
@@ -105,7 +105,7 @@ ggplot2::ggplot(
     ggplot2::ylab(latex2exp::TeX("$\\Delta_{nLTT}$")) +
     ggplot2::labs(fill = "Sampling") +
     ggplot2::labs(caption = paste0("(n = ", sample_size,"/", n_nltt_stats_all,"), figure_error_sampling_representative_zoom")) +
-    ggplot2::ggtitle("The effect of sampling on nLTT statistic values for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initaion rates (columns)\nand extinction rates (rows)") +
+    ggplot2::ggtitle("The effect of sampling on nLTT statistic values for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)") +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 options(warn = 2) # Be strict
 dev.off()
@@ -121,7 +121,7 @@ ggplot2::ggplot(
     ggplot2::ylab(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$")) +
     ggplot2::labs(fill = "Sampling") +
     ggplot2::labs(caption = "figure_error_sampling_representative_mean") +
-    ggplot2::ggtitle("The effect of sampling on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initaion rates (columns)\nand extinction rates (rows)") +
+    ggplot2::ggtitle("The effect of sampling on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)") +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
 
@@ -138,7 +138,7 @@ ggplot2::ggplot(
     ggplot2::ylab(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$")) +
     ggplot2::labs(fill = "Sampling") +
     ggplot2::labs(caption = "figure_error_sampling_representative_mean_zoom") +
-    ggplot2::ggtitle("The effect of sampling on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initaion rates (columns)\nand extinction rates (rows)") +
+    ggplot2::ggtitle("The effect of sampling on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)") +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 options(warn = 2) # Be strict
 dev.off()

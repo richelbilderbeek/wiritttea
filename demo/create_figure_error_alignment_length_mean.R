@@ -69,7 +69,7 @@ ggplot2::ggplot(
     ggplot2::ylab("Mean nLTT statistics") +
     ggplot2::labs(
       fill = "Sequence/nlength (bp)",
-      title = "The effect of alignment length on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initaion rates (columns)\nand extinction rates (rows)",
+      title = "The effect of alignment length on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)",
       caption  = "figure_error_alignment_length_mean"
     ) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))

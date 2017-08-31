@@ -65,7 +65,7 @@ ggplot2::ggplot(
       title = paste0(
         "The effect of alignment length on nLTT statistic for\n",
         "different speciation completion rates (x axis boxplot),\n",
-        "speciation initaion rates (columns)\n",
+        "speciation initiation rates (columns)\n",
         "and extinction rates (rows) (n = ", n_samples, "/", n_data, ")"
       ),
       fill = "Sequence\nlength (bp)",
