@@ -61,23 +61,33 @@ svg("~/figure_error_expected_mean_dur_spec_alignment_length.svg")
 set.seed(42)
 n_sampled <- 5000
 n_data_points <- nrow(na.omit(df))
+
+options(warn = 1) # Allow points not to be plotted
+
 ggplot2::ggplot(
   data = dplyr::sample_n(na.omit(df), size = n_sampled), # Out of 7M
   ggplot2::aes(x = mean_durspec, y = nltt_stat, color = as.factor(sequence_length))
 ) + ggplot2::geom_jitter(width = 0.01, alpha = 0.2) +
-  ggplot2::geom_smooth(method = "loess") +
   ggplot2::geom_smooth(method = "lm") +
+  ggpmisc::stat_poly_eq(
+    formula = y ~ x,
+    eq.with.lhs = paste(latex2exp::TeX("$\\Delta_{nLTT}$"), "~`=`~"),
+    eq.x.rhs = latex2exp::TeX(" \\bar{t_{ds}}"),
+    ggplot2::aes(label = paste(..eq.label.., ..adj.rr.label.., sep = "~~~~")),
+    parse = TRUE) +
+  ggplot2::geom_smooth(method = "loess") +
   ggplot2::geom_hline(yintercept = mean_bd_error_1000, linetype = "dotted", color = scales::hue_pal()(2)[1]) +
   ggplot2::geom_hline(yintercept = mean_bd_error_10000, linetype = "dotted", color = scales::hue_pal()(2)[2]) +
-  ggplot2::coord_cartesian(ylim = c(0, 0.1)) +
-  ggplot2::xlab("Expected mean duration of speciation (million years)") +
-  ggplot2::ylab("nLTT statistic") +
+  ggplot2::scale_y_continuous(limits = c(0, 0.05)) + # Will have some outliers unplotted
+  ggplot2::xlab(latex2exp::TeX(" t_\\bar{ds}} (million years)")) +
+  ggplot2::ylab(latex2exp::TeX("$\\Delta_{nLTT}$")) +
   ggplot2::labs(
-    title = paste0("nLTT statistic for different expected mean duration of speciation (n = ", n_sampled, " / ", n_data_points, ")"),
-    caption  = "figure_error_expected_mean_dur_spec_alignment_length"
+    title = "nLTT statistic for different expected mean duration of speciation for different DNA alignment lengths",
+    caption  = paste0("n = ", n_sampled, " / ", n_data_points, ", figure_error_expected_mean_dur_spec_alignment_length")
   ) +
-  ggplot2::labs(color = "DNA\nalignment\nlength\n(base pairs)") +
+  ggplot2::labs(color = latex2exp::TeX("$l_a$")) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
+options(warn = 2) # Be strict
 
 dev.off()

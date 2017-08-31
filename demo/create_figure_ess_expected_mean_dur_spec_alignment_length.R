@@ -64,7 +64,7 @@ ggplot2::ggplot(
   ggplot2::ylab("ESS") +
   ggplot2::labs(
     title = paste0("ESS for different expected mean duration of speciation"),
-    caption  = "figure_ess_expected_mean_dur_spec_alignment_length"
+    caption  = "figure_ess_mean_dur_spec_alignment_length"
   ) +
   ggplot2::labs(color = "DNA\nalignment\nlength\n(base pairs)") +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))

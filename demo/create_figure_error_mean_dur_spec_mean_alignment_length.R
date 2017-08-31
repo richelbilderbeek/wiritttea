@@ -60,22 +60,32 @@ mean_bd_error_10000 <- mean(na.omit(df[ df$scr == scr_bd & df$sequence_length ==
 print("Creating figure")
 
 svg("~/figure_error_expected_mean_dur_spec_mean_alignment_length.svg")
+
+options(warn = 1) # Allow points to fall off plot range
+
 ggplot2::ggplot(
   data = na.omit(df),
   ggplot2::aes(x = mean_durspec, y = mean, color = as.factor(sequence_length))
 ) + ggplot2::geom_point() +
-  ggplot2::geom_smooth(method = "loess", size = 0.5) +
   ggplot2::geom_smooth(method = "lm", size = 0.5) +
+  ggpmisc::stat_poly_eq(
+    formula = y ~ x,
+    eq.with.lhs = paste(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$"), "~`=`~"),
+    eq.x.rhs = latex2exp::TeX(" \\bar{t_{ds}}"),
+    ggplot2::aes(label = paste(..eq.label.., ..adj.rr.label.., sep = "~~~~")),
+    parse = TRUE) +
+  ggplot2::geom_smooth(method = "loess", size = 0.5) +
   ggplot2::geom_hline(yintercept = mean_bd_error_1000, linetype = "dashed", color = scales::hue_pal()(2)[1]) +
   ggplot2::geom_hline(yintercept = mean_bd_error_10000, linetype = "dashed", color = scales::hue_pal()(2)[2]) +
-  ggplot2::xlab("Expected mean duration of speciation (million years)") +
-  ggplot2::ylab("Mean nLTT statistic") +
+  ggplot2::xlab(latex2exp::TeX(" t_\\bar{ds}} (million years)")) +
+  ggplot2::ylab(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$")) +
   ggplot2::labs(
     title = "Mean nLTT statistic for different duration of speciations",
     caption  = "figure_error_expected_mean_dur_spec_mean_alignment_length"
   ) +
-  ggplot2::labs(color = "DNA\nalignment\nlength\n(base pairs)") +
+  ggplot2::labs(color = latex2exp::TeX("$l_a$")) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
+options(warn = 2) # Be strict
 
 dev.off()
