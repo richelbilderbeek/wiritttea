@@ -60,14 +60,16 @@ my_colors <- hsv(scales::rescale(sort(unique(df$mean_durspec)), to = c(0.0, 5.0 
 
 print("Creating figures")
 
+cut_x <- 0.05 # nLTT statistic value at which head and teail are seperated
+
 svg("~/figure_error.svg")
 ggplot2::ggplot(
   data = df,
   ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
 ) +
   ggplot2::geom_histogram(binwidth = 0.001) +
-  ggplot2::scale_color_manual(values = my_colors) +
   ggplot2::scale_fill_manual(values = my_colors) +
+  ggplot2::geom_vline(xintercept = cut_x, linetype = "dotted") +
   ggplot2::labs(
     title = "nLTT statistic distribution",
     x = latex2exp::TeX("$\\Delta_{nLTT}$"),
@@ -86,9 +88,9 @@ ggplot2::ggplot(
   ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
 ) +
   ggplot2::geom_histogram(binwidth = 0.001) +
-  ggplot2::scale_color_manual(values = my_colors) +
   ggplot2::scale_fill_manual(values = my_colors) +
-  ggplot2::coord_cartesian(xlim = c(0.0, 0.05)) +
+  ggplot2::geom_vline(xintercept = cut_x, linetype = "dotted") +
+  ggplot2::coord_cartesian(xlim = c(0.0, cut_x)) +
   ggplot2::labs(
     title = "nLTT statistic distribution",
     x = latex2exp::TeX("$\\Delta_{nLTT}$"),
@@ -104,9 +106,9 @@ ggplot2::ggplot(
   ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
 ) +
   ggplot2::geom_histogram(binwidth = 0.001) +
-  ggplot2::scale_color_manual(values = my_colors) +
   ggplot2::scale_fill_manual(values = my_colors) +
-  ggplot2::coord_cartesian(xlim = c(0.05, 0.35)) +
+  ggplot2::geom_vline(xintercept = cut_x, linetype = "dotted") +
+  ggplot2::coord_cartesian(xlim = c(cut_x, 0.35)) +
   ggplot2::labs(
     title = "nLTT statistic distribution",
     x = latex2exp::TeX("$\\Delta_{nLTT}$"),
@@ -115,3 +117,4 @@ ggplot2::ggplot(
   ) + ggplot2::guides(fill = FALSE) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
+
