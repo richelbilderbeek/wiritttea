@@ -54,22 +54,26 @@ df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
 names(df)
 head(df, n = 10)
 
-my_colors <- hsv(scales::rescale(sort(unique(df$mean_durspec)), to = c(0.0, 5.0/6.0)))
+df <- na.omit(df)
+
+my_colors <- hsv(scales::rescale(sort(unique(df$mean_durspec)), to = c(0.0, 5.0 / 6.0)))
 
 print("Creating figures")
 
 svg("~/figure_error.svg")
 ggplot2::ggplot(
-  data = na.omit(df),
+  data = df,
   ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
 ) +
-  ggplot2::geom_histogram(binwidth = 0.0001) +
+  ggplot2::geom_histogram(binwidth = 0.001) +
+  ggplot2::scale_color_manual(values = my_colors) +
   ggplot2::scale_fill_manual(values = my_colors) +
   ggplot2::labs(
     title = "nLTT statistic distribution",
-    x = "nLTT statistic",
+    x = latex2exp::TeX("$\\Delta_{nLTT}$"),
     y = "Count",
     caption = "figure_error.svg"
+  #) +
   ) + ggplot2::guides(fill = FALSE) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
@@ -78,15 +82,16 @@ dev.off()
 
 svg("~/figure_error_head.svg")
 ggplot2::ggplot(
-  data = df[na.omit(df)$nltt_stat < 0.05, ],
+  data = df[df$nltt_stat < 0.05, ],
   ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
 ) +
-  ggplot2::geom_histogram(binwidth = 0.0001) +
+  ggplot2::geom_histogram(binwidth = 0.001) +
+  ggplot2::scale_color_manual(values = my_colors) +
   ggplot2::scale_fill_manual(values = my_colors) +
   ggplot2::coord_cartesian(xlim = c(0.0, 0.05)) +
   ggplot2::labs(
     title = "nLTT statistic distribution",
-    x = "nLTT statistic",
+    x = latex2exp::TeX("$\\Delta_{nLTT}$"),
     y = "Count",
     caption = "figure_error_head.svg"
   ) + ggplot2::guides(fill = FALSE) +
@@ -95,15 +100,16 @@ dev.off()
 
 svg("~/figure_error_tail.svg")
 ggplot2::ggplot(
-  data = df[na.omit(df)$nltt_stat > 0.05, ],
+  data = df[df$nltt_stat > 0.05, ],
   ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
 ) +
   ggplot2::geom_histogram(binwidth = 0.001) +
+  ggplot2::scale_color_manual(values = my_colors) +
   ggplot2::scale_fill_manual(values = my_colors) +
   ggplot2::coord_cartesian(xlim = c(0.05, 0.35)) +
   ggplot2::labs(
     title = "nLTT statistic distribution",
-    x = "nLTT statistic",
+    x = latex2exp::TeX("$\\Delta_{nLTT}$"),
     y = "Count",
     caption = "figure_error_tail.svg"
   ) + ggplot2::guides(fill = FALSE) +

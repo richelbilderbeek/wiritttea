@@ -74,6 +74,7 @@ ggplot2::ggplot(
     eq.x.rhs = latex2exp::TeX(" \\bar{t_{ds}}"),
     ggplot2::aes(label = paste(..eq.label.., ..adj.rr.label.., sep = "~~~~")),
     parse = TRUE) +
+  ggplot2::scale_y_continuous(limits = c(0, 0.05)) + # Will have some outliers unplotted
   ggplot2::geom_smooth(method = "loess", size = 0.5) +
   ggplot2::geom_hline(yintercept = mean_bd_error_1000, linetype = "dashed", color = scales::hue_pal()(2)[1]) +
   ggplot2::geom_hline(yintercept = mean_bd_error_10000, linetype = "dashed", color = scales::hue_pal()(2)[2]) +

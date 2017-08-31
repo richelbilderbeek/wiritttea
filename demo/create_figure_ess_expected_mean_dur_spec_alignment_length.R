@@ -58,15 +58,22 @@ ggplot2::ggplot(
   data = na.omit(df),
   ggplot2::aes(x = mean_durspec, y = likelihood, color = as.factor(sequence_length))
 ) + ggplot2::geom_jitter(width = 0.01, alpha = 0.2) +
-  ggplot2::geom_smooth(method = "loess") +
   ggplot2::geom_smooth(method = "lm") +
-  ggplot2::xlab("Expected mean duration of speciation (million years)") +
+  ggpmisc::stat_poly_eq(
+    formula = y ~ x,
+    eq.with.lhs = paste(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$"), "~`=`~"),
+    eq.x.rhs = latex2exp::TeX(" \\bar{t_{ds}}"),
+    ggplot2::aes(label = paste(..eq.label.., ..adj.rr.label.., sep = "~~~~")),
+    parse = TRUE) +
+  ggplot2::scale_y_continuous(limits = c(0, 1300)) + # Allows equations to be shown well
+  ggplot2::geom_smooth(method = "loess") +
+  ggplot2::xlab(latex2exp::TeX(" t_\\bar{ds}} (million years)")) +
   ggplot2::ylab("ESS") +
   ggplot2::labs(
-    title = paste0("ESS for different expected mean duration of speciation"),
+    title = paste0("Effective sample sizes of tree likelihood,\nfor different expected mean duration of speciation,\nfor different DNA alignment lengths"),
     caption  = "figure_ess_mean_dur_spec_alignment_length"
   ) +
-  ggplot2::labs(color = "DNA\nalignment\nlength\n(base pairs)") +
+  ggplot2::labs(color = latex2exp::TeX("$l_a$")) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 
