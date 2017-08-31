@@ -61,11 +61,14 @@ svg("~/figure_error_expected_mean_dur_spec.svg")
 set.seed(42)
 n_sampled <- 2000
 n_data_points <- nrow(na.omit(df))
+
+options(warn = 1) # Allow points falling out of range
+
 ggplot2::ggplot(
   data = dplyr::sample_n(na.omit(df), size = n_sampled), # Out of 7M
   ggplot2::aes(x = mean_durspec, y = nltt_stat)
-) + ggplot2::geom_jitter(width = 0.01, alpha = 0.01) +
-  ggplot2::geom_smooth(method = "lm", color = "blue") +
+) + ggplot2::geom_jitter(width = 0.01, alpha = 0.1) +
+  ggplot2::geom_smooth(method = "lm", color = "blue", size = 0.5, alpha = 0.25) +
   ggpmisc::stat_poly_eq(
     formula = y ~ x,
     eq.with.lhs = paste(latex2exp::TeX("$\\Delta$_{nLTT}"), "~`=`~"),
@@ -73,15 +76,17 @@ ggplot2::ggplot(
     eq.x.rhs = latex2exp::TeX(" \\bar{t_{ds}}"),
     #eq.x.rhs = "~italic(t_ds)",
     ggplot2::aes(label = ..eq.label..),
+    color = "blue",
     parse = TRUE) +
-  ggplot2::geom_smooth(method = "loess", color = "red") +
+  ggplot2::geom_smooth(method = "loess", color = "red", size = 0.5, alpha = 0.25) +
   ggplot2::geom_hline(yintercept = mean_bd_error, linetype = "dotted") +
+  ggplot2::scale_y_continuous(limits = c(0, 0.05)) + # Will have some outliers unplotted
   # ggplot2::coord_cartesian(ylim = c(0, 0.1)) +
-  ggplot2::xlab("Expected mean duration of speciation (million years)") +
-  ggplot2::ylab("nLTT statistic") +
+  ggplot2::xlab(latex2exp::TeX(" \\bar{t_{ds}} (million years)")) +
+  ggplot2::ylab(latex2exp::TeX("$\\Delta$_{nLTT}")) +
   ggplot2::labs(
-    title = paste0("nLTT statistic for different expected mean duration of speciation (n = ", n_sampled, " / ", n_data_points, ")"),
-    caption  = "figure_error_expected_mean_dur_spec"
+    title = "nLTT statistic for different expected mean duration of speciation",
+    caption = paste0("n = ", n_sampled, " / ", n_data_points, "), figure_error_expected_mean_dur_spec")
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
