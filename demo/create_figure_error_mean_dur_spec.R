@@ -65,10 +65,18 @@ ggplot2::ggplot(
   data = dplyr::sample_n(na.omit(df), size = n_sampled), # Out of 7M
   ggplot2::aes(x = mean_durspec, y = nltt_stat)
 ) + ggplot2::geom_jitter(width = 0.01, alpha = 0.01) +
-  ggplot2::geom_smooth(method = "loess", color = "red") +
   ggplot2::geom_smooth(method = "lm", color = "blue") +
+  ggpmisc::stat_poly_eq(
+    formula = y ~ x,
+    eq.with.lhs = paste(latex2exp::TeX("$\\Delta$_{nLTT}"), "~`=`~"),
+    #eq.with.lhs = "italic(nLTT)~`=`~",
+    eq.x.rhs = latex2exp::TeX(" \\bar{t_{ds}}"),
+    #eq.x.rhs = "~italic(t_ds)",
+    ggplot2::aes(label = ..eq.label..),
+    parse = TRUE) +
+  ggplot2::geom_smooth(method = "loess", color = "red") +
   ggplot2::geom_hline(yintercept = mean_bd_error, linetype = "dotted") +
-  ggplot2::coord_cartesian(ylim = c(0, 0.1)) +
+  # ggplot2::coord_cartesian(ylim = c(0, 0.1)) +
   ggplot2::xlab("Expected mean duration of speciation (million years)") +
   ggplot2::ylab("nLTT statistic") +
   ggplot2::labs(
