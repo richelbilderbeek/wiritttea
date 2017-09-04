@@ -1,4 +1,4 @@
-# Create figure 150
+# Create figure 'figure_error_low_high_ess'
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
@@ -76,8 +76,9 @@ ggplot2::ggplot(
     ggplot2::ylab(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$")) +
     ggplot2::labs(
       title = "The effect of a low and high ESS of tree likelihood on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)",
-      caption  = "figure_error_low_high_ess.svg"
+      caption  = "figure_error_low_high_ess"
     ) +
     ggplot2::labs(fill = latex2exp::TeX("ESS tree\nlikelihood")) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
+
