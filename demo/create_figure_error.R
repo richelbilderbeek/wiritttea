@@ -27,6 +27,8 @@ if (!file.exists(nltt_stats_filename)) {
 
 print("Read parameters")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
+names(parameters)
+
 
 print("Add mean duration of speciation to parameters")
 parameters$mean_durspec <- PBD::pbd_mean_durspecs(
