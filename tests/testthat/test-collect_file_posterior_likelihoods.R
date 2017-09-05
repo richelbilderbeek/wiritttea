@@ -6,7 +6,7 @@ test_that("basic use", {
   df <- wiritttea::collect_file_posterior_likelihoods(filename)
   testthat::expect_equal(
     names(df),
-    c("sti", "ai", "pi", "likelihood")
+    c("sti", "ai", "pi", "si", "likelihood")
   )
   testthat::expect_true(nrow(df) == 88)
 })

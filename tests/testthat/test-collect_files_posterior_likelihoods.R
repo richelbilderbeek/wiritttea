@@ -7,7 +7,7 @@ test_that("multiplication works", {
   df <- wiritttea::collect_files_posterior_likelihoods(filenames)
   testthat::expect_equal(
     names(df),
-    c("filename", "sti", "ai", "pi" , "likelihood")
+    c("filename", "sti", "ai", "pi", "si", "likelihood")
   )
 
   testthat::expect_true(nrow(df) > 10)

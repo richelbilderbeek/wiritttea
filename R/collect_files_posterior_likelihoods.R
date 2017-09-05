@@ -25,8 +25,7 @@ collect_files_posterior_likelihoods <- function(filenames) {
         ai = NA,
         pi = NA,
         si = NA,
-        t = NA,
-        nltt = NA
+        likelihood = NA
       )
     }
     # Prepend a col with the filename

@@ -2,7 +2,7 @@
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
-nltt_stats_filename <- paste0("~/wirittte_data/nltt_stats_", date, ".csv")
+posterior_likelihoods_filename <- paste0("~/wirittte_data/posterior_likelihoods_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) nltt_stats_filename <- args[1]
@@ -11,11 +11,11 @@ print(paste("nltt_stats_filename:", nltt_stats_filename))
 
 if (!file.exists(nltt_stats_filename)) {
   stop("File '", nltt_stats_filename, "' not found, ",
-    "please run analyse_nltt_stats")
+    "please run analyse_posterior_likelihoods")
 }
 
 print("Read nLTT stats")
-nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+nltt_stats <- wiritttea::read_collected_posterior_likelihoods(posterior_likelihoods_filename)
 names(nltt_stats)
 
 testit::assert("pi" %in% names(nltt_stats))
