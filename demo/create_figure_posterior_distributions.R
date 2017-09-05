@@ -24,38 +24,46 @@ library(dplyr)
 df <- tidyr::spread(nltt_stats, pi, nltt_stat) %>% rename(pi1 = "1", pi2 = "2")
 
 head(df)
-df2 <- dplyr::group_by(.data = df, sti, ai)
+df2 <- dplyr::group_by(.data = df, filename, sti, ai)
 head(df2)
 
 safe_mann_whitney <- function(pi1, pi2)
 {
+  p <- NA
   tryCatch(
-      stats::wilcox.test(
+      p <- stats::wilcox.test(
         pi1,
         pi2,
         correct = FALSE,
         exact = FALSE, # cannot compute exact p-value with ties
         na.action = na.omit
       )$p.value,
-      error = function(cond) { NA }
+      error = function(cond) {} # nolint
     )
+  p
 }
 
 df3 <- df2 %>% summarize(x = safe_mann_whitney(pi1, pi2))
 
-df3 <- df2 %>% summarize(x = stats::wilcox.test(
-        pi1,
-        pi2,
-        correct = FALSE,
-        exact = FALSE, # cannot compute exact p-value with ties
-        na.action = na.omit
-      )$p.value)
+df3
 head(df3)
+names(df3)
+hist(df3$x)
 
-getOption("na.action")
+svg("~/figure_posterior_distribution_nltt.svg")
+ggplot2::ggplot(
+  na.omit(df3),
+  ggplot2::aes(x = x, na.omit = TRUE)
+) +
+  ggplot2::geom_histogram(binwidth = 0.01) +
+  ggplot2::geom_vline(xintercept = 0.05, linetype = "dotted") +
+  ggplot2::xlab("p value") +
+  ggplot2::ylab("Count") +
+  ggplot2::labs(
+    title = "The distribution of p values of Mann-Whitney tests\nbetween posterior nLTT statistics",
+    caption  = "'figure_posterior_distribution_nltt'"
+  ) +
+  ggplot2::annotate("text", x = c(0.0, 0.125), y = 325, label = c("same", "different")) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-#head(reshape2::dcast(nltt_stats, value,value.var = nltt_stat, id.var = "pi",  ~ ai ~ sti))
-head(tidyr::separate(nltt_stats, col = pi, into = c("pi1", "pi2")))
-
-testit::assert("pi1" %in% names(nltt_stats))
-testit::assert("pi2" %in% names(nltt_stats))
+dev.off()
