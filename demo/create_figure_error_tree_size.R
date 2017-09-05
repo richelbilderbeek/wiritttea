@@ -58,8 +58,10 @@ print("Creating figure")
 svg("~/figure_error_tree_size.svg")
 n <- 2000
 cut_x <- 2000
-cut_y <- 1.2
+cut_y <- 0.125
 set.seed(42)
+
+options(warn = 1) # Be milder for ylim
 
 ggplot2::ggplot(
   data = dplyr::sample_n(df, size = n),
@@ -74,7 +76,7 @@ ggplot2::ggplot(
     color = "blue",
     parse = TRUE) +
   ggplot2::geom_smooth(method = "loess", color = "red", size = 0.5, alpha = 0.25) +
-  ggplot2::coord_cartesian(xlim = c(cut_x, cut_y)) +
+  ggplot2::ylim(c(0, cut_y)) +
   ggplot2::xlab(latex2exp::TeX("$n_t$")) +
   ggplot2::ylab(latex2exp::TeX("$\\Delta_{nLTT}$")) +
   ggplot2::labs(
@@ -99,7 +101,7 @@ ggplot2::ggplot(
     color = "blue",
     parse = TRUE) +
   ggplot2::geom_smooth(method = "loess", color = "red", size = 0.5, alpha = 0.25) +
-  ggplot2::coord_cartesian(xlim = c(cut_x, cut_y)) +
+  ggplot2::ylim(c(0, cut_y)) +
   ggplot2::xlab(latex2exp::TeX("$n_t$")) +
   ggplot2::ylab(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$")) +
   ggplot2::labs(
