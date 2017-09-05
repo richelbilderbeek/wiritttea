@@ -12,7 +12,12 @@
 statistics. Default value is 'inst/extdata/collected_files_nltt_stats.csv'}
 }
 \value{
-a dataframe
+a dataframe, with columns `filename` (name of the file),
+  `sti` (species tree index), `ai` (alignment index), `pi` (posterior
+  index), `si` (state index) and `nltt_stat` (the nLTT statistic between
+  that posteriors's state and the nLTT of the original
+  species tree (which is either 'youngest' for `sti` equals 1, or
+  'oldest' for `sti` equals 2)
 }
 \description{
 Read all the collected nLTT statistics of all simulations

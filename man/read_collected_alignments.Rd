@@ -4,7 +4,8 @@
 \alias{read_collected_alignments}
 \title{Reads the file with the collected alignments' qualities}
 \usage{
-read_collected_alignments(csv_filename)
+
+  read_collected_alignments(csv_filename = find_path("read_collected_alignments.csv"))
 }
 \arguments{
 \item{csv_filename}{name of the CSV file}
