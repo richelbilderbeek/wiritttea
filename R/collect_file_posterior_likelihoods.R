@@ -19,9 +19,13 @@ collect_file_posterior_likelihoods <- function(filename) {
   for (sti in 1:2) {
     for (j in seq(1, n_alignments)) {
       for (k in seq(1, n_beast_runs)) {
-        likelihoods <- wiritttes::get_posteriors(file)[[index]][[1]]$estimates$likelihoods
+        likelihoods <- wiritttes::get_posteriors(file)[[index]][[1]]$estimates$likelihood
 
-        n_likelihoods <- nrow(likelihoods)
+        #print(head(likelihoods)) #debug
+
+        n_likelihoods <- length(likelihoods)
+
+
         this_df <- data.frame(
           sti = rep(sti, n_likelihoods),
           ai = rep(j, n_likelihoods),
@@ -37,7 +41,13 @@ collect_file_posterior_likelihoods <- function(filename) {
       }
     }
   }
-  testit::assert(!is.null(df$nltt))
+  testit::assert(!is.null(df$likelihoods))
+  testit::assert(names(df)
+    ==  c("sti", "ai", "pi", "likelihoods")
+  )
+
+  names(df) <- c("sti", "ai", "pi", "likelihood")
+
   testit::assert(names(df)
     ==  c("sti", "ai", "pi", "likelihood")
   )

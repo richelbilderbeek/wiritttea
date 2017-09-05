@@ -5,10 +5,10 @@ test_that("multiplication works", {
   filenames <- wiritttea::find_paths(
     c("toy_example_3.RDa", "toy_example_4.RDa"))
   df <- wiritttea::collect_files_posterior_likelihoods(filenames)
-  expect_equal(
+  testthat::expect_equal(
     names(df),
-    c("filename", "sti", "ai", "pi", "si", "likelihood")
+    c("filename", "sti", "ai", "pi" , "likelihood")
   )
 
-  expect_true(nrow(df) > 10)
+  testthat::expect_true(nrow(df) > 10)
 })
