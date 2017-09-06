@@ -17,3 +17,15 @@ A data frame with filename, sti, ai, pi, si, likelihood
 Collects the tree likelihoods of all phylogenies belonging to a
 multiple parameter file in the melted/uncast/long form
 }
+\examples{
+  filenames <- wiritttea::find_paths(
+   c("toy_example_1.RDa", "toy_example_2.RDa",
+   "toy_example_3.RDa", "toy_example_4.RDa")
+ )
+ df <- wiritttea::collect_files_posterior_likelihoods(filenames)
+ testthat::expect_equal(
+   names(df),
+   c("filename", "sti", "ai", "pi", "si", "likelihood")
+ )
+ testthat::expect_true(nrow(df) == 220)
+}
