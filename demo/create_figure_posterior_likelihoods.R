@@ -79,8 +79,18 @@ ggplot2::ggplot(
   ) +
   ggplot2::annotate("text", x = c(0.0, 0.125), y = 1450, label = c("different", "same")) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-
 dev.off()
+
+
+
+
+
+
+
+
+
+
+
 
 # Show posterior with low, median and high p value
 low  <- df[which(df$p_value == min(   df$p_value)), ]
@@ -106,8 +116,8 @@ ggplot2::ggplot(
   ggplot2::ylab("Count") +
   ggplot2::xlim(-59330,-59310) +
   ggplot2::labs(
-    title = "The distribution of tree likelihoods between two posteriors",
-    caption  = "'figure_posterior_distribution_likelihood_low'"
+    title = "The distribution of tree likelihoods of two replicate  posteriors",
+    caption  = paste0("p value = ", low$p_value, ", figure_posterior_distribution_likelihood_low")
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 options(warn = 2) # Be strict
@@ -115,10 +125,11 @@ dev.off()
 
 
 
-mid  <- df[which(df$p_value == median(df$p_value)), ]
+
 
 
 high <- df[which(df$p_value == max(   df$p_value)), ]
+
 high_filename <- paste0(posteriors_path, "/", high$filename[1])
 high_sti <- as.numeric(high$sti[1])
 high_ai <- as.numeric(high$ai[1])
@@ -131,7 +142,7 @@ df_high <- data.frame(
 )
 
 svg("~/figure_posterior_distribution_likelihoods_high.svg")
-options(warn = 1) # Alhigh outliers not to be plotted
+options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
   na.omit(df_high),
   ggplot2::aes(x = likelihood, fill = pi)
@@ -141,9 +152,10 @@ ggplot2::ggplot(
   ggplot2::ylab("Count") +
   #ggplot2::xlim(-59330,-59310) +
   ggplot2::labs(
-    title = "The distribution of tree likelihoods between two posteriors",
-    caption  = "'figure_posterior_distribution_likelihood_high'"
+    title = "The distribution of tree likelihoods of two replicate posteriors",
+    caption  = paste0("p value = ", high$p_value, ", figure_posterior_distribution_likelihood_high")
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 options(warn = 2) # Be strict
 dev.off()
+
