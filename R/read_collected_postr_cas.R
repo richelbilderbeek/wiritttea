@@ -1,0 +1,27 @@
+#' Read all the collected tree crown_ages of all posteriors
+#' @return a dataframe
+#' @examples
+#'   df <- read_collected_posterior_crown_ages()
+#'   testit::assert(names(df) ==
+#'     c(
+#'       "filename", "sti", "ai",
+#'       "pi", "si", "crown_age"
+#'     )
+#' @author Richel Bilderbeek
+#' @export
+read_collected_posterior_crown_ages <- function(
+  filename = wiritttea::find_path("collect_files_posterior_crown_ages.csv")
+) {
+  testit::assert(file.exists(filename))
+  df <- utils::read.csv(
+   file = filename,
+   header = TRUE,
+   stringsAsFactors = FALSE,
+   row.names = 1
+  )
+  df$sti <- as.factor(df$sti)
+  df$ai <- as.factor(df$ai)
+  df$pi <- as.factor(df$pi)
+  df$si <- as.factor(df$si)
+  df
+}

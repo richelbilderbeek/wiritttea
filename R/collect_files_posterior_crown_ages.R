@@ -1,6 +1,7 @@
 #' Collects the tree crown_ages of all phylogenies belonging to a
 #' multiple parameter file in the melted/uncast/long form
 #' @param filenames names of the parameter file
+#' @param verbose shows progress if TRUE
 #' @return A data frame with filename, sti, ai, pi, si, crown_age
 #' @examples
 #'   filenames <- wiritttea::find_paths(
@@ -14,7 +15,7 @@
 #'  )
 #'  testthat::expect_true(nrow(df) == 220)
 #' @export
-collect_files_posterior_crown_ages <- function(filenames) {
+collect_files_posterior_crown_ages <- function(filenames, verbose = FALSE) {
 
   if (length(filenames) < 1) {
     stop("there must be at least one filename supplied")
@@ -22,6 +23,9 @@ collect_files_posterior_crown_ages <- function(filenames) {
 
   df <- NULL # Posterior Gamma statistics
   for (filename in filenames) {
+    if (verbose == TRUE) {
+      print(filename)
+    }
     this_df <- NULL
     tryCatch(
       this_df <- wiritttea::collect_file_posterior_crown_ages(

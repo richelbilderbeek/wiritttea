@@ -5,10 +5,12 @@
 \title{Collects the tree crown_ages of all phylogenies belonging to a
 multiple parameter file in the melted/uncast/long form}
 \usage{
-collect_files_posterior_crown_ages(filenames)
+collect_files_posterior_crown_ages(filenames, verbose = FALSE)
 }
 \arguments{
 \item{filenames}{names of the parameter file}
+
+\item{verbose}{shows progress if TRUE}
 }
 \value{
 A data frame with filename, sti, ai, pi, si, crown_age
