@@ -3,6 +3,7 @@ library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
 posterior_likelihoods_filename <- paste0("~/wirittte_data/posterior_likelihoods_", date, ".csv")
+posteriors_path <- paste0("~/wirittte_data/", date, "/")
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) nltt_stats_filename <- args[1]
@@ -39,9 +40,8 @@ print("Remove NAs")
 df <- na.omit(df)
 nrow(df)
 
-head(df)
-df2 <- dplyr::group_by(.data = df, filename, sti, ai)
-head(df2)
+print("Group")
+df <- dplyr::group_by(.data = df, filename, sti, ai)
 
 safe_mann_whitney <- function(pi1, pi2)
 {
@@ -59,15 +59,15 @@ safe_mann_whitney <- function(pi1, pi2)
   p
 }
 
-df3 <- df2 %>% summarize(x = safe_mann_whitney(pi1, pi2))
+df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
 
-head(df3)
-names(df3)
+head(df)
+names(df)
 
 svg("~/figure_posterior_distribution_likelihoods.svg")
 ggplot2::ggplot(
-  na.omit(df3),
-  ggplot2::aes(x = x, na.omit = TRUE)
+  na.omit(df),
+  ggplot2::aes(x = p_value, na.omit = TRUE)
 ) +
   ggplot2::geom_histogram(binwidth = 0.01) +
   ggplot2::geom_vline(xintercept = 0.05, linetype = "dotted") +
@@ -80,4 +80,70 @@ ggplot2::ggplot(
   ggplot2::annotate("text", x = c(0.0, 0.125), y = 1450, label = c("different", "same")) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
+dev.off()
+
+# Show posterior with low, median and high p value
+low  <- df[which(df$p_value == min(   df$p_value)), ]
+low_filename <- paste0(posteriors_path, "/", low$filename[1])
+low_sti <- as.numeric(low$sti[1])
+low_ai <- as.numeric(low$ai[1])
+low_file <- wiritttes::read_file(low_filename)
+low_likelihoods1 <- wiritttes::get_posterior(low_file, sti = low_sti, ai = low_ai, pi = 1)$estimates$likelihood
+low_likelihoods2 <- wiritttes::get_posterior(low_file, sti = low_sti, ai = low_ai, pi = 2)$estimates$likelihood
+df_low <- data.frame(
+  pi = as.factor(c(rep(1, length(low_likelihoods1)), rep(2, length(low_likelihoods2)))),
+  likelihood  = c(low_likelihoods1, low_likelihoods2)
+)
+
+svg("~/figure_posterior_distribution_likelihoods_low.svg")
+options(warn = 1) # Allow outliers not to be plotted
+ggplot2::ggplot(
+  na.omit(df_low),
+  ggplot2::aes(x = likelihood, fill = pi)
+) +
+  ggplot2::geom_histogram(binwidth = 0.5, position = "identity", alpha = 0.25) +
+  ggplot2::xlab("tree likelihood") +
+  ggplot2::ylab("Count") +
+  ggplot2::xlim(-59330,-59310) +
+  ggplot2::labs(
+    title = "The distribution of tree likelihoods between two posteriors",
+    caption  = "'figure_posterior_distribution_likelihood_low'"
+  ) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+options(warn = 2) # Be strict
+dev.off()
+
+
+
+mid  <- df[which(df$p_value == median(df$p_value)), ]
+
+
+high <- df[which(df$p_value == max(   df$p_value)), ]
+high_filename <- paste0(posteriors_path, "/", high$filename[1])
+high_sti <- as.numeric(high$sti[1])
+high_ai <- as.numeric(high$ai[1])
+high_file <- wiritttes::read_file(high_filename)
+high_likelihoods1 <- wiritttes::get_posterior(high_file, sti = high_sti, ai = high_ai, pi = 1)$estimates$likelihood
+high_likelihoods2 <- wiritttes::get_posterior(high_file, sti = high_sti, ai = high_ai, pi = 2)$estimates$likelihood
+df_high <- data.frame(
+  pi = as.factor(c(rep(1, length(high_likelihoods1)), rep(2, length(high_likelihoods2)))),
+  likelihood  = c(high_likelihoods1, high_likelihoods2)
+)
+
+svg("~/figure_posterior_distribution_likelihoods_high.svg")
+options(warn = 1) # Alhigh outliers not to be plotted
+ggplot2::ggplot(
+  na.omit(df_high),
+  ggplot2::aes(x = likelihood, fill = pi)
+) +
+  ggplot2::geom_histogram(position = "identity", alpha = 0.25) +
+  ggplot2::xlab("tree likelihood") +
+  ggplot2::ylab("Count") +
+  #ggplot2::xlim(-59330,-59310) +
+  ggplot2::labs(
+    title = "The distribution of tree likelihoods between two posteriors",
+    caption  = "'figure_posterior_distribution_likelihood_high'"
+  ) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+options(warn = 2) # Be strict
 dev.off()
