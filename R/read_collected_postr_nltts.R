@@ -12,16 +12,5 @@
 read_collected_posterior_nltts <- function(
   filename = wiritttea::find_path("collect_files_posterior_nltts.csv")
 ) {
-  testit::assert(file.exists(filename))
-  df <- utils::read.csv(
-   file = filename,
-   header = TRUE,
-   stringsAsFactors = FALSE,
-   row.names = 1
-  )
-  df$sti <- as.factor(df$sti)
-  df$ai <- as.factor(df$ai)
-  df$pi <- as.factor(df$pi)
-  df$si <- as.factor(df$si)
-  df
+  wiritttea::read_collected_nltt_stats(filename)
 }

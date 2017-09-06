@@ -61,10 +61,8 @@ safe_mann_whitney <- function(pi1, pi2)
 
 df3 <- df2 %>% summarize(x = safe_mann_whitney(pi1, pi2))
 
-df3
 head(df3)
 names(df3)
-hist(df3$x)
 
 svg("~/figure_posterior_distribution_likelihoods.svg")
 ggplot2::ggplot(

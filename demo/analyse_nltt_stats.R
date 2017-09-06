@@ -1,8 +1,9 @@
 # Analyse the nLTT stats
 library(wiritttea)
 options(warn = 2) # Be strict
-path_data <- "~/Peregrine20170710"
-nltt_stats_filename <- "~/wirittte_data/nltt_stats_20170710.csv"
+date <- "20170710"
+path_data <- paste0("~/Peregrine", date)
+nltt_stats_filename <- paste0("~/wirittte_data/nltt_stats_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) path_data <- args[1]

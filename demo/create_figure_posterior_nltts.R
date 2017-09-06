@@ -1,29 +1,40 @@
-# Create 'figure_posterior_distributions_likelihood' and 'figure_posterior_distributions_nltt'
+# Create 'figure_posterior_distributions_nltts'
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
-posterior_likelihoods_filename <- paste0("~/wirittte_data/posterior_likelihoods_", date, ".csv")
+nltt_stats_filename <- paste0("~/wirittte_data/nltt_stats_", date, ".csv")
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) nltt_stats_filename <- args[1]
 
-print(paste("posterior_likelihoods_filename:", posterior_likelihoods_filename))
+print(paste("nltt_stats_filename:", nltt_stats_filename))
 
-if (!file.exists(posterior_likelihoods_filename)) {
-  stop("File '", posterior_likelihoods_filename, "' not found, ",
-    "please run analyse_posterior_likelihoods")
+if (!file.exists(nltt_stats_filename)) {
+  stop("File '", nltt_stats_filename, "' not found, ",
+    "please run analyse_nltt_stats")
 }
 
 print("Read nLTT stats")
-nltt_stats <- wiritttea::read_collected_posterior_nltts(posterior_likelihoods_filename)
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
 names(nltt_stats)
+
+dplyr::sample_n(nltt_stats, size = 100)
 
 testit::assert("pi" %in% names(nltt_stats))
 library(dplyr)
 
+print("Split nLTT stats of first and second posterior")
 df <- tidyr::spread(nltt_stats, pi, nltt_stat) %>% rename(pi1 = "1", pi2 = "2")
 
+print("Remove NA column")
+df <- dplyr::select(df, -starts_with("<NA>"))
+testit::assert(names(df) == c("filename", "sti", "ai", "si", "pi1", "pi2"))
+
+print("Remove NAs")
+df <- na.omit(df)
+
 head(df)
+
 df2 <- dplyr::group_by(.data = df, filename, sti, ai)
 head(df2)
 
@@ -45,7 +56,6 @@ safe_mann_whitney <- function(pi1, pi2)
 
 df3 <- df2 %>% summarize(x = safe_mann_whitney(pi1, pi2))
 
-df3
 head(df3)
 names(df3)
 hist(df3$x)
