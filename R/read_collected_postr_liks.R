@@ -22,6 +22,6 @@ read_collected_posterior_likelihoods <- function(
   df$sti <- as.factor(df$sti)
   df$ai <- as.factor(df$ai)
   df$pi <- as.factor(df$pi)
-  df$si <- as.factor(df$pi)
+  df$si <- as.factor(df$si)
   df
 }

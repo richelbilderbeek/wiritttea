@@ -15,7 +15,7 @@ if (!file.exists(posterior_likelihoods_filename)) {
 }
 
 print("Read nLTT stats")
-posterior_likelihoods_filename <- wiritttea::read_collected_posterior_likelihoods(posterior_likelihoods_filename)
+nltt_stats <- wiritttea::read_collected_posterior_nltts(posterior_likelihoods_filename)
 names(nltt_stats)
 
 testit::assert("pi" %in% names(nltt_stats))
@@ -63,7 +63,7 @@ ggplot2::ggplot(
     title = "The distribution of p values of Mann-Whitney tests\nbetween posterior nLTT statistics",
     caption  = "'figure_posterior_distribution_nltt'"
   ) +
-  ggplot2::annotate("text", x = c(0.0, 0.125), y = 325, label = c("same", "different")) +
+  ggplot2::annotate("text", x = c(0.0, 0.125), y = 325, label = c("different", "same")) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
 dev.off()
