@@ -4,19 +4,26 @@
 \alias{collect_file_posterior_nltts}
 \title{Collect the nLTT values of the BEAST2 posteriors}
 \usage{
-collect_file_posterior_nltts(filename, dt)
+collect_file_posterior_nltts(filename)
 }
 \arguments{
 \item{filename}{name of the file containing the parameters and results}
-
-\item{dt}{the resolution of the nLTT plot,
-must be in range <0,1>, default is 0.001}
 }
 \value{
-a data frame
+a data frame with columns 'sti' (species tree index),
+  'ai' (alignment index), 'pi' (posterior index), 'si' (posterior
+  state index) and 'nltt' (normalized Lineages Through Time statistic).
 }
 \description{
 Collect the nLTT values of the BEAST2 posteriors
+}
+\examples{
+  filename <- wiritttea::find_path("toy_example_3.RDa")
+   df <- wiritttea::collect_file_posterior_nltts(filename)
+   testthat::expect_equal(names(df),
+     c("sti", "ai", "pi", "si", "nltt")
+   )
+   testthat::expect_true(nrow(df) == 80)
 }
 \author{
 Richel Bilderbeek

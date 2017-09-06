@@ -1,6 +1,6 @@
 context("collect_files_stree_nltts")
 
-test_that("collect_files_stree_nltts: basic", {
+test_that("basic", {
   filenames <- c(
     find_path("toy_example_1.RDa"),
     find_path("toy_example_2.RDa"),

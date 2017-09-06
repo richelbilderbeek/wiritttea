@@ -5,18 +5,30 @@
 \title{Collects the nLTT statistics of all phylogenies belonging to a
 multiple parameter file in the melted/uncast/long form}
 \usage{
-collect_files_posterior_nltts(filenames, dt = 0.001)
+collect_files_posterior_nltts(filenames)
 }
 \arguments{
 \item{filenames}{names of the parameter file}
-
-\item{dt}{the resolution of the nLTT plot,
-must be in range <0,1>, default is 0.001}
 }
 \value{
-A list with two dataframes of nLTTs
+A dataframe of nLTTs
 }
 \description{
 Collects the nLTT statistics of all phylogenies belonging to a
 multiple parameter file in the melted/uncast/long form
+}
+\examples{
+  filenames <- wiritttea::find_paths(
+     c("toy_example_1.RDa", "toy_example_2.RDa",
+     "toy_example_3.RDa", "toy_example_4.RDa")
+   )
+   df <- wiritttea::collect_files_posterior_nltts(filenames)
+
+   testit::assert(
+     dplyr::all_equal(
+       names(df),
+       c("filename", "sti", "ai", "pi", "si", "nltt")
+     )
+   )
+   testthat::expect_true(nrow(df) == 200)
 }

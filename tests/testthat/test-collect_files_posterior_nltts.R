@@ -7,12 +7,13 @@ test_that("Basic use", {
     "toy_example_3.RDa", "toy_example_4.RDa")
   )
   df <- wiritttea::collect_files_posterior_nltts(filenames)
+
   testthat::expect_equal(
     names(df),
     c("filename", "sti", "ai", "pi", "si", "nltt")
   )
 
-  # write.csv(df, "~/collect_files_posterior_likelihoods.csv")
+  # write.csv(df, "~/collect_files_posterior_nltts.csv")
 
-  testthat::expect_true(nrow(df) > 10)
+  testthat::expect_true(nrow(df) == 200)
 })

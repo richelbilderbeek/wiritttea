@@ -1,48 +1,57 @@
 #' Collects the nLTT statistics of all phylogenies belonging to a
 #' multiple parameter file in the melted/uncast/long form
 #' @param filenames names of the parameter file
-#' @param dt the resolution of the nLTT plot,
-#'   must be in range <0,1>, default is 0.001
-#' @return A list with two dataframes of nLTTs
+#' @return A dataframe of nLTTs
+#' @examples
+#'   filenames <- wiritttea::find_paths(
+#'      c("toy_example_1.RDa", "toy_example_2.RDa",
+#'      "toy_example_3.RDa", "toy_example_4.RDa")
+#'    )
+#'    df <- wiritttea::collect_files_posterior_nltts(filenames)
+#'    testit::assert(
+#'      dplyr::all_equal(
+#'        names(df),
+#'        c("filename", "sti", "ai", "pi", "si", "nltt")
+#'      )
+#'    )
+#'    testthat::expect_true(nrow(df) == 200)
 #' @export
-collect_files_posterior_nltts <- function(filenames, dt = 0.001) {
+collect_files_posterior_nltts <- function(filenames) {
 
   if (length(filenames) < 1) {
     stop("there must be at least one filename supplied")
   }
 
-  # Posteriors Normalized lineages through timeS
-  pns <- NULL # Posterior Gamma statistics
+  df <- NULL
   for (filename in filenames) {
-    this_pns <- NULL
+    this_df <- NULL
     tryCatch(
-      this_pns <- wiritttea::collect_file_posterior_nltts(
-        filename = filename, dt = dt
+      this_df <- wiritttea::collect_file_posterior_nltts(
+        filename = filename
       ),
       error = function(msg) {} # nolint
     )
-    if (is.null(this_pns)) {
-      this_pns <- data.frame(
+    if (is.null(this_df)) {
+      this_df <- data.frame(
         sti = NA,
         ai = NA,
         pi = NA,
         si = NA,
-        t = NA,
         nltt = NA
       )
     }
     # Prepend a col with the filename
-    this_filenames <- rep(basename(filename), times = nrow(this_pns))
-    this_pns <- cbind(
+    this_filenames <- rep(basename(filename), times = nrow(this_df))
+    this_df <- cbind(
       filename = this_filenames,
-      this_pns
+      this_df
     )
-    if (!is.null(pns)) {
-      pns <- rbind(pns, this_pns)
+    if (!is.null(df)) {
+      df <- rbind(df, this_df)
     } else {
-      pns <- this_pns
+      df <- this_df
     }
   }
 
-  return(pns)
+  df
 }
