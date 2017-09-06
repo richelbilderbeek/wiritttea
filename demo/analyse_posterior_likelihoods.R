@@ -20,3 +20,4 @@ if (!file.exists(posterior_likelihoods_filename)) {
 
 # Read nLTT stats
 posterior_likelihoods <- wiritttea::read_collected_posterior_likelihoods(posterior_likelihoods_filename)
+head(posterior_likelihoods)

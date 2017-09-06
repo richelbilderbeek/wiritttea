@@ -7,15 +7,15 @@ posterior_likelihoods_filename <- paste0("~/wirittte_data/posterior_likelihoods_
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) > 0) nltt_stats_filename <- args[1]
 
-print(paste("nltt_stats_filename:", nltt_stats_filename))
+print(paste("posterior_likelihoods_filename:", posterior_likelihoods_filename))
 
-if (!file.exists(nltt_stats_filename)) {
-  stop("File '", nltt_stats_filename, "' not found, ",
+if (!file.exists(posterior_likelihoods_filename)) {
+  stop("File '", posterior_likelihoods_filename, "' not found, ",
     "please run analyse_posterior_likelihoods")
 }
 
 print("Read nLTT stats")
-nltt_stats <- wiritttea::read_collected_posterior_likelihoods(posterior_likelihoods_filename)
+posterior_likelihoods_filename <- wiritttea::read_collected_posterior_likelihoods(posterior_likelihoods_filename)
 names(nltt_stats)
 
 testit::assert("pi" %in% names(nltt_stats))
