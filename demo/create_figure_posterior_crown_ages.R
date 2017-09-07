@@ -67,8 +67,6 @@ ggplot2::ggplot(
 dev.off()
 
 
-TODO FROM HERE
-
 
 print("Determine sample size")
 n_sampled <- 500000
@@ -116,7 +114,7 @@ df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
 head(df)
 names(df)
 
-svg("~/figure_posterior_distribution_crown_ages.svg")
+svg("~/figure_posterior_distribution_crown_ages_p_values.svg")
 ggplot2::ggplot(
   na.omit(df),
   ggplot2::aes(x = p_value, na.omit = TRUE)
@@ -126,8 +124,8 @@ ggplot2::ggplot(
   ggplot2::xlab("p value") +
   ggplot2::ylab("Count") +
   ggplot2::labs(
-    title = "The distribution of p values of Mann-Whitney tests\nbetween posterior crown_ages",
-    caption  = "'figure_posterior_distribution_crown_age'"
+    title = "The distribution of p values of Mann-Whitney tests\nbetween posterior crown ages",
+    caption  = "figure_posterior_distribution_crown_ages_p_values"
   ) +
   ggplot2::annotate("text", x = c(0.0, 0.125), y = 1450, label = c("different", "same")) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
@@ -150,26 +148,26 @@ low_filename <- paste0(posteriors_path, "/", low$filename[1])
 low_sti <- as.numeric(low$sti[1])
 low_ai <- as.numeric(low$ai[1])
 low_file <- wiritttes::read_file(low_filename)
-low_crown_ages1 <- wiritttes::get_posterior(low_file, sti = low_sti, ai = low_ai, pi = 1)$estimates$crown_age
-low_crown_ages2 <- wiritttes::get_posterior(low_file, sti = low_sti, ai = low_ai, pi = 2)$estimates$crown_age
+low_crown_ages1 <- wiritttes::get_posterior(low_file, sti = low_sti, ai = low_ai, pi = 1)$estimates$TreeHeight
+low_crown_ages2 <- wiritttes::get_posterior(low_file, sti = low_sti, ai = low_ai, pi = 2)$estimates$TreeHeight
 df_low <- data.frame(
   pi = as.factor(c(rep(1, length(low_crown_ages1)), rep(2, length(low_crown_ages2)))),
   crown_age  = c(low_crown_ages1, low_crown_ages2)
 )
 
-svg("~/figure_posterior_distribution_crown_ages_low.svg")
+svg("~/figure_posterior_distribution_crown_ages_lowest_p_value.svg")
 options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
   na.omit(df_low),
   ggplot2::aes(x = crown_age, fill = pi)
 ) +
-  ggplot2::geom_histogram(binwidth = 0.5, position = "identity", alpha = 0.25) +
+  ggplot2::geom_histogram(binwidth = 0.001, position = "identity", alpha = 0.25) +
   ggplot2::xlab("tree crown_age") +
   ggplot2::ylab("Count") +
-  ggplot2::xlim(-59330,-59310) +
+  ggplot2::xlim(0.14,0.17) +
   ggplot2::labs(
     title = "The distribution of tree crown_ages of two replicate  posteriors",
-    caption  = paste0("p value = ", low$p_value, ", figure_posterior_distribution_crown_age_low")
+    caption  = paste0("p value = ", low$p_value, ", figure_posterior_distribution_crown_ages_lowest_p_value")
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 options(warn = 2) # Be strict
@@ -186,26 +184,26 @@ high_filename <- paste0(posteriors_path, "/", high$filename[1])
 high_sti <- as.numeric(high$sti[1])
 high_ai <- as.numeric(high$ai[1])
 high_file <- wiritttes::read_file(high_filename)
-high_crown_ages1 <- wiritttes::get_posterior(high_file, sti = high_sti, ai = high_ai, pi = 1)$estimates$crown_age
-high_crown_ages2 <- wiritttes::get_posterior(high_file, sti = high_sti, ai = high_ai, pi = 2)$estimates$crown_age
+high_crown_ages1 <- wiritttes::get_posterior(high_file, sti = high_sti, ai = high_ai, pi = 1)$estimates$TreeHeight
+high_crown_ages2 <- wiritttes::get_posterior(high_file, sti = high_sti, ai = high_ai, pi = 2)$estimates$TreeHeight
 df_high <- data.frame(
   pi = as.factor(c(rep(1, length(high_crown_ages1)), rep(2, length(high_crown_ages2)))),
   crown_age  = c(high_crown_ages1, high_crown_ages2)
 )
 
-svg("~/figure_posterior_distribution_crown_ages_high.svg")
+svg("~/figure_posterior_distribution_crown_ages_highest_p_value.svg")
 options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
   na.omit(df_high),
   ggplot2::aes(x = crown_age, fill = pi)
 ) +
-  ggplot2::geom_histogram(position = "identity", alpha = 0.25) +
+  ggplot2::geom_histogram(binwidth = 0.001, position = "identity", alpha = 0.25) +
   ggplot2::xlab("tree crown_age") +
   ggplot2::ylab("Count") +
-  #ggplot2::xlim(-59330,-59310) +
+  ggplot2::xlim(0.14, 0.16) +
   ggplot2::labs(
     title = "The distribution of tree crown_ages of two replicate posteriors",
-    caption  = paste0("p value = ", high$p_value, ", figure_posterior_distribution_crown_age_high")
+    caption  = paste0("p value = ", high$p_value, ", figure_posterior_distribution_crown_ages_highest_p_value")
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 options(warn = 2) # Be strict
