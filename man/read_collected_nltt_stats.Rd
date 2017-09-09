@@ -5,11 +5,16 @@
 \title{Read all the collected nLTT statistics of all simulations}
 \usage{
 
-  read_collected_nltt_stats(filename = find_path("collect_files_nltt_stats.csv"))
+  read_collected_nltt_stats(filename = find_path("collect_files_nltt_stats.csv"),
+  burn_in_fraction)
 }
 \arguments{
 \item{filename}{the name of the CSV containing the collected nLTT
 statistics. Default value is 'inst/extdata/collected_files_nltt_stats.csv'}
+
+\item{burn_in_fraction}{fraction of posterior states being discarded,
+where 0.0 keeps the full posterior, 0.1 (a commonly used value)
+discards the first 10 percent}
 }
 \value{
 a dataframe, with columns `filename` (name of the file),
@@ -23,7 +28,7 @@ a dataframe, with columns `filename` (name of the file),
 Read all the collected nLTT statistics of all simulations
 }
 \examples{
-  df <- read_collected_nltt_stats()
+  df <- read_collected_nltt_stats(burn_in_fraction = 0.1)
   expected_names <- c("filename", "sti", "ai", "pi", "si", "nltt_stat")
   testit::assert(names(df) == expected_names)
   testit::assert(is.factor(df$filename))

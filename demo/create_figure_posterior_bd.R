@@ -133,7 +133,7 @@ ggplot2::ggplot(
   ggplot2::facet_wrap(~variable, ncol = 4, nrow = 1, shrink = TRUE, scales = "free") +
   ggplot2::labs(
     title = "Distributions of estimated BD parameters",
-    caption = paste0(filename, ", figure_posterior_distribution_bd")
+    caption = paste0(filename, ", figure_posterior_distribution_bd_all")
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()
