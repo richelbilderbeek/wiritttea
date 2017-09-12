@@ -43,7 +43,7 @@ parameters$filename <- as.factor(parameters$filename)
 parameters <- subset(parameters, select = c(filename, mean_durspec) )
 
 print("Read nLTT stats")
-nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 
 print("Prepare nLTT stats for merge")
 nltt_stats <- subset(nltt_stats, select = c(filename, nltt_stat) )

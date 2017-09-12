@@ -40,7 +40,7 @@ parameters <- dplyr::select(parameters, c(filename, sirg, scr, erg))
 #parameters <- dplyr::select(parameters, c(filename, sirg, scr, erg, mean_durspec))
 
 print("Read nLTT stats")
-nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 
 print("Use only half of the nLTT stats, due to memory")
 n_nltt_stats_all <- nrow(nltt_stats)

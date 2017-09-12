@@ -16,7 +16,7 @@ if (!file.exists(nltt_stats_filename)) {
 }
 
 print("Read nLTT stats")
-nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 names(nltt_stats)
 
 testit::assert("pi" %in% names(nltt_stats))

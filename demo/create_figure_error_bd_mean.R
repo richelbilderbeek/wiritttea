@@ -26,7 +26,7 @@ if (!file.exists(nltt_stats_filename)) {
 
 print("Read parameters and nLTT stats")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
-nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 
 print("Take the mean of the nLTT stats")
 library(dplyr)

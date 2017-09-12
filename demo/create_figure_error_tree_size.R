@@ -22,7 +22,7 @@ if (!file.exists(nltt_stats_filename)) {
 
 # Read parameters and nLTT stats
 n_taxa <- wiritttea::read_collected_n_taxa(n_taxa_filename)
-nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 head(n_taxa)
 head(nltt_stats)
 tail(n_taxa)

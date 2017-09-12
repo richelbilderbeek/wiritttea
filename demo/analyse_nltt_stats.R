@@ -19,7 +19,7 @@ if (!file.exists(nltt_stats_filename)) {
 }
 
 # Read nLTT stats
-nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename)
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 
 # How many NA's?
 library(dplyr)
