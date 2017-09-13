@@ -75,7 +75,7 @@ svg("~/figure_error_posterior_nltt_si_early.svg")
 early_nltt_stats <- na.omit(nltt_stats)
 early_nltt_stats <- early_nltt_stats[ as.numeric(early_nltt_stats$si) < 100, ]
 ggplot2::ggplot(
-  dplyr::sample_n(early_nltt_stats, size = 100000),
+  dplyr::sample_n(early_nltt_stats, size = 10000),
   ggplot2::aes(x = as.numeric(si), y = nltt_stat)) +
   ggplot2::geom_point(alpha = 0.01) +
   ggplot2::geom_smooth(method = "lm") +
