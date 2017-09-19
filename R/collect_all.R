@@ -6,7 +6,7 @@
 #' @examples
 #'   folder <- "~/GitHubs/wiritttea/inst/extdata"
 #'   if (file.exists(folder)) {
-#'     do_analysis(folder = folder)
+#'     collect_all(folder = folder)
 #'     testit::assert(length(list.files(folder, pattern = "\\.csv")) > 0)
 #'   }
 #' @export

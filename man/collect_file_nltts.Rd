@@ -23,7 +23,7 @@ parameter file in the melted/uncast/long form
 \examples{
   dt <- 0.1
   filename <- find_path("toy_example_3.RDa")
-  df <- collect_file_nltts(filename, dt = dt)
+  df <- collect_file_nltts(filename)
   testit::assert(names(df) == c("species_tree_nltts", "posterior_nltts"))
   testit::assert(names(df$species_tree_nltts)
     == c("sti", "t", "nltt")
