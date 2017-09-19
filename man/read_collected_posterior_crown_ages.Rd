@@ -7,6 +7,9 @@
 
   read_collected_posterior_crown_ages(filename = wiritttea::find_path("collect_files_posterior_crown_ages.csv"))
 }
+\arguments{
+\item{filename}{name of the file with all the collected posteriors' crown ages}
+}
 \value{
 a dataframe
 }

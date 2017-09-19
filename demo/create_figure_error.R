@@ -56,7 +56,7 @@ df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
 names(df)
 head(df, n = 10)
 
-df <- na.omit(df)
+df <- stats::na.omit(df)
 
 my_colors <- hsv(scales::rescale(sort(unique(df$mean_durspec)), to = c(0.0, 5.0 / 6.0)))
 

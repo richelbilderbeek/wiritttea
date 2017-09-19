@@ -1,6 +1,8 @@
-# nstpist: Number of Species Trees Per Incipient Species Tree
-# napst: Number of Alignments per Species Tree
-# nppa: Number of Posteriors per Alignment
+#' Creates the filenames of the log files
+#' @param  rda_filename name of the RDa file containing a WIRITTTES data file
+#' @param nstpist: Number of Species Trees Per Incipient Species Tree
+#' @param napst: Number of Alignments per Species Tree
+#' @param nppa: Number of Posteriors per Alignment
 #' @examples
 #'   rda_filename <- "test.RDa"
 #'   log_filenames <- create_log_filenames(rda_filename, 2,2,2)

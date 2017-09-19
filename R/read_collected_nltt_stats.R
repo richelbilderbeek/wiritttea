@@ -42,7 +42,7 @@ read_collected_nltt_stats <- function(
   )
 
   # Remove burn-in
-  max_si <- max(na.omit(df$si))
+  max_si <- max(stats::na.omit(df$si))
   si_lower_bound <- burn_in_fraction * max_si
   df <- df[df$si > si_lower_bound, ]
 

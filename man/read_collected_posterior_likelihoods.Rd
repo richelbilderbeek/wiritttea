@@ -7,6 +7,9 @@
 
   read_collected_posterior_likelihoods(filename = wiritttea::find_path("collect_files_posterior_likelihoods.csv"))
 }
+\arguments{
+\item{filename}{name of the file with all the collected posteriors' likelihoods}
+}
 \value{
 a dataframe
 }

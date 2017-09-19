@@ -51,8 +51,8 @@ names(df)
 head(df, n = 10)
 
 # Calculate mean BD error
-scr_bd <- max(na.omit(df$scr))
-mean_bd_error <- mean(na.omit(df[ df$scr == scr_bd, ]$nltt_stat))
+scr_bd <- max(stats::na.omit(df$scr))
+mean_bd_error <- mean(stats::na.omit(df[ df$scr == scr_bd, ]$nltt_stat))
 
 
 print("Creating figure")
@@ -60,12 +60,12 @@ print("Creating figure")
 svg("~/figure_error_expected_mean_dur_spec.svg")
 set.seed(42)
 n_sampled <- 2000
-n_data_points <- nrow(na.omit(df))
+n_data_points <- nrow(stats::na.omit(df))
 
 options(warn = 1) # Allow points falling out of range
 
 ggplot2::ggplot(
-  data = dplyr::sample_n(na.omit(df), size = n_sampled), # Out of 7M
+  data = dplyr::sample_n(stats::na.omit(df), size = n_sampled), # Out of 7M
   ggplot2::aes(x = mean_durspec, y = nltt_stat)
 ) + ggplot2::geom_jitter(width = 0.01, alpha = 0.1) +
   ggplot2::geom_smooth(method = "lm", color = "blue", size = 0.5, alpha = 0.25) +

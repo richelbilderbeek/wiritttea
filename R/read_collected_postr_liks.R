@@ -1,4 +1,5 @@
 #' Read all the collected tree likelihoods of all posteriors
+#' @param filename name of the file with all the collected posteriors' likelihoods
 #' @return a dataframe
 #' @examples
 #'   df <- read_collected_posterior_likelihoods()

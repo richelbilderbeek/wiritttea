@@ -2,6 +2,8 @@
 #' @param csv_filename name of the CSV file
 #' @return a data frame with all operators' acceptances
 #' @author Richel Bilderbeek
+#' @usage read_collected_operators(
+#'   csv_filename = wiritttea::find_path("read_collected_operators.csv"))
 #' @export
 read_collected_operators <- function(
   csv_filename = wiritttea::find_path("read_collected_operators.csv")

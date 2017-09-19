@@ -1,4 +1,5 @@
 #' Read all the collected nLTT statistics of all posteriors
+#' @param filename name of the file with all the collected posteriors' nLLTs
 #' @return a dataframe
 #' @examples
 #'   df <- read_collected_posterior_nltts()

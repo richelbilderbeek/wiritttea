@@ -4,8 +4,8 @@
 \alias{read_collected_operators}
 \title{Reads the file with the collected BEAST2 operators' acceptances}
 \usage{
-
-  read_collected_operators(csv_filename = wiritttea::find_path("read_collected_operators.csv"))
+read_collected_operators(
+  csv_filename = wiritttea::find_path("read_collected_operators.csv"))
 }
 \arguments{
 \item{csv_filename}{name of the CSV file}

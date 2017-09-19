@@ -63,13 +63,13 @@ head(df, n = 10)
 # for different values of scr
 # Nice jitter
 ggplot2::ggplot(
-  data = na.omit(df),
+  data = stats::na.omit(df),
   ggplot2::aes(x = sirg, y = erg, color = mean)
 ) + ggplot2::geom_jitter()
 
 
 ggplot2::ggplot(
-  data = na.omit(df),
+  data = stats::na.omit(df),
   ggplot2::aes(x = sirg, y = erg, col = mean)
 ) + ggplot2::facet_grid(scr ~ .) + ggplot2::geom_jitter()
 
@@ -79,7 +79,7 @@ ggplot2::ggplot(
 # Create non-linear model
 if (1 == 2) {
   df[is.finite(df$mean), ]
-  df_clean <- na.omit(df[is.finite(df$mean) | is.finite(df$erg) | is.finite(df$scr) | is.finite(df$siri), ])
+  df_clean <- stats::na.omit(df[is.finite(df$mean) | is.finite(df$erg) | is.finite(df$scr) | is.finite(df$siri), ])
   df_clean$mean[ is.infinite(df_clean$mean) ]
   df_clean$mean[ is.na(df_clean$mean) ]
   model <- nls(
@@ -92,7 +92,7 @@ if (1 == 2) {
     )
   )
   View(df_clean)
-  sum(is.na(na.omit(df)))
+  sum(is.na(stats::na.omit(df)))
   is.nan(df)
   Inf
 
@@ -116,7 +116,7 @@ if (1 == 2) {
     mean ~
     erg +
     scr +
-    siri, data = na.omit(df_ni))
+    siri, data = stats::na.omit(df_ni))
   names(model_2)
   length(model$fitted.values)
   length(model_2$fitted.values)
@@ -149,7 +149,7 @@ if (1 == 2) {
     mean ~
     erg +
     scr +
-    siri, data = na.omit(df_ni))
+    siri, data = stats::na.omit(df_ni))
   names(model_2)
   length(model$fitted.values)
   length(model_2$fitted.values)
@@ -167,7 +167,8 @@ if (1 == 2) {
     z = df$mean, zlab = "Mean nLTT statistic"
   )
   names(df)
-  nltt_stat_per_spec_dur <- na.omit(na.omit(df) %>% group_by(erg, mean_durspec) %>%
+  nltt_stat_per_spec_dur <- stats::na.omit(stats::na.omit(df) %>%
+      group_by(erg, mean_durspec) %>%
          summarise(mean=mean(mean)))
   plot3D::scatter3D(
     x = nltt_stat_per_spec_dur$mean_durspec, xlab = "Mean duration of speciation",
@@ -241,14 +242,14 @@ if (1 == 2) {
   )
 
   lattice::wireframe(
-    mean ~ mean_durspec + erg, data = na.omit(df),
+    mean ~ mean_durspec + erg, data = stats::na.omit(df),
     drape = TRUE,
     colorkey = TRUE
   )
 
   #
   ggplot2::ggplot(
-    data = na.omit(df),
+    data = stats::na.omit(df),
     ggplot2::aes(x = mean_durspec, y = mean)
   ) + ggplot2::geom_point() +
       ggplot2::xlab("Mean duration of speciation") +

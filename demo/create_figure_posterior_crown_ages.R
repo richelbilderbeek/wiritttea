@@ -87,7 +87,7 @@ df <- dplyr::select(df, -starts_with("<NA>"))
 testit::assert(names(df) == c("filename", "sti", "ai", "si", "pi1", "pi2"))
 
 print("Remove NAs")
-df <- na.omit(df)
+df <- stats::na.omit(df)
 nrow(df)
 
 print("Group")
@@ -102,7 +102,7 @@ safe_mann_whitney <- function(pi1, pi2)
         pi2,
         correct = FALSE,
         exact = FALSE, # cannot compute exact p-value with ties
-        na.action = na.omit
+        na.action = stats::na.omit
       )$p.value,
       error = function(cond) {} # nolint
     )
@@ -116,8 +116,8 @@ names(df)
 
 svg("~/figure_posterior_distribution_crown_ages_p_values.svg")
 ggplot2::ggplot(
-  na.omit(df),
-  ggplot2::aes(x = p_value, na.omit = TRUE)
+  stats::na.omit(df),
+  ggplot2::aes(x = p_value, stats::na.omit = TRUE)
 ) +
   ggplot2::geom_histogram(binwidth = 0.01) +
   ggplot2::geom_vline(xintercept = 0.05, linetype = "dotted") +
@@ -158,7 +158,7 @@ df_low <- data.frame(
 svg("~/figure_posterior_distribution_crown_ages_lowest_p_value.svg")
 options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
-  na.omit(df_low),
+  stats::na.omit(df_low),
   ggplot2::aes(x = crown_age, fill = pi)
 ) +
   ggplot2::geom_histogram(binwidth = 0.001, position = "identity", alpha = 0.25) +
@@ -194,7 +194,7 @@ df_high <- data.frame(
 svg("~/figure_posterior_distribution_crown_ages_highest_p_value.svg")
 options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
-  na.omit(df_high),
+  stats::na.omit(df_high),
   ggplot2::aes(x = crown_age, fill = pi)
 ) +
   ggplot2::geom_histogram(binwidth = 0.001, position = "identity", alpha = 0.25) +

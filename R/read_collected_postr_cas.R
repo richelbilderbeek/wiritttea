@@ -1,4 +1,5 @@
 #' Read all the collected tree crown_ages of all posteriors
+#' @param filename name of the file with all the collected posteriors' crown ages
 #' @return a dataframe
 #' @examples
 #'   df <- read_collected_posterior_crown_ages()

@@ -61,7 +61,7 @@ print("Creating figure")
 svg("~/figure_error_alignment_length_mean.svg")
 
 ggplot2::ggplot(
-  data = na.omit(df),
+  data = stats::na.omit(df),
   ggplot2::aes(x = as.factor(scr), y = mean, fill = as.factor(sequence_length))
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +

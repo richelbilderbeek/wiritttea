@@ -7,6 +7,9 @@
 
   read_collected_posterior_nltts(filename = wiritttea::find_path("collect_files_posterior_nltts.csv"))
 }
+\arguments{
+\item{filename}{name of the file with all the collected posteriors' nLLTs}
+}
 \value{
 a dataframe
 }

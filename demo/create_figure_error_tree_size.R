@@ -48,7 +48,7 @@ testit::assert("filename" %in% names(nltt_stat_means))
 df_mean <- merge(x = nltt_stat_means, y = n_taxa, by = "filename", all = TRUE)
 df <- merge(x = nltt_stats, y = n_taxa, by = "filename", all = TRUE)
 n_all <- nrow(df)
-df <- na.omit(df)
+df <- stats::na.omit(df)
 names(df_mean)
 head(df_mean, n = 10)
 tail(df_mean, n = 10)
@@ -88,7 +88,7 @@ dev.off()
 
 svg("~/figure_error_tree_size_mean.svg")
 ggplot2::ggplot(
-  data = na.omit(df_mean),
+  data = stats::na.omit(df_mean),
   ggplot2::aes(x = n_taxa, y = mean)
 ) +
   ggplot2::geom_point() +
