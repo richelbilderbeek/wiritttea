@@ -5,11 +5,14 @@
 \title{Read all the collected nLTT statistics of all posteriors}
 \usage{
 wiritttea::read_collected_posterior_nltts(
-   filename = wiritttea::find_path("collect_files_posterior_nltts.csv")
+   filename = wiritttea::find_path("collect_files_posterior_nltts.csv"),
+   burn_in_fraction = 0.2
  )
 }
 \arguments{
 \item{filename}{name of the file with all the collected posteriors' nLLTs}
+
+\item{burn_in_fraction}{the fraction of earliest values that is discarded}
 }
 \value{
 a dataframe
@@ -18,7 +21,7 @@ a dataframe
 Read all the collected nLTT statistics of all posteriors
 }
 \examples{
-  df <- wiritttea::read_collected_posterior_nltts()
+  df <- wiritttea::read_collected_posterior_nltts(burn_in_fraction = 0.2)
   testit::assert(names(df) ==
     c(
       "filename", "sti", "ai",

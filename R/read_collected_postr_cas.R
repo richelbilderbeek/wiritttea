@@ -6,7 +6,7 @@
 #'   filename = wiritttea::find_path("collect_files_posterior_crown_ages.csv")
 #' )
 #' @examples
-#'   df <- read_collected_posterior_crown_ages()
+#'   df <- wiritttea::read_collected_posterior_crown_ages()
 #'   testit::assert(names(df) ==
 #'     c(
 #'       "filename", "sti", "ai",

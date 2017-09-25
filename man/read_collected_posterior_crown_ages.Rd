@@ -18,7 +18,7 @@ a dataframe
 Read all the collected tree crown_ages of all posteriors
 }
 \examples{
-  df <- read_collected_posterior_crown_ages()
+  df <- wiritttea::read_collected_posterior_crown_ages()
   testit::assert(names(df) ==
     c(
       "filename", "sti", "ai",

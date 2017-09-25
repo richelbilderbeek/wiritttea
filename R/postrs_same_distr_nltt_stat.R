@@ -6,8 +6,8 @@
 #'  that posterior state its phylogeny and the sampled species tree)
 #' @return data frame
 #' @examples
-#'   nltt_stats <- read_collected_nltt_stats()
-#'   df <- postrs_same_distr_nltt_stat(nltt_stats)
+#'   nltt_stats <- wiritttea::read_collected_nltt_stats(burn_in_fraction = 0.2)
+#'   df <- wiritttea::postrs_same_distr_nltt_stat(nltt_stats)
 #'   testit::assert(all(names(df) == c("filename", "sti", "ai", "same_distr")))
 #' @export
 postrs_same_distr_nltt_stat <- function(df) {

@@ -21,7 +21,7 @@ Tests if the nLTT statistics between posteriors
 are of the same distribution
 }
 \examples{
-  nltt_stats <- read_collected_nltt_stats()
-  df <- postrs_same_distr_nltt_stat(nltt_stats)
+  nltt_stats <- wiritttea::read_collected_nltt_stats(burn_in_fraction = 0.2)
+  df <- wiritttea::postrs_same_distr_nltt_stat(nltt_stats)
   testit::assert(all(names(df) == c("filename", "sti", "ai", "same_distr")))
 }

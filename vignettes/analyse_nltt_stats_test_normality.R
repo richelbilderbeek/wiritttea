@@ -3,7 +3,7 @@ library(wiritttea)
 options(warn = 2)
 
 ## ------------------------------------------------------------------------
-nltt_stats_raw <- read_collected_nltt_stats()
+nltt_stats_raw <- read_collected_nltt_stats(burn_in_fraction = 0.2)
 #nltt_stats_raw$sti <- plyr::revalue(nltt_stats_raw$sti, c("1"="youngest", "2"="oldest"))
 knitr::kable(head(nltt_stats_raw))
 
@@ -45,7 +45,7 @@ ggplot2::ggplot(
   "nLTT statistic posterior distribution types"
 ) + ggplot2::guides(
   # Remove legend title
-  fill = ggplot2::guide_legend(title = NULL) 
+  fill = ggplot2::guide_legend(title = NULL)
 ) + ggplot2::scale_y_continuous(
   "Number of posteriors"
 )
@@ -58,15 +58,15 @@ df_normal <- df[df$idn == "normal", ]
 # Select of those posteriors the ones with the highest number
 # of taxa
 normal_max_n_taxa <- df_normal[
-  df_normal$n_taxa == max(df_normal$n_taxa), 
+  df_normal$n_taxa == max(df_normal$n_taxa),
 ]
 
 # Obtain that first posterior its nLTT statistics
-normal_max_n_taxa_nltts <- nltt_stats[ 
-  nltt_stats$filename == normal_max_n_taxa[1, ]$filename & 
-  nltt_stats$sti == normal_max_n_taxa[1, ]$sti & 
-  nltt_stats$ai == normal_max_n_taxa[1, ]$ai & 
-  nltt_stats$pi == normal_max_n_taxa[1, ]$pi, 
+normal_max_n_taxa_nltts <- nltt_stats[
+  nltt_stats$filename == normal_max_n_taxa[1, ]$filename &
+  nltt_stats$sti == normal_max_n_taxa[1, ]$sti &
+  nltt_stats$ai == normal_max_n_taxa[1, ]$ai &
+  nltt_stats$pi == normal_max_n_taxa[1, ]$pi,
 ]
 
 # Plot those nLTT statistics
@@ -74,20 +74,20 @@ normal_max_n_taxa_nltts <- nltt_stats[
 # Solid line with fill: nLTT density
 # Dashed line: normal distribution
 ggplot2::ggplot(
-  normal_max_n_taxa_nltts, 
+  normal_max_n_taxa_nltts,
   ggplot2::aes(x=normal_max_n_taxa_nltts$nltt_stat)
 ) + ggplot2::geom_histogram(
   ggplot2::aes(y=..density..)
 ) + ggplot2::geom_density(
-  alpha=.2, 
+  alpha=.2,
   fill="#666666"
 ) + ggplot2::ggtitle("nLTT statistic distribution that is normally distributed"
 ) + ggplot2::stat_function(
-  fun = dnorm, 
+  fun = dnorm,
   args = list(
-    mean = mean(normal_max_n_taxa_nltts$nltt_stat), 
+    mean = mean(normal_max_n_taxa_nltts$nltt_stat),
     sd = sd(normal_max_n_taxa_nltts$nltt_stat)
-  ), 
+  ),
   lty = 2
 )
 
@@ -99,34 +99,34 @@ df_not_normal <- df[df$idn == "not normal", ]
 # Select of those posteriors the ones with the highest number
 # of taxa
 not_normal_max_n_taxa <- df_not_normal[
-  df_not_normal$n_taxa == max(df_not_normal$n_taxa), 
+  df_not_normal$n_taxa == max(df_not_normal$n_taxa),
 ]
 
-not_normal_max_n_taxa_nltts <- nltt_stats[ 
-  nltt_stats$filename == not_normal_max_n_taxa[1, ]$filename & 
-  nltt_stats$sti == not_normal_max_n_taxa[1, ]$sti & 
-  nltt_stats$ai == not_normal_max_n_taxa[1, ]$ai & 
-  nltt_stats$pi == not_normal_max_n_taxa[1, ]$pi, 
+not_normal_max_n_taxa_nltts <- nltt_stats[
+  nltt_stats$filename == not_normal_max_n_taxa[1, ]$filename &
+  nltt_stats$sti == not_normal_max_n_taxa[1, ]$sti &
+  nltt_stats$ai == not_normal_max_n_taxa[1, ]$ai &
+  nltt_stats$pi == not_normal_max_n_taxa[1, ]$pi,
 ]
 
 # Histogram: nLTT distribution
 # Solid line with fill: nLTT density
 # Dashed line: normal distribution
 ggplot2::ggplot(
-  not_normal_max_n_taxa_nltts, 
+  not_normal_max_n_taxa_nltts,
   ggplot2::aes(x=not_normal_max_n_taxa_nltts$nltt_stat)
 ) + ggplot2::geom_histogram(
   ggplot2::aes(y=..density..)
 ) + ggplot2::geom_density(
-  alpha=.2, 
+  alpha=.2,
   fill="#666666"
 ) + ggplot2::ggtitle("nLTT statistic distribution that is not normally distributed"
 ) + ggplot2::stat_function(
-  fun = dnorm, 
+  fun = dnorm,
   args = list(
-    mean = mean(not_normal_max_n_taxa_nltts$nltt_stat), 
+    mean = mean(not_normal_max_n_taxa_nltts$nltt_stat),
     sd = sd(not_normal_max_n_taxa_nltts$nltt_stat)
-  ), 
+  ),
   lty = 2
 )
 

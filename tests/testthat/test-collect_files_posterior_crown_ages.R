@@ -12,6 +12,7 @@ test_that("Basic use", {
     c("filename", "sti", "ai", "pi", "si", "crown_age")
   )
 
+  # Generation of file
   # write.csv(df, "~/collect_files_posterior_crown_ages.csv")
 
   testthat::expect_true(nrow(df) == 220)
