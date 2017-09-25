@@ -106,7 +106,7 @@ collect_files_nltt_stats <- function(filenames) {
 #'     )
 #'   )
 #'   expected_names <- c("filename", "sti", "ai", "pi", "si", "nltt_stat")
-#'   testit::assert(names(nltt_stats) == expected_names)
+#'   testit::assert(all(names(nltt_stats) == expected_names))
 #' @author Richel Bilderbeek
 collect_files_nltt_stats_dirty <- function(filenames) {
   clean_filenames <- filenames[wiritttes::are_valid_files(filenames)]

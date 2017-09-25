@@ -4,9 +4,9 @@
 \alias{read_collected_posterior_likelihoods}
 \title{Read all the collected tree likelihoods of all posteriors}
 \usage{
-wiritttea::read_collected_posterior_likelihoods(
-  filename = wiritttea::find_path("collect_files_posterior_likelihoods.csv")
-)
+read_collected_posterior_likelihoods(
+    filename = "collected_posterior_likelihoods.csv"
+  )
 }
 \arguments{
 \item{filename}{name of the file with all the collected posteriors' likelihoods}
@@ -18,7 +18,7 @@ a dataframe
 Read all the collected tree likelihoods of all posteriors
 }
 \examples{
-  df <- read_collected_posterior_likelihoods()
+  df <- wiritttea::read_collected_posterior_likelihoods()
   testit::assert(names(df) ==
     c(
       "filename", "sti", "ai",

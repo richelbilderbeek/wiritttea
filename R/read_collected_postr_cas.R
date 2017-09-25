@@ -2,8 +2,8 @@
 #' @param filename name of the file with all the collected posteriors' crown ages
 #' @return a dataframe
 #' @usage
-#' wiritttea::read_collected_posterior_crown_ages(
-#'   filename = wiritttea::find_path("collect_files_posterior_crown_ages.csv")
+#' read_collected_posterior_crown_ages(
+#'   filename ="collected_posterior_crown_ages.csv"
 #' )
 #' @examples
 #'   df <- wiritttea::read_collected_posterior_crown_ages()

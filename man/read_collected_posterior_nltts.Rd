@@ -4,10 +4,10 @@
 \alias{read_collected_posterior_nltts}
 \title{Read all the collected nLTT statistics of all posteriors}
 \usage{
-wiritttea::read_collected_posterior_nltts(
-   filename = wiritttea::find_path("collect_files_posterior_nltts.csv"),
-   burn_in_fraction = 0.2
- )
+read_collected_posterior_nltts(
+    filename = "collected_posterior_nltts.csv",
+    burn_in_fraction = 0.2
+  )
 }
 \arguments{
 \item{filename}{name of the file with all the collected posteriors' nLLTs}

@@ -3,10 +3,10 @@
 #' @param burn_in_fraction the fraction of earliest values that is discarded
 #' @return a dataframe
 #' @usage
-#'  wiritttea::read_collected_posterior_nltts(
-#'    filename = wiritttea::find_path("collect_files_posterior_nltts.csv"),
-#'    burn_in_fraction = 0.2
-#'  )
+#'   read_collected_posterior_nltts(
+#'     filename = "collected_posterior_nltts.csv",
+#'     burn_in_fraction = 0.2
+#'   )
 #' @examples
 #'   df <- wiritttea::read_collected_posterior_nltts(burn_in_fraction = 0.2)
 #'   testit::assert(names(df) ==

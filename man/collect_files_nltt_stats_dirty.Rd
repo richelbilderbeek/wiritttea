@@ -24,7 +24,7 @@ Calculates the nLTT statistics from multiple files that may be invalid
     )
   )
   expected_names <- c("filename", "sti", "ai", "pi", "si", "nltt_stat")
-  testit::assert(names(nltt_stats) == expected_names)
+  testit::assert(all(names(nltt_stats) == expected_names))
 }
 \author{
 Richel Bilderbeek
