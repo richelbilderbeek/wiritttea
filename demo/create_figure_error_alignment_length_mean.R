@@ -1,4 +1,5 @@
 # Create 'figure_error_alignment_length_mean'
+#   and 'figure_error_alignment_length_median'
 library(wiritttea)
 options(warn = 2) # Be strict
 date <- "20170710"
@@ -35,9 +36,14 @@ esses <- wiritttea::read_collected_esses(esses_filename)
 # Take the mean of the nLTT stats
 library(dplyr)
 nltt_stat_means <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
-       summarise(mean=mean(nltt_stat), sd=sd(nltt_stat))
+       summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+nltt_stat_medians <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
+       summarise(median = median(nltt_stat))
+
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))
+testit::assert(all(names(nltt_stat_medians)
+  == c("filename", "sti", "ai", "pi", "median")))
 head(nltt_stat_means, n = 10)
 nrow(nltt_stat_means)
 
@@ -48,29 +54,46 @@ parameters$filename <- as.factor(parameters$filename)
 # Connect the mean nLTT stats and parameters
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(nltt_stat_means))
-df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
-
+df_means <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
+df_medians <- merge(x = parameters, y = nltt_stat_medians, by = "filename", all = TRUE)
 
 # Merge with the ESSes
-df <- merge(x = df, y = esses, by = c("filename", "sti", "ai", "pi"), all = TRUE)
+df_means <- merge(x = df_means, y = esses, by = c("filename", "sti", "ai", "pi"), all = TRUE)
+df_medians <- merge(x = df_medians, y = esses, by = c("filename", "sti", "ai", "pi"), all = TRUE)
 
-head(df)
 
 print("Creating figure")
 
 svg("~/figure_error_alignment_length_mean.svg")
 
 ggplot2::ggplot(
-  data = stats::na.omit(df),
+  data = stats::na.omit(df_means),
   ggplot2::aes(x = as.factor(scr), y = mean, fill = as.factor(sequence_length))
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +
-    ggplot2::xlab("Speciation completion rate (probability per lineage per million years)") +
-    ggplot2::ylab("Mean nLTT statistics") +
+    ggplot2::xlab(latex2exp::TeX("Speciation completion rate $\\lambda$")) +
+    ggplot2::ylab(latex2exp::TeX("Mean nLTT statistics, $\\bar{\\Delta_{nLTT}}$")) +
     ggplot2::labs(
-      fill = "Sequence/nlength (bp)",
+      fill = latex2exp::TeX("Sequence\nlength $l_a$"),
       title = "The effect of alignment length on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)",
       caption  = "figure_error_alignment_length_mean"
+    ) +
+    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+dev.off()
+
+svg("~/figure_error_alignment_length_median.svg")
+
+ggplot2::ggplot(
+  data = stats::na.omit(df_medians),
+  ggplot2::aes(x = as.factor(scr), y = median, fill = as.factor(sequence_length))
+) + ggplot2::geom_boxplot() +
+    ggplot2::facet_grid(erg ~ sirg) +
+    ggplot2::xlab(latex2exp::TeX("Speciation completion rate $\\lambda$")) +
+    ggplot2::ylab(latex2exp::TeX("Median nLTT statistics, $\\widetilde{\\Delta_{nLTT}}$")) +
+    ggplot2::labs(
+      fill = latex2exp::TeX("Sequence\nlength $l_a$"),
+      title = "The effect of alignment length on median nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)",
+      caption  = "figure_error_alignment_length_median"
     ) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 dev.off()

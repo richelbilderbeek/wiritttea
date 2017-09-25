@@ -7,8 +7,8 @@ analyse_nltt_stats   R script for analysing the nLTT statistics
 analyse_n_taxa   R script to analyse the number of taxa
 analyse_operators   Analyse
 analyse_parameters   R script to analyse the parameters
-analyse_posterior_crown_ages
-analyse_posterior_likelihoods
+analyse_posterior_crown_ages   Analyse
+analyse_posterior_likelihoods   Analyse
 analyse_posterior_nltts   Analyse
 analyse_posteriors   R script to analyse the posteriors
 analyse_strees_identical   R script to see if the sampled species trees have equal branch lengths

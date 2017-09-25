@@ -13,11 +13,13 @@ a dataframe
 Read all the collected nLTT values of all posteriors
 }
 \examples{
-  df <- read_collected_nltts_postrs()
-  testit::assert(names(df) ==
-    c(
-      "filename", "sti", "ai",
-      "pi", "si", "t", "nltt"
+  df <- wiritttea::read_collected_nltts_postrs()
+  testit::assert(
+    all(names(df) ==
+      c(
+        "filename", "sti", "ai",
+        "pi", "si", "nltt"
+      )
     )
   )
 }
