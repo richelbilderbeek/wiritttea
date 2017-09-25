@@ -33,7 +33,7 @@ collect_file_nltts <- function(filename, dt = 0.001) {
     filename = filename, dt = dt
   )
   posterior_nltts <- wiritttea::collect_file_posterior_nltts(
-    filename = filename, dt = dt
+    filename = filename
   )
 
   return(

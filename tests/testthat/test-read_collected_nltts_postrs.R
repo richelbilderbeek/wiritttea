@@ -1,11 +1,12 @@
 context("read_collected_nltts_postrs")
 
-test_that("read_collected_nltts_postrs: use", {
-  df <- read_collected_nltts_postrs()
-  testit::assert(names(df) ==
+test_that("use", {
+  df <- wiritttea::read_collected_nltts_postrs()
+  testthat::expect_identical(object = names(df),
+    expected =
     c(
       "filename", "sti", "ai",
-      "pi", "si", "t", "nltt"
+      "pi", "si", "nltt"
     )
   )
 })

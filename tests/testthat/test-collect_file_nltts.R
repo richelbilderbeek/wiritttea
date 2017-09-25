@@ -2,18 +2,18 @@ context("collect_file_nltts")
 
 test_that("collect_file_nltts: use", {
   dt <- 0.1
-  filename <- find_path("toy_example_3.RDa")
-  df <- collect_file_nltts(filename, dt = dt)
-  expect_equal(
+  filename <- wiritttea::find_path("toy_example_3.RDa")
+  df <- wiritttea::collect_file_nltts(filename, dt = dt)
+  testthat::expect_equal(
     names(df),
     c("species_tree_nltts", "posterior_nltts")
   )
-  expect_equal(
+  testthat::expect_equal(
     names(df$species_tree_nltts),
     c("sti", "t", "nltt")
   )
-  expect_true(nrow(df$species_tree_nltts) > 2)
-  expect_true(nrow(df$posterior_nltts) > 80)
+  testthat::expect_true(nrow(df$species_tree_nltts) > 2)
+  testthat::expect_equal(object = nrow(df$posterior_nltts), expected = 80)
 })
 
 test_that("collect_file_nltts: abuse", {
