@@ -7,20 +7,20 @@
 create_log_filenames(rda_filename, nstpist, napst, nppa)
 }
 \arguments{
-\item{rda_filename}{name of the RDa file containing a WIRITTTES data file}
+\item{rda_filename}{Name of the RDa file containing a WIRITTTES data file}
 
-\item{nstpist:}{Number of Species Trees Per Incipient Species Tree}
+\item{nstpist}{Number of Species Trees Per Incipient Species Tree}
 
-\item{napst:}{Number of Alignments per Species Tree}
+\item{napst}{Number of Alignments per Species Tree}
 
-\item{nppa:}{Number of Posteriors per Alignment}
+\item{nppa}{Number of Posteriors per Alignment}
 }
 \description{
 Creates the filenames of the log files
 }
 \examples{
   rda_filename <- "test.RDa"
-  log_filenames <- create_log_filenames(rda_filename, 2,2,2)
+  log_filenames <- wiritttea::create_log_filenames(rda_filename, 2,2,2)
   testit::assert(log_filenames[1] == "test_1_1_1.log")
   testit::assert(log_filenames[2] == "test_1_1_2.log")
   testit::assert(log_filenames[3] == "test_1_2_1.log")

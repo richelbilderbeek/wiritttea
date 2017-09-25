@@ -1,6 +1,10 @@
 #' Read all the collected tree likelihoods of all posteriors
 #' @param filename name of the file with all the collected posteriors' likelihoods
 #' @return a dataframe
+#' @usage
+#' wiritttea::read_collected_posterior_likelihoods(
+#'   filename = wiritttea::find_path("collect_files_posterior_likelihoods.csv")
+#' )
 #' @examples
 #'   df <- read_collected_posterior_likelihoods()
 #'   testit::assert(names(df) ==

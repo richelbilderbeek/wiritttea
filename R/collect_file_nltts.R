@@ -14,7 +14,7 @@
 #'     == c("sti", "t", "nltt")
 #'   )
 #'   testit::assert(nrow(df$species_tree_nltts) > 2)
-#'   testit::assert(nrow(df$posterior_nltts) > 80)
+#'   testit::assert(nrow(df$posterior_nltts) == 80)
 #' @export
 collect_file_nltts <- function(filename, dt = 0.001) {
 

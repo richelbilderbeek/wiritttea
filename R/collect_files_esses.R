@@ -151,7 +151,7 @@ collect_files_esses_from_log_files <- function(filenames, show_progress = FALSE)
   for (i in seq_along(filenames)) {
 
     rda_filename <- filenames[i]
-    log_filenames <- wiritttes::create_log_filenames(
+    log_filenames <- wiritttea::create_log_filenames(
       rda_filename, nstpist, napst, nppa)
 
     for (log_filename in log_filenames) {

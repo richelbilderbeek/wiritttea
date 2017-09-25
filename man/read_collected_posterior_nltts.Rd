@@ -4,8 +4,9 @@
 \alias{read_collected_posterior_nltts}
 \title{Read all the collected nLTT statistics of all posteriors}
 \usage{
-
-  read_collected_posterior_nltts(filename = wiritttea::find_path("collect_files_posterior_nltts.csv"))
+wiritttea::read_collected_posterior_nltts(
+   filename = wiritttea::find_path("collect_files_posterior_nltts.csv")
+ )
 }
 \arguments{
 \item{filename}{name of the file with all the collected posteriors' nLLTs}
@@ -17,7 +18,7 @@ a dataframe
 Read all the collected nLTT statistics of all posteriors
 }
 \examples{
-  df <- read_collected_posterior_nltts()
+  df <- wiritttea::read_collected_posterior_nltts()
   testit::assert(names(df) ==
     c(
       "filename", "sti", "ai",

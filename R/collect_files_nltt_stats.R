@@ -3,14 +3,14 @@
 #' @return a distribution of nLTT statistics
 #' @export
 #' @examples
-#'   nltt_stats <- collect_files_nltt_stats(
+#'   nltt_stats <- wiritttea::collect_files_nltt_stats(
 #'     filenames = c(
 #'       find_path("toy_example_1.RDa"),
 #'       find_path("toy_example_2.RDa")
 #'     )
 #'   )
 #'   expected_names <- c("filename", "sti", "ai", "pi", "si", "nltt_stat")
-#'   testit::assert(names(nltt_stats) == expected_names)
+#'   testit::assert(all(names(nltt_stats) == expected_names))
 #' @author Richel Bilderbeek
 collect_files_nltt_stats <- function(filenames) {
 
