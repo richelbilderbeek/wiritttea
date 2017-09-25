@@ -1,10 +1,46 @@
 analyse_alignments   Analyse the quality of alignments
 analyse_alignments_dmid   Analyse the DMID of alignments
 analyse_esses   Analyse the Effectice Sample Sizes
-analyse_nltt_stats   R script for analysing the nLTT statistics
+analyse_log_files   Analyse
 analyse_nltt_stats_means   R script for analysing the mean nLTT statistics
+analyse_nltt_stats   R script for analysing the nLTT statistics
 analyse_n_taxa   R script to analyse the number of taxa
+analyse_operators   Analyse
 analyse_parameters   R script to analyse the parameters
+analyse_posterior_crown_ages
+analyse_posterior_likelihoods
+analyse_posterior_nltts   Analyse
 analyse_posteriors   R script to analyse the posteriors
 analyse_strees_identical   R script to see if the sampled species trees have equal branch lengths
-do_analysis   do a full analys
+create_figure_acceptance_mcmc_operators   Create figure 
+create_figure_alignment_qualities   Create figure 
+create_figure_error   Create figure 
+create_figure_error_alignment_length   Create figure 
+create_figure_error_alignment_length_mean   Create figure 
+create_figure_error_bd   Create figure 
+create_figure_error_bd_mean   Create figure 
+create_figure_error_for_scr   Create figure 
+create_figure_error_low_high_ess   Create figure 
+create_figure_error_max   Create figure 
+create_figure_error_mean_dur_spec   Create figure 
+create_figure_error_mean_dur_spec_alignment_length   Create figure 
+create_figure_error_mean_dur_spec_mean   Create figure 
+create_figure_error_mean_dur_spec_mean_sampling   Create figure 
+create_figure_error_mean_dur_spec_sampling   Create figure 
+create_figure_error_sampling_representative   Create figure 
+create_figure_error_tree_size   Create figure 
+create_figure_ess_distribution   Create figure 
+create_figure_ess_expected_mean_dur_spec_alignment_length   Create figure 
+create_figure_exit_statuses   Create figure 
+create_figure_exit_statuses_posteriors   Create figure 
+create_figure_lowest_ess   Create figure 
+create_figure_posterior_bd   Create figure 
+create_figure_posterior_crown_ages   Create figure 
+create_figure_posterior_likelihoods   Create figure 
+create_figure_posterior_nltts   Create figure 
+create_figure_run_times   Create figure 
+create_figure_strees_different   Create figure 
+create_table_109   Create table 
+create_table_111   Create table 
+create_table_112   Create table 
+do_analysis   do a full analysis

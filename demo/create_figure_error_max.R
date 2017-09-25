@@ -44,7 +44,8 @@ parameters$filename <- as.factor(parameters$filename)
 parameters <- subset(parameters, select = c(filename, mean_durspec) )
 
 print("Read nLTT stats, with burn-in")
-nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, keep_burn_in = TRUE)
+nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename,
+  burn_in_fraction = 0.0)
 head(nltt_stats)
 
 svg("~/figure_error_posterior_nltt_si.svg")
@@ -122,7 +123,9 @@ dev.off()
 
 
 print("Read nLTT stats, without burn-in")
-nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
+nltt_stats <- wiritttea::read_collected_nltt_stats(
+  nltt_stats_filename,
+  burn_in_fraction = 0.2)
 head(nltt_stats)
 tail(nltt_stats)
 
@@ -134,7 +137,7 @@ filenames <- unique(head(df, 1000)$filename)
 file <- wiritttes::read_file(paste0(raw_data_path, date, "/", df$filename[1]))
 
 posterior_stree <- wiritttes::get_posterior_tree(
-  file = file
+  file = file,
   sti = as.numeric(df$sti[1]),
   ai = as.numeric(df$ai[1]),
   pi = as.numeric(df$pi[1]),
