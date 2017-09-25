@@ -16,7 +16,8 @@ if (!file.exists(posterior_crown_ages_filename)) {
 }
 
 print("Read posterior crown_ages")
-posterior_crown_ages <- wiritttea::read_collected_posterior_crown_ages(posterior_crown_ages_filename)
+posterior_crown_ages <- wiritttea::read_collected_posterior_crown_ages(
+    posterior_crown_ages_filename)
 
 print("General overview")
 
@@ -117,7 +118,7 @@ names(df)
 svg("~/figure_posterior_distribution_crown_ages_p_values.svg")
 ggplot2::ggplot(
   stats::na.omit(df),
-  ggplot2::aes(x = p_value, stats::na.omit = TRUE)
+  ggplot2::aes(x = p_value, na.omit = TRUE)
 ) +
   ggplot2::geom_histogram(binwidth = 0.01) +
   ggplot2::geom_vline(xintercept = 0.05, linetype = "dotted") +

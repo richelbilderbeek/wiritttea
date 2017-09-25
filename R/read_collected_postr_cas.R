@@ -7,11 +7,11 @@
 #' )
 #' @examples
 #'   df <- wiritttea::read_collected_posterior_crown_ages()
-#'   testit::assert(names(df) ==
-#'     c(
-#'       "filename", "sti", "ai",
-#'       "pi", "si", "crown_age"
+#'   testit::assert(
+#'     all(
+#'       names(df) ==  c("filename", "sti", "ai", "pi", "si", "crown_age")
 #'     )
+#'   )
 #' @author Richel Bilderbeek
 #' @export
 read_collected_posterior_crown_ages <- function(

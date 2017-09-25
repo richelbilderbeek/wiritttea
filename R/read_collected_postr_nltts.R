@@ -4,7 +4,7 @@
 #' @return a dataframe
 #' @usage
 #'   read_collected_posterior_nltts(
-#'     filename = "collected_posterior_nltts.csv",
+#'     filename = wiritttea::find_path("collect_files_posterior_nltts.csv"),
 #'     burn_in_fraction = 0.2
 #'   )
 #' @examples

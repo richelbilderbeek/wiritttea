@@ -3,7 +3,8 @@
 #' @return a dataframe
 #' @usage
 #'   read_collected_posterior_likelihoods(
-#'     filename = "collected_posterior_likelihoods.csv"
+#'     filename = wiritttea::find_path(
+#'       "collect_files_posterior_likelihoods.csv")
 #'   )
 #' @examples
 #'   df <- wiritttea::read_collected_posterior_likelihoods()

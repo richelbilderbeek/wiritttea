@@ -5,7 +5,8 @@
 \title{Read all the collected tree likelihoods of all posteriors}
 \usage{
 read_collected_posterior_likelihoods(
-    filename = "collected_posterior_likelihoods.csv"
+    filename = wiritttea::find_path(
+      "collect_files_posterior_likelihoods.csv")
   )
 }
 \arguments{
