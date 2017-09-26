@@ -129,17 +129,29 @@ else
 fi
 
 
-# Tested until here
-exit 
 
 ############################
 # Collect n posteriors
 ############################
 
-cmd="sbatch --dependency=afterany:$jobid collect_files_n_posteriors.sh"
-echo "cmd: "$cmd
-jobid=`$cmd | cut -d ' ' -f 4`
-echo "jobid: "$jobid
+cmd="./collect_n_posteriors "$source_folder" ~/n_posteriors_"$date".csv"
+if [[ $on_peregrine == 1 ]]; then 
+  cmd="sbatch --dependency=afterany:$jobid "$cmd
+  echo "cmd: "$cmd
+  jobid=`$cmd | cut -d ' ' -f 4`
+  echo "jobid: "$jobid
+else
+  echo "cmd: "$cmd
+  `$cmd`
+fi
+
+# Tested until here
+exit 
+
+#cmd="sbatch --dependency=afterany:$jobid collect_files_n_posteriors.sh"
+#echo "cmd: "$cmd
+#jobid=`$cmd | cut -d ' ' -f 4`
+#echo "jobid: "$jobid
 
 ##########################
 # Analysis
