@@ -1,39 +1,47 @@
 #!/bin/bash
 
-##########################
-# Clean up
-##########################
-rm *.txt
-rm *.log
-rm *.csv
-rm *.pdf
-rm *.md
+if [[ $# == 0 ]]; then
+  echo "Error: need argument 'target folder', for example '/data/p230198/20170926'"
+  exit
+fi
+
+target_folder=$1
+
+if [[ $target_folder == "--help" ]]; then
+  echo "Supply the path of a 'target folder' that contains the .RDa files to analyse"
+  echo "For example '/data/p230198/20170926'"
+  exit
+fi
+
+echo "target_folder: "$target_folder
 
 ##########################
 # Update other packages
 ##########################
 
-jobid=`sbatch install_r_packages.sh | cut -d ' ' -f 4`
-echo "jobid: "$jobid
+#jobid=`sbatch install_r_packages.sh | cut -d ' ' -f 4`
+#echo "jobid: "$jobid
 
 ##########################
 # Update this package
 ##########################
 
-cmd="sbatch --dependency=afterok:$jobid install_this_r_package.sh"
-echo "cmd: "$cmd
-jobid=`$cmd | cut -d ' ' -f 4`
-echo "jobid: "$jobid
+#cmd="sbatch --dependency=afterok:$jobid install_this_r_package.sh"
+#echo "cmd: "$cmd
+#jobid=`$cmd | cut -d ' ' -f 4`
+#echo "jobid: "$jobid
 
 ##########################
 # Check parameter file creation success
 ##########################
 
-cmd="sbatch --dependency=afterany:$jobid collect_files_parameters.sh"
+#cmd="sbatch --dependency=afterany:$jobid collect_files_parameters.sh"
+cmd="sbatch collect_files_parameters.sh"
 echo "cmd: "$cmd
 jobid=`$cmd | cut -d ' ' -f 4`
 echo "jobid: "$jobid
 
+exit
 ##################
 # Collect n taxa #
 ##################

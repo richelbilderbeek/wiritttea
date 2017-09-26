@@ -7,4 +7,4 @@
 #SBATCH --job-name=collect_files_parameters
 #SBATCH --output=collect_files_parameters.log
 module load R/3.3.1-foss-2016a
-time Rscript collect_files_parameters.R
+time Rscript collect_files_parameters.R $@
