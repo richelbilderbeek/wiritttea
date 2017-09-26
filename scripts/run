@@ -1,12 +1,40 @@
 #!/bin/bash
+. is_peregrine
 
+# Input
 if [[ $# == 0 ]]; then
-  echo "Please add an argument for the source folder"
+  echo "Please add the source superfolder as a first argument, e.g. '~/wirittte_data'"
   exit
 fi
 
-source_folder=$1
+if [[ $# == 1 ]]; then
+  echo "Please add the date as a second argument, e.g. '20170711'"
+  exit
+fi
+
+# Variable initialization
+source_superfolder=$1
+echo "source_superfolder: "$source_superfolder
+
+date=$2
+echo "date: "$date
+
+source_folder=$source_superfolder"/"$date
 echo "source_folder: "$source_folder
+
+on_peregrine=`is_peregrine`
+echo "on_peregrine: "$on_peregrine
+
+skip_install=1
+echo "skip_install: "$skip_install
+
+# Checking inputs
+if [ -d $source_superfolder  ]; then
+  echo "OK: source super folder is a folder"
+else
+  echo "ERROR: source super folder is not a folder"
+  exit
+fi
 
 if [ -d $source_folder  ]; then
   echo "OK: source folder is a folder"
@@ -15,14 +43,6 @@ else
   exit
 fi
 
-. is_peregrine
-
-on_peregrine=`is_peregrine`
-echo "on_peregrine: "$on_peregrine
-
-skip_install=1
-echo "skip_install: "$skip_install
-
 ##########################
 # Update other packages
 ##########################
@@ -30,6 +50,8 @@ echo "skip_install: "$skip_install
 if [[ $skip_install == 0 ]]; then
   jobid=`sbatch install_r_packages.sh | cut -d ' ' -f 4`
   echo "jobid: "$jobid
+else
+  echo "Skip install_r_packages"
 fi
 
 ##########################
@@ -41,38 +63,49 @@ if [[ $skip_install == 0 ]]; then
   echo "cmd: "$cmd
   jobid=`$cmd | cut -d ' ' -f 4`
   echo "jobid: "$jobid
+else
+  echo "Skip install_this_r_package"
 fi
 
 ##########################
 # Check parameter file creation success
 ##########################
 
-if [[ $skip_install == 0 ]]; then
-  cmd="sbatch --dependency=afterany:$jobid collect_files_parameters.sh"
+cmd="./collect_files_parameters "$source_folder" ~/parameters_"$date".csv"
+if [[ $on_peregrine == 1 ]]; then 
+  cmd="sbatch --dependency=afterany:$jobid "$cmd
   echo "cmd: "$cmd
   jobid=`$cmd | cut -d ' ' -f 4`
+  echo "jobid: "$jobid
 else
-  #cmd="sbatch collect_files_parameters.sh "$source_folder
-  cmd="./collect_files_parameters "$source_folder
-  if [[ $on_peregrine == 1 ]]; then 
-    cmd="sbatch "$cmd
-  fi
   echo "cmd: "$cmd
-  jobid=`$cmd | cut -d ' ' -f 4`
+  `$cmd`
 fi
 
-echo "jobid: "$jobid
-
-exit 
+# Tested until here
+exit
 
 ##################
 # Collect n taxa #
 ##################
 
-cmd="sbatch --dependency=afterany:$jobid collect_n_taxa.sh"
-echo "cmd: "$cmd
-jobid=`$cmd | cut -d ' ' -f 4`
-echo "jobid: "$jobid
+cmd="./collect_n_taxa "$source_folder" ~/n_taxa_"$date".csv"
+if [[ $on_peregrine == 1 ]]; then 
+  cmd="sbatch --dependency=afterany:$jobid "$cmd
+  echo "cmd: "$cmd
+  jobid=`$cmd | cut -d ' ' -f 4`
+  echo "jobid: "$jobid
+else
+  echo "cmd: "$cmd
+  `$cmd`
+fi
+
+exit 
+
+# cmd="sbatch --dependency=afterany:$jobid collect_n_taxa.sh"
+# echo "cmd: "$cmd
+# jobid=`$cmd | cut -d ' ' -f 4`
+# echo "jobid: "$jobid
 
 ############################
 # Collect n species trees

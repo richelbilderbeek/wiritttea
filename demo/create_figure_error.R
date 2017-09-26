@@ -2,13 +2,14 @@
 # of all simulations
 library(wiritttea)
 options(warn = 2) # Be strict
-date <- "20170710"
-nltt_stats_filename <- paste0("~/wirittte_data/nltt_stats_", date, ".csv")
-parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
+
+date <- "stub"
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) > 0) nltt_stats_filename <- args[1]
-if (length(args) > 1) parameters_filename <- args[2]
+if (length(args) > 0) date <- args[1]
+
+nltt_stats_filename <- paste0("~/wirittte_data/nltt_stats_", date, ".csv")
+parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
 
 print(paste("nltt_stats_filename:", nltt_stats_filename))
 print(paste("parameters_filename:", parameters_filename))
