@@ -82,9 +82,6 @@ else
   `$cmd`
 fi
 
-# Tested until here
-exit
-
 ##################
 # Collect n taxa #
 ##################
@@ -100,12 +97,8 @@ else
   `$cmd`
 fi
 
+# Tested until here
 exit 
-
-# cmd="sbatch --dependency=afterany:$jobid collect_n_taxa.sh"
-# echo "cmd: "$cmd
-# jobid=`$cmd | cut -d ' ' -f 4`
-# echo "jobid: "$jobid
 
 ############################
 # Collect n species trees
