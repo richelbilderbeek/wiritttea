@@ -58,7 +58,6 @@ else
     cmd="sbatch "$cmd
   fi
   echo "cmd: "$cmd
-  exit
   jobid=`$cmd | cut -d ' ' -f 4`
 fi
 
