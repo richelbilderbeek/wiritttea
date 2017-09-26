@@ -75,7 +75,7 @@ ggplot2::ggplot(
   ggplot2::geom_vline(xintercept = cut_x, linetype = "dotted") +
   ggplot2::labs(
     title = "nLTT statistic distribution",
-    x = latex2exp::TeX("$\\Delta_{nLTT}$"),
+    x = latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$"),
     y = "Count",
     caption = "figure_error.svg"
   #) +
@@ -96,7 +96,7 @@ ggplot2::ggplot(
   ggplot2::coord_cartesian(xlim = c(0.0, cut_x)) +
   ggplot2::labs(
     title = "nLTT statistic distribution",
-    x = latex2exp::TeX("$\\Delta_{nLTT}$"),
+    x = latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$"),
     y = "Count",
     caption = "figure_error_head.svg"
   ) + ggplot2::guides(fill = FALSE) +
@@ -114,7 +114,7 @@ ggplot2::ggplot(
   ggplot2::coord_cartesian(xlim = c(cut_x, 0.35)) +
   ggplot2::labs(
     title = "nLTT statistic distribution",
-    x = latex2exp::TeX("$\\Delta_{nLTT}$"),
+    x = latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$"),
     y = "Count",
     caption = "figure_error_tail.svg"
   ) + ggplot2::guides(fill = FALSE) +
