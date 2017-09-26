@@ -1,2 +1,5 @@
-"","message"
-"1","No valid files supplied"
+"","rng_seed","sirg","siri","scr","erg","eri","age","mutation_rate","n_alignments","sequence_length","nspp","n_beast_runs"
+"article_0_0_0_0_0_100.RDa",100,0.3,0.3,0.1,0,0,15,0.01,2,1000,1000,2
+"article_0_0_0_0_0_101.RDa",101,0.3,0.3,0.1,0,0,15,0.01,2,1000,1000,2
+"article_0_0_0_0_0_102.RDa",102,0.3,0.3,0.1,0,0,15,0.01,2,1000,1000,2
+"article_0_0_0_0_0_103.RDa",103,0.3,0.3,0.1,0,0,15,0.01,2,1000,1000,2
