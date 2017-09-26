@@ -3,7 +3,7 @@
 #' @return a dataframe
 #' @usage
 #' read_collected_posterior_crown_ages(
-#'   filename ="collected_posterior_crown_ages.csv"
+#'   filename = wiritttea::find_path("collect_files_posterior_crown_ages.csv")
 #' )
 #' @examples
 #'   df <- wiritttea::read_collected_posterior_crown_ages()
@@ -15,7 +15,7 @@
 #' @author Richel Bilderbeek
 #' @export
 read_collected_posterior_crown_ages <- function(
-  filename = wiritttea::find_path("collect_files_posterior_crown_ages.csv")
+
 ) {
   testit::assert(file.exists(filename))
   df <- utils::read.csv(

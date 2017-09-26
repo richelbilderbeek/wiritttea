@@ -5,7 +5,7 @@
 \title{Read all the collected tree crown_ages of all posteriors}
 \usage{
 read_collected_posterior_crown_ages(
-  filename ="collected_posterior_crown_ages.csv"
+  filename = wiritttea::find_path("collect_files_posterior_crown_ages.csv")
 )
 }
 \arguments{

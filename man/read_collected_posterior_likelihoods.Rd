@@ -20,11 +20,15 @@ Read all the collected tree likelihoods of all posteriors
 }
 \examples{
   df <- wiritttea::read_collected_posterior_likelihoods()
-  testit::assert(names(df) ==
-    c(
-      "filename", "sti", "ai",
-      "pi", "si", "likelihood"
+  testit::assert(
+    all(
+      names(df) ==
+      c(
+        "filename", "sti", "ai",
+        "pi", "si", "likelihood"
+      )
     )
+  )
 }
 \author{
 Richel Bilderbeek
