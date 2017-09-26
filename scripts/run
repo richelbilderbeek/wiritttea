@@ -79,7 +79,7 @@ if [[ $on_peregrine == 1 ]]; then
   echo "jobid: "$jobid
 else
   echo "cmd: "$cmd
-  `$cmd`
+  eval $cmd >/dev/null
 fi
 
 ##################
@@ -94,7 +94,7 @@ if [[ $on_peregrine == 1 ]]; then
   echo "jobid: "$jobid
 else
   echo "cmd: "$cmd
-  `$cmd`
+  eval $cmd >/dev/null
 fi
 
 
@@ -110,7 +110,7 @@ if [[ $on_peregrine == 1 ]]; then
   echo "jobid: "$jobid
 else
   echo "cmd: "$cmd
-  `$cmd`
+  eval $cmd >/dev/null
 fi
 
 ############################
@@ -125,7 +125,7 @@ if [[ $on_peregrine == 1 ]]; then
   echo "jobid: "$jobid
 else
   echo "cmd: "$cmd
-  `$cmd`
+  eval $cmd >/dev/null
 fi
 
 
@@ -142,7 +142,7 @@ if [[ $on_peregrine == 1 ]]; then
   echo "jobid: "$jobid
 else
   echo "cmd: "$cmd
-  `$cmd`
+  eval $cmd >/dev/null
 fi
 
 ##########################
@@ -157,21 +157,15 @@ if [[ $on_peregrine == 1 ]]; then
   echo "jobid: "$jobid
 else
   echo "cmd: "$cmd
-  `$cmd`
+  eval $cmd >/dev/null
 fi
 
 # Tested until here
 exit 
 
-#cmd="sbatch --dependency=afterany:$jobid collect_esses.sh"
-#echo "cmd: "$cmd
-#jobid=`$cmd | cut -d ' ' -f 4`
-#echo "jobid: "$jobid
-
 ##########################
 # Analysis
 ##########################
-
 
 cmd="sbatch --dependency=afterany:$jobid collect_gammas.sh"
 echo "cmd: "$cmd
