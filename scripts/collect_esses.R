@@ -1,20 +1,34 @@
+# Analyse the ESSes
 library(wiritttea)
-folder <- "/data/p230198"
+options(warn = 2) # Be strict
 
-fns <- paste(
-  folder, list.files(folder, pattern = "\\.RDa"), sep = "/"
-)
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) == 0) {
+  stop("Supply a source folder as a first argument, e.g. '~/wirittte_data/stub'")
+}
+if (length(args) == 1) {
+  stop("Supply a target filename as a second argument, e.g. '~/esses_stub.csv'")
+}
+if (length(args) != 2) {
+  stop("Supply two parameters: a source folder and a target filename, ",
+    "e.g. '~/wirittte_data/stub ~/parameters_stub.csv'")
+}
 
-df <- collect_files_esses(fns)
+path_data <- args[1]
+esses_filename <- args[2]
 
-utils::write.csv(
-  x = df,
-  file = "../inst/extdata/collect_files_esses.csv",
-  row.names = TRUE
-)
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) > 0) path_data <- args[1]
+if (length(args) > 1) esses_filename <- args[2]
 
-utils::write.csv(
-  x = df,
-  file = "../inst/extdata/collected_esses.csv",
-  row.names = TRUE
-)
+print(paste("path_data:", path_data))
+print(paste("esses_filename:", esses_filename))
+
+print("Collecting .RDa files")
+my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
+
+print("Collecting ESSes")
+df_esses <- wiritttea::collect_files_esses(filenames = my_filenames)
+
+print("Saving ESSes")
+write.csv(df_esses, esses_filename)

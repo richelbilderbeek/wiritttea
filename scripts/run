@@ -145,10 +145,25 @@ else
   `$cmd`
 fi
 
+##########################
+# ESS
+##########################
+
+cmd="./collect_esses "$source_folder" ~/esses_"$date".csv"
+if [[ $on_peregrine == 1 ]]; then 
+  cmd="sbatch --dependency=afterany:$jobid "$cmd
+  echo "cmd: "$cmd
+  jobid=`$cmd | cut -d ' ' -f 4`
+  echo "jobid: "$jobid
+else
+  echo "cmd: "$cmd
+  `$cmd`
+fi
+
 # Tested until here
 exit 
 
-#cmd="sbatch --dependency=afterany:$jobid collect_files_n_posteriors.sh"
+#cmd="sbatch --dependency=afterany:$jobid collect_esses.sh"
 #echo "cmd: "$cmd
 #jobid=`$cmd | cut -d ' ' -f 4`
 #echo "jobid: "$jobid
@@ -157,10 +172,6 @@ exit
 # Analysis
 ##########################
 
-cmd="sbatch --dependency=afterany:$jobid collect_esses.sh"
-echo "cmd: "$cmd
-jobid=`$cmd | cut -d ' ' -f 4`
-echo "jobid: "$jobid
 
 cmd="sbatch --dependency=afterany:$jobid collect_gammas.sh"
 echo "cmd: "$cmd
