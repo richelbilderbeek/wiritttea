@@ -1,3 +1,17 @@
+analyse_alignments   Analyse the quality of alignments
+analyse_alignments_dmid   Analyse the DMID of alignments
+analyse_esses   Analyse the Effectice Sample Sizes
+analyse_log_files   Analyse
+analyse_nltt_stats_means   R script for analysing the mean nLTT statistics
+analyse_nltt_stats   R script for analysing the nLTT statistics
+analyse_n_taxa   R script to analyse the number of taxa
+analyse_operators   Analyse
+analyse_parameters   R script to analyse the parameters
+analyse_posterior_crown_ages   Analyse
+analyse_posterior_likelihoods   Analyse
+analyse_posterior_nltts   Analyse
+analyse_posteriors   R script to analyse the posteriors
+analyse_strees_identical   R script to see if the sampled species trees have equal branch lengths
 create_figure_acceptance_mcmc_operators   Create figure 
 create_figure_alignment_qualities   Create figure 
 create_figure_error   Create figure 
@@ -29,3 +43,4 @@ create_figure_strees_different   Create figure
 create_table_109   Create table 
 create_table_111   Create table 
 create_table_112   Create table 
+do_analysis   do a full analysis
