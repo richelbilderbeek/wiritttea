@@ -71,7 +71,7 @@ fi
 # Check parameter file creation success
 ##########################
 
-cmd="./collect_files_parameters "$source_folder" ~/parameters_"$date".csv"
+cmd="./collect_parameters "$source_folder" ~/parameters_"$date".csv"
 if [[ $on_peregrine == 1 ]]; then 
   cmd="sbatch --dependency=afterany:$jobid "$cmd
   echo "cmd: "$cmd
