@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function is_peregrine()
+{
+  hostname=`echo $HOSTNAME`
+  if [[ $hostname == "peregrine.hpc.rug.nl" ]]; then
+    echo "1"
+  else
+    echo "0"
+  fi
+}
+
