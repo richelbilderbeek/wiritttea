@@ -113,17 +113,24 @@ else
   `$cmd`
 fi
 
-# Tested until here
-exit 
-
 ############################
 # Collect n alignments
 ############################
 
-cmd="sbatch --dependency=afterany:$jobid collect_files_n_alignments.sh"
-echo "cmd: "$cmd
-jobid=`$cmd | cut -d ' ' -f 4`
-echo "jobid: "$jobid
+cmd="./collect_n_alignments "$source_folder" ~/n_alignments_"$date".csv"
+if [[ $on_peregrine == 1 ]]; then 
+  cmd="sbatch --dependency=afterany:$jobid "$cmd
+  echo "cmd: "$cmd
+  jobid=`$cmd | cut -d ' ' -f 4`
+  echo "jobid: "$jobid
+else
+  echo "cmd: "$cmd
+  `$cmd`
+fi
+
+
+# Tested until here
+exit 
 
 ############################
 # Collect n posteriors
