@@ -2,7 +2,7 @@
 # of all simulations
 library(wiritttea)
 options(warn = 2) # Be strict
-date <- "20170710"
+date <- "stub"
 raw_data_path <- "~/wirittte_data/"
 nltt_stats_filename <- paste0(raw_data_path, "nltt_stats_", date, ".csv")
 parameters_filename <- paste0("~/GitHubs/wirittte_data/parameters_", date, ".csv")
@@ -63,7 +63,7 @@ ggplot2::ggplot(
     color = "black",
     parse = TRUE) +
   ggplot2::xlab(latex2exp::TeX("posterior state index, $s_i$")) +
-  ggplot2::ylab(latex2exp::TeX("$\\Delta_{nLTT}$")) +
+  ggplot2::ylab(latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$")) +
   ggplot2::labs(
     title = "nLTT statistic values in a posterior",
     caption = "figure_error_posterior_nltt_si"
@@ -88,7 +88,7 @@ ggplot2::ggplot(
     color = "black",
     parse = TRUE) +
   ggplot2::xlab(latex2exp::TeX("posterior state index, $s_i$")) +
-  ggplot2::ylab(latex2exp::TeX("$\\Delta_{nLTT}$")) +
+  ggplot2::ylab(latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$")) +
   ggplot2::labs(
     title = "nLTT statistic values in a posterior",
     caption = "figure_error_posterior_nltt_si_early"
@@ -112,7 +112,7 @@ ggplot2::ggplot(
     color = "black",
     parse = TRUE) +
   ggplot2::xlab(latex2exp::TeX("posterior state index, $s_i$")) +
-  ggplot2::ylab(latex2exp::TeX("$\\Delta_{nLTT}$")) +
+  ggplot2::ylab(latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$")) +
   ggplot2::labs(
     title = "nLTT statistic values in a posterior",
     caption = "figure_error_posterior_nltt_si_early"
@@ -192,7 +192,7 @@ ggplot2::ggplot(
   ggplot2::geom_vline(xintercept = cut_x, linetype = "dotted") +
   ggplot2::labs(
     title = "nLTT statistic distribution",
-    x = latex2exp::TeX("$\\Delta_{nLTT}$"),
+    x = latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$"),
     y = "Count",
     caption = "figure_error.svg"
   #) +
@@ -213,7 +213,7 @@ ggplot2::ggplot(
   ggplot2::coord_cartesian(xlim = c(0.0, cut_x)) +
   ggplot2::labs(
     title = "nLTT statistic distribution",
-    x = latex2exp::TeX("$\\Delta_{nLTT}$"),
+    x = latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$"),
     y = "Count",
     caption = "figure_error_head.svg"
   ) + ggplot2::guides(fill = FALSE) +
@@ -231,7 +231,7 @@ ggplot2::ggplot(
   ggplot2::coord_cartesian(xlim = c(cut_x, 0.35)) +
   ggplot2::labs(
     title = "nLTT statistic distribution",
-    x = latex2exp::TeX("$\\Delta_{nLTT}$"),
+    x = latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$"),
     y = "Count",
     caption = "figure_error_tail.svg"
   ) + ggplot2::guides(fill = FALSE) +
