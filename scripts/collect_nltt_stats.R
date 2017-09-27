@@ -14,7 +14,7 @@ if (length(args) != 2) {
     "e.g. '~/wirittte_data/stub ~/parameters_stub.csv'")
 }
 
-args <- c("/home/richel/wirittte_data/20170926", "~/nltt_stats_20170926.csv")
+# args <- c("/home/richel/wirittte_data/20170926", "~/nltt_stats_20170926.csv")
 
 path_data <- args[1]
 nltt_stats_filename <- args[2]
