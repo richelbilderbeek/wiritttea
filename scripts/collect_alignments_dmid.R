@@ -24,35 +24,7 @@ print(paste("alignment_dmid_filename:", alignment_dmid_filename))
 
 my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
 
-# Assume all files have the same number of alignments
-n_alignments <- wiritttes::extract_napst(wiritttes::read_file(my_filenames[1])) * 2
-
-df <- data.frame(
-  filename = rep(basename(my_filenames), each = n_alignments),
-  ai = rep(seq(1, n_alignments), times = length(my_filenames)),
-  dmid = rep(NA, length(my_filenames), each = n_alignments)
-)
-
-n_rows <- nrow(df)
-
-for (row in seq(1, n_rows)) {
-  file_index <- 1 + trunc((row - 1)/ 4)
-  my_filename <- my_filenames[file_index]
-  testit::assert(file.exists(my_filename))
-
-  tryCatch({
-    file <- wiritttes::read_file(my_filename) # Can fail
-    this_n_alignments <- wiritttes::extract_napst(file) * 2
-    testit::assert(this_n_alignments == n_alignments)
-    ai <- 1 + ((row - 1 ) %% n_alignments)
-    alignment <- wiritttes::get_alignment_by_index(file, ai)
-    m <- ape::dist.dna(x = alignment, model = "JC69", as.matrix = TRUE)
-    dmid <- wiritttea::calc_dmid(m)
-    df$dmid[row] <- dmid
-  }, error = function(cond) {} #nolint
-  )
-  gc() # Need to do so manually
-}
+df <- collect_files_alignments_dmid(filenames = my_filenames)
 
 # Save
 write.csv(df, alignment_dmid_filename)

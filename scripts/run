@@ -71,7 +71,7 @@ fi
 # Collect alignment DMIDs
 ##########################
 
-cmd="./collect_alignments_dmid "$source_folder" ~/parameters_"$date".csv"
+cmd="./collect_alignments_dmid "$source_folder" ~/alignments_dmid_"$date".csv"
 if [[ $on_peregrine == 1 ]]; then 
   cmd="sbatch --dependency=afterany:$jobid "$cmd
   echo "cmd: "$cmd
