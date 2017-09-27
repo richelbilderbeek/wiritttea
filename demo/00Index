@@ -1,5 +1,3 @@
-analyse_alignments   Analyse the quality of alignments
-analyse_alignments_dmid   Analyse the DMID of alignments
 analyse_log_files   Analyse
 analyse_nltt_stats_means   R script for analysing the mean nLTT statistics
 analyse_operators   Analyse
