@@ -5,7 +5,6 @@ analyse_nltt_stats_means   R script for analysing the mean nLTT statistics
 analyse_operators   Analyse
 analyse_posterior_crown_ages   Analyse
 analyse_posterior_likelihoods   Analyse
-analyse_posteriors   R script to analyse the posteriors
 analyse_strees_identical   R script to see if the sampled species trees have equal branch lengths
 create_figure_acceptance_mcmc_operators   Create figure 
 create_figure_alignment_qualities   Create figure 

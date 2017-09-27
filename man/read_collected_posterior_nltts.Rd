@@ -5,6 +5,7 @@
 \title{Read all the collected nLTT statistics of all posteriors}
 \usage{
 read_collected_posterior_nltts(
+    filename = wiritttea::find_path("collect_files_posterior_nltts.csv"),
     burn_in_fraction
   )
 }

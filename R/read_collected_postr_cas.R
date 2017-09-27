@@ -9,7 +9,7 @@
 #'   df <- wiritttea::read_collected_posterior_crown_ages()
 #'   testit::assert(
 #'     all(
-#'       names(df) ==  c("filename", "sti", "ai", "pi", "si", "crown_age")
+#'       names(df) == c("filename", "sti", "ai", "pi", "si", "crown_age")
 #'     )
 #'   )
 #' @author Richel Bilderbeek
