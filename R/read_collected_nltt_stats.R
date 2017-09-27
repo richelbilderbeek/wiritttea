@@ -51,10 +51,7 @@ read_collected_nltt_stats <- function(
   df$ai <- as.factor(df$ai)
   df$pi <- as.factor(df$pi)
   df$si <- as.factor(df$si)
-  testit::assert(names(df) == c(
-    "filename", "sti", "ai", "pi", "si", "nltt_stat"
-    )
-  )
+
   testit::assert(is.factor(df$filename))
   testit::assert(is.factor(df$sti))
   testit::assert(is.factor(df$ai))

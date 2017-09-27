@@ -5,15 +5,19 @@
 #' @usage
 #'   read_collected_posterior_nltts(
 #      filename = wiritttea::find_path("collect_files_posterior_nltts.csv"),
-#'     burn_in_fraction = 0.2
+#'     burn_in_fraction
 #'   )
 #' @examples
-#'   df <- wiritttea::read_collected_posterior_nltts(burn_in_fraction = 0.2)
+#'   df <- wiritttea::read_collected_posterior_nltts(
+#'     filename = wiritttea::find_path("collect_files_posterior_nltts.csv"),
+#'     burn_in_fraction = 0.2
+#'   )
 #'   testit::assert(names(df) ==
 #'     c(
 #'       "filename", "sti", "ai",
 #'       "pi", "si", "nltt"
 #'     )
+#'   )
 #' @author Richel Bilderbeek
 #' @export
 read_collected_posterior_nltts <- function(
@@ -21,7 +25,7 @@ read_collected_posterior_nltts <- function(
   burn_in_fraction
 ) {
   wiritttea::read_collected_nltt_stats(
-    filename,
+    filename = filename,
     burn_in_fraction = burn_in_fraction
   )
 }

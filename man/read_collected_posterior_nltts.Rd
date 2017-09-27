@@ -5,7 +5,7 @@
 \title{Read all the collected nLTT statistics of all posteriors}
 \usage{
 read_collected_posterior_nltts(
-    burn_in_fraction = 0.2
+    burn_in_fraction
   )
 }
 \arguments{
@@ -20,12 +20,16 @@ a dataframe
 Read all the collected nLTT statistics of all posteriors
 }
 \examples{
-  df <- wiritttea::read_collected_posterior_nltts(burn_in_fraction = 0.2)
+  df <- wiritttea::read_collected_posterior_nltts(
+    filename = wiritttea::find_path("collect_files_posterior_nltts.csv"),
+    burn_in_fraction = 0.2
+  )
   testit::assert(names(df) ==
     c(
       "filename", "sti", "ai",
       "pi", "si", "nltt"
     )
+  )
 }
 \author{
 Richel Bilderbeek
