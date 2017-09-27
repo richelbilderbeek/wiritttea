@@ -14,68 +14,56 @@
 #' @author Richel Bilderbeek
 collect_files_parameters <- function(filenames) {
 
-  parameter_names <- NULL
-
-  # Find parameter filenames
-  for (filename in filenames) {
-    if (!wiritttes::is_valid_file(filename = filename)) {
-      next
-    }
-    file <- wiritttes::read_file(filename)
-    parameter_names <- names(file$parameters)
-    break
-  }
-  if (is.null(parameter_names)) {
-    df <- data.frame(
-      message = "No valid files supplied",
-      stringsAsFactors = FALSE
-    )
-    testit::assert(class(df) == "data.frame")
-    return(df)
-  }
+  nrows <- length(filenames)
+  df <- data.frame(
+    rng_seed = rep(NA, nrows),
+    sirg = rep(NA, nrows),
+    siri = rep(NA, nrows),
+    scr = rep(NA, nrows),
+    erg = rep(NA, nrows),
+    eri = rep(NA, nrows),
+    age = rep(NA, nrows),
+    mutation_rate = rep(NA, nrows),
+    n_alignments = rep(NA, nrows),
+    sequence_length = rep(NA, nrows),
+    nspp = rep(NA, nrows),
+    n_beast_runs = rep(NA, nrows),
+    fixed_crown_age = rep(NA, nrows)
+  )
 
   # Disable scientific notation
   old_scipen <- getOption("scipen")
   options(scipen = 999)
 
   # Collect the parameters
-  df <- NULL
-  for (filename in filenames) {
+  for (i in seq(1, nrows)) {
+    filename <- filenames[i]
     file <- NULL
     tryCatch(
       file <- wiritttes::read_file(filename),
       error = function(msg) { } # nolint msg should be unused
     )
-    if (!is.null(file)) {
-      parameter_values <- as.numeric(
-        file$parameters[2, , 2]
-      )
-      testit::assert(length(parameter_values) == length(parameter_names))
-      if (is.null(df)) {
-        df <- data.frame(parameter_values = parameter_values)
-      } else {
-        df <- cbind(df, parameter_values)
-      }
-    } else {
-      new_col <- rep(NA, times = length(parameter_names))
-      testit::assert(length(new_col) == length(parameter_names))
-      if (is.null(df)) {
-        df <- data.frame(parameter_values = new_col)
-      } else {
-        df <- cbind(df, new_col)
-      }
-    }
-  }
 
-  tidy_df <- t(df)
-  rownames(tidy_df) <- c(basename(filenames))
-  colnames(tidy_df) <- parameter_names
-  tidy_df <- data.frame(tidy_df)
+    if (is.null(file)) {
+      next
+    }
+    df$rng_seed[i] <- wiritttes::extract_seed(file)
+    df$sirg[i] <- wiritttes::extract_sirg(file)
+    df$siri[i] <- wiritttes::extract_siri(file)
+    df$scr[i] <- wiritttes::extract_scr(file)
+    df$erg[i] <- wiritttes::extract_erg(file)
+    df$eri[i] <- wiritttes::extract_eri(file)
+    df$age[i] <- wiritttes::extract_crown_age(file)
+    df$mutation_rate[i] <- wiritttes::extract_mutation_rate(file)
+    df$n_alignments[i] <- wiritttes::extract_napst(file)
+    df$sequence_length[i] <- wiritttes::extract_sequence_length(file)
+    df$nspp[i] <- wiritttes::extract_nspp(file)
+    df$n_beast_runs[i] <- wiritttes::extract_nppa(file)
+    df$fixed_crown_age[i] <- wiritttes::extract_fixed_crown_age(file)
+  }
 
   # Restore original scientific notation
   options(scipen = old_scipen)
 
-
-  testit::assert(class(tidy_df) == "data.frame")
-  tidy_df
+  df
 }

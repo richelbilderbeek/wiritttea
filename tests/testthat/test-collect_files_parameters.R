@@ -8,9 +8,10 @@ test_that("collect_files_parameters: use", {
 
 test_that("collect_files_parameters: invalid file return an empty data.frame", {
 
-  df <- collect_files_parameters(filenames = c("inva.lid"))
-  expect_equal(class(df), "data.frame")
-  expect_equal(df$message, "No valid files supplied")
+  filenames <- c("inva.lid")
+  df <- wiritttea::collect_files_parameters(filenames = filenames)
+  testthat::expect_equal(class(df), "data.frame")
+  testthat::expect_equal(nrow(df), length(filenames))
 })
 
 test_that("collect_files_parameters: abuse", {
@@ -26,13 +27,13 @@ test_that("collect_files_parameters: abuse", {
     )
   )
   # One row per file
-  expect_equal(nrow(df), 2)
+  testthat::expect_equal(nrow(df), 2)
 
   # File one has only NAs
-  expect_true(is.na(df[1, "rng_seed"]))
+  testthat::expect_true(is.na(df[1, "rng_seed"]))
 
   # File two (a toy example) is valid
-  expect_false(is.na(df[2, "rng_seed"]))
+  testthat::expect_false(is.na(df[2, "rng_seed"]))
   file.remove(filename)
 })
 
