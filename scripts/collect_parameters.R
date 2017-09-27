@@ -1,14 +1,8 @@
 # Collects the parameters used in all .RDa files in one file
 library(wiritttea)
-do_debug <- TRUE
 options(warn = 2)
 
 args <- commandArgs(trailingOnly = TRUE)
-
-if (do_debug == TRUE) {
-  args <- c("~/wirittte_data/20170926", "~/parameters_20170926.csv")
-  args <- c("~/wirittte_data/stub", "~/parameters_stub.csv")
-}
 
 if (length(args) == 0) {
   stop("Supply a source folder as a first argument, e.g. '~/wirittte_data/stub'")
@@ -27,9 +21,4 @@ parameters_filename <- args[2]
 # Collect all parameters in a single file
 # Will overwrite
 my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
-
-if (do_debug == TRUE) {
-  wiritttea::collect_files_parameters(filenames = my_filenames[1])
-}
-
 write.csv(wiritttea::collect_files_parameters(filenames = my_filenames), parameters_filename)
