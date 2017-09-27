@@ -44,7 +44,7 @@ collect_files_esses <- function(filenames, show_progress = FALSE) {
 
   df <- data.frame(
     filename = rep(basename(filenames), each = nppf),
-    sti = rep(seq(1,2), each = napst * nppa, times = n_files),
+    sti = rep(seq(1, 2), each = napst * nppa, times = n_files),
     ai = rep(seq(1, napst), each = nstpist, times = n_files * nppa),
     pi = rep(seq(1, nppa), times = n_files * nstpist * napst),
     posterior = rep(NA, n_rows),
@@ -62,7 +62,7 @@ collect_files_esses <- function(filenames, show_progress = FALSE) {
     if (show_progress == TRUE) {
       print(filename)
     }
-    tryCatch( {
+    tryCatch({
       this_esses <- wiritttea::collect_file_esses(filename)
       df[index:(index + nppf - 1), ] <- this_esses
     }, error = function(cond) {} # nolint
@@ -134,7 +134,7 @@ collect_files_esses_from_log_files <- function(filenames, show_progress = FALSE)
 
   df <- data.frame(
     filename = rep(basename(filenames), each = nppf),
-    sti = rep(seq(1,2), each = napst * nppa, times = n_files),
+    sti = rep(seq(1, 2), each = napst * nppa, times = n_files),
     ai = rep(seq(1, napst), each = nstpist, times = n_files * nppa),
     pi = rep(seq(1, nppa), times = n_files * nstpist * napst),
     posterior = rep(NA, n_rows),

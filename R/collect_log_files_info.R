@@ -37,7 +37,7 @@ collect_log_files_info <- function(filenames, show_progress = FALSE) {
       print(filename)
     }
 
-    tryCatch( {
+    tryCatch({
       this_df <- wiritttea::collect_log_file_info(
         filename = filename
       )

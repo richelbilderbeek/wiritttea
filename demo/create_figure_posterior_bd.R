@@ -80,7 +80,7 @@ while (length(posterior) < 2) {
   testit::assert(file.exists(filename))
 
   print("Get posterior of that filename (if fails, try again)")
-  tryCatch( {
+  tryCatch({
     posterior <- wiritttes::get_posterior(
       wiritttes::read_file(filename), sti = 1, ai = 1, pi = 1)
     },

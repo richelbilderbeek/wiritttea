@@ -19,7 +19,7 @@ collect_files_operators <- function(
       print(filename)
     }
     n_rows_to_add <- 1
-    tryCatch( {
+    tryCatch({
       n_rows_to_add <- nrow(RBeast::parse_beast_state_operators(filename))
       }, error = function(cond) {} # nolint
     )
@@ -44,7 +44,7 @@ collect_files_operators <- function(
       print(filename)
     }
     indices_to_add <- 1
-    tryCatch( {
+    tryCatch({
       this_df <- RBeast::parse_beast_state_operators(filename)
       this_df$filename <- basename(filename)
       df[
@@ -64,8 +64,8 @@ collect_files_operators <- function(
   # Make factors
   df$filename <- as.factor(df$filename)
 
-  expected_names <- c("filename", "operator", "p", "accept", "reject", "acceptFC",
-    "rejectFC", "rejectIv", "rejectOp")
+  expected_names <- c("filename", "operator", "p", "accept", "reject",
+    "acceptFC", "rejectFC", "rejectIv", "rejectOp")
   testit::assert(names(df) == expected_names)
 
   df

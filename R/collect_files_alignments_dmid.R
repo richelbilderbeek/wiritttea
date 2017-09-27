@@ -24,7 +24,7 @@ collect_files_alignments_dmid <- function(filenames) {
   n_rows <- nrow(df)
 
   for (row in seq(1, n_rows)) {
-    file_index <- 1 + trunc((row - 1)/ 4)
+    file_index <- 1 + trunc( (row - 1) / 4)
     my_filename <- filenames[file_index]
     testit::assert(file.exists(my_filename))
 
@@ -32,7 +32,7 @@ collect_files_alignments_dmid <- function(filenames) {
       file <- wiritttes::read_file(my_filename) # Can fail
       this_n_alignments <- wiritttes::extract_napst(file) * 2
       testit::assert(this_n_alignments == n_alignments)
-      ai <- 1 + ((row - 1 ) %% n_alignments)
+      ai <- 1 + ( (row - 1 ) %% n_alignments)
       alignment <- wiritttes::get_alignment_by_index(file, ai)
       m <- ape::dist.dna(x = alignment, model = "JC69", as.matrix = TRUE)
       dmid <- wiritttea::calc_dmid(m)

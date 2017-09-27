@@ -28,7 +28,8 @@ collect_file_posterior_crown_ages <- function(filename) {
   for (sti in 1:2) {
     for (j in seq(1, n_alignments)) {
       for (k in seq(1, n_beast_runs)) {
-        crown_ages <- wiritttes::get_posteriors(file)[[index]][[1]]$estimates$TreeHeight
+        crown_ages <- wiritttes::get_posteriors(
+          file)[[index]][[1]]$estimates$TreeHeight
 
         n_crown_ages <- length(crown_ages)
 

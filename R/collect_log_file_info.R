@@ -7,7 +7,8 @@
 #'   `memory` denotes that there was more memory used than reserved,
 #'   `died` means that the task died by a signal,
 #'   `invalid_file` is stated when the .RDa file to read from was invalid,
-#'   `alignment` and `no_dnabin` are caused from an unreadable or unmanagable alignment,
+#'   `alignment` and `no_dnabin` are caused from an unreadable or
+#'     unmanagable alignment,
 #'   `fasta` and `fasta_io` results from an unreadable FASTA file
 #'   (a temporary created by `add_posterior`),
 #'   `trees` results from an unreadable `.trees` file,
@@ -32,23 +33,23 @@ collect_log_file_info <- function(filename) {
   )
 
   text <- wiritttea::file_to_lines(filename)
-  if (length(grep(pattern = "slurmstepd: error: Exceeded step memory limit at some point", x = text)) > 0) {
+  if (length(grep(pattern = "slurmstepd: error: Exceeded step memory limit at some point", x = text)) > 0) { # nolint
     df$exit_status <- "memory"
-  } else if (length(grep(pattern = "slurmstepd: error: get_exit_code task 0 died by signal", x = text)) > 0) {
+  } else if (length(grep(pattern = "slurmstepd: error: get_exit_code task 0 died by signal", x = text)) > 0) { # nolint
     df$exit_status <- "died"
-  } else if (length(grep(pattern = "\\.Call\\(\"rawStreamToDNAbin\", x\\)", x = text)) > 0) {
+  } else if (length(grep(pattern = "\\.Call\\(\"rawStreamToDNAbin\", x\\)", x = text)) > 0) { # nolint
     df$exit_status <- "fasta"
-  } else if (length(grep(pattern = "Error in value\\[\\[3L\\]\\]\\(cond\\) : invalid file", x = text)) > 0) {
+  } else if (length(grep(pattern = "Error in value\\[\\[3L\\]\\]\\(cond\\) : invalid file", x = text)) > 0) { # nolint
     df$exit_status <- "invalid_file"
-  } else if (length(grep(pattern = "Error: file.exists\\(beast_trees_filename\\) is not TRUE", x = text)) > 0) {
+  } else if (length(grep(pattern = "Error: file.exists\\(beast_trees_filename\\) is not TRUE", x = text)) > 0) { # nolint
     df$exit_status <- "trees"
-  } else if (length(grep(pattern = "In ape::read.FASTA\\(fasta_filename\\) :rm: write error: Input/output error", x = text)) > 0) {
+  } else if (length(grep(pattern = "In ape::read.FASTA\\(fasta_filename\\) :rm: write error: Input/output error", x = text)) > 0) { # nolint
     df$exit_status <- "fasta_io"
-  } else if (length(grep(pattern = "Error in data.frame\\(sequences, row.names = labels\\)", x = text)) > 0) {
+  } else if (length(grep(pattern = "Error in data.frame\\(sequences, row.names = labels\\)", x = text)) > 0) { # nolint
     df$exit_status <- "alignment"
-  } else if (length(grep(pattern = "embedded nul\\(s\\) found in input", x = text)) > 0) {
+  } else if (length(grep(pattern = "embedded nul\\(s\\) found in input", x = text)) > 0) { # nolint
     df$exit_status <- "save_posterior"
-  } else if (length(grep(pattern = "Error: class\\(sequences_dnabin\\) == \"DNAbin\" is not TRUE", x = text)) > 0) {
+  } else if (length(grep(pattern = "Error: class\\(sequences_dnabin\\) == \"DNAbin\" is not TRUE", x = text)) > 0) { # nolint
     df$exit_status <- "no_dnabin"
   }
 
@@ -56,7 +57,8 @@ collect_log_file_info <- function(filename) {
   # "Used CPU time       :    01:36:11 ("
   if (length(grep(pattern = "Used CPU time", x = text)) > 0) {
     line <- text[ grep(pattern = "Used CPU time", x = text) ]
-    t <- stringr::str_extract(line, "[:digit:][:digit:]:[:digit:][:digit:]:[:digit:][:digit:]")
+    t <- stringr::str_extract(line,
+      "[:digit:][:digit:]:[:digit:][:digit:]:[:digit:][:digit:]")
     # Only use the first hit
     if (length(t) > 1) t <- t[1]
     if (is.na(t)) {
@@ -68,14 +70,6 @@ collect_log_file_info <- function(filename) {
       df$sys_time <- n_secs
     }
   }
-  # Old approach
-  # if (length(grep(pattern = "sys\t", x = text)) > 0) {
-  #   line <- text[ grep(pattern = "sys\t", x = text) ]
-  #   t <- stringr::str_split(str = line, "\t")[[1]][2]
-  #   # "0m0.165s"
-  #   n_secs <- lubridate::period_to_seconds(lubridate::ms(t))
-  #   df$sys_time <- n_secs
-  # }
 
   testit::assert(names(df)
     == c("filename", "exit_status", "sys_time")

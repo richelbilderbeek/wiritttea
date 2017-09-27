@@ -18,8 +18,8 @@ collect_file_posterior_nltts <- function(filename) {
   }
 
   file <- wiritttes::read_file(filename)
-  parameters <- file$parameters
-  napst <- wiritttes::extract_napst(file) # Number of Alignments Per Species Tree
+  # napst: Number of Alignments Per Species Tree
+  napst <- wiritttes::extract_napst(file)
   nppa <- wiritttes::extract_nppa(file) # Number of Posteriors Per Alignment
   nspp <- wiritttes::extract_nspp(file) # Number of States Per posterior
 

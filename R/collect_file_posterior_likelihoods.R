@@ -19,7 +19,8 @@ collect_file_posterior_likelihoods <- function(filename) {
   for (sti in 1:2) {
     for (j in seq(1, n_alignments)) {
       for (k in seq(1, n_beast_runs)) {
-        likelihoods <- wiritttes::get_posteriors(file)[[index]][[1]]$estimates$likelihood
+        likelihoods <- wiritttes::get_posteriors(
+          file)[[index]][[1]]$estimates$likelihood
 
         n_likelihoods <- length(likelihoods)
 
