@@ -15,7 +15,7 @@
 #' @author Richel Bilderbeek
 #' @export
 read_collected_posterior_crown_ages <- function(
-
+   filename = wiritttea::find_path("collect_files_posterior_crown_ages.csv")
 ) {
   testit::assert(file.exists(filename))
   df <- utils::read.csv(
