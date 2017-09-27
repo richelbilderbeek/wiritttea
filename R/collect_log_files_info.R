@@ -15,7 +15,12 @@
 collect_log_files_info <- function(filenames, show_progress = FALSE) {
 
   if (length(filenames) < 1) {
-    stop("there must be at least one filename supplied")
+    df <- data.frame(
+      filename = NA,
+      exit_status = NA,
+      sys_time = NA
+    )
+    return(df[0, ])
   }
 
   # Log file info
