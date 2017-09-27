@@ -68,6 +68,21 @@ else
 fi
 
 ##########################
+# Collect posterior likelihoods
+##########################
+
+cmd="./collect_posterior_likelihoods "$source_folder" ~/posterior_likelihoods_"$date".csv"
+if [[ $on_peregrine == 1 ]]; then 
+  cmd="sbatch --dependency=afterany:$jobid "$cmd
+  echo "cmd: "$cmd
+  jobid=`$cmd | cut -d ' ' -f 4`
+  echo "jobid: "$jobid
+else
+  echo "cmd: "$cmd
+  eval $cmd >/dev/null
+fi
+
+##########################
 # Collect posterior crown ages
 ##########################
 
