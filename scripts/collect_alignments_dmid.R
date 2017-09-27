@@ -26,5 +26,4 @@ my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
 
 df <- collect_files_alignments_dmid(filenames = my_filenames)
 
-# Save
 write.csv(df, alignment_dmid_filename)
