@@ -3,7 +3,7 @@
 #' @return a data frame
 #' @author Richel Bilderbeek
 #' @export
-collect_file_posterior_likelihoods <- function(filename) {
+collect_file_pstr_likelihoods <- function(filename) {
   if (!wiritttes::is_valid_file(filename)) {
     stop("invalid file")
   }

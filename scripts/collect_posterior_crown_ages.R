@@ -20,5 +20,5 @@ posterior_crown_ages_filename <- args[2]
 
 # Do it
 my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
-df_posterior_crown_ages <- wiritttea::collect_files_posterior_crown_ages(my_filenames, verbose = TRUE)
+df_posterior_crown_ages <- wiritttea::collect_files_pstr_crown_ages(my_filenames, verbose = TRUE)
 write.csv(df_posterior_crown_ages, posterior_crown_ages_filename)

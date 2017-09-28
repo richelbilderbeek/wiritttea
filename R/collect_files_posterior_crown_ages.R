@@ -8,14 +8,14 @@
 #'    c("toy_example_1.RDa", "toy_example_2.RDa",
 #'    "toy_example_3.RDa", "toy_example_4.RDa")
 #'  )
-#'  df <- wiritttea::collect_files_posterior_crown_ages(filenames)
+#'  df <- wiritttea::collect_files_pstr_crown_ages(filenames)
 #'  testthat::expect_equal(
 #'    names(df),
 #'    c("filename", "sti", "ai", "pi", "si", "crown_age")
 #'  )
 #'  testthat::expect_true(nrow(df) == 220)
 #' @export
-collect_files_posterior_crown_ages <- function(filenames, verbose = FALSE) {
+collect_files_pstr_crown_ages <- function(filenames, verbose = FALSE) {
 
   if (length(filenames) < 1) {
     stop("there must be at least one filename supplied")
@@ -28,7 +28,7 @@ collect_files_posterior_crown_ages <- function(filenames, verbose = FALSE) {
     }
     this_df <- NULL
     tryCatch(
-      this_df <- wiritttea::collect_file_posterior_crown_ages(
+      this_df <- wiritttea::collect_file_pstr_crown_ages(
         filename = filename
       ),
       error = function(msg) {} # nolint

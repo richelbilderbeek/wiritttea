@@ -20,5 +20,5 @@ posterior_likelihoods_filename <- args[2]
 
 # Do it
 my_filenames <- list.files(path_data, pattern = "*.RDa", full.names = TRUE)
-df_posterior_likelihoods <- wiritttea::collect_files_posterior_likelihoods(my_filenames)
+df_posterior_likelihoods <- wiritttea::collect_files_pstr_likelihoods(my_filenames)
 write.csv(df_posterior_likelihoods, posterior_likelihoods_filename)

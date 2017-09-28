@@ -4,7 +4,7 @@
 #' @note BEAST2 calls this parameter 'TreeHeight'
 #' @examples
 #'   filename <- wiritttea::find_path("toy_example_3.RDa")
-#'   df <- wiritttea::collect_file_posterior_crown_ages(filename)
+#'   df <- wiritttea::collect_file_pstr_crown_ages(filename)
 #'   testthat::expect_equal(
 #'     names(df),
 #'     c("sti", "ai", "pi", "si", "crown_age")
@@ -12,7 +12,7 @@
 #'   testthat::expect_true(nrow(df) == 88)
 #' @author Richel Bilderbeek
 #' @export
-collect_file_posterior_crown_ages <- function(filename) {
+collect_file_pstr_crown_ages <- function(filename) {
   if (!wiritttes::is_valid_file(filename)) {
     stop("invalid file")
   }

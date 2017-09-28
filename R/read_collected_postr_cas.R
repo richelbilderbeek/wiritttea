@@ -2,11 +2,11 @@
 #' @param filename name of the file with all the collected posteriors' crown ages
 #' @return a dataframe
 #' @usage
-#' read_collected_posterior_crown_ages(
+#' read_collected_pstr_crown_ages(
 #'   filename = wiritttea::find_path("collect_files_posterior_crown_ages.csv")
 #' )
 #' @examples
-#'   df <- wiritttea::read_collected_posterior_crown_ages()
+#'   df <- wiritttea::read_collected_pstr_crown_ages()
 #'   testit::assert(
 #'     all(
 #'       names(df) == c("filename", "sti", "ai", "pi", "si", "crown_age")
@@ -14,7 +14,7 @@
 #'   )
 #' @author Richel Bilderbeek
 #' @export
-read_collected_posterior_crown_ages <- function(
+read_collected_pstr_crown_ages <- function(
    filename = wiritttea::find_path("collect_files_posterior_crown_ages.csv")
 ) {
   testit::assert(file.exists(filename))

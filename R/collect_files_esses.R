@@ -8,7 +8,7 @@
 #'   filenames <- find_paths(c("toy_example_3.RDa", "toy_example_4.RDa"))
 #'   df <- collect_files_esses(filenames)
 #'   testit::assert(nrow(df) == 16)
-#' @seealso collect_files_esses_from_log_files
+#' @seealso collect_files_esses_from_logs
 #' @export
 collect_files_esses <- function(filenames, show_progress = FALSE) {
 
@@ -99,7 +99,7 @@ collect_files_esses <- function(filenames, show_progress = FALSE) {
 #'   df <- collect_files_esses(filenames)
 #'   testit::assert(nrow(df) == 16)
 #' @export
-collect_files_esses_from_log_files <- function(filenames, show_progress = FALSE) {
+collect_files_esses_from_logs <- function(filenames, show_progress = FALSE) {
 
   if (length(filenames) == 0) {
     print(paste("filenames: '", filenames, "'", sep = ""))
@@ -195,4 +195,3 @@ collect_files_esses_from_log_files <- function(filenames, show_progress = FALSE)
   )
   df
 }
-

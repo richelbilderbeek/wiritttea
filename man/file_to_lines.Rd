@@ -16,7 +16,8 @@ the text of the filename as a vector
 Read a file and convert it to a vector of strings, in complexity O(2n)
 }
 \examples{
-  text <- wiritttea::file_to_lines(filename = wiritttea::find_path("add_alignments_ok.log"))
+  text <- wiritttea::file_to_lines(
+    filename = wiritttea::find_path("add_alignments_ok.log"))
   testit::assert(length(text) == 50)
 }
 \author{

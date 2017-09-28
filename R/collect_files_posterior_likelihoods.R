@@ -7,14 +7,14 @@
 #'    c("toy_example_1.RDa", "toy_example_2.RDa",
 #'    "toy_example_3.RDa", "toy_example_4.RDa")
 #'  )
-#'  df <- wiritttea::collect_files_posterior_likelihoods(filenames)
+#'  df <- wiritttea::collect_files_pstr_likelihoods(filenames)
 #'  testthat::expect_equal(
 #'    names(df),
 #'    c("filename", "sti", "ai", "pi", "si", "likelihood")
 #'  )
 #'  testthat::expect_true(nrow(df) == 220)
 #' @export
-collect_files_posterior_likelihoods <- function(filenames) {
+collect_files_pstr_likelihoods <- function(filenames) {
 
   if (length(filenames) < 1) {
     stop("there must be at least one filename supplied")
@@ -25,7 +25,7 @@ collect_files_posterior_likelihoods <- function(filenames) {
   for (filename in filenames) {
     this_pns <- NULL
     tryCatch(
-      this_pns <- wiritttea::collect_file_posterior_likelihoods(
+      this_pns <- wiritttea::collect_file_pstr_likelihoods(
         filename = filename
       ),
       error = function(msg) {} # nolint

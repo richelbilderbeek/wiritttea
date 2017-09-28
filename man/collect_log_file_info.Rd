@@ -17,7 +17,8 @@ A dataframe of log file info.
   `memory` denotes that there was more memory used than reserved,
   `died` means that the task died by a signal,
   `invalid_file` is stated when the .RDa file to read from was invalid,
-  `alignment` and `no_dnabin` are caused from an unreadable or unmanagable alignment,
+  `alignment` and `no_dnabin` are caused from an unreadable or
+    unmanagable alignment,
   `fasta` and `fasta_io` results from an unreadable FASTA file
   (a temporary created by `add_posterior`),
   `trees` results from an unreadable `.trees` file,

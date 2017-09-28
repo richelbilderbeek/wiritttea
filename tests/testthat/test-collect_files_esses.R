@@ -14,14 +14,16 @@ test_that("only invalid file fails", {
 
 test_that("valid and invalid file works", {
 
-  filenames <- find_paths(c("toy_example_3.RDa", "collect_files_esses_invalid.RDa"))
+  filenames <- find_paths(
+    c("toy_example_3.RDa", "collect_files_esses_invalid.RDa"))
   df <- collect_files_esses(filenames)
   testthat::expect_equal(nrow(df), 16)
 })
 
 test_that("invalid and valid file works", {
 
-  filenames <- find_paths(c("collect_files_esses_invalid.RDa", "toy_example_3.RDa"))
+  filenames <- find_paths(
+    c("collect_files_esses_invalid.RDa", "toy_example_3.RDa"))
   df <- collect_files_esses(filenames)
   testthat::expect_equal(nrow(df), 16)
 })

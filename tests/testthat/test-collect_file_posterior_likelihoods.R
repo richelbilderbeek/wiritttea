@@ -1,9 +1,9 @@
-context("collect_file_posterior_likelihoods")
+context("collect_file_pstr_likelihoods")
 
 test_that("basic use", {
 
   filename <- wiritttea::find_path("toy_example_3.RDa")
-  df <- wiritttea::collect_file_posterior_likelihoods(filename)
+  df <- wiritttea::collect_file_pstr_likelihoods(filename)
   testthat::expect_equal(
     names(df),
     c("sti", "ai", "pi", "si", "likelihood")

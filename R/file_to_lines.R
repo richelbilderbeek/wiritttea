@@ -2,7 +2,8 @@
 #' @param filename the name of a file
 #' @return the text of the filename as a vector
 #' @examples
-#'   text <- wiritttea::file_to_lines(filename = wiritttea::find_path("add_alignments_ok.log"))
+#'   text <- wiritttea::file_to_lines(
+#'     filename = wiritttea::find_path("add_alignments_ok.log"))
 #'   testit::assert(length(text) == 50)
 #' @author Richel Bilderbeek
 #' @export

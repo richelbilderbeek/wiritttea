@@ -27,5 +27,5 @@ Collects the ESSes of all phylogenies belonging to the
   testit::assert(nrow(df) == 16)
 }
 \seealso{
-collect_files_esses_from_log_files
+collect_files_esses_from_logs
 }

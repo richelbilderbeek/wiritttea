@@ -37,7 +37,8 @@ collect_file_posterior_nltts <- function(filename) {
     species_tree <- wiritttes::get_species_tree_by_index(file, sti)
     for (ai in seq(1, napst)) {
       for (pi in seq(1, nppa)) {
-        phylogenies <- wiritttes::get_posterior(file = file, sti = sti, ai = ai, pi = pi)$trees
+        phylogenies <- wiritttes::get_posterior(
+          file = file, sti = sti, ai = ai, pi = pi)$trees
         for (si in seq(1, nspp)) {
           tryCatch(
             df$nltt[index] <- nLTT::nLTTstat_exact(
