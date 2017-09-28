@@ -56,7 +56,8 @@ collect_log_file_info <- function(filename) {
 
   # "Used CPU time       :    01:36:11 ("
   if (length(grep(pattern = "Used CPU time", x = text)) > 0) {
-    line <- text[ grep(pattern = "Used CPU time", x = text) ]
+    index <- grep(pattern = "Used CPU time", x = text)
+    line <- text[index]
     t <- stringr::str_extract(line,
       "[:digit:][:digit:]:[:digit:][:digit:]:[:digit:][:digit:]")
     # Only use the first hit

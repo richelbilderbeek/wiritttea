@@ -1,5 +1,6 @@
 #' Read all the collected tree crown_ages of all posteriors
-#' @param filename name of the file with all the collected posteriors' crown ages
+#' @param filename name of the file with all the collected
+#'   posteriors' crown ages
 #' @return a dataframe
 #' @usage
 #' read_collected_pstr_crown_ages(

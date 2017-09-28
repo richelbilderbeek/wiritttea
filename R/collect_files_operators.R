@@ -9,7 +9,12 @@
 #'   )
 #' @author Richel Bilderbeek
 collect_files_operators <- function(
-  filenames = find_paths(c("collect_files_operators.xml.state", "collect_files_operators_empty.xml.state")),
+  filenames = find_paths(
+    c(
+      "collect_files_operators.xml.state",
+      "collect_files_operators_empty.xml.state"
+     )
+  ),
   show_progress = FALSE) {
 
   # Calculate the number of rows needed

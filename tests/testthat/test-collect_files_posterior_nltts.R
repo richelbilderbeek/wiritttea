@@ -13,7 +13,10 @@ test_that("Basic use", {
     c("filename", "sti", "ai", "pi", "si", "nltt")
   )
 
-  # write.csv(df, "~/collect_files_posterior_nltts.csv")
+  need_to_recreate <- FALSE
+  if (need_to_recreate == TRUE) {
+    write.csv(df, "~/collect_files_posterior_nltts.csv")
+  }
 
   testthat::expect_true(nrow(df) == 200)
 })

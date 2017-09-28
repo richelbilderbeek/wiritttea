@@ -9,7 +9,8 @@ read_collected_pstr_crown_ages(
 )
 }
 \arguments{
-\item{filename}{name of the file with all the collected posteriors' crown ages}
+\item{filename}{name of the file with all the collected
+posteriors' crown ages}
 }
 \value{
 a dataframe

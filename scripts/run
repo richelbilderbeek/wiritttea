@@ -82,7 +82,6 @@ else
   eval $cmd >/dev/null
 fi
 
-exit 
 ##########################
 # Collect posterior likelihoods
 ##########################

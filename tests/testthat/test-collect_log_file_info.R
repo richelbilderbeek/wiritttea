@@ -72,16 +72,3 @@ test_that("add_posteriors read sequence is no DNAbin", {
     filename = wiritttea::find_path("add_posteriors_sequence_no_dnabin.log"))
   testthat::expect_equal(df$exit_status[1], "no_dnabin")
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
