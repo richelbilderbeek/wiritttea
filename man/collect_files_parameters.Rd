@@ -24,6 +24,7 @@ Collects the parameters of its input files
  )
  df <- collect_files_parameters(filenames)
  testit::assert(nrow(df) == 3)
+ testit::assert(all(rownames(df) == basename(filenames)))
 }
 \author{
 Richel Bilderbeek

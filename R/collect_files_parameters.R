@@ -10,6 +10,7 @@
 #'  )
 #'  df <- collect_files_parameters(filenames)
 #'  testit::assert(nrow(df) == 3)
+#'  testit::assert(all(rownames(df) == basename(filenames)))
 #' @export
 #' @author Richel Bilderbeek
 collect_files_parameters <- function(filenames) {
@@ -64,6 +65,9 @@ collect_files_parameters <- function(filenames) {
 
   # Restore original scientific notation
   options(scipen = old_scipen)
+
+
+  rownames(df) <- basename(filenames)
 
   df
 }

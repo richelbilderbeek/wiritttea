@@ -4,6 +4,13 @@ test_that("collect_files_parameters: use", {
   # Testing
   filenames <- find_paths(paste0("toy_example_", seq(1, 4), ".RDa"))
   df <- collect_files_parameters(filenames = filenames)
+
+  need_to_recreate <- FALSE
+  if (need_to_recreate == TRUE) {
+
+    write.csv(df, "~/collect_files_parameters.csv")
+    # then copy to GitHub's wiritttea/inst/exdata folder
+  }
 })
 
 test_that("collect_files_parameters: invalid file return an empty data.frame", {
