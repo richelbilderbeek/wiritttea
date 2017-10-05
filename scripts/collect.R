@@ -44,20 +44,20 @@ if (dir.exists(source_folder)) {
 
 # Prepare commands
 cmds <- c(
-  paste0("./collect_log_files ", source_folder, " ~/log_files_", date, ".csv"),
-  paste0("./collect_posterior_likelihoods ", source_folder, " ~/posterior_likelihoods_", date, ".csv"), 
-  paste0("./collect_posterior_crown_ages ", source_folder, " ~/posterior_crown_ages_", date, ".csv"), 
-  paste0("./collect_operators ", source_folder, " ~/operators_", date, ".csv"), 
-  paste0("./collect_strees_identical ", source_folder, " ~/collect_strees_identical_", date, ".csv"), 
-  paste0("./collect_alignments ", source_folder, " ~/alignments_", date, ".csv"), 
-  paste0("./collect_alignments_dmid ", source_folder, " ~/alignments_dmid_", date, ".csv"), 
-  paste0("./collect_parameters ", source_folder, " ~/parameters_", date, ".csv"), 
-  paste0("./collect_n_taxa ", source_folder, " ~/n_taxa_", date, ".csv"), 
-  paste0("./collect_n_species_trees ", source_folder, " ~/n_species_trees_", date, ".csv"), 
-  paste0("./collect_n_alignments ", source_folder, " ~/n_alignments_", date, ".csv"), 
-  paste0("./collect_n_posteriors ", source_folder, " ~/n_posteriors_", date, ".csv"), 
-  paste0("./collect_esses ", source_folder, " ~/esses_", date, ".csv"), 
-  paste0("./collect_nltt_stats ", source_folder, " ~/nltt_stats_", date, ".csv") 
+  paste0("./collect_log_files ", source_folder, " ", source_superfolder, "/log_files_", date, ".csv"),
+  paste0("./collect_posterior_likelihoods ", source_folder, " ", source_superfolder, "/posterior_likelihoods_", date, ".csv"),
+  paste0("./collect_posterior_crown_ages ", source_folder, " ", source_superfolder, "/posterior_crown_ages_", date, ".csv"),
+  paste0("./collect_operators ", source_folder, " ", source_superfolder, "/operators_", date, ".csv"),
+  paste0("./collect_strees_identical ", source_folder, " ", source_superfolder, "/collect_strees_identical_", date, ".csv"),
+  paste0("./collect_alignments ", source_folder, " ", source_superfolder, "/alignments_", date, ".csv"),
+  paste0("./collect_alignments_dmid ", source_folder, " ", source_superfolder, "/alignments_dmid_", date, ".csv"),
+  paste0("./collect_parameters ", source_folder, " ", source_superfolder, "/parameters_", date, ".csv"),
+  paste0("./collect_n_taxa ", source_folder, " ", source_superfolder, "/n_taxa_", date, ".csv"),
+  paste0("./collect_n_species_trees ", source_folder, " ", source_superfolder, "/n_species_trees_", date, ".csv"),
+  paste0("./collect_n_alignments ", source_folder, " ", source_superfolder, "/n_alignments_", date, ".csv"),
+  paste0("./collect_n_posteriors ", source_folder, " ", source_superfolder, "/n_posteriors_", date, ".csv"),
+  paste0("./collect_esses ", source_folder, " ", source_superfolder, "/esses_", date, ".csv"),
+  paste0("./collect_nltt_stats ", source_folder, " ", source_superfolder, "/nltt_stats_", date, ".csv")
 )
 
 # Don't care about output
@@ -70,7 +70,7 @@ for (cmd in cmds) {
 
 # on_peregrine <- Sys.getenv("HOSTNAME") == "peregrine.hpc.rug.nl"
 # print(paste0("on_peregrine: ", on_peregrine))
-# if [[ $on_peregrine == 1 ]]; then 
+# if [[ $on_peregrine == 1 ]]; then
 #   cmd="sbatch --dependency=afterany:$jobid "$cmd
 #   echo "cmd: "$cmd
 #   jobid=`$cmd | cut -d ' ' -f 4`
