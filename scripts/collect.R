@@ -29,9 +29,6 @@ print(paste0("date: ", date))
 source_folder <- paste0(source_superfolder, "/", date)
 print(paste0("source_folder: ", source_folder))
 
-skip_install <- FALSE
-print(paste0("skip_install: ", skip_install))
-
 # Checking inputs
 if (dir.exists(source_superfolder)) {
   print("OK: source super folder is a folder")
