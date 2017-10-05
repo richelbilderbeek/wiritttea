@@ -29,14 +29,10 @@ print(paste0("date: ", date))
 source_folder <- paste0(source_superfolder, "/", date)
 print(paste0("source_folder: ", source_folder))
 
-on_peregrine <- Sys.getenv("HOSTNAME") == "peregrine.hpc.rug.nl"
-print(paste0("on_peregrine: ", on_peregrine))
-
 skip_install<-TRUE
 print(paste0("skip_install: ", skip_install))
 
 # Checking inputs
-
 if (dir.exists(source_superfolder)) {
   print("OK: source super folder is a folder")
 } else {
@@ -49,9 +45,7 @@ if (dir.exists(source_folder)) {
   stop("ERROR: source folder is not a folder")
 }
 
-##########################
-# Collect log files
-##########################
+# Prepare commands
 cmds <- c(
   paste0("./collect_log_files ", source_folder, " ~/log_files_", date, ".csv"),
   paste0("./collect_posterior_likelihoods ", source_folder, " ~/posterior_likelihoods_", date, ".csv"), 
@@ -69,17 +63,16 @@ cmds <- c(
   paste0("./collect_nltt_stats ", source_folder, " ~/nltt_stats_", date, ".csv") 
 )
 
+# Don't care about output
+cmds <- paste0(cmds, " >/dev/null")
 
-if (on_peregrine == FALSE) {
-  cmds <- paste0(cmds, " >/dev/null")
-  for (cmd in cmds) {
-    system(cmd)
-  }
+# Run the commands in sequence
+for (cmd in cmds) {
+  system(cmd)
 }
 
-
-if (on_peregrine == TRUE) {
-# cmd="./collect_log_files "$source_folder" ~/log_files_"$date".csv"
+# on_peregrine <- Sys.getenv("HOSTNAME") == "peregrine.hpc.rug.nl"
+# print(paste0("on_peregrine: ", on_peregrine))
 # if [[ $on_peregrine == 1 ]]; then 
 #   cmd="sbatch --dependency=afterany:$jobid "$cmd
 #   echo "cmd: "$cmd
@@ -89,6 +82,5 @@ if (on_peregrine == TRUE) {
 #   echo "cmd: "$cmd
 #   eval $cmd >/dev/null
 # fi
-}
 
 
