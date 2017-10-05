@@ -7,7 +7,8 @@ and 'figure_error_tail.svg', showing the complete distribution of all
 errors (measured as nLTT statistic)}
 \usage{
 create_figure_error(parameters, nltt_stats, cut_x = 0.05,
-  path = path.expand("~"), verbose = FALSE)
+  svg_filenames = paste0(path.expand("~"), "/figure_error", c(".svg",
+  "_head.svg", "_tail.svg")), verbose = FALSE)
 }
 \arguments{
 \item{parameters}{collected parameters, as returned from 'collect_parameters'}
@@ -17,8 +18,7 @@ create_figure_error(parameters, nltt_stats, cut_x = 0.05,
 
 \item{cut_x}{nLTT statistic value at which head and tail are seperated}
 
-\item{path}{the path of where the figures will be saved, which is the
-home folder by default}
+\item{svg_filenames}{the three filenames the figures will be saved as}
 
 \item{verbose}{if set to TRUE, the function prints more information}
 }
@@ -33,7 +33,7 @@ errors (measured as nLTT statistic)
   create_figure_error(
     parameters = parameters,
     nltt_stats = nltt_stats,
-    path = path.expand("~")
+    svg_filenames = paste0(path.expand("~"), "/figure_error", c(".svg", "_head.svg", "_tail.svg"))
   )
 }
 \author{

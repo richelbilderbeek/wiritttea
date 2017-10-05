@@ -5,8 +5,7 @@
 #' @param nltt_stats collected nLTT statistics, as returned from
 #'   'read_collected_nltt_stats', assumes burn-in is already removed
 #' @param cut_x nLTT statistic value at which head and tail are seperated
-#' @param path the path of where the figures will be saved, which is the
-#'   home folder by default
+#' @param svg_filenames the three filenames the figures will be saved as
 #' @param verbose if set to TRUE, the function prints more information
 #' @examples
 #'   parameters <- read_collected_parameters()
@@ -14,7 +13,7 @@
 #'   create_figure_error(
 #'     parameters = parameters,
 #'     nltt_stats = nltt_stats,
-#'     path = path.expand("~")
+#'     svg_filenames = paste0(path.expand("~"), "/figure_error", c(".svg", "_head.svg", "_tail.svg"))
 #'   )
 #' @export
 #' @author Richel Bilderbeek
@@ -22,7 +21,7 @@ create_figure_error <- function(
   parameters,
   nltt_stats,
   cut_x = 0.05,
-  path = path.expand("~"),
+  svg_filenames = paste0(path.expand("~"), "/figure_error", c(".svg", "_head.svg", "_tail.svg")),
   verbose = FALSE
 ) {
 
@@ -61,7 +60,7 @@ create_figure_error <- function(
 
   my_colors <- hsv(scales::rescale(sort(unique(df$mean_durspec)), to = c(0.0, 5.0 / 6.0)))
 
-  figure_filename <- paste0(path, "/figure_error.svg")
+  figure_filename <- svg_filenames[1]
   if (verbose == TRUE) {
     print(paste0("Creating main figure ", figure_filename))
   }
@@ -82,7 +81,7 @@ create_figure_error <- function(
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
   ggplot2::ggsave(file = figure_filename, width = 7, height = 7)
 
-  figure_filename <- paste0(path, "/figure_error_head.svg")
+  figure_filename <- svg_filenames[2]
   if (verbose == TRUE) {
     print(paste0("Creating head figure ", figure_filename))
   }
@@ -105,7 +104,7 @@ create_figure_error <- function(
 
   ggplot2::ggsave(file = figure_filename, width = 7, height = 7)
 
-  figure_filename <- paste0(path, "/figure_error_tail.svg")
+  figure_filename <- svg_filenames[3]
   if (verbose == TRUE) {
     print(paste0("Creating tail figure ", figure_filename))
   }
