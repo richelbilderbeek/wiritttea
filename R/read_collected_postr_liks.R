@@ -3,12 +3,12 @@
 #'   posteriors' likelihoods
 #' @return a dataframe
 #' @usage
-#'   read_collected_pstr_likelihoods(
+#'   read_collected_pstr_liks(
 #'     filename = wiritttea::find_path(
 #'       "collect_files_posterior_likelihoods.csv")
 #'   )
 #' @examples
-#'   df <- wiritttea::read_collected_pstr_likelihoods()
+#'   df <- wiritttea::read_collected_pstr_liks()
 #'   testit::assert(
 #'     all(
 #'       names(df) ==
@@ -20,7 +20,7 @@
 #'   )
 #' @author Richel Bilderbeek
 #' @export
-read_collected_pstr_likelihoods <- function(
+read_collected_pstr_liks <- function(
   filename = wiritttea::find_path("collect_files_posterior_likelihoods.csv")
 ) {
   testit::assert(file.exists(filename))
