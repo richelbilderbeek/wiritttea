@@ -25,7 +25,7 @@ echo "source_folder: "$source_folder
 on_peregrine=`is_peregrine`
 echo "on_peregrine: "$on_peregrine
 
-skip_install=1
+skip_install=0
 echo "skip_install: "$skip_install
 
 # Checking inputs
@@ -48,8 +48,16 @@ fi
 ##########################
 
 if [[ $skip_install == 0 ]]; then
-  jobid=`sbatch install_r_packages.sh | cut -d ' ' -f 4`
-  echo "jobid: "$jobid
+  cmd="./install_r_packages"
+  if [[ $on_peregrine == 1 ]]; then 
+    cmd="sbatch --dependency=afterany:$jobid "$cmd
+    echo "cmd: "$cmd
+    jobid=`$cmd | cut -d ' ' -f 4`
+    echo "jobid: "$jobid
+  else
+    echo "cmd: "$cmd
+    eval $cmd >/dev/null
+  fi
 else
   echo "Skip install_r_packages"
 fi
@@ -59,10 +67,16 @@ fi
 ##########################
 
 if [[ $skip_install == 0 ]]; then
-  cmd="sbatch --dependency=afterok:$jobid install_this_r_package.sh"
-  echo "cmd: "$cmd
-  jobid=`$cmd | cut -d ' ' -f 4`
-  echo "jobid: "$jobid
+  cmd="./install_this_r_package"
+  if [[ $on_peregrine == 1 ]]; then 
+    cmd="sbatch --dependency=afterany:$jobid "$cmd
+    echo "cmd: "$cmd
+    jobid=`$cmd | cut -d ' ' -f 4`
+    echo "jobid: "$jobid
+  else
+    echo "cmd: "$cmd
+    eval $cmd >/dev/null
+  fi
 else
   echo "Skip install_this_r_package"
 fi

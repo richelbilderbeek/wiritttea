@@ -68,8 +68,21 @@ On Peregrine, from the `wiritttea` root folder:
 
 ```
 cd scripts
-./run.sh
+./run [superfolder] [subfolder]
 ```
+
+for example:
+
+```
+cd scripts
+./run /home/richel/wirittte_data 20171003
+```
+
+The raw data (the .RDa files) will be looked for in the folder `/home/richel/wirittte_data/20171003`.
+
+The subfolder name is used to distinguish different datasets. For example, running
+the example above successfully will create many files of the form `[type]_[subfolder].csv`,
+for example `parameters_20171003.csv`.
 
 This will first create a dataset, then analyse this.
 
@@ -132,7 +145,8 @@ You will need some packages, which are listed in `install_r_packages.R`.
 In Linux, you can install all of these with:
 
 ```
-sudo install_r_packages.sh
+cd scripts
+sudo ./install_r_packages
 ```
 
 ### Install BEAST2
@@ -144,7 +158,7 @@ You can do this from [the BEAST2 GitHub](https://github.com/CompEvol/beast2).
 In Linux, you can install it with:
 
 ```
-./install_beast2.sh
+./install_beast2
 ```
 
 ## Install Java
