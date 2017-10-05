@@ -170,6 +170,25 @@ Try first to install the `rJava` package
 R CMD javareconf
 ```
 
+Nope, does not work
+
+```
+Hi Richel,
+
+Even with 'sudo R CMD javareconf' you would not have solved the problem. There was more trouble. I fixed it like this:
+For Linux(Ubuntu) users: If you have oracle-java (7/8) installed. It'll be at this location /usr/lib/jvm and sudo access is required.
+Create the file /etc/ld.so.conf.d/java.conf with the following entries:
+/usr/lib/jvm/java-8-oracle/jre/lib/amd64
+/usr/lib/jvm/java-8-oracle/jre/lib/amd64/server(Replace java-8-oracle with java-7-oracle depending on your java version)
+Then:
+sudo ldconfigRestart RStudio and then install the rJava package.
+
+You should be able to install it yourself now.
+
+Regards,
+Chris
+```
+
 ## Article
 
 The article-in-preparation can be found
