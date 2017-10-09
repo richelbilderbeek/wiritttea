@@ -50,7 +50,7 @@ fi
 if [[ $skip_install == 0 ]]; then
   cmd="./install_r_packages"
   if [[ $on_peregrine == 1 ]]; then 
-    cmd="sbatch --dependency=afterany:$jobid "$cmd
+    cmd="sbatch "$cmd
     echo "cmd: "$cmd
     jobid=`$cmd | cut -d ' ' -f 4`
     echo "jobid: "$jobid
