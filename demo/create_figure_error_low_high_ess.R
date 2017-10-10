@@ -37,7 +37,7 @@ esses <- wiritttea::read_collected_esses(esses_filename)
 # Take the mean of the nLTT stats
 `%>%` <- dplyr::`%>%`
 nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-       summarise(mean=mean(nltt_stat), sd=sd(nltt_stat))
+       dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))
 head(nltt_stat_means, n = 10)
