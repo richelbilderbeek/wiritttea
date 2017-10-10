@@ -24,5 +24,6 @@ create_figure_acceptance_mcmc_operators <- function(
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)) +
     ggplot2::geom_hline(yintercept = optimum_acceptance_level,
       linetype = "dashed")
-  ggplot2::ggsave(svg_filename)
+
+  ggplot2::ggsave(file = svg_filename, width = 7, height = 7)
 }
