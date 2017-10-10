@@ -8,14 +8,10 @@ create_figure_error_sampling_representative <- function(
   filename
 ) {
 
-
-  print("Select only those columns needed")
+  # print("Select only those columns needed")
   parameters <- dplyr::select(parameters, c(filename, sirg, scr, erg))
-  #parameters <- dplyr::select(parameters, c(filename, sirg, scr, erg, mean_durspec))
 
-  print("Read nLTT stats")
-
-  print("Use only half of the nLTT stats, due to memory")
+  # print("Use only half of the nLTT stats, due to memory")
   n_nltt_stats_all <- nrow(nltt_stats)
   n_nltt_stats <- n_nltt_stats_all / 2
 

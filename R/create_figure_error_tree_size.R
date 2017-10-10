@@ -1,14 +1,14 @@
 #' Create figure 'figure_error_tree_size'
+#' @param n_taxa the number of taxa, as returned from read_collected_n_taxa
 #' @param nltt_stats the nLTT statistics, as returned from read_collected_nltt_stats
 #' @param filename name of the file the figure will be saved to
+#' @export
 create_figure_error_tree_size <- function(
-  n_taxa <- wiritttea::read_collected_n_taxa(n_taxa_filename),
+  n_taxa,
   nltt_stats,
   filename
 ) {
 
-  testit::assert(basename("/home/p230198/Peregrine20170710/article_0_3_1_0_1_521.RDa") == "article_0_3_1_0_1_521.RDa")
-  testit::assert(basename("article_0_3_1_0_1_521.RDa") == "article_0_3_1_0_1_521.RDa")
   nltt_stats$filename <- as.vector(nltt_stats$filename)
   nltt_stats$filename <- basename(nltt_stats$filename)
 
@@ -28,11 +28,6 @@ create_figure_error_tree_size <- function(
   df <- merge(x = nltt_stats, y = n_taxa, by = "filename", all = TRUE)
   n_all <- nrow(df)
   df <- stats::na.omit(df)
-  names(df_mean)
-  head(df_mean, n = 10)
-  tail(df_mean, n = 10)
-
-  print("Creating figure")
 
   svg("~/figure_error_tree_size.svg")
   n <- 2000

@@ -1,4 +1,4 @@
-# Create 'figure_error_mean_dur_spec'
+#' Create 'figure_error_mean_dur_spec'
 #' @param parameters parameters, as returned from read_collected_parameters
 #' @param nltt_stats the nLTT statistics, as returned from read_collected_nltt_stats
 #' @param filename name of the file the figure will be saved to
@@ -7,25 +7,15 @@ create_figure_error_mean_dur_spec <- function(
   nltt_stats,
   filename
 ) {
-
-  # Read parameters and nLTT stats
-
-  print("Add mean duration of speciation to parameters")
+  # print("Add mean duration of speciation to parameters")
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(
     eris = parameters$eri,
     scrs = parameters$scr,
     siris = parameters$siri
   )
 
-  # Prepare parameters for merge
-  # parameters$filename <- row.names(parameters)
-  # parameters$filename <- as.factor(parameters$filename)
-
   # Only select the columns we need
-  names(parameters)
   parameters <- dplyr::select(parameters, c(filename, mean_durspec, scr))
-
-  head(nltt_stats)
   nltt_stats <- dplyr::select(nltt_stats, c(filename, nltt_stat))
 
   # Connect the mean nLTT stats and parameters
@@ -33,17 +23,13 @@ create_figure_error_mean_dur_spec <- function(
   testit::assert("filename" %in% names(nltt_stats))
   df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
 
-  names(df)
-  head(df, n = 10)
-
   # Calculate mean BD error
   scr_bd <- max(stats::na.omit(df$scr))
   mean_bd_error <- mean(stats::na.omit(df[ df$scr == scr_bd, ]$nltt_stat))
 
 
-  print("Creating figure")
+  # print("Creating figure")
 
-  svg("~/figure_error_expected_mean_dur_spec.svg")
   set.seed(42)
   n_sampled <- 2000
   n_data_points <- nrow(stats::na.omit(df))
@@ -69,12 +55,11 @@ create_figure_error_mean_dur_spec <- function(
     ggplot2::ylab(latex2exp::TeX("$\\Delta_{nLTT}$")) +
     ggplot2::labs(
       title = "nLTT statistic for different expected mean duration of speciation",
-      caption = paste0("n = ", n_sampled, " / ", n_data_points, "), figure_error_expected_mean_dur_spec")
+      caption = filename
     ) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
   options(warn = 2) # Be strict
-
 
   ggplot2::ggsave(file = filename, width = 7, height = 7)
 }

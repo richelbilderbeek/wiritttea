@@ -16,7 +16,7 @@ create_figure_error_mean_dur_spec_mean_sampling <- function(
   )
 
   # Take the mean of the nLTT stats
-  library(dplyr)
+  `%>%` <- dplyr::`%>%`
   nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
          dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
   testit::assert(all(names(nltt_stat_means)
@@ -42,10 +42,6 @@ create_figure_error_mean_dur_spec_mean_sampling <- function(
   print("Rename column")
   df$sti <- plyr::revalue(df$sti, c("1" = "youngest", "2" = "oldest"))
 
-  print("Creating figure")
-
-  svg("~/figure_error_expected_mean_dur_spec_mean_sampling.svg")
-
   options(warn = 1) # Allow points to fall off plot range
 
   ggplot2::ggplot(
@@ -65,7 +61,7 @@ create_figure_error_mean_dur_spec_mean_sampling <- function(
     ggplot2::ylab(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$")) +
     ggplot2::labs(
       title = "Mean nLTT statistic for different duration of speciations\nfor different sampling methods",
-      caption  = "figure_error_expected_mean_dur_spec_mean_sampling"
+      caption  = filename
     ) +
     ggplot2::labs(color = "Sampling") +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))

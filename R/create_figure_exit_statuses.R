@@ -1,13 +1,11 @@
 #' Create figure 'figure_exit_statuses'
+#' @param log_files_info log files' info, as returned from read_collected_log_files_info
 #' @param filename name of the file the figure will be saved to
 create_figure_exit_statuses <- function(
-  log_files_info <- wiritttea::read_collected_log_files_info(log_files_filename),
+  log_files_info,
   filename
 ) {
 
-
-
-  # Create figure
   ggplot2::ggplot(
     data = log_files_info[ log_files_info$exit_status != "OK" & !is.na(log_files_info$exit_status), ],
     ggplot2::aes(x = "", fill = exit_status)

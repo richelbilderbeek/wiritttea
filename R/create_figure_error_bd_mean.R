@@ -14,37 +14,33 @@ create_figure_error_bd_mean <- function(
   testit::assert(all(names(nltt_stat_means)
     == c("filename", "sti", "ai", "pi", "mean", "sd")))
 
-  # print("Prepare parameters for merge")
-  # parameters$filename <- row.names(parameters)
-  # parameters$filename <- as.factor(parameters$filename)
-
-  print("Connect the mean nLTT stats and parameters")
+  # print("Connect the mean nLTT stats and parameters")
   testit::assert("filename" %in% names(parameters))
   testit::assert("filename" %in% names(nltt_stat_means))
   df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
-  names(df)
-  head(df, n = 10)
 
-  print("Only keep rows with the highest SCR (as those are a BD model)")
-  print(paste0("Rows before: ", nrow(df)))
+  # print("Only keep rows with the highest SCR (as those are a BD model)")
+  # print(paste0("Rows before: ", nrow(df)))
   dplyr::count(df, scr)
   scr_bd <- max(stats::na.omit(df$scr))
   df <- df[ df$scr == scr_bd, ]
-  print(paste0("Rows after: ", nrow(df)))
+  # print(paste0("Rows after: ", nrow(df)))
 
-  print("Creating figure")
+  # print("Creating figure")
 
-  svg("~/figure_error_bd_mean.svg")
   ggplot2::ggplot(
     data = stats::na.omit(df),
     ggplot2::aes(x = mean)
   ) +
-    ggplot2::geom_histogram(binwidth = 0.001) +
-    ggplot2::facet_grid(erg ~ sirg) +
-    ggplot2::scale_x_continuous("Mean nLTT statistic") +
-    ggplot2::scale_y_continuous("Count") +
-    ggplot2::ggtitle("Mean nLTT statistics\nfor different extinction (columns)\nand speciation inition rates (rows)") +
-    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+  ggplot2::geom_histogram(binwidth = 0.001) +
+  ggplot2::facet_grid(erg ~ sirg) +
+  ggplot2::scale_x_continuous("Mean nLTT statistic") +
+  ggplot2::scale_y_continuous("Count") +
+  ggplot2::labs(
+    title = "Mean nLTT statistics\nfor different extinction (columns)\nand speciation inition rates (rows)",
+    caption = filename
+  ) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
   ggplot2::ggsave(file = filename, width = 7, height = 7)
 }

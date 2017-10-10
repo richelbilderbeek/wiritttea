@@ -1,15 +1,16 @@
 #' Table 109: Successes and reasons of failures
+#' @param log_files_info log files' info, as returned from read_collected_log_files_info
 #' @param filename name of the file the table will be saved to
 create_table_109 <- function(
-  df_log_files <- wiritttea::read_collected_log_files_info(log_files_filename),
+  log_files_info,
   filename
 ) {
 
-  write.csv(df_log_files, filename)
+  write.csv(log_files_info, filename)
 
   # Why did these fail?
   ggplot2::ggplot(
-    data = df_log_files,
+    data = log_files_info,
     ggplot2::aes(x = exit_status)
   ) +
     ggplot2::geom_bar() +

@@ -3,12 +3,13 @@
 #' @param nltt_stats the nLTT statistics, as returned from read_collected_nltt_stats
 #' @param esses the ESSes, as returned from read_collected_esses
 #' @param filename name of the file the figure will be saved to
+#' @export
 create_figure_error_low_high_ess <- function(
   parameters,
   nltt_stats,
   esses,
   filename
-)
+) {
 
   # Take the mean of the nLTT stats
   `%>%` <- dplyr::`%>%`
@@ -16,19 +17,13 @@ create_figure_error_low_high_ess <- function(
          dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
   testit::assert(all(names(nltt_stat_means)
     == c("filename", "sti", "ai", "pi", "mean", "sd")))
-  head(nltt_stat_means, n = 10)
-  nrow(nltt_stat_means)
 
-  print("Add mean duration of speciation to parameters")
+  # print("Add mean duration of speciation to parameters")
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(
     eris = parameters$eri,
     scrs = parameters$scr,
     siris = parameters$siri
   )
-
-  # Prepare parameters for merge
-  # parameters$filename <- row.names(parameters)
-  # parameters$filename <- as.factor(parameters$filename)
 
   # Connect the mean nLTT stats and parameters
   testit::assert("filename" %in% names(parameters))
@@ -36,11 +31,8 @@ create_figure_error_low_high_ess <- function(
   n <- 1000000
   df <- merge(x = parameters, y = dplyr::sample_n(nltt_stats, size = n), by = "filename", all = TRUE)
   df_mean <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
-  names(df)
-  names(df_mean)
 
   # Calculate median ESS
-  names(esses)
   median_ess <- median(stats::na.omit(esses$treeLikelihood))
 
   # Calculate the types
@@ -121,10 +113,6 @@ create_figure_error_low_high_ess <- function(
   options(warn = 2) # Be strict
 
   dev.off()
-
-
-
-
 
   svg("~/figure_error_expected_mean_dur_spec_mean_low_high_ess.svg")
   options(warn = 1) # Allow points to fall off plot range

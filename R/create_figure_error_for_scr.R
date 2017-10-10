@@ -21,29 +21,24 @@ create_figure_error_for_scr <- function(
          dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
   testit::assert(all(names(nltt_stat_means)
     == c("filename", "sti", "ai", "pi", "mean", "sd")))
-  head(nltt_stat_means, n = 10)
-  nrow(nltt_stat_means)
-
-  # Prepare parameters for merge
-  # parameters$filename <- row.names(parameters)
-  # parameters$filename <- as.factor(parameters$filename)
 
   # Connect the mean nLTT stats and parameters
   testit::assert("filename" %in% names(parameters))
   testit::assert("filename" %in% names(nltt_stat_means))
   df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
-  names(df)
-  head(df, n = 10)
 
   ggplot2::ggplot(
     data = stats::na.omit(df),
     ggplot2::aes(x = as.factor(scr), y = mean)
   ) + ggplot2::geom_boxplot() +
-      ggplot2::facet_grid(erg ~ sirg) +
-      ggplot2::xlab("Speciation completion rate (probability per lineage per million years)") +
-      ggplot2::ylab("Mean nLTT statistics") +
-      ggplot2::ggtitle("Mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)") +
-      ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+  ggplot2::facet_grid(erg ~ sirg) +
+  ggplot2::xlab("Speciation completion rate (probability per lineage per million years)") +
+  ggplot2::ylab("Mean nLTT statistics") +
+  ggplot2::labs(
+    title = "Mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)",
+    caption  = filename
+  ) +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
   ggplot2::ggsave(file = filename, width = 7, height = 7)
 }
