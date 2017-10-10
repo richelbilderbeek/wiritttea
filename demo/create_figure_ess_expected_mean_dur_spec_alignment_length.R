@@ -55,7 +55,7 @@ print("Creating figure")
 svg("~/figure_ess_expected_mean_dur_spec_alignment_length.svg")
 
 ggplot2::ggplot(
-  data = na.omit(df),
+  data = stats::na.omit(df),
   ggplot2::aes(x = mean_durspec, y = likelihood, color = as.factor(sequence_length))
 ) + ggplot2::geom_jitter(width = 0.01, alpha = 0.2) +
   ggplot2::geom_smooth(method = "lm") +

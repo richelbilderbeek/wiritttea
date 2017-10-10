@@ -80,7 +80,7 @@ df_mean <- merge(x = df_mean, y = esses, by = c("filename", "sti", "ai", "pi"), 
 
 svg("~/figure_error_low_high_ess.svg")
 ggplot2::ggplot(
-  data = na.omit(df),
+  data = stats::na.omit(df),
   ggplot2::aes(x = as.factor(scr), y = nltt_stat, fill = ess_type)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +
@@ -96,7 +96,7 @@ dev.off()
 
 svg("~/figure_error_low_high_ess_mean.svg")
 ggplot2::ggplot(
-  data = na.omit(df_mean),
+  data = stats::na.omit(df_mean),
   ggplot2::aes(x = as.factor(scr), y = mean, fill = ess_type)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +
@@ -154,7 +154,7 @@ svg("~/figure_error_expected_mean_dur_spec_mean_low_high_ess.svg")
 options(warn = 1) # Allow points to fall off plot range
 
 ggplot2::ggplot(
-  data = na.omit(df_mean),
+  data = stats::na.omit(df_mean),
   ggplot2::aes(x = mean_durspec, y = mean, color = ess_type)
 ) +
   ggplot2::geom_point() +

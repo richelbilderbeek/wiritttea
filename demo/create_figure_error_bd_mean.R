@@ -59,7 +59,7 @@ print("Creating figure")
 
 svg("~/figure_error_bd_mean.svg")
 ggplot2::ggplot(
-  data = na.omit(df),
+  data = stats::na.omit(df),
   ggplot2::aes(x = mean)
 ) +
   ggplot2::geom_histogram(binwidth = 0.001) +

@@ -10,7 +10,7 @@ create_figure_acceptance_mcmc_operators <- function(
 ) {
   optimum_acceptance_level <- 0.234
   ggplot2::ggplot(
-    na.omit(df_operators),
+    stats::na.omit(df_operators),
     ggplot2::aes(x = operator, y = p, fill = operator)
   ) +
     ggplot2::geom_boxplot() +

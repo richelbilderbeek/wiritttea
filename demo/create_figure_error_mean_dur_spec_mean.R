@@ -70,7 +70,7 @@ options(warn = 1) # Allow points falling out of range
 
 
 ggplot2::ggplot(
-  data = na.omit(df_means),
+  data = stats::na.omit(df_means),
   ggplot2::aes(x = mean_durspec, y = mean)
 ) + ggplot2::geom_point() +
   ggplot2::geom_smooth(method = "lm", color = "blue", size = 0.5, alpha = 0.25) +
@@ -105,7 +105,7 @@ svg("~/figure_error_expected_mean_dur_spec_median.svg")
 
 options(warn = 1) # Allow points falling out of range
 ggplot2::ggplot(
-  data = na.omit(df_medians),
+  data = stats::na.omit(df_medians),
   ggplot2::aes(x = mean_durspec, y = median)
 ) + ggplot2::geom_point() +
   ggplot2::geom_smooth(method = "lm", color = "blue", size = 0.5, alpha = 0.25) +

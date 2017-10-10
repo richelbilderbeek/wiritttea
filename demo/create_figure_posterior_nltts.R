@@ -30,7 +30,7 @@ df <- dplyr::select(df, -starts_with("<NA>"))
 testit::assert(names(df) == c("filename", "sti", "ai", "si", "pi1", "pi2"))
 
 print("Remove NAs")
-df <- na.omit(df)
+df <- stats::na.omit(df)
 
 head(df)
 
@@ -55,7 +55,7 @@ safe_mann_whitney <- function(pi1, pi2)
 
 df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
 
-df <- na.omit(df)
+df <- stats::na.omit(df)
 head(df)
 
 svg("~/figure_posterior_distribution_nltts.svg")
@@ -102,7 +102,7 @@ df_low <- data.frame(
 svg("~/figure_posterior_distribution_nltts_low.svg")
 options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
-  na.omit(df_low),
+  stats::na.omit(df_low),
   ggplot2::aes(x = nltt, fill = pi)
 ) +
   ggplot2::geom_histogram(binwidth = 0.001, position = "identity", alpha = 0.25) +
@@ -150,7 +150,7 @@ df_high <- data.frame(
 svg("~/figure_posterior_distribution_nltts_high.svg")
 options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
-  na.omit(df_high),
+  stats::na.omit(df_high),
   ggplot2::aes(x = nltt, fill = pi)
 ) +
   ggplot2::geom_histogram(binwidth = 0.001, position = "identity", alpha = 0.25) +

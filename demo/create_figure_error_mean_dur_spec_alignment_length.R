@@ -116,7 +116,7 @@ svg("~/figure_error_expected_mean_dur_spec_mean_alignment_length.svg")
 options(warn = 1) # Allow points to fall off plot range
 
 ggplot2::ggplot(
-  data = na.omit(df_mean),
+  data = stats::na.omit(df_mean),
   ggplot2::aes(x = mean_durspec, y = mean, color = as.factor(sequence_length))
 ) + ggplot2::geom_point() +
   ggplot2::geom_smooth(method = "lm", size = 0.5) +

@@ -112,7 +112,7 @@ dev.off()
 
 svg("~/figure_error_sampling_representative_mean.svg")
 ggplot2::ggplot(
-  data = na.omit(df_mean),
+  data = stats::na.omit(df_mean),
   ggplot2::aes(x = as.factor(scr), y = mean, fill = sti)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +
@@ -128,7 +128,7 @@ dev.off()
 svg("~/figure_error_sampling_representative_mean_zoom.svg")
 options(warn = 1) # Allow points not to be plotted
 ggplot2::ggplot(
-  data = na.omit(df_mean),
+  data = stats::na.omit(df_mean),
   ggplot2::aes(x = as.factor(scr), y = mean, fill = sti)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +

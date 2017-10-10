@@ -49,7 +49,7 @@ print(paste0("Rows after: ", nrow(df)))
 print("Creating figure")
 svg("~/figure_error_bd.svg")
 ggplot2::ggplot(
-  data = na.omit(df),
+  data = stats::na.omit(df),
   ggplot2::aes(x = nltt_stat)
 ) +
   ggplot2::geom_histogram(binwidth = 0.001) +

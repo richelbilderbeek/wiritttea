@@ -73,7 +73,7 @@ dev.off()
 
 
 svg("~/figure_error_posterior_nltt_si_early.svg")
-early_nltt_stats <- na.omit(nltt_stats)
+early_nltt_stats <- stats::na.omit(nltt_stats)
 early_nltt_stats <- early_nltt_stats[ as.numeric(early_nltt_stats$si) < 100, ]
 ggplot2::ggplot(
   dplyr::sample_n(early_nltt_stats, size = 10000),
@@ -97,7 +97,7 @@ ggplot2::ggplot(
 dev.off()
 
 svg("~/figure_error_posterior_nltt_si_late.svg")
-late_nltt_stats <- na.omit(nltt_stats)
+late_nltt_stats <- stats::na.omit(nltt_stats)
 late_nltt_stats <- late_nltt_stats[ as.numeric(late_nltt_stats$si) >= 100, ]
 ggplot2::ggplot(
   dplyr::sample_n(late_nltt_stats, size = 100000),
@@ -130,7 +130,7 @@ head(nltt_stats)
 tail(nltt_stats)
 
 print("Order by nltt_stat, highest value first")
-df <- na.omit(nltt_stats[with(nltt_stats, order(-nltt_stat)), ])
+df <- stats::na.omit(nltt_stats[with(nltt_stats, order(-nltt_stat)), ])
 head(df)
 filenames <- unique(head(df, 1000)$filename)
 
@@ -174,7 +174,7 @@ df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
 names(df)
 head(df, n = 10)
 
-df <- na.omit(df)
+df <- stats::na.omit(df)
 
 my_colors <- hsv(scales::rescale(sort(unique(df$mean_durspec)), to = c(0.0, 5.0 / 6.0)))
 

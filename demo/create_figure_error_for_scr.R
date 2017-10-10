@@ -54,7 +54,7 @@ head(df, n = 10)
 
 svg("~/figure_140.svg")
 ggplot2::ggplot(
-  data = na.omit(df),
+  data = stats::na.omit(df),
   ggplot2::aes(x = as.factor(scr), y = mean)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +

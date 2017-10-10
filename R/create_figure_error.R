@@ -58,7 +58,8 @@ create_figure_error <- function(
 
   df <- stats::na.omit(df)
 
-  my_colors <- hsv(scales::rescale(sort(unique(df$mean_durspec)), to = c(0.0, 5.0 / 6.0)))
+  my_colors <- grDevices::hsv(
+    scales::rescale(sort(unique(df$mean_durspec)), to = c(0.0, 5.0 / 6.0)))
 
   figure_filename <- svg_filenames[1]
   if (verbose == TRUE) {

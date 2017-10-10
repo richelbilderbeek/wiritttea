@@ -45,7 +45,7 @@ head(df)
 svg("~/figure_ess_distribution.svg")
 
 ggplot2::ggplot(
-  data = na.omit(df),
+  data = stats::na.omit(df),
   ggplot2::aes(x = ess, fill = parameter)) +
   ggplot2::geom_histogram(alpha = 0.5, position = "identity", binwidth = 10) +
   ggplot2::facet_grid(erg ~ scr) +

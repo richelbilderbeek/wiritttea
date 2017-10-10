@@ -37,7 +37,7 @@ df <- dplyr::select(df, -starts_with("<NA>"))
 testit::assert(names(df) == c("filename", "sti", "ai", "si", "pi1", "pi2"))
 
 print("Remove NAs")
-df <- na.omit(df)
+df <- stats::na.omit(df)
 nrow(df)
 
 print("Group")
@@ -66,7 +66,7 @@ names(df)
 
 svg("~/figure_posterior_distribution_likelihoods.svg")
 ggplot2::ggplot(
-  na.omit(df),
+  stats::na.omit(df),
   ggplot2::aes(x = p_value, na.omit = TRUE)
 ) +
   ggplot2::geom_histogram(binwidth = 0.01) +
@@ -108,7 +108,7 @@ df_low <- data.frame(
 svg("~/figure_posterior_distribution_likelihoods_low.svg")
 options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
-  na.omit(df_low),
+  stats::na.omit(df_low),
   ggplot2::aes(x = likelihood, fill = pi)
 ) +
   ggplot2::geom_histogram(binwidth = 0.5, position = "identity", alpha = 0.25) +
@@ -144,7 +144,7 @@ df_high <- data.frame(
 svg("~/figure_posterior_distribution_likelihoods_high.svg")
 options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
-  na.omit(df_high),
+  stats::na.omit(df_high),
   ggplot2::aes(x = likelihood, fill = pi)
 ) +
   ggplot2::geom_histogram(position = "identity", alpha = 0.25) +
