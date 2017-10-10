@@ -1,5 +1,11 @@
 context("create_figure_error_mean_dur_spec_mean")
 
 test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+
+  filename <- tempfile(pattern = "figure_", fileext = ".svg")
+  testthat::expect_false(file.exists(filename))
+
+  testthat::expect_silent(create_figure_error_mean_dur_spec_mean())
+
+  testthat::expect_true(file.exists(filename))
 })
