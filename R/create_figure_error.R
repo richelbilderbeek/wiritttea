@@ -1,10 +1,9 @@
-#' Creates figures 'figure_error.svg', 'figure_error_head.svg'
-#' and 'figure_error_tail.svg', showing the complete distribution of all
+#' Creates figure 'figure_error.svg', showing the complete distribution of all
 #' errors (measured as nLTT statistic)
 #' @param parameters collected parameters, as returned from 'collect_parameters'
 #' @param nltt_stats collected nLTT statistics, as returned from
 #'   'read_collected_nltt_stats', assumes burn-in is already removed
-#' @param svg_filenames the three filenames the figures will be saved as
+#' @param filename the name of the file the figures will be saved as
 #' @param verbose if set to TRUE, the function prints more information
 #' @examples
 #'   parameters <- read_collected_parameters()
@@ -12,7 +11,7 @@
 #'   create_figure_error(
 #'     parameters = parameters,
 #'     nltt_stats = nltt_stats,
-#'     filenames = paste0(path.expand("~"), "/figure_error_.svg")
+#'     filename = paste0(path.expand("~"), "/figure_error.svg")
 #'   )
 #' @export
 #' @author Richel Bilderbeek
@@ -27,7 +26,6 @@ create_figure_error <- function(
     print("Add mean duration of speciation to parameters")
   }
 
-  filename <- NULL; rm(filename) # nolint, should fix warning: no visible binding for global variable
   mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
   nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
 

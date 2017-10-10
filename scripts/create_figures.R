@@ -5,6 +5,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 if (1 == 2) {
   args <- c("/home/richel/wirittte_data", "stub")
+  args <- c("/home/richel/wirittte_data", "20171009")
 }
 
 if (length(args) < 1) {
@@ -102,6 +103,7 @@ print("create_figure_error_alignment_length_mean")
 wiritttea::create_figure_error_alignment_length_mean(
   parameters = parameters,
   nltt_stats = nltt_stats,
+  esses = esses,
   filename = paste0(source_superfolder, "/figure_error_alignment_length_", date, ".svg")
 )
 

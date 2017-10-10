@@ -2,8 +2,7 @@
 % Please edit documentation in R/create_figure_error.R
 \name{create_figure_error}
 \alias{create_figure_error}
-\title{Creates figures 'figure_error.svg', 'figure_error_head.svg'
-and 'figure_error_tail.svg', showing the complete distribution of all
+\title{Creates figure 'figure_error.svg', showing the complete distribution of all
 errors (measured as nLTT statistic)}
 \usage{
 create_figure_error(parameters, nltt_stats, filename, verbose = FALSE)
@@ -14,13 +13,12 @@ create_figure_error(parameters, nltt_stats, filename, verbose = FALSE)
 \item{nltt_stats}{collected nLTT statistics, as returned from
 'read_collected_nltt_stats', assumes burn-in is already removed}
 
-\item{verbose}{if set to TRUE, the function prints more information}
+\item{filename}{the name of the file the figures will be saved as}
 
-\item{svg_filenames}{the three filenames the figures will be saved as}
+\item{verbose}{if set to TRUE, the function prints more information}
 }
 \description{
-Creates figures 'figure_error.svg', 'figure_error_head.svg'
-and 'figure_error_tail.svg', showing the complete distribution of all
+Creates figure 'figure_error.svg', showing the complete distribution of all
 errors (measured as nLTT statistic)
 }
 \examples{
@@ -29,7 +27,7 @@ errors (measured as nLTT statistic)
   create_figure_error(
     parameters = parameters,
     nltt_stats = nltt_stats,
-    filenames = paste0(path.expand("~"), "/figure_error_.svg")
+    filename = paste0(path.expand("~"), "/figure_error.svg")
   )
 }
 \author{
