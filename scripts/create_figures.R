@@ -110,6 +110,7 @@ print("create_figure_error_alignment_length_mean")
 wiritttea::create_figure_error_alignment_length_mean(
   parameters = parameters,
   nltt_stats = nltt_stats,
+  esses = esses,
   filename = paste0(source_superfolder, "/figure_error_alignment_length_mean_", date, ".svg")
 )
 
@@ -118,6 +119,7 @@ print("create_figure_error_alignment_length_median")
 wiritttea::create_figure_error_alignment_length_median(
   parameters = parameters,
   nltt_stats = nltt_stats,
+  esses = esses,
   filename = paste0(source_superfolder, "/figure_error_alignment_length_median_", date, ".svg")
 )
 
