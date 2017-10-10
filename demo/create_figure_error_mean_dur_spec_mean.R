@@ -55,11 +55,11 @@ df_means <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TR
 df_medians <- merge(x = parameters, y = nltt_stat_medians, by = "filename", all = TRUE)
 
 # Calculate mean BD error
-testit::assert(max(na.omit(df_means$scr)) == max(na.omit(df_medians$scr)))
-scr_bd <- max(na.omit(df_means$scr))
+testit::assert(max(stats::na.omit(df_means$scr)) == max(stats::na.omit(df_medians$scr)))
+scr_bd <- max(stats::na.omit(df_means$scr))
 
-mean_bd_error <- mean(na.omit(df_means[ df_means$scr == scr_bd, ]$mean))
-median_bd_error <- mean(na.omit(df_medians[ df_medians$scr == scr_bd, ]$median))
+mean_bd_error <- mean(stats::na.omit(df_means[ df_means$scr == scr_bd, ]$mean))
+median_bd_error <- mean(stats::na.omit(df_medians[ df_medians$scr == scr_bd, ]$median))
 
 
 print("Creating figure")

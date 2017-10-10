@@ -29,6 +29,10 @@ create_figure_error <- function(
     print("Add mean duration of speciation to parameters")
   }
 
+  filename <- NULL; rm(filename) # nolint, should fix warning: no visible binding for global variable
+  mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(
     eris = parameters$eri,
     scrs = parameters$scr,
@@ -39,8 +43,6 @@ create_figure_error <- function(
     print("Prepare parameters for merge")
   }
 
-  # parameters$filename <- row.names(parameters)
-  # parameters$filename <- as.factor(parameters$filename)
   parameters <- subset(parameters, select = c(filename, mean_durspec) )
 
   if (verbose == TRUE) {

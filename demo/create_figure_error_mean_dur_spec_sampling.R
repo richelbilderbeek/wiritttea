@@ -58,10 +58,10 @@ print("Creating figure")
 svg("~/figure_error_expected_mean_dur_spec_sampling.svg")
 set.seed(42)
 n_sampled <- 5000
-n_data_points <- nrow(na.omit(df))
+n_data_points <- nrow(stats::na.omit(df))
 options(warn = 1) # Allow points not to be plotted
 ggplot2::ggplot(
-  data = dplyr::sample_n(na.omit(df), size = n_sampled), # Out of 7M
+  data = dplyr::sample_n(stats::na.omit(df), size = n_sampled), # Out of 7M
   ggplot2::aes(x = mean_durspec, y = nltt_stat, color = as.factor(sti))
 ) + ggplot2::geom_jitter(width = 0.01, alpha = 0.2) +
   ggplot2::geom_smooth(method = "lm", size = 0.5, alpha = 0.25) +

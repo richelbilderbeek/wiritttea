@@ -50,7 +50,7 @@ head(nltt_stats)
 
 svg("~/figure_error_posterior_nltt_si.svg")
 ggplot2::ggplot(
-  dplyr::sample_n(na.omit(nltt_stats), size = 100000),
+  dplyr::sample_n(stats::na.omit(nltt_stats), size = 100000),
   ggplot2::aes(x = as.numeric(si), y = nltt_stat)) +
   ggplot2::geom_point(alpha = 0.01) +
   ggplot2::geom_smooth(method = "lm") +
@@ -161,7 +161,7 @@ RBeast::remove_burn_in
 plot(head(df$si, 100))
 head(df)
 tail(df)
-tail(sort(na.omit(nltt_stats$nltt_stat)), 5)
+tail(sort(stats::na.omit(nltt_stats$nltt_stat)), 5)
 
 print("Prepare nLTT stats for merge")
 nltt_stats <- subset(nltt_stats, select = c(filename, nltt_stat) )

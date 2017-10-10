@@ -65,9 +65,9 @@ names(df_mean)
 head(df_mean, n = 10)
 
 # Calculate mean BD error
-scr_bd <- max(na.omit(df$scr))
-mean_bd_error_1000  <- mean(na.omit(df[ df$scr == scr_bd & df$sequence_length == 1000 , ]$nltt_stat))
-mean_bd_error_10000 <- mean(na.omit(df[ df$scr == scr_bd & df$sequence_length == 10000, ]$nltt_stat))
+scr_bd <- max(stats::na.omit(df$scr))
+mean_bd_error_1000  <- mean(stats::na.omit(df[ df$scr == scr_bd & df$sequence_length == 1000 , ]$nltt_stat))
+mean_bd_error_10000 <- mean(stats::na.omit(df[ df$scr == scr_bd & df$sequence_length == 10000, ]$nltt_stat))
 
 print("Creating figure")
 
@@ -76,12 +76,12 @@ nltt_stat_cutoff <- 0.1
 svg("~/figure_error_expected_mean_dur_spec_alignment_length.svg")
 set.seed(42)
 n_sampled <- 5000
-n_data_points <- nrow(na.omit(df))
+n_data_points <- nrow(stats::na.omit(df))
 
 options(warn = 1) # Allow points not to be plotted
 
 ggplot2::ggplot(
-  data = dplyr::sample_n(na.omit(df), size = n_sampled), # Out of 7M
+  data = dplyr::sample_n(stats::na.omit(df), size = n_sampled), # Out of 7M
   ggplot2::aes(x = mean_durspec, y = nltt_stat, color = as.factor(sequence_length))
 ) + ggplot2::geom_jitter(width = 0.01, alpha = 0.2) +
   ggplot2::geom_smooth(method = "lm") +

@@ -80,7 +80,7 @@ sample_size <- 500000
 
 svg("~/figure_error_sampling_representative.svg")
 ggplot2::ggplot(
-  data = dplyr::sample_n(na.omit(df), size = sample_size),
+  data = dplyr::sample_n(stats::na.omit(df), size = sample_size),
   ggplot2::aes(x = as.factor(scr), y = nltt_stat, fill = sti)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +
@@ -97,7 +97,7 @@ svg("~/figure_error_sampling_representative_zoom.svg")
 set.seed(42)
 options(warn = 1) # Allow points not to be plotted
 ggplot2::ggplot(
-  data = dplyr::sample_n(na.omit(df), size = sample_size),
+  data = dplyr::sample_n(stats::na.omit(df), size = sample_size),
   ggplot2::aes(x = as.factor(scr), y = nltt_stat, fill = sti)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +

@@ -75,16 +75,28 @@ wiritttea::create_figure_error(
 
 wiritttea::create_figure_acceptance_mcmc_operators(
   operators = operators,
-  filename = paste0(source_superfolder, "/figure_acceptance_mcmc_operators", date, ".svg")
+  filename = paste0(source_superfolder, "/figure_acceptance_mcmc_operators_", date, ".svg")
 )
 
 wiritttea::create_figure_alignment_qualities(
   alignments = alignments,
-  filename = paste0(source_superfolder, "/figure_alignment_qualities", date, ".svg")
+  filename = paste0(source_superfolder, "/figure_alignment_qualities_", date, ".svg")
 )
 
 wiritttea::create_figure_error_alignment_length(
   parameters = parameters,
   nltt_stats = nltt_stats,
-  filename = paste0(source_superfolder, "/figure_error_alignment_length", date, ".svg")
+  filename = paste0(source_superfolder, "/figure_error_alignment_length_", date, ".svg")
+)
+
+wiritttea::create_figure_error_alignment_length_mean(
+  parameters = parameters,
+  nltt_stats = nltt_stats,
+  filename = paste0(source_superfolder, "/figure_error_alignment_length_mean_", date, ".svg")
+)
+
+wiritttea::create_figure_error_alignment_length_median(
+  parameters = parameters,
+  nltt_stats = nltt_stats,
+  filename = paste0(source_superfolder, "/figure_error_alignment_length_median_", date, ".svg")
 )

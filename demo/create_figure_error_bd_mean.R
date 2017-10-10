@@ -51,7 +51,7 @@ head(df, n = 10)
 print("Only keep rows with the highest SCR (as those are a BD model)")
 print(paste0("Rows before: ", nrow(df)))
 dplyr::count(df, scr)
-scr_bd <- max(na.omit(df$scr))
+scr_bd <- max(stats::na.omit(df$scr))
 df <- df[ df$scr == scr_bd, ]
 print(paste0("Rows after: ", nrow(df)))
 

@@ -65,7 +65,7 @@ names(df_mean)
 
 # Calculate median ESS
 names(esses)
-median_ess <- median(na.omit(esses$treeLikelihood))
+median_ess <- median(stats::na.omit(esses$treeLikelihood))
 
 # Calculate the types
 esses$ess_type <- esses$treeLikelihood > median_ess
@@ -116,12 +116,12 @@ dev.off()
 svg("~/figure_error_expected_mean_dur_spec_low_high_ess.svg")
 set.seed(42)
 n_sampled <- 5000
-n_data_points <- nrow(na.omit(df))
+n_data_points <- nrow(stats::na.omit(df))
 nltt_stat_cutoff <- 0.12
 
 options(warn = 1) # Allow points not to be plotted
 ggplot2::ggplot(
-  data = dplyr::sample_n(na.omit(df), size = n_sampled), # Out of 7M
+  data = dplyr::sample_n(stats::na.omit(df), size = n_sampled), # Out of 7M
   ggplot2::aes(x = mean_durspec, y = nltt_stat, color = ess_type)
 ) + ggplot2::geom_jitter(width = 0.01, alpha = 0.2) +
   ggplot2::geom_smooth(method = "lm") +
