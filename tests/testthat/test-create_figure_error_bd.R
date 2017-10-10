@@ -1,12 +1,14 @@
 context("create_figure_error_bd")
 
-test_that("multiplication works", {
+test_that("works", {
 
   filename <- tempfile(pattern = "figure_", fileext = ".svg")
   testthat::expect_false(file.exists(filename))
 
   testthat::expect_silent(
-    create_figure_error_bd(
+    wiritttea::create_figure_error_bd(
+      parameters = wiritttea::read_collected_parameters(),
+      nltt_stats = wiritttea::read_collected_nltt_stats(burn_in_fraction = 0.2),
       filename = filename
     )
   )

@@ -4,7 +4,7 @@
 #' @param filename name of the file the figure will be saved to
 create_figure_ess_distribution <- function(
   parameters,
-  df_esses,
+  esses,
   filename
 ) {
 
@@ -15,19 +15,19 @@ create_figure_ess_distribution <- function(
   # parameters$filename <- as.factor(parameters$filename)
 
   # Melt data, convert to long form
-  df_esses_long <- reshape2::melt(df_esses,
+  esses_long <- reshape2::melt(esses,
     id = c("filename", "sti", "ai", "pi")
   )
-  testit::assert(is.factor(df_esses_long$variable))
+  testit::assert(is.factor(esses_long$variable))
 
-  df_esses_long <- dplyr::rename(df_esses_long, parameter = variable)
-  df_esses_long <- dplyr::rename(df_esses_long, ess = value)
-  head(df_esses_long)
+  esses_long <- dplyr::rename(esses_long, parameter = variable)
+  esses_long <- dplyr::rename(esses_long, ess = value)
+  head(esses_long)
 
   print("Connect the ESSes and parameters")
   testit::assert("filename" %in% names(parameters))
-  testit::assert("filename" %in% names(df_esses))
-  df <- merge(x = parameters, y = df_esses_long, by = "filename", all = TRUE)
+  testit::assert("filename" %in% names(esses))
+  df <- merge(x = parameters, y = esses_long, by = "filename", all = TRUE)
   head(df)
 
   svg("~/figure_ess_distribution.svg")

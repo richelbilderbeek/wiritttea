@@ -7,6 +7,8 @@ test_that("multiplication works", {
 
   testthat::expect_silent(
     create_figure_error_mean_dur_spec_mean_sampling(
+      parameters = wiritttea::read_collected_parameters(),
+      nltt_stats = wiritttea::read_collected_nltt_stats(burn_in_fraction = 0.2),
       filename = filename
     )
   )

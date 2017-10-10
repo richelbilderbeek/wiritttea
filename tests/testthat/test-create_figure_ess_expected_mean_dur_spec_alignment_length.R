@@ -6,7 +6,9 @@ test_that("multiplication works", {
   testthat::expect_false(file.exists(filename))
 
   testthat::expect_silent(
-    create_figure_ess_expected_mean_dur_spec_alignment_length(
+    wiritttea::create_figure_ess_expected_mean_dur_spec_alignment_length(
+      parameters = wiritttea::read_collected_parameters(),
+      esses = wiritttea::read_collected_esses(),
       filename = filename
     )
   )

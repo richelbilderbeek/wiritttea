@@ -1,12 +1,14 @@
 context("create_figure_error_low_high_ess")
 
-test_that("multiplication works", {
+test_that("works", {
 
   filename <- tempfile(pattern = "figure_", fileext = ".svg")
   testthat::expect_false(file.exists(filename))
 
   testthat::expect_silent(
-    create_figure_error_low_high_ess(
+    wiritttea::create_figure_error_low_high_ess(
+      parameters = wiritttea::read_collected_parameters(),
+      esses = wiritttea::read_collected_esses(),
       filename = filename
     )
   )
