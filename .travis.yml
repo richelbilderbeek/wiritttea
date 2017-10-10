@@ -5,6 +5,7 @@ dist: trusty
 r_packages:
   - dplyr
   - tidyr
+  - latex2exp
 
 r_github_packages:
   - jimhester/covr
