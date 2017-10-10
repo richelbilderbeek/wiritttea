@@ -4,10 +4,10 @@
 \alias{create_figure_alignment_qualities}
 \title{Create figure 'alignment_qualities'}
 \usage{
-create_figure_alignment_qualities(df_alignments, filename)
+create_figure_alignment_qualities(alignments, filename)
 }
 \arguments{
-\item{df_alignments}{data frame with alignments, as returned by 'read_collected_alignments'}
+\item{alignments}{data frame with alignments, as returned by 'read_collected_alignments'}
 
 \item{filename}{the name of the file the figure is saved to}
 }

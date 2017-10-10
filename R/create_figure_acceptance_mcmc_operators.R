@@ -1,16 +1,16 @@
 #' Create the figure 'Operator acceptances'
-#' @param df_operators data frame with the collected operator acceptances
+#' @param operators data frame with the collected operator acceptances
 #' @param filename the name of the file the figure is saved to
 #' @return nothing, it saves a file
 #' @author Richel Bilderbeek
 #' @export
 create_figure_acceptance_mcmc_operators <- function(
-  df_operators,
+  operators,
   filename
 ) {
   optimum_acceptance_level <- 0.234
   ggplot2::ggplot(
-    stats::na.omit(df_operators),
+    stats::na.omit(operators),
     ggplot2::aes(x = operator, y = p, fill = operator)
   ) +
     ggplot2::geom_boxplot() +

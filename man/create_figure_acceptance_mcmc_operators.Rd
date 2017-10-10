@@ -4,10 +4,10 @@
 \alias{create_figure_acceptance_mcmc_operators}
 \title{Create the figure 'Operator acceptances'}
 \usage{
-create_figure_acceptance_mcmc_operators(df_operators, filename)
+create_figure_acceptance_mcmc_operators(operators, filename)
 }
 \arguments{
-\item{df_operators}{data frame with the collected operator acceptances}
+\item{operators}{data frame with the collected operator acceptances}
 
 \item{filename}{the name of the file the figure is saved to}
 }

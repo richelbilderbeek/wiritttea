@@ -7,6 +7,7 @@
 #'   csv_filename <- wiritttea::find_path("collect_files_parameters.csv")
 #'   df <- wiritttea::read_collected_parameters(csv_filename)
 #'   testit::assert(nrow(df) == 4)
+#'   testit::assert("filename" %in% names(df))
 #'   testit::assert("rng_seed" %in% names(df))
 #'   testit::assert("sirg" %in% names(df))
 #'   testit::assert("siri" %in% names(df))
@@ -33,6 +34,18 @@ read_collected_parameters <- function(
     stringsAsFactors = FALSE,
     row.names = 1
   )
+
+  # Backwards compatibility: filename used to be stored as a rowname
+  filenames_present <- "filename" %in% names(df)
+  if (filenames_present == FALSE) {
+    df$filename <- row.names(df)
+    df$filename <- as.factor(df$filename)
+  }
+  filenames_present <- "filename" %in% names(df)
+  testit::assert(filenames_present == TRUE)
+
+  # Backwards compatibility: nspp used to be stored in mcmc_chainlength, the
+  #   latter assuming a sampling interval of one thousand
   if ("mcmc_chainlength" %in%  names(df)) {
     df$mcmc_chainlength <- df$mcmc_chainlength / 1000
     df <- plyr::rename(df, c("mcmc_chainlength" = "nspp"))

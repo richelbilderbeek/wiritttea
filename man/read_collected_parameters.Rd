@@ -20,6 +20,7 @@ Reads the file with the collected parameters
   csv_filename <- wiritttea::find_path("collect_files_parameters.csv")
   df <- wiritttea::read_collected_parameters(csv_filename)
   testit::assert(nrow(df) == 4)
+  testit::assert("filename" \%in\% names(df))
   testit::assert("rng_seed" \%in\% names(df))
   testit::assert("sirg" \%in\% names(df))
   testit::assert("siri" \%in\% names(df))

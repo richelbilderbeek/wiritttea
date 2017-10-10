@@ -5,7 +5,7 @@
 \title{Create figure 'error_alignment_length'}
 \usage{
 create_figure_error_alignment_length(parameters, nltt_stats, filename,
-  n_sampled = nrow(stats::na.omit(nltt_stats)))
+  n_sampled = NA)
 }
 \arguments{
 \item{parameters}{parameters, as returned by read_collected_parameters}
@@ -14,7 +14,7 @@ create_figure_error_alignment_length(parameters, nltt_stats, filename,
 
 \item{filename}{name of the file the figure is saved to}
 
-\item{the}{number of nLTT statistics sampled}
+\item{n_sampled, }{the number of nLTT statistics sampled, NA denotes all}
 }
 \value{
 nothing, only creates a file

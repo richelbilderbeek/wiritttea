@@ -1,20 +1,20 @@
 #' Create figure 'alignment_qualities'
-#' @param df_alignments data frame with alignments, as returned by 'read_collected_alignments'
+#' @param alignments data frame with alignments, as returned by 'read_collected_alignments'
 #' @param filename the name of the file the figure is saved to
 #' @return nothing, it saves a file
 #' @author Richel Bilderbeek
 #' @export
 create_figure_alignment_qualities <- function(
-  df_alignments,
+  alignments,
   filename
 ) {
 
   df <- data.frame(
     status = c("ok", "zero", "na"),
     n = c(
-      sum(df_alignments$n_alignments_ok),
-      sum(df_alignments$n_alignments_zeroes),
-      sum(df_alignments$n_alignments_na)
+      sum(alignments$n_alignments_ok),
+      sum(alignments$n_alignments_zeroes),
+      sum(alignments$n_alignments_na)
     )
   )
   df$status <- as.factor(df$status)

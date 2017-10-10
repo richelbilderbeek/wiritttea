@@ -1,5 +1,5 @@
 library(wiritttea)
-options(warn = 2)
+options(warn = 1)
 
 args <- commandArgs(trailingOnly = TRUE)
 
@@ -62,9 +62,10 @@ if (!file.exists(operators_filename)) {
 
 print("Reading files")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
+rownames(parameters)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
-df_operators <- wiritttea::read_collected_operators(operators_filename)
-df_alignments <- wiritttea::read_collected_alignments(alignments_filename)
+operators <- wiritttea::read_collected_operators(operators_filename)
+alignments <- wiritttea::read_collected_alignments(alignments_filename)
 
 print("Create figures")
 wiritttea::create_figure_error(
@@ -74,11 +75,17 @@ wiritttea::create_figure_error(
 )
 
 wiritttea::create_figure_acceptance_mcmc_operators(
-  df_operators = df_operators,
+  operators = operators,
   filename = paste0(source_superfolder, "/figure_acceptance_mcmc_operators", date, ".svg")
 )
 
 wiritttea::create_figure_alignment_qualities(
-  df_operators = df_operators,
+  alignments = alignments,
   filename = paste0(source_superfolder, "/figure_alignment_qualities", date, ".svg")
+)
+
+wiritttea::create_figure_error_alignment_length(
+  parameters = parameters,
+  nltt_stats = nltt_stats,
+  filename = paste0(source_superfolder, "/figure_error_alignment_length", date, ".svg")
 )

@@ -2,7 +2,7 @@
 #' @param parameters parameters, as returned by read_collected_parameters
 #' @param nltt_stats nLTT stats, as returned by read_collected_nltt_stats
 #' @param filename name of the file the figure is saved to
-#' @param the number of nLTT statistics sampled
+#' @param n_sampled, the number of nLTT statistics sampled, NA denotes all
 #' @return nothing, only creates a file
 #' @export
 #' @author Richel Bilderbeek
@@ -10,7 +10,7 @@ create_figure_error_alignment_length <- function(
   parameters,
   nltt_stats,
   filename,
-  n_sampled = nrow(stats::na.omit(nltt_stats))
+  n_sampled = NA
 ) {
 
 # # Create 'figure_error_alignment_length'
@@ -63,6 +63,10 @@ create_figure_error_alignment_length <- function(
   df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
 
   n_data <- nrow(na.omit(df))
+
+  if (is.na(n_sampled)) {
+    n_sampled <- n_data
+  }
 
   ggplot2::ggplot(
     data = dplyr::sample_n(na.omit(df), n_sampled),
