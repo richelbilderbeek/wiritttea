@@ -24,6 +24,7 @@ Requires: adephylo,
     tools,
     TreeSim
 Imports:
+    latex2exp,
     Matrix,
     nLTT,
     PBD,

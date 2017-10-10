@@ -1,3 +1,4 @@
+#' Create figure 'alignment_qualities'
 #' @param df_alignments data frame with alignments, as returned by 'read_collected_alignments'
 #' @param filename the name of the file the figure is saved to
 #' @return nothing, it saves a file
