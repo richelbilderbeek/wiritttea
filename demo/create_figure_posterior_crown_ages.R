@@ -74,14 +74,15 @@ n_sampled <- 500000
 print(paste0("Using a sample of ", n_sampled, " of ", nrow(posterior_crown_ages), " observations"))
 
 print("Sample some of the crown_ages")
-library(dplyr)
 set.seed(42)
 some_posterior_crown_ages <- dplyr::sample_n(posterior_crown_ages, size = n_sampled)
 head(some_posterior_crown_ages)
 
 print("Split posterior crown_ages per posterior index")
 testit::assert("pi" %in% names(posterior_crown_ages))
-df <- tidyr::spread(some_posterior_crown_ages, pi, crown_age) %>% rename(pi1 = "1", pi2 = "2")
+`%>%` <- dplyr::`%>%`
+df <- tidyr::spread(some_posterior_crown_ages, pi, crown_age)
+  %>% dplyr::rename(pi1 = "1", pi2 = "2")
 
 print("Remove NA column")
 df <- dplyr::select(df, -starts_with("<NA>"))

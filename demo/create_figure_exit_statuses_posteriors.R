@@ -12,12 +12,12 @@ df_esses <- wiritttea::read_collected_esses(esses_filename)
 head(df_esses)
 
 # How many NA's?
-library(dplyr)
 
 is_ok <- function(x) {
   !is.na(x)
 }
 
+`%>%` <- dplyr::`%>%`
 df_esses_ok <- df_esses  %>% count(is_ok(posterior))
 
 names(df_esses_ok) <- c("ok", "n")

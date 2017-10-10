@@ -20,7 +20,7 @@ nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_
 names(nltt_stats)
 
 testit::assert("pi" %in% names(nltt_stats))
-library(dplyr)
+`%>%` <- dplyr::`%>%`
 
 print("Split nLTT stats of first and second posterior")
 df <- tidyr::spread(nltt_stats, pi, nltt_stat) %>% rename(pi1 = "1", pi2 = "2")

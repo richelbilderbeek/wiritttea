@@ -29,8 +29,8 @@ parameters <- wiritttea::read_collected_parameters(parameters_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 
 print("Take the mean of the nLTT stats")
-library(dplyr)
-nltt_stat_means <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
+`%>%` <- dplyr::`%>%`
+nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
        summarise(mean=mean(nltt_stat), sd=sd(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))

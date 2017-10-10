@@ -33,8 +33,8 @@ parameters$mean_durspec <- PBD::pbd_mean_durspecs(
 )
 
 # Take the mean of the nLTT stats
-library(dplyr)
-nltt_stat_means <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
+`%>%` <- dplyr::`%>%`
+nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
        summarise(mean=mean(nltt_stat), sd=sd(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))

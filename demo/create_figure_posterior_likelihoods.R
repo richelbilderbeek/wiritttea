@@ -23,14 +23,14 @@ n_sampled <- 500000
 print(paste0("Using a sample of ", n_sampled, " of ", nrow(posterior_likelihoods), " observations"))
 
 print("Sample some of the likelihoods")
-library(dplyr)
 set.seed(42)
 some_posterior_likelihoods <- dplyr::sample_n(posterior_likelihoods, size = n_sampled)
 head(some_posterior_likelihoods)
 
 print("Split posterior likelihoods per posterior index")
 testit::assert("pi" %in% names(posterior_likelihoods))
-df <- tidyr::spread(some_posterior_likelihoods, pi, likelihood) %>% rename(pi1 = "1", pi2 = "2")
+`%>%` <- dplyr::`%>%`
+df <- tidyr::spread(some_posterior_likelihoods, pi, likelihood) %>% dplyr::rename(pi1 = "1", pi2 = "2")
 
 print("Remove NA column")
 df <- dplyr::select(df, -starts_with("<NA>"))

@@ -14,7 +14,7 @@ create_figure_error_alignment_length_median <- function(
 
   `%>%` <- dplyr::`%>%`
 
-  nltt_stat_medians <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
+  nltt_stat_medians <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
          summarise(median = median(nltt_stat))
 
   testit::assert(all(names(nltt_stat_medians)

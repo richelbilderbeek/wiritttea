@@ -14,7 +14,7 @@ create_figure_error_alignment_length_mean <- function(
 
   `%>%` <- dplyr::`%>%`
 
-  nltt_stat_means <- nltt_stats %>% group_by(filename, sti, ai, pi) %>%
+  nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
          summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
 
   testit::assert(all(names(nltt_stat_means)
