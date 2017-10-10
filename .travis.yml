@@ -4,8 +4,9 @@ dist: trusty
 
 r_packages:
   - dplyr
-  - tidyr
   - latex2exp
+  - svglite
+  - tidyr
 
 r_github_packages:
   - jimhester/covr
