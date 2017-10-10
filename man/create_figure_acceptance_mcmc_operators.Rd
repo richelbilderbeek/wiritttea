@@ -4,12 +4,12 @@
 \alias{create_figure_acceptance_mcmc_operators}
 \title{Create the figure 'Operator acceptances'}
 \usage{
-create_figure_acceptance_mcmc_operators(df_operators, svg_filename)
+create_figure_acceptance_mcmc_operators(df_operators, filename)
 }
 \arguments{
 \item{df_operators}{data frame with the collected operator acceptances}
 
-\item{svg_filename}{the name of the file the figure is saved to}
+\item{filename}{the name of the file the figure is saved to}
 }
 \value{
 nothing, it saves a file

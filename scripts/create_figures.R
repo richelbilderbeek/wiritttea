@@ -35,6 +35,8 @@ if (dir.exists(source_superfolder)) {
 # Checking if all files exist
 nltt_stats_filename <- paste0(source_superfolder, "/nltt_stats_", date, ".csv")
 parameters_filename <- paste0(source_superfolder, "/parameters_", date, ".csv")
+alignments_filename <- paste0(source_superfolder, "/alignments_", date, ".csv")
+operators_filename <- paste0(source_superfolder, "/operators_", date, ".csv")
 
 if (!file.exists(parameters_filename)) {
   stop(
@@ -48,10 +50,21 @@ if (!file.exists(nltt_stats_filename)) {
     "please run collect_nltt_stats")
 }
 
+if (!file.exists(alignments_filename)) {
+  stop("File '", alignments_filename, "' not found, ",
+    "please run collect_alignments")
+}
+
+if (!file.exists(operators_filename)) {
+  stop("File '", operators_filename, "' not found, ",
+    "please run collect_operators")
+}
+
 print("Reading files")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 df_operators <- wiritttea::read_collected_operators(operators_filename)
+df_alignments <- wiritttea::read_collected_alignments(alignments_filename)
 
 print("Create figures")
 wiritttea::create_figure_error(
@@ -62,5 +75,10 @@ wiritttea::create_figure_error(
 
 wiritttea::create_figure_acceptance_mcmc_operators(
   df_operators = df_operators,
-  svg_filename = paste0(source_superfolder, "/figure__acceptance_mcmc_operators.svg")
+  filename = paste0(source_superfolder, "/figure_acceptance_mcmc_operators", date, ".svg")
+)
+
+wiritttea::create_figure_alignment_qualities(
+  df_operators = df_operators,
+  filename = paste0(source_superfolder, "/figure_alignment_qualities", date, ".svg")
 )
