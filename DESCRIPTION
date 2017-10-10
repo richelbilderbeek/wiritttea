@@ -20,6 +20,7 @@ Requires:
     PBD,
     phangorn,
     phytools,
+    scales,
     svglite,
     testit,
     tidyr,
@@ -34,6 +35,7 @@ Imports:
     phytools,
     RBeast,
     ribir,
+    scales,
     svglite,
     wiritttes
 Suggests:

@@ -5,6 +5,7 @@ dist: trusty
 r_packages:
   - dplyr
   - latex2exp
+  - scales
   - svglite
   - tidyr
 
