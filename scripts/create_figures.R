@@ -80,7 +80,7 @@ print("create_figure_error")
 wiritttea::create_figure_error(
   parameters = parameters,
   nltt_stats = nltt_stats,
-  svg_filenames = paste0(source_superfolder, "/figure_error_", date, c("","_head", "_tail"), ".svg")
+  filename = paste0(source_superfolder, "/figure_error_", date, ".svg")
 )
 
 print("create_figure_acceptance_mcmc_operators")
