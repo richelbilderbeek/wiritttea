@@ -12,6 +12,12 @@ create_figure_error_alignment_length_mean <- function(
   filename
 ) {
 
+  sirg <- NULL; rm(sirg) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  erg <- NULL; rm(erg) # nolint, should fix warning: no visible binding for global variable
+  sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+
   `%>%` <- dplyr::`%>%`
 
   nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
