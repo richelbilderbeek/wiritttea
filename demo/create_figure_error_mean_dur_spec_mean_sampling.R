@@ -41,8 +41,8 @@ head(nltt_stat_means, n = 10)
 nrow(nltt_stat_means)
 
 # Prepare parameters for merge
-parameters$filename <- row.names(parameters)
-parameters$filename <- as.factor(parameters$filename)
+# parameters$filename <- row.names(parameters)
+# parameters$filename <- as.factor(parameters$filename)
 
 # Only select the columns we need
 names(parameters)

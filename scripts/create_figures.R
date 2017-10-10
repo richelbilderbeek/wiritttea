@@ -62,7 +62,6 @@ if (!file.exists(operators_filename)) {
 
 print("Reading files")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
-rownames(parameters)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 operators <- wiritttea::read_collected_operators(operators_filename)
 alignments <- wiritttea::read_collected_alignments(alignments_filename)

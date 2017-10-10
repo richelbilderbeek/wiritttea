@@ -39,8 +39,8 @@ create_figure_error <- function(
     print("Prepare parameters for merge")
   }
 
-  parameters$filename <- row.names(parameters)
-  parameters$filename <- as.factor(parameters$filename)
+  # parameters$filename <- row.names(parameters)
+  # parameters$filename <- as.factor(parameters$filename)
   parameters <- subset(parameters, select = c(filename, mean_durspec) )
 
   if (verbose == TRUE) {

@@ -48,8 +48,8 @@ create_figure_error_alignment_length <- function(
 
 
   # Prepare parameters for merge
-  parameters$filename <- row.names(parameters)
-  parameters$filename <- as.factor(parameters$filename)
+  # parameters$filename <- row.names(parameters)
+  # parameters$filename <- as.factor(parameters$filename)
 
   # Select only those columns that we need
   names(parameters)

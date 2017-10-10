@@ -20,6 +20,7 @@ Requires:
     PBD,
     phangorn,
     phytools,
+    svglite,
     testit,
     tidyr,
     tools,

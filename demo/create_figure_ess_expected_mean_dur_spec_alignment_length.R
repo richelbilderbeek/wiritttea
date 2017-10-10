@@ -32,8 +32,8 @@ parameters$mean_durspec <- PBD::pbd_mean_durspecs(
 )
 
 # Prepare parameters for merge
-parameters$filename <- row.names(parameters)
-parameters$filename <- as.factor(parameters$filename)
+# parameters$filename <- row.names(parameters)
+# parameters$filename <- as.factor(parameters$filename)
 
 # Only select the columns we need
 names(parameters)

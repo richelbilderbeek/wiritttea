@@ -37,9 +37,9 @@ testit::assert(all(names(nltt_stat_means)
 head(nltt_stat_means, n = 10)
 nrow(nltt_stat_means)
 
-print("Prepare parameters for merge")
-parameters$filename <- row.names(parameters)
-parameters$filename <- as.factor(parameters$filename)
+# print("Prepare parameters for merge")
+# parameters$filename <- row.names(parameters)
+# parameters$filename <- as.factor(parameters$filename)
 
 print("Connect the mean nLTT stats and parameters")
 testit::assert("filename" %in% names(parameters))

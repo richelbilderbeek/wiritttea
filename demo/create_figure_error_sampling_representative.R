@@ -32,10 +32,12 @@ print("Add mean duration of speciation to parameters")
 #  siris = parameters$siri
 #)
 
-print("Prepare parameters for merge and select only those columns needed")
-parameters$filename <- row.names(parameters)
-parameters$filename <- as.factor(parameters$filename)
-names(parameters)
+# print("Prepare parameters for merge")
+# parameters$filename <- row.names(parameters)
+# parameters$filename <- as.factor(parameters$filename)
+# names(parameters)
+
+print("Select only those columns needed")
 parameters <- dplyr::select(parameters, c(filename, sirg, scr, erg))
 #parameters <- dplyr::select(parameters, c(filename, sirg, scr, erg, mean_durspec))
 

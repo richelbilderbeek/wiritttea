@@ -38,9 +38,9 @@ parameters$mean_durspec <- PBD::pbd_mean_durspecs(
   siris = parameters$siri
 )
 
-print("Prepare parameters for merge")
-parameters$filename <- row.names(parameters)
-parameters$filename <- as.factor(parameters$filename)
+# print("Prepare parameters for merge")
+# parameters$filename <- row.names(parameters)
+# parameters$filename <- as.factor(parameters$filename)
 parameters <- subset(parameters, select = c(filename, mean_durspec) )
 
 print("Read nLTT stats, with burn-in")

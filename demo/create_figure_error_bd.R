@@ -28,9 +28,9 @@ print("Read parameters and nLTT stats")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 
-print("Prepare parameters for merge")
-parameters$filename <- row.names(parameters)
-parameters$filename <- as.factor(parameters$filename)
+# print("Prepare parameters for merge")
+# parameters$filename <- row.names(parameters)
+# parameters$filename <- as.factor(parameters$filename)
 
 print("Connect the mean nLTT stats and parameters")
 testit::assert("filename" %in% names(parameters))

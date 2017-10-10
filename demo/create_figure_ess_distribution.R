@@ -20,11 +20,9 @@ print("Read parameters and ESSes")
 df_esses <- wiritttea::read_collected_esses(esses_filename)
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
 
-print("Prepare parameters for merge")
-parameters$filename <- row.names(parameters)
-parameters$filename <- as.factor(parameters$filename)
-
-head(df)
+# print("Prepare parameters for merge")
+# parameters$filename <- row.names(parameters)
+# parameters$filename <- as.factor(parameters$filename)
 
 # Melt data, convert to long form
 df_esses_long <- reshape2::melt(df_esses,
