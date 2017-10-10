@@ -12,11 +12,11 @@ create_figure_error_alignment_length_median <- function(
   filename
 ) {
 
-  sirg <- NULL; rm(sirg) # nolint, should fix warning: no visible binding for global variable
-  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
-  erg <- NULL; rm(erg) # nolint, should fix warning: no visible binding for global variable
-  sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  pi <- NULL; rm(pi) # nolint, should fix warning: no visible binding for global variable
   nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  median <- NULL; rm(median) # nolint, should fix warning: no visible binding for global variable
 
   `%>%` <- dplyr::`%>%`
 
