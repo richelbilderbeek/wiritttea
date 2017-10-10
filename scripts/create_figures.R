@@ -51,6 +51,7 @@ if (!file.exists(nltt_stats_filename)) {
 print("Reading files")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
+df_operators <- wiritttea::read_collected_operators(operators_filename)
 
 print("Create figures")
 wiritttea::create_figure_error(
@@ -59,3 +60,7 @@ wiritttea::create_figure_error(
   svg_filenames = paste0(source_superfolder, "/figure_error_", date, c("","_head", "_tail"), ".svg")
 )
 
+wiritttea::create_figure_acceptance_mcmc_operators(
+  df_operators = df_operators,
+  svg_filename = paste0(source_superfolder, "/figure__acceptance_mcmc_operators.svg")
+)
