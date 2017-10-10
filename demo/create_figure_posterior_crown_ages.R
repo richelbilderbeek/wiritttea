@@ -16,7 +16,7 @@ if (!file.exists(posterior_crown_ages_filename)) {
 }
 
 print("Read posterior crown_ages")
-posterior_crown_ages <- wiritttea::read_collected_posterior_crown_ages(
+posterior_crown_ages <- wiritttea::read_collected_pstr_crown_ages(
     posterior_crown_ages_filename)
 
 print("General overview")
