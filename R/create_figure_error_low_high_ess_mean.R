@@ -17,6 +17,9 @@ create_figure_error_low_high_ess_mean <- function(
   sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
   ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
   nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  median <- NULL; rm(median) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  ess_type <- NULL; rm(ess_type) # nolint, should fix warning: no visible binding for global variable
 
   # Take the mean of the nLTT stats
   `%>%` <- dplyr::`%>%`

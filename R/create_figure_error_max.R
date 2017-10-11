@@ -1,10 +1,14 @@
-#' Create 'figure_error_max', showing phylogenies with the top 10 biggest nLTT statistics error
-#' of all simulations
+#' Create 'figure_error_max', showing the phylogeny with the biggest
+#'   nLTT statistics error
+#'   of all simulations
 #' @param parameters parameters, as returned from read_collected_parameters
-#' @param nltt_stats the nLTT statistics, as returned from read_collected_nltt_stats
+#' @param nltt_stats the nLTT statistics, as returned from
+#'   read_collected_nltt_stats
 #' @param filename name of the file the figure will be saved to
 #' @param sample_size the number of nLTT statistics that will be sampled, use
 #'   NA to sample all
+#' @param raw_data_path the path where the raw data (the .RDa files) can
+#'   be found
 #' @author Richel Bilderbeek
 #' @export
 create_figure_error_max <- function(
@@ -34,7 +38,7 @@ create_figure_error_max <- function(
 
   # print("Order by nltt_stat, highest value first")
   df <- stats::na.omit(nltt_stats[with(nltt_stats, order(-nltt_stat)), ])
-  filenames <- unique(head(df, 1000)$filename)
+  filenames <- unique(utils::head(df, 1000)$filename)
 
   file <- wiritttes::read_file(paste0(raw_data_path, "/", df$filename[1]))
 
@@ -51,13 +55,13 @@ create_figure_error_max <- function(
     sti = as.numeric(df$sti[1])
   )
 
-  svg(filename)
+  grDevices::svg(filename)
   n_rows <- 2
   n_cols <- 1
-  par(mfrow = c(n_rows, n_cols))
+  graphics::par(mfrow = c(n_rows, n_cols))
   ape::plot.phylo(main = "posterior tree", posterior_stree, show.tip.label = FALSE)
   ape::plot.phylo(main = "original species tree", stree, show.tip.label = FALSE)
-  dev.off()
-  par(mfrow = c(1, 1))
+  grDevices::dev.off()
+  graphics::par(mfrow = c(1, 1))
 }
 

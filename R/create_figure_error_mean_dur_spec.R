@@ -7,7 +7,15 @@ create_figure_error_mean_dur_spec <- function(
   nltt_stats,
   filename
 ) {
-  # print("Add mean duration of speciation to parameters")
+
+  mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
+  .adj.rr.label.. <- NULL; rm(.adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
+
+
+  # Add mean duration of speciation to parameters
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(
     eris = parameters$eri,
     scrs = parameters$scr,
@@ -27,8 +35,7 @@ create_figure_error_mean_dur_spec <- function(
   scr_bd <- max(stats::na.omit(df$scr))
   mean_bd_error <- mean(stats::na.omit(df[ df$scr == scr_bd, ]$nltt_stat))
 
-
-  # print("Creating figure")
+  # Creating figure
 
   set.seed(42)
   n_sampled <- 2000
