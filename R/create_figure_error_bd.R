@@ -2,6 +2,8 @@
 #' @param parameters parameters, as returned from read_collected_parameters
 #' @param nltt_stats the nLTT statistics, as returned from read_collected_nltt_stats
 #' @param filename name of the file the figure will be saved to
+#' @author Richel Bilderbeek
+#' @export
 create_figure_error_bd <- function(
   parameters,
   nltt_stats,
@@ -11,15 +13,13 @@ create_figure_error_bd <- function(
   testit::assert("filename" %in% names(parameters))
   testit::assert("filename" %in% names(nltt_stats))
   df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
-  names(df)
-  head(df, n = 10)
 
-  print("Only keep rows with the highest SCR (as those are a BD model)")
-  print(paste0("Rows before: ", nrow(df)))
+  # print("Only keep rows with the highest SCR (as those are a BD model)")
+  # print(paste0("Rows before: ", nrow(df)))
   dplyr::count(df, scr)
   scr_bd <- max(stats::na.omit(df$scr))
   df <- df[ df$scr == scr_bd, ]
-  print(paste0("Rows after: ", nrow(df)))
+  # print(paste0("Rows after: ", nrow(df)))
 
   ggplot2::ggplot(
     data = stats::na.omit(df),

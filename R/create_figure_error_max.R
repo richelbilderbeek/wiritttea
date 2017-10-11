@@ -3,6 +3,8 @@
 #' @param parameters parameters, as returned from read_collected_parameters
 #' @param nltt_stats the nLTT statistics, as returned from read_collected_nltt_stats
 #' @param filename name of the file the figure will be saved to
+#' @author Richel Bilderbeek
+#' @export
 create_figure_error_max <- function(
   parameters,
   nltt_stats,

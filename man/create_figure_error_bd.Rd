@@ -16,3 +16,6 @@ create_figure_error_bd(parameters, nltt_stats, filename)
 \description{
 Create figure create_figure_error_bd
 }
+\author{
+Richel Bilderbeek
+}

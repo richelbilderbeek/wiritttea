@@ -1,4 +1,4 @@
-context("create_figure_error_low_high_ess")
+context("create_figure_error_low_high_ess_mean")
 
 test_that("works", {
 
@@ -6,7 +6,7 @@ test_that("works", {
   testthat::expect_false(file.exists(filename))
 
   testthat::expect_silent(
-    wiritttea::create_figure_error_low_high_ess(
+    wiritttea::create_figure_error_low_high_ess_mean(
       parameters = wiritttea::read_collected_parameters(),
       nltt_stats = wiritttea::read_collected_nltt_stats(burn_in_fraction = 0.2),
       esses = wiritttea::read_collected_esses(),

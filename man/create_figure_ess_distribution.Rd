@@ -4,15 +4,18 @@
 \alias{create_figure_ess_distribution}
 \title{Create 'figure_ess_distribution'}
 \usage{
-create_figure_ess_distribution(parameters, df_esses, filename)
+create_figure_ess_distribution(parameters, esses, filename)
 }
 \arguments{
 \item{parameters}{parameters, as returned from read_collected_parameters}
 
-\item{filename}{name of the file the figure will be saved to}
-
 \item{esses}{the ESSes, as returned from read_collected_esses}
+
+\item{filename}{name of the file the figure will be saved to}
 }
 \description{
 Create 'figure_ess_distribution'
+}
+\author{
+Richel Bilderbeek
 }

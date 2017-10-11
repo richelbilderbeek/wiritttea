@@ -18,3 +18,6 @@ create_figure_error_max(parameters, nltt_stats, filename)
 Create 'figure_error_max', showing phylogenies with the top 10 biggest nLTT statistics error
 of all simulations
 }
+\author{
+Richel Bilderbeek
+}
