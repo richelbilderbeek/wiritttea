@@ -8,35 +8,31 @@ create_figure_ess_expected_mean_dur_spec_alignment_length <- function(
   filename
 ) {
 
-  print("Add mean duration of speciation to parameters")
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
+  sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
+  ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
+  ..adj.rr.label.. <- NULL; rm(..adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
+
+
+  # Add mean duration of speciation to parameters
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(
     eris = parameters$eri,
     scrs = parameters$scr,
     siris = parameters$siri
   )
 
-  # Prepare parameters for merge
-  # parameters$filename <- row.names(parameters)
-  # parameters$filename <- as.factor(parameters$filename)
-
   # Only select the columns we need
-  names(parameters)
   parameters <- dplyr::select(parameters, c(filename, mean_durspec, sequence_length))
-
-  head(esses)
   esses <- dplyr::select(esses, c(filename, likelihood))
 
   # Connect the mean nLTT stats and parameters
   testit::assert("filename" %in% names(parameters))
   testit::assert("filename" %in% names(esses))
   df <- merge(x = parameters, y = esses, by = "filename", all = TRUE)
-
-  names(df)
-  head(df, n = 10)
-
-  print("Creating figure")
-
-  svg("~/figure_ess_expected_mean_dur_spec_alignment_length.svg")
 
   ggplot2::ggplot(
     data = stats::na.omit(df),
@@ -55,7 +51,7 @@ create_figure_ess_expected_mean_dur_spec_alignment_length <- function(
     ggplot2::ylab("ESS") +
     ggplot2::labs(
       title = paste0("Effective sample sizes of tree likelihood,\nfor different expected mean duration of speciation,\nfor different DNA alignment lengths"),
-      caption  = "figure_ess_mean_dur_spec_alignment_length"
+      caption = filename
     ) +
     ggplot2::labs(color = latex2exp::TeX("$l_a$")) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))

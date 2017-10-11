@@ -14,6 +14,7 @@ create_figure_error_mean_dur_spec_mean <- function(
   ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
   nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
   mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
+  median <- NULL; rm(median) # nolint, should fix warning: no visible binding for global variable
   ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
   ..adj.rr.label.. <- NULL; rm(..adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
 
@@ -48,7 +49,6 @@ create_figure_error_mean_dur_spec_mean <- function(
   mean_bd_error <- mean(stats::na.omit(df_means[ df_means$scr == scr_bd, ]$mean))
   median_bd_error <- mean(stats::na.omit(df_medians[ df_medians$scr == scr_bd, ]$median))
 
-  svg("~/figure_error_expected_mean_dur_spec_mean.svg")
   options(warn = 1) # Allow points falling out of range
 
   ggplot2::ggplot(

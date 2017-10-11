@@ -8,7 +8,16 @@ create_figure_error_sampling_representative <- function(
   filename
 ) {
 
-  # print("Select only those columns needed")
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
+  sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
+  ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
+  ..adj.rr.label.. <- NULL; rm(..adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
+
+  # Select only those columns needed
   parameters <- dplyr::select(parameters, c(filename, sirg, scr, erg))
 
   # print("Use only half of the nLTT stats, due to memory")

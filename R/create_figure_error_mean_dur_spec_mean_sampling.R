@@ -9,6 +9,14 @@ create_figure_error_mean_dur_spec_mean_sampling <- function(
   nltt_stats,
   filename
 ) {
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
+  sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
+  ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
+  ..adj.rr.label.. <- NULL; rm(..adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
 
   # Add mean duration of speciation to parameters
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(

@@ -9,17 +9,24 @@ create_figure_error_tree_size <- function(
   filename
 ) {
 
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
+  sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
+  ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
+  ..adj.rr.label.. <- NULL; rm(..adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
+
   nltt_stats$filename <- as.vector(nltt_stats$filename)
   nltt_stats$filename <- basename(nltt_stats$filename)
 
   # Take the mean of the nLTT stats
   `%>%` <- dplyr::`%>%`
   nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-         dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+         dplyr::summarise(mean = mean(nltt_stat))
   testit::assert(all(names(nltt_stat_means)
-    == c("filename", "sti", "ai", "pi", "mean", "sd")))
-  head(nltt_stat_means, n = 10)
-  nrow(nltt_stat_means)
+    == c("filename", "sti", "ai", "pi", "mean")))
 
   # Connect the mean nLTT stats and n_taxa
   testit::assert("filename" %in% names(n_taxa))
@@ -58,9 +65,10 @@ create_figure_error_tree_size <- function(
       caption  = paste0("(n = ", n, "/", n_all, "), error_tree_size")
     ) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-  dev.off()
 
-  svg("~/figure_error_tree_size_mean.svg")
+  ggplot2::ggsave(file = filename, width = 7, height = 7)
+
+
   ggplot2::ggplot(
     data = stats::na.omit(df_mean),
     ggplot2::aes(x = n_taxa, y = mean)
