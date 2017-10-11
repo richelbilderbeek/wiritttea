@@ -4,6 +4,7 @@ dist: trusty
 
 r_packages:
   - dplyr
+  - ggpmisc
   - latex2exp
   - scales
   - svglite

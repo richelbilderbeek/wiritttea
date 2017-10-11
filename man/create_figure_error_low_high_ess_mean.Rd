@@ -15,6 +15,9 @@ create_figure_error_low_high_ess_mean(parameters, nltt_stats, esses, filename,
 \item{esses}{the ESSes, as returned from read_collected_esses}
 
 \item{filename}{name of the file the figure will be saved to}
+
+\item{sample_size}{the number of nLTT statistics that will be sampled, use
+NA to sample all}
 }
 \description{
 Create figure 'figure_error_low_high_ess' using mean nLTT statistics

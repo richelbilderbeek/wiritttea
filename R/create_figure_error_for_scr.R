@@ -8,6 +8,11 @@ create_figure_error_for_scr <- function(
   filename
 ) {
 
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+
   # Add mean duration of speciation to parameters
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(
     eris = parameters$eri,
@@ -18,9 +23,9 @@ create_figure_error_for_scr <- function(
   # Take the mean of the nLTT stats
   `%>%` <- dplyr::`%>%`
   nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-         dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+         dplyr::summarise(mean = mean(nltt_stat))
   testit::assert(all(names(nltt_stat_means)
-    == c("filename", "sti", "ai", "pi", "mean", "sd")))
+    == c("filename", "sti", "ai", "pi", "mean")))
 
   # Connect the mean nLTT stats and parameters
   testit::assert("filename" %in% names(parameters))

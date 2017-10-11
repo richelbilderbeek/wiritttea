@@ -4,12 +4,12 @@
 \alias{create_figure_exit_statuses_posteriors}
 \title{Create figure_exit_statuses_posteriors: How many parameter estimates are OK?}
 \usage{
-create_figure_exit_statuses_posteriors(df_esses, filename)
+create_figure_exit_statuses_posteriors(esses, filename)
 }
 \arguments{
-\item{filename}{name of the file the figure will be saved to}
-
 \item{esses}{the ESSes, as returned from read_collected_esses}
+
+\item{filename}{name of the file the figure will be saved to}
 }
 \description{
 Create figure_exit_statuses_posteriors: How many parameter estimates are OK?

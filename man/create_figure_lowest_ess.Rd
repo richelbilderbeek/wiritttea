@@ -4,12 +4,12 @@
 \alias{create_figure_lowest_ess}
 \title{Create figure_lowest_ess: Which estimated parameter has the lowest ESS?}
 \usage{
-create_figure_lowest_ess(df_esses, filename)
+create_figure_lowest_ess(esses, filename)
 }
 \arguments{
-\item{filename}{name of the file the figure will be saved to}
-
 \item{esses}{the ESSes, as returned from read_collected_esses}
+
+\item{filename}{name of the file the figure will be saved to}
 }
 \description{
 Create figure_lowest_ess: Which estimated parameter has the lowest ESS?

@@ -10,13 +10,16 @@ create_figure_error_bd <- function(
   filename
 ) {
 
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+
   testit::assert("filename" %in% names(parameters))
   testit::assert("filename" %in% names(nltt_stats))
   df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
 
   # print("Only keep rows with the highest SCR (as those are a BD model)")
   # print(paste0("Rows before: ", nrow(df)))
-  dplyr::count(df, scr)
+  # dplyr::count(df, scr)
   scr_bd <- max(stats::na.omit(df$scr))
   df <- df[ df$scr == scr_bd, ]
   # print(paste0("Rows after: ", nrow(df)))

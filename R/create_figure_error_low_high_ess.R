@@ -3,6 +3,8 @@
 #' @param nltt_stats the nLTT statistics, as returned from read_collected_nltt_stats
 #' @param esses the ESSes, as returned from read_collected_esses
 #' @param filename name of the file the figure will be saved to
+#' @param sample_size the number of nLTT statistics that will be sampled, use
+#'   NA to sample all
 #' @export
 create_figure_error_low_high_ess <- function(
   parameters,
@@ -12,12 +14,16 @@ create_figure_error_low_high_ess <- function(
   sample_size = NA
 ) {
 
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+
   # Take the mean of the nLTT stats
   `%>%` <- dplyr::`%>%`
   nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-         dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+         dplyr::summarise(mean = mean(nltt_stat))
   testit::assert(all(names(nltt_stat_means)
-    == c("filename", "sti", "ai", "pi", "mean", "sd")))
+    == c("filename", "sti", "ai", "pi", "mean")))
 
   # print("Add mean duration of speciation to parameters")
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(

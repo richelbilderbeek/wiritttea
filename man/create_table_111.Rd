@@ -4,12 +4,12 @@
 \alias{create_table_111}
 \title{Table 111: How many parameter estimates are OK?}
 \usage{
-create_table_111(df_esses, filename)
+create_table_111(esses, filename)
 }
 \arguments{
-\item{filename}{name of the file the table will be saved to}
-
 \item{esses}{the ESSes, as returned from read_collected_esses}
+
+\item{filename}{name of the file the table will be saved to}
 }
 \description{
 Table 111: How many parameter estimates are OK?

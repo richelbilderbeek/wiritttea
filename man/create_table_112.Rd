@@ -4,12 +4,12 @@
 \alias{create_table_112}
 \title{Table 112: Which estimated parameter has the lowest ESS?}
 \usage{
-create_table_112(df_esses, filename)
+create_table_112(esses, filename)
 }
 \arguments{
-\item{filename}{name of the file the table will be saved to}
-
 \item{esses}{the ESSes, as returned from read_collected_esses}
+
+\item{filename}{name of the file the table will be saved to}
 }
 \description{
 Table 112: Which estimated parameter has the lowest ESS?

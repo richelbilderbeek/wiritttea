@@ -5,7 +5,8 @@
 \title{Create 'figure_error_max', showing phylogenies with the top 10 biggest nLTT statistics error
 of all simulations}
 \usage{
-create_figure_error_max(parameters, nltt_stats, filename)
+create_figure_error_max(parameters, nltt_stats, filename, sample_size = NA,
+  raw_data_path = system.file("extdata", package = "wiritttea"))
 }
 \arguments{
 \item{parameters}{parameters, as returned from read_collected_parameters}
@@ -13,6 +14,9 @@ create_figure_error_max(parameters, nltt_stats, filename)
 \item{nltt_stats}{the nLTT statistics, as returned from read_collected_nltt_stats}
 
 \item{filename}{name of the file the figure will be saved to}
+
+\item{sample_size}{the number of nLTT statistics that will be sampled, use
+NA to sample all}
 }
 \description{
 Create 'figure_error_max', showing phylogenies with the top 10 biggest nLTT statistics error
