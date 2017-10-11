@@ -18,3 +18,6 @@ create_figure_error_mean_dur_spec_mean_sampling(parameters, nltt_stats,
 \description{
 Create 'figure_error_expected_mean_dur_spec_mean_sampling'
 }
+\author{
+Richel Bilderbeek
+}

@@ -2,6 +2,8 @@
 #' @param parameters parameters, as returned from read_collected_parameters
 #' @param nltt_stats the nLTT statistics, as returned from read_collected_nltt_stats
 #' @param filename name of the file the figure will be saved to
+#' @author Richel Bilderbeek
+#' @export
 create_figure_error_mean_dur_spec_mean_sampling <- function(
   parameters,
   nltt_stats,
@@ -21,25 +23,16 @@ create_figure_error_mean_dur_spec_mean_sampling <- function(
          dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
   testit::assert(all(names(nltt_stat_means)
     == c("filename", "sti", "ai", "pi", "mean", "sd")))
-  head(nltt_stat_means, n = 10)
-  nrow(nltt_stat_means)
-
-  # Prepare parameters for merge
-  # parameters$filename <- row.names(parameters)
-  # parameters$filename <- as.factor(parameters$filename)
 
   # Only select the columns we need
-  names(parameters)
   parameters <- dplyr::select(parameters, c(filename, mean_durspec))
 
   # Connect the mean nLTT stats and parameters
   testit::assert("filename" %in% names(parameters))
   testit::assert("filename" %in% names(nltt_stat_means))
   df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
-  names(df)
-  head(df, n = 10)
 
-  print("Rename column")
+  # Rename column
   df$sti <- plyr::revalue(df$sti, c("1" = "youngest", "2" = "oldest"))
 
   options(warn = 1) # Allow points to fall off plot range
@@ -66,7 +59,7 @@ create_figure_error_mean_dur_spec_mean_sampling <- function(
     ggplot2::labs(color = "Sampling") +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-  options(warn = 2) # Be strict
-
   ggplot2::ggsave(file = filename, width = 7, height = 7)
+
+  options(warn = 2) # Be strict
 }

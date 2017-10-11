@@ -16,6 +16,11 @@ create_figure_error_mean_dur_spec_alignment_length <- function(
   sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
   ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
   nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
+  sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
+  ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
+  ..adj.rr.label.. <- NULL; rm(..adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
 
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(
     eris = parameters$eri,
@@ -87,7 +92,8 @@ create_figure_error_mean_dur_spec_alignment_length <- function(
     ggplot2::labs(color = latex2exp::TeX("$l_a$")) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-  options(warn = 2) # Be strict
 
   ggplot2::ggsave(file = filename, width = 7, height = 7)
+
+  options(warn = 2) # Be strict
 }

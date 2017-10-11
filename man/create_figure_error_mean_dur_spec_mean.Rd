@@ -16,3 +16,6 @@ create_figure_error_mean_dur_spec_mean(parameters, nltt_stats, filename)
 \description{
 Create 'figure_error_expected_mean_dur_spec_mean' (tailing mean: use the mean nLTT statistic)
 }
+\author{
+Richel Bilderbeek
+}

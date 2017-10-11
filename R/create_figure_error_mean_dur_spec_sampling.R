@@ -2,28 +2,23 @@
 #' @param parameters parameters, as returned from read_collected_parameters
 #' @param nltt_stats the nLTT statistics, as returned from read_collected_nltt_stats
 #' @param filename name of the file the figure will be saved to
+#' @author Richel Bilderbeek
+#' @export
 create_figure_error_mean_dur_spec_sampling <- function(
   parameters,
   nltt_stats,
   filename
 ) {
 
-  print("Add mean duration of speciation to parameters")
+  # Add mean duration of speciation to parameters
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(
     eris = parameters$eri,
     scrs = parameters$scr,
     siris = parameters$siri
   )
 
-  # Prepare parameters for merge
-  # parameters$filename <- row.names(parameters)
-  # parameters$filename <- as.factor(parameters$filename)
-
   # Only select the columns we need
-  names(parameters)
   parameters <- dplyr::select(parameters, c(filename, mean_durspec))
-
-  head(nltt_stats)
   nltt_stats <- dplyr::select(nltt_stats, c(filename, sti, nltt_stat))
 
   # Connect the mean nLTT stats and parameters
@@ -31,15 +26,9 @@ create_figure_error_mean_dur_spec_sampling <- function(
   testit::assert("filename" %in% names(nltt_stats))
   df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
 
-  names(df)
-  head(df, n = 10)
-
-  print("Rename column")
+  # Rename column
   df$sti <- plyr::revalue(df$sti, c("1" = "youngest", "2" = "oldest"))
 
-  print("Creating figure")
-
-  svg("~/figure_error_expected_mean_dur_spec_sampling.svg")
   set.seed(42)
   n_sampled <- 5000
   n_data_points <- nrow(stats::na.omit(df))
@@ -61,7 +50,7 @@ create_figure_error_mean_dur_spec_sampling <- function(
     ggplot2::ylab(latex2exp::TeX("$\\Delta_{nLTT}$")) +
     ggplot2::labs(
       title = "nLTT statistic for different expected mean duration of speciation\nfor different sampling methods",
-      caption  = paste0("n = ", n_sampled, " / ", n_data_points, ", figure_error_expected_mean_dur_spec_sampling")
+      caption  = paste0("n = ", n_sampled, " / ", n_data_points, ", ", filename)
     ) +
     ggplot2::labs(color = "Sampling") +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))

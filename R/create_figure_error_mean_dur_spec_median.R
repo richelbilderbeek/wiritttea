@@ -1,10 +1,10 @@
-#' Create 'figure_error_expected_mean_dur_spec_mean' (tailing mean: use the mean nLTT statistic)
+#' Create 'figure_error_expected_mean_dur_spec_median' (tailing median: use the median nLTT statistic)
 #' @param parameters parameters, as returned from read_collected_parameters
 #' @param nltt_stats the nLTT statistics, as returned from read_collected_nltt_stats
 #' @param filename name of the file the figure will be saved to
 #' @author Richel Bilderbeek
 #' @export
-create_figure_error_mean_dur_spec_mean <- function(
+create_figure_error_mean_dur_spec_median <- function(
   parameters,
   nltt_stats,
   filename
@@ -48,17 +48,15 @@ create_figure_error_mean_dur_spec_mean <- function(
   mean_bd_error <- mean(stats::na.omit(df_means[ df_means$scr == scr_bd, ]$mean))
   median_bd_error <- mean(stats::na.omit(df_medians[ df_medians$scr == scr_bd, ]$median))
 
-  svg("~/figure_error_expected_mean_dur_spec_mean.svg")
   options(warn = 1) # Allow points falling out of range
-
   ggplot2::ggplot(
-    data = stats::na.omit(df_means),
-    ggplot2::aes(x = mean_durspec, y = mean)
+    data = stats::na.omit(df_medians),
+    ggplot2::aes(x = mean_durspec, y = median)
   ) + ggplot2::geom_point() +
     ggplot2::geom_smooth(method = "lm", color = "blue", size = 0.5, alpha = 0.25) +
     ggpmisc::stat_poly_eq(
       formula = y ~ x,
-      eq.with.lhs = paste(latex2exp::TeX("$\\bar{\\Delta_{nLTT}}$"), "~`=`~"),
+      eq.with.lhs = paste(latex2exp::TeX("$\\widetilde{\\Delta_{nLTT}}$"), "~`=`~"),
       eq.x.rhs = latex2exp::TeX(" \\bar{t_{ds}}"),
       ggplot2::aes(label = paste(..eq.label.., ..adj.rr.label.., sep = "~~~~")),
       color = "blue",
@@ -67,13 +65,14 @@ create_figure_error_mean_dur_spec_mean <- function(
     ggplot2::geom_hline(yintercept = mean_bd_error, linetype = "dotted") +
     ggplot2::scale_y_continuous(limits = c(0, 0.05)) + # Will have some outliers unplotted
     ggplot2::xlab(latex2exp::TeX("Mean duration of speciation t_\\bar{ds}}")) +
-    ggplot2::ylab(latex2exp::TeX("Mean nLTT statistic $\\bar{\\Delta_{nLTT}}$")) +
+    ggplot2::ylab(latex2exp::TeX("Median nLTT statistic $\\widetilde{\\Delta_{nLTT}}$")) +
     ggplot2::labs(
-      title = "Mean nLTT statistic for different duration of speciations",
+      title = "Median nLTT statistic for different duration of speciations",
       caption  = filename
     ) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-  ggplot2::ggsave(file = filename, width = 7, height = 7)
   options(warn = 2) # Be strict
+
+  ggplot2::ggsave(file = filename, width = 7, height = 7)
 }

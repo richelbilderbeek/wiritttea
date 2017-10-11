@@ -12,7 +12,7 @@ create_figure_error_mean_dur_spec <- function(
   scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
   nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
   ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
-  .adj.rr.label.. <- NULL; rm(.adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
+  ..adj.rr.label.. <- NULL; rm(..adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
 
 
   # Add mean duration of speciation to parameters

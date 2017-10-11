@@ -73,7 +73,7 @@ create_figure_error_mean_dur_spec_mean_alignment_length <- function(
     ggplot2::labs(color = latex2exp::TeX("$l_a$")) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-  options(warn = 2) # Be strict
-
   ggplot2::ggsave(file = filename, width = 7, height = 7)
+
+ options(warn = 2) # Be strict
 }
