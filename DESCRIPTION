@@ -12,7 +12,9 @@ LazyData: TRUE
 Requires: 
     adephylo,
     ape,
-    beastscriptr,
+    beautier,
+    beastier,
+    lumier,
     dplyr,
     ggpmisc,
     latex2exp,
@@ -35,7 +37,6 @@ Imports:
     PBD,
     phangorn,
     phytools,
-    RBeast,
     ribir,
     scales,
     svglite,
@@ -57,10 +58,11 @@ Suggests:
     testthat,
     tidyr
 Remotes: 
-    beast-dev/RBeast,
     jimhester/covr,
     jimhester/lintr,
-    richelbilderbeek/beastscriptr,
+    richelbilderbeek/beautier,
+    richelbilderbeek/beastier,
+    richelbilderbeek/lumier,
     richelbilderbeek/nLTT,
     richelbilderbeek/ribir,
     richelbilderbeek/wiritttes,

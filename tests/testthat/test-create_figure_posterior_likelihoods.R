@@ -1,6 +1,6 @@
 context("create_figure_posterior_likelihoods")
 
-test_that("multiplication works", {
+test_that("use", {
 
   filename <- tempfile(pattern = "figure_", fileext = ".svg")
   testthat::expect_false(file.exists(filename))

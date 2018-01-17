@@ -62,7 +62,7 @@ collect_file_esses <- function(filename) {
             posterior <- wiritttes::get_posterior(
               file, sti = sti, ai = ai, pi = pi)
             traces <- posterior$estimates
-            this_esses <- RBeast::calc_esses(
+            this_esses <- beastier::calc_esses(
               traces = traces,
               sample_interval = 1000
             )
