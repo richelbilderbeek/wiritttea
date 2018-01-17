@@ -18,3 +18,6 @@ create_figure_ess_expected_mean_dur_spec_alignment_length(parameters, esses,
 \description{
 Create 'figure_ess_expected_mean_dur_spec_alignment_length'
 }
+\author{
+Richel J.C. Bilderbeek
+}

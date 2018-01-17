@@ -1,6 +1,8 @@
 #' Create figure 'figure_exit_statuses'
 #' @param log_files_info log files' info, as returned from read_collected_log_files_info
 #' @param filename name of the file the figure will be saved to
+#' @export
+#' @author Richel J.C. Bilderbeek
 create_figure_exit_statuses <- function(
   log_files_info,
   filename

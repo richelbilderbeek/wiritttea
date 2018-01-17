@@ -12,7 +12,7 @@ create_table_111 <- function(
   }
 
   `%>%` <- dplyr::`%>%`
-  esses_ok <- esses  %>% count(is_ok(min_ess))
+  esses_ok <- esses  %>% dplyr::count(is_ok(esses))
 
   names(esses_ok) <- c("ok", "n")
   esses_ok[ esses_ok$ok == TRUE, 1] <- "OK"

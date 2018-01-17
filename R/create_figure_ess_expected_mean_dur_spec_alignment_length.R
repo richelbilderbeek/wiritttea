@@ -2,6 +2,8 @@
 #' @param parameters parameters, as returned from read_collected_parameters
 #' @param esses the ESSes, as returned from read_collected_esses
 #' @param filename name of the file the figure will be saved to
+#' @export
+#' @author Richel J.C. Bilderbeek
 create_figure_ess_expected_mean_dur_spec_alignment_length <- function(
   parameters,
   esses,

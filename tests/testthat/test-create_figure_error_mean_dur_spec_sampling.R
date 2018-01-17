@@ -2,6 +2,8 @@ context("create_figure_error_mean_dur_spec_sampling")
 
 test_that("works", {
 
+  skip("Decrease sample")
+
   filename <- tempfile(pattern = "figure_", fileext = ".svg")
   testthat::expect_false(file.exists(filename))
 

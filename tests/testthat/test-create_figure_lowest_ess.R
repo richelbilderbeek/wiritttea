@@ -1,13 +1,14 @@
 context("create_figure_lowest_ess")
 
-test_that("multiplication works", {
+test_that("use", {
 
   filename <- tempfile(pattern = "figure_", fileext = ".svg")
   testthat::expect_false(file.exists(filename))
 
   testthat::expect_silent(
-    create_figure_lowest_ess(
-      filename = filename
+    wiritttea:::create_figure_lowest_ess(
+      filename = filename,
+      esses = read_collected_esses()
     )
   )
 

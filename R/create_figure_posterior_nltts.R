@@ -11,10 +11,10 @@ create_figure_posterior_nltts <- function(
   `%>%` <- dplyr::`%>%`
 
   print("Split nLTT stats of first and second posterior")
-  df <- tidyr::spread(nltt_stats, pi, nltt_stat) %>% rename(pi1 = "1", pi2 = "2")
+  df <- tidyr::spread(nltt_stats, pi, nltt) %>% dplyr::rename(pi1 = "1", pi2 = "2")
 
   print("Remove NA column")
-  df <- dplyr::select(df, -starts_with("<NA>"))
+  df <- dplyr::select(df, -dplyr::starts_with("<NA>"))
   testit::assert(names(df) == c("filename", "sti", "ai", "si", "pi1", "pi2"))
 
   print("Remove NAs")
@@ -41,7 +41,7 @@ create_figure_posterior_nltts <- function(
     p
   }
 
-  df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
+  df <- df %>% dplyr::summarize(p_value = safe_mann_whitney(pi1, pi2))
 
   df <- stats::na.omit(df)
   head(df)
@@ -64,7 +64,7 @@ create_figure_posterior_nltts <- function(
 
   dev.off()
 
-
+  return ()
 
 
 

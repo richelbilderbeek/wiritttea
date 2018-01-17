@@ -13,7 +13,7 @@ create_figure_exit_statuses_posteriors <- function(
   }
 
   `%>%` <- dplyr::`%>%`
-  esses_ok <- esses  %>% count(is_ok(posterior))
+  esses_ok <- esses  %>% dplyr::count(is_ok(posterior))
 
   names(esses_ok) <- c("ok", "n")
   esses_ok[ esses_ok$ok == TRUE, 1] <- "OK"
