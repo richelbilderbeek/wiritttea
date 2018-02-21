@@ -157,7 +157,7 @@ svg("~/figure_error_posterior_nltt_bad_stree.svg")
 ape::plot.phylo(main = "original species tree", stree, show.tip.label = FALSE)
 dev.off()
 
-beastier::remove_burn_in
+tracerer::remove_burn_in
 plot(head(df$si, 100))
 head(df)
 tail(df)

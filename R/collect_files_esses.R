@@ -158,8 +158,8 @@ collect_files_esses_from_logs <- function(filenames, show_progress = FALSE) {
 
       tryCatch({
         print(log_filename)
-        estimates <- beastier::parse_beast_log(log_filename)
-        this_esses <- beastier::calc_esses(
+        estimates <- tracerer::parse_beast_log(log_filename)
+        this_esses <- tracerer::calc_esses(
           traces = estimates,
           sample_interval = 1000
         )

@@ -14,3 +14,6 @@ create_figure_exit_statuses(log_files_info, filename)
 \description{
 Create figure 'figure_exit_statuses'
 }
+\author{
+Richel J.C. Bilderbeek
+}
