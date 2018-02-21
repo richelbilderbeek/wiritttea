@@ -59,7 +59,7 @@ create_figure_posterior_crown_ages <- function(
   # print("Sample some of the crown_ages")
   # set.seed(42)
   # some_posterior_crown_ages <- dplyr::sample_n(posterior_crown_ages, size = n_sampled)
-  # head(some_posterior_crown_ages)
+  # utils::head(some_posterior_crown_ages)
   #
   # print("Split posterior crown_ages per posterior index")
   # testit::assert("pi" %in% names(posterior_crown_ages))
@@ -96,7 +96,7 @@ create_figure_posterior_crown_ages <- function(
   #
   # df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
   #
-  # head(df)
+  # utils::head(df)
   # names(df)
   #
   # svg("~/figure_posterior_distribution_crown_ages_p_values.svg")

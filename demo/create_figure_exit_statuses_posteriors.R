@@ -9,10 +9,7 @@ if (length(args) > 0) esses_filename <- args[1]
 #Investigations
 df_esses <- wiritttea::read_collected_esses(esses_filename)
 
-head(df_esses)
-
 # How many NA's?
-
 is_ok <- function(x) {
   !is.na(x)
 }

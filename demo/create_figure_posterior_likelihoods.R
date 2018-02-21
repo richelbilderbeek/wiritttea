@@ -25,7 +25,6 @@ print(paste0("Using a sample of ", n_sampled, " of ", nrow(posterior_likelihoods
 print("Sample some of the likelihoods")
 set.seed(42)
 some_posterior_likelihoods <- dplyr::sample_n(posterior_likelihoods, size = n_sampled)
-head(some_posterior_likelihoods)
 
 print("Split posterior likelihoods per posterior index")
 testit::assert("pi" %in% names(posterior_likelihoods))
@@ -60,9 +59,6 @@ safe_mann_whitney <- function(pi1, pi2)
 }
 
 df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
-
-head(df)
-names(df)
 
 svg("~/figure_posterior_distribution_likelihoods.svg")
 ggplot2::ggplot(

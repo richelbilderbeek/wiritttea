@@ -41,8 +41,6 @@ testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))
 testit::assert(all(names(nltt_stat_medians)
   == c("filename", "sti", "ai", "pi", "median")))
-head(nltt_stat_means, n = 10)
-nrow(nltt_stat_means)
 
 # Prepare parameters for merge
 # parameters$filename <- row.names(parameters)

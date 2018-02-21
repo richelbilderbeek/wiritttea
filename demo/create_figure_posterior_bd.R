@@ -66,7 +66,6 @@ parameters <- wiritttea::read_collected_parameters(parameters_filename)
 
 print("Select all Birth-Death parameters")
 bd_parameters <- parameters[ parameters$scr == max(parameters$scr) & parameters$erg > 0.0, ]
-head(bd_parameters)
 
 set.seed(10)
 posterior <- NA
@@ -127,7 +126,6 @@ some_values <- dplyr::sample_n(df, size = 5)
 
 print("Convert to long form")
 df <- reshape2::melt(df, measure.vars = names(df))
-head(df)
 
 print("Plot the variables individually")
 

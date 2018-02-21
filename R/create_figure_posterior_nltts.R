@@ -20,10 +20,7 @@ create_figure_posterior_nltts <- function(
   print("Remove NAs")
   df <- stats::na.omit(df)
 
-  head(df)
-
   df <- dplyr::group_by(.data = df, filename, sti, ai)
-  head(df)
 
   safe_mann_whitney <- function(pi1, pi2)
   {
@@ -44,7 +41,6 @@ create_figure_posterior_nltts <- function(
   df <- df %>% dplyr::summarize(p_value = safe_mann_whitney(pi1, pi2))
 
   df <- stats::na.omit(df)
-  head(df)
 
   svg("~/figure_posterior_distribution_nltts.svg")
   ggplot2::ggplot(
@@ -79,7 +75,6 @@ create_figure_posterior_nltts <- function(
   low_sti <- as.numeric(low$sti[1])
   low_ai <- as.numeric(low$ai[1])
   low_df <- wiritttea::collect_file_nltt_stats(low_filename)
-  head(x)
   low_nltts1 <- low_df[which(low_df$sti == low_sti & low_df$ai == low_ai & low_df$pi == 1), ]$nltt_stat
   low_nltts2 <- low_df[which(low_df$sti == low_sti & low_df$ai == low_ai & low_df$pi == 2), ]$nltt_stat
   df_low <- data.frame(
@@ -127,7 +122,6 @@ create_figure_posterior_nltts <- function(
   high_sti <- as.numeric(high$sti[1])
   high_ai <- as.numeric(high$ai[1])
   high_df <- wiritttea::collect_file_nltt_stats(high_filename)
-  head(x)
   high_nltts1 <- high_df[which(high_df$sti == high_sti & high_df$ai == high_ai & high_df$pi == 1), ]$nltt_stat
   high_nltts2 <- high_df[which(high_df$sti == high_sti & high_df$ai == high_ai & high_df$pi == 2), ]$nltt_stat
   df_high <- data.frame(

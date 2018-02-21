@@ -40,8 +40,6 @@ nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
        dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))
-head(nltt_stat_means, n = 10)
-nrow(nltt_stat_means)
 
 print("Add mean duration of speciation to parameters")
 parameters$mean_durspec <- PBD::pbd_mean_durspecs(

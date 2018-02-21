@@ -36,9 +36,6 @@ create_figure_error_sampling_representative <- function(
          dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
   testit::assert(all(names(nltt_stat_means)
     == c("filename", "sti", "mean", "sd")))
-  head(nltt_stat_means, n = 10)
-  nrow(nltt_stat_means)
-
 
   # Connect the mean nLTT stats and parameters
   testit::assert("filename" %in% names(parameters))

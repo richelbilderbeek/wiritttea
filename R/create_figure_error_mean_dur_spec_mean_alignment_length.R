@@ -43,11 +43,6 @@ create_figure_error_mean_dur_spec_mean_alignment_length <- function(
   df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
   df_mean <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
 
-  names(df)
-  head(df, n = 10)
-  names(df_mean)
-  head(df_mean, n = 10)
-
   # Calculate mean BD error
   scr_bd <- max(stats::na.omit(df$scr))
   mean_bd_error_1000  <- mean(stats::na.omit(df[ df$scr == scr_bd & df$sequence_length == 1000 , ]$nltt_stat))

@@ -57,7 +57,6 @@ create_figure_posterior_bd <- function(
 
   print("Select all Birth-Death parameters")
   bd_parameters <- parameters[ parameters$scr == max(parameters$scr) & parameters$erg > 0.0, ]
-  head(bd_parameters)
 
   set.seed(10)
   posterior <- NA
@@ -118,7 +117,6 @@ create_figure_posterior_bd <- function(
 
   print("Convert to long form")
   df <- reshape2::melt(df, measure.vars = names(df))
-  head(df)
 
   print("Plot the variables individually")
 

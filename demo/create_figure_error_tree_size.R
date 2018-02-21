@@ -23,10 +23,6 @@ if (!file.exists(nltt_stats_filename)) {
 # Read parameters and nLTT stats
 n_taxa <- wiritttea::read_collected_n_taxa(n_taxa_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
-head(n_taxa)
-head(nltt_stats)
-tail(n_taxa)
-tail(nltt_stats)
 
 testit::assert(basename("/home/p230198/Peregrine20170710/article_0_3_1_0_1_521.RDa") == "article_0_3_1_0_1_521.RDa")
 testit::assert(basename("article_0_3_1_0_1_521.RDa") == "article_0_3_1_0_1_521.RDa")
@@ -39,8 +35,6 @@ nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
        dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))
-head(nltt_stat_means, n = 10)
-nrow(nltt_stat_means)
 
 # Connect the mean nLTT stats and n_taxa
 testit::assert("filename" %in% names(n_taxa))
@@ -49,9 +43,6 @@ df_mean <- merge(x = nltt_stat_means, y = n_taxa, by = "filename", all = TRUE)
 df <- merge(x = nltt_stats, y = n_taxa, by = "filename", all = TRUE)
 n_all <- nrow(df)
 df <- stats::na.omit(df)
-names(df_mean)
-head(df_mean, n = 10)
-tail(df_mean, n = 10)
 
 print("Creating figure")
 

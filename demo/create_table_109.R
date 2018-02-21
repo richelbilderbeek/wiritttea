@@ -22,7 +22,6 @@ df_log_files <- wiritttea::read_collected_log_files_info(log_files_filename)
 write.csv(df_log_files, table_109_filename)
 
 # Why did these fail?
-head(df_log_files)
 ggplot2::ggplot(
   data = df_log_files,
   ggplot2::aes(x = exit_status)

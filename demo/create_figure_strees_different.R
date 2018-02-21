@@ -18,8 +18,6 @@ if (!file.exists(strees_filename)) {
 print("Load strees data")
 df_strees <- wiritttea::read_collected_strees_identical(strees_filename)
 
-head(df_strees)
-
 svg("~/figure_strees_different.svg")
 ggplot2::ggplot(
   df_strees,
