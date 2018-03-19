@@ -62,7 +62,7 @@ create_figure_posterior_likelihoods <- function(
     ) +
     ggplot2::annotate("text", x = c(0.0, 0.125), y = 1450, label = c("different", "same")) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-  dev.off()
+  grDevices::dev.off()
 
   # # Show posterior with low, median and high p value
   # low  <- df[which(df$p_value == min(   df$p_value)), ]
@@ -93,7 +93,7 @@ create_figure_posterior_likelihoods <- function(
   #   ) +
   #   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
   # options(warn = 2) # Be strict
-  # dev.off()
+  # grDevices::dev.off()
   #
   #
   #

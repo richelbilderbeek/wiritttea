@@ -57,7 +57,7 @@ df <- merge(x = parameters, y = dplyr::sample_n(nltt_stats, size = n_nltt_stats)
 print("Take the mean of the nLTT stats")
 `%>%` <- dplyr::`%>%`
 nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti) %>%
-       dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+       dplyr::summarise(mean = mean(nltt_stat), sd = stats::sd(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "mean", "sd")))
 

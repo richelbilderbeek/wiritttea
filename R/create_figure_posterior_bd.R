@@ -40,15 +40,17 @@ create_figure_posterior_bd <- function(
 
     } else {
       # Set up the page
-      grid.newpage()
-      pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+      grid::grid.newpage()
+      grid::pushViewport(
+        grid::viewport(layout = grid::grid.layout(nrow(layout), ncol(layout)))
+      )
 
       # Make each plot, in the correct location
       for (i in 1:numPlots) {
         # Get the i,j matrix positions of the regions that contain this subplot
         matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
 
-        print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+        print(plots[[i]], vp = grid::viewport(layout.pos.row = matchidx$row,
                                         layout.pos.col = matchidx$col))
       }
     }
@@ -83,7 +85,7 @@ create_figure_posterior_bd <- function(
   p
   # If a range goes from [0, crownTreeHeight], multiply it by
   # 'tree_scale' to let it go from [0, crown_age]
-  tree_scale <- p$age / median(posterior$estimates$TreeHeight)
+  tree_scale <- p$age / stats::median(posterior$estimates$TreeHeight)
 
 
   # BirthDeath
@@ -191,13 +193,13 @@ create_figure_posterior_bd <- function(
 
   svg("~/figure_posterior_distribution_bd_bd.svg")
   p1
-  dev.off()
+  grDevices::dev.off()
   svg("~/figure_posterior_distribution_bd_br2.svg")
   p2
-  dev.off()
+  grDevices::dev.off()
   svg("~/figure_posterior_distribution_bd_rdr2.svg")
   p3
-  dev.off()
+  grDevices::dev.off()
   svg("~/figure_posterior_distribution_bd_all.svg")
   p4
 

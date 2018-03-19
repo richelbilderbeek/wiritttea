@@ -28,7 +28,7 @@ create_figure_error_mean_dur_spec_mean_sampling <- function(
   # Take the mean of the nLTT stats
   `%>%` <- dplyr::`%>%`
   nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-         dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+         dplyr::summarise(mean = mean(nltt_stat), sd = stats::sd(nltt_stat))
   testit::assert(all(names(nltt_stat_means)
     == c("filename", "sti", "ai", "pi", "mean", "sd")))
 

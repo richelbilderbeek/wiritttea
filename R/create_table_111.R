@@ -19,5 +19,5 @@ create_table_111 <- function(
   esses_ok[ esses_ok$ok == FALSE, 1] <- "Fail"
   names(esses_ok) <- c("Parameter estimate status", "Count")
 
-  write.csv(esses_ok, filename)
+  utils::write.csv(esses_ok, filename)
 }

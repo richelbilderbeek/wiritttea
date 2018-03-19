@@ -35,5 +35,5 @@ create_table_112 <- function(
   tibble_tally <- dplyr::count(esses, lowest)
   df_tally <- as.data.frame(tibble_tally)
 
-  write.csv(df_tally, filename)
+  utils::write.csv(df_tally, filename)
 }

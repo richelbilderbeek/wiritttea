@@ -33,7 +33,7 @@ create_figure_error_sampling_representative <- function(
   print("Take the mean of the nLTT stats")
   `%>%` <- dplyr::`%>%`
   nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti) %>%
-         dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+         dplyr::summarise(mean = mean(nltt_stat), sd = stats::sd(nltt_stat))
   testit::assert(all(names(nltt_stat_means)
     == c("filename", "sti", "mean", "sd")))
 
@@ -64,7 +64,7 @@ create_figure_error_sampling_representative <- function(
       ggplot2::labs(caption = paste0("(n = ", sample_size,"/", n_nltt_stats_all,"), figure_error_sampling_representative")) +
       ggplot2::ggtitle("The effect of sampling on nLTT statistic values for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)") +
       ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-  dev.off()
+  grDevices::dev.off()
 
   svg("~/figure_error_sampling_representative_zoom.svg")
   set.seed(42)
@@ -83,7 +83,7 @@ create_figure_error_sampling_representative <- function(
       ggplot2::ggtitle("The effect of sampling on nLTT statistic values for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)") +
       ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
   options(warn = 2) # Be strict
-  dev.off()
+  grDevices::dev.off()
 
   svg("~/figure_error_sampling_representative_mean.svg")
   ggplot2::ggplot(
@@ -98,7 +98,7 @@ create_figure_error_sampling_representative <- function(
       ggplot2::labs(caption = "figure_error_sampling_representative_mean") +
       ggplot2::ggtitle("The effect of sampling on mean nLTT statistic for\ndifferent speciation completion rates (x axis boxplot),\nspeciation initiation rates (columns)\nand extinction rates (rows)") +
       ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-  dev.off()
+  grDevices::dev.off()
 
   svg("~/figure_error_sampling_representative_mean_zoom.svg")
   options(warn = 1) # Allow points not to be plotted

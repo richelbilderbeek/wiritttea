@@ -8,7 +8,7 @@ test_that("collect_files_parameters: use", {
   need_to_recreate <- FALSE
   if (need_to_recreate == TRUE) {
 
-    write.csv(df, "~/collect_files_parameters.csv")
+    utils::write.csv(df, "~/collect_files_parameters.csv")
     # then copy to GitHub's wiritttea/inst/exdata folder
   }
 })

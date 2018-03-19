@@ -48,7 +48,7 @@ create_figure_error_low_high_ess_mean <- function(
   df_mean <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
 
   # Calculate median ESS
-  median_ess <- median(stats::na.omit(esses$treeLikelihood))
+  median_ess <- stats::median(stats::na.omit(esses$treeLikelihood))
 
   # Calculate the types
   esses$ess_type <- esses$treeLikelihood > median_ess
@@ -112,7 +112,7 @@ create_figure_error_low_high_ess_mean <- function(
 #
 #   options(warn = 2) # Be strict
 #
-#   dev.off()
+#   grDevices::dev.off()
 #
 #   svg("~/figure_error_expected_mean_dur_spec_mean_low_high_ess.svg")
 #   options(warn = 1) # Allow points to fall off plot range

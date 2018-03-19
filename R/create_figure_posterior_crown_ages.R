@@ -35,7 +35,7 @@ create_figure_posterior_crown_ages <- function(
   #     caption  = "figure_posterior_distribution_crown_ages_low_count"
   #   ) +
   #   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-  # dev.off()
+  # grDevices::dev.off()
   # svg("~/figure_posterior_distribution_crown_ages_high_count.svg")
   # ggplot2::ggplot(
   #   data = posterior_crown_ages,
@@ -114,7 +114,7 @@ create_figure_posterior_crown_ages <- function(
   #   ) +
   #   ggplot2::annotate("text", x = c(0.0, 0.125), y = 1450, label = c("different", "same")) +
   #   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-  # dev.off()
+  # grDevices::dev.off()
   #
   #
   #
@@ -156,7 +156,7 @@ create_figure_posterior_crown_ages <- function(
   #   ) +
   #   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
   # options(warn = 2) # Be strict
-  # dev.off()
+  # grDevices::dev.off()
   #
   #
   #

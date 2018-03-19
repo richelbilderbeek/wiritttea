@@ -44,7 +44,7 @@ create_figure_error_low_high_ess <- function(
   df <- merge(x = parameters, y = dplyr::sample_n(nltt_stats, size = sample_size), by = "filename", all = TRUE)
 
   # Calculate median ESS
-  median_ess <- median(stats::na.omit(esses$treeLikelihood))
+  median_ess <- stats::median(stats::na.omit(esses$treeLikelihood))
 
   # Calculate the types
   esses$ess_type <- esses$treeLikelihood > median_ess
