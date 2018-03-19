@@ -9,6 +9,11 @@ create_figure_posterior_nltts <- function(
   nltt <- NULL; rm(nltt) # nolint, should fix warning: no visible binding for global variable
   sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
   ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  pi1 <- NULL; rm(pi1) # nolint, should fix warning: no visible binding for global variable
+  pi2 <- NULL; rm(pi2) # nolint, should fix warning: no visible binding for global variable
+  p_value <- NULL; rm(p_value) # nolint, should fix warning: no visible binding for global variable
+  posteriors_path <- NULL; rm(posteriors_path) # nolint, should fix warning: no visible binding for global variable
+
 
   testit::assert("pi" %in% names(nltt_stats))
   `%>%` <- dplyr::`%>%`

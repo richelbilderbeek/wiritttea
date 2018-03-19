@@ -5,6 +5,7 @@ create_table_109 <- function(
   log_files_info,
   filename
 ) {
+  exit_status <- NULL; rm(exit_status) # nolint, should fix warning: no visible binding for global variable
 
   utils::write.csv(log_files_info, filename)
 

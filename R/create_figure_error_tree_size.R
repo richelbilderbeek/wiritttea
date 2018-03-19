@@ -36,7 +36,7 @@ create_figure_error_tree_size <- function(
   n_all <- nrow(df)
   df <- stats::na.omit(df)
 
-  svg("~/figure_error_tree_size.svg")
+  grDevices::svg("~/figure_error_tree_size.svg")
   n <- 2000
   cut_x <- 2000
   cut_y <- 0.125

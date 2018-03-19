@@ -8,6 +8,8 @@ create_figure_exit_statuses <- function(
   filename
 ) {
 
+  exit_status <- NULL; rm(exit_status) # nolint, should fix warning: no visible binding for global variable
+
   ggplot2::ggplot(
     data = log_files_info[ log_files_info$exit_status != "OK" & !is.na(log_files_info$exit_status), ],
     ggplot2::aes(x = "", fill = exit_status)

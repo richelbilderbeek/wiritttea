@@ -5,6 +5,7 @@ create_table_112 <- function(
   esses,
   filename
 ) {
+  lowest <- NULL; rm(lowest) # nolint, should fix warning: no visible binding for global variable
 
   # Tally the count of each parameter having the lowest ESS per posterior
   parameter_names <- c("posterior", "likelihood", "prior", "treeLikelihood", "TreeHeight", "BirthDeath", "birthRate2", "relativeDeathRate2")
