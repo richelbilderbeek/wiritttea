@@ -10,6 +10,8 @@ create_figure_ess_expected_mean_dur_spec_alignment_length <- function(
   filename
 ) {
 
+  likelihood <- NULL; rm(likelihood) # nolint, should fix warning: no visible binding for global variable
+  exit_status <- NULL; rm(exit_status) # nolint, should fix warning: no visible binding for global variable
   sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
   ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
   nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable

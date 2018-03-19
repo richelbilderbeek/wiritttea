@@ -18,6 +18,10 @@ create_figure_ess_distribution_likelihood <- function(
   sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
   ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
   ..adj.rr.label.. <- NULL; rm(..adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
+  variable <- NULL; rm(variable) # nolint, should fix warning: no visible binding for global variable
+  value <- NULL; rm(value) # nolint, should fix warning: no visible binding for global variable
+  ess <- NULL; rm(ess) # nolint, should fix warning: no visible binding for global variable
+
 
   # Melt data, convert to long form
   esses_long <- reshape2::melt(esses,

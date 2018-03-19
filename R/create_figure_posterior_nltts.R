@@ -6,6 +6,9 @@ create_figure_posterior_nltts <- function(
   filename
 ) {
 
+  nltt <- NULL; rm(nltt) # nolint, should fix warning: no visible binding for global variable
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
 
   testit::assert("pi" %in% names(nltt_stats))
   `%>%` <- dplyr::`%>%`
@@ -31,7 +34,7 @@ create_figure_posterior_nltts <- function(
           pi2,
           correct = FALSE,
           exact = FALSE, # cannot compute exact p-value with ties
-          na.action = na.omit
+          na.action = stats::na.omit
         )$p.value,
         error = function(cond) {} # nolint
       )
@@ -42,7 +45,7 @@ create_figure_posterior_nltts <- function(
 
   df <- stats::na.omit(df)
 
-  svg("~/figure_posterior_distribution_nltts.svg")
+  grDevices::svg("~/figure_posterior_distribution_nltts.svg")
   ggplot2::ggplot(
     df,
     ggplot2::aes(x = p_value, na.omit = TRUE)
@@ -82,7 +85,7 @@ create_figure_posterior_nltts <- function(
     nltt  = c(low_nltts1, low_nltts2)
   )
 
-  svg("~/figure_posterior_distribution_nltts_low.svg")
+  grDevices::svg("~/figure_posterior_distribution_nltts_low.svg")
   options(warn = 1) # Allow outliers not to be plotted
   ggplot2::ggplot(
     stats::na.omit(df_low),
@@ -129,7 +132,7 @@ create_figure_posterior_nltts <- function(
     nltt  = c(high_nltts1, high_nltts2)
   )
 
-  svg("~/figure_posterior_distribution_nltts_high.svg")
+  grDevices::svg("~/figure_posterior_distribution_nltts_high.svg")
   options(warn = 1) # Allow outliers not to be plotted
   ggplot2::ggplot(
     stats::na.omit(df_high),

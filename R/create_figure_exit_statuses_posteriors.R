@@ -6,6 +6,11 @@ create_figure_exit_statuses_posteriors <- function(
   filename
 ) {
 
+  posterior <- NULL; rm(posterior) # nolint, should fix warning: no visible binding for global variable
+  status <- NULL; rm(status) # nolint, should fix warning: no visible binding for global variable
+  n <- NULL; rm(n) # nolint, should fix warning: no visible binding for global variable
+
+
   # How many NA's?
 
   is_ok <- function(x) {
@@ -21,7 +26,7 @@ create_figure_exit_statuses_posteriors <- function(
   names(esses_ok) <- c("status", "n")
   esses_ok$status <- as.factor(esses_ok$status)
 
-  svg("~/figure_exit_statuses_posteriors.svg")
+  grDevices::svg("~/figure_exit_statuses_posteriors.svg")
   ggplot2::ggplot(
     data = esses_ok,
     ggplot2::aes(x = status, y = n, fill = status)

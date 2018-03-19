@@ -6,6 +6,9 @@ create_figure_posterior_bd <- function(
   filename
 ) {
 
+  value <- NULL; rm(value) # nolint, should fix warning: no visible binding for global variable
+  raw_data_path <- NULL; rm(raw_data_path) # nolint, should fix warning: no visible binding for global variable
+
 
   # Multiple plot function
   #
@@ -191,16 +194,16 @@ create_figure_posterior_bd <- function(
 
 
 
-  svg("~/figure_posterior_distribution_bd_bd.svg")
+  grDevices::svg("~/figure_posterior_distribution_bd_bd.svg")
   p1
   grDevices::dev.off()
-  svg("~/figure_posterior_distribution_bd_br2.svg")
+  grDevices::svg("~/figure_posterior_distribution_bd_br2.svg")
   p2
   grDevices::dev.off()
-  svg("~/figure_posterior_distribution_bd_rdr2.svg")
+  grDevices::svg("~/figure_posterior_distribution_bd_rdr2.svg")
   p3
   grDevices::dev.off()
-  svg("~/figure_posterior_distribution_bd_all.svg")
+  grDevices::svg("~/figure_posterior_distribution_bd_all.svg")
   p4
 
   ggplot2::ggsave(file = filename, width = 7, height = 7)

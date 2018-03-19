@@ -6,6 +6,8 @@ create_figure_lowest_ess <- function(
   filename
 ) {
 
+  lowest <- NULL; rm(lowest) # nolint, should fix warning: no visible binding for global variable
+
 
   # Tally the count of each parameter having the lowest ESS per posterior
   parameter_names <- c("posterior", "likelihood", "prior", "treeLikelihood", "TreeHeight", "BirthDeath", "birthRate2", "relativeDeathRate2")
@@ -35,7 +37,7 @@ create_figure_lowest_ess <- function(
 
   # Make a histogram
 
-  svg("~/figure_lowest_ess.svg")
+  grDevices::svg("~/figure_lowest_ess.svg")
   ggplot2::ggplot(
     data = esses,
     ggplot2::aes(x = lowest, fill = lowest)

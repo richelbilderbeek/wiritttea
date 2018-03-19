@@ -56,7 +56,7 @@ parameters$mean_durspec <- PBD::pbd_mean_durspecs(
 
   print("Creating figure")
 
-  svg("~/figure_error_expected_mean_dur_spec_mean_sampling.svg")
+  grDevices::svg("~/figure_error_expected_mean_dur_spec_mean_sampling.svg")
 
   options(warn = 1) # Allow points to fall off plot range
 

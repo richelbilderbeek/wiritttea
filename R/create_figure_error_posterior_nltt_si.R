@@ -17,6 +17,7 @@ create_figure_error_posterior_nltt_si <- function(
 
   sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
   ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  si <- NULL; rm(si) # nolint, should fix warning: no visible binding for global variable
   nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
   scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
   mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable

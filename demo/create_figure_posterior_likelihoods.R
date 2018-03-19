@@ -51,14 +51,14 @@ safe_mann_whitney <- function(pi1, pi2)
         pi2,
         correct = FALSE,
         exact = FALSE, # cannot compute exact p-value with ties
-        na.action = na.omit
+        na.action = stats::na.omit
       )$p.value,
       error = function(cond) {} # nolint
     )
   p
 }
 
-df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
+df <- df %>% dplyr::summarize(p_value = safe_mann_whitney(pi1, pi2))
 
 svg("~/figure_posterior_distribution_likelihoods.svg")
 ggplot2::ggplot(

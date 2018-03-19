@@ -12,6 +12,8 @@ create_figure_error_sampling_representative <- function(
   ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
   nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
   scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  sirg <- NULL; rm(sirg) # nolint, should fix warning: no visible binding for global variable
+  erg <- NULL; rm(erg) # nolint, should fix warning: no visible binding for global variable
   mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
   sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
   ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
@@ -51,7 +53,7 @@ create_figure_error_sampling_representative <- function(
   nltt_stat_cutoff <- 0.03
   sample_size <- 500000
 
-  svg("~/figure_error_sampling_representative.svg")
+  grDevices::svg("~/figure_error_sampling_representative.svg")
   ggplot2::ggplot(
     data = dplyr::sample_n(stats::na.omit(df), size = sample_size),
     ggplot2::aes(x = as.factor(scr), y = nltt_stat, fill = sti)
@@ -66,7 +68,7 @@ create_figure_error_sampling_representative <- function(
       ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
   grDevices::dev.off()
 
-  svg("~/figure_error_sampling_representative_zoom.svg")
+  grDevices::svg("~/figure_error_sampling_representative_zoom.svg")
   set.seed(42)
   options(warn = 1) # Allow points not to be plotted
   ggplot2::ggplot(
@@ -85,7 +87,7 @@ create_figure_error_sampling_representative <- function(
   options(warn = 2) # Be strict
   grDevices::dev.off()
 
-  svg("~/figure_error_sampling_representative_mean.svg")
+  grDevices::svg("~/figure_error_sampling_representative_mean.svg")
   ggplot2::ggplot(
     data = stats::na.omit(df_mean),
     ggplot2::aes(x = as.factor(scr), y = mean, fill = sti)
@@ -100,7 +102,7 @@ create_figure_error_sampling_representative <- function(
       ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
   grDevices::dev.off()
 
-  svg("~/figure_error_sampling_representative_mean_zoom.svg")
+  grDevices::svg("~/figure_error_sampling_representative_mean_zoom.svg")
   options(warn = 1) # Allow points not to be plotted
   ggplot2::ggplot(
     data = stats::na.omit(df_mean),

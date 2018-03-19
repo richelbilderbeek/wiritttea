@@ -110,7 +110,7 @@ safe_mann_whitney <- function(pi1, pi2)
   p
 }
 
-df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
+df <- df %>% dplyr::summarize(p_value = safe_mann_whitney(pi1, pi2))
 
 svg("~/figure_posterior_distribution_crown_ages_p_values.svg")
 ggplot2::ggplot(

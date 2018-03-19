@@ -81,7 +81,7 @@ create_figure_error_low_high_ess_mean <- function(
 
 
 
-#   svg("~/figure_error_expected_mean_dur_spec_low_high_ess.svg")
+#   grDevices::svg("~/figure_error_expected_mean_dur_spec_low_high_ess.svg")
 #   set.seed(42)
 #   n_sampled <- 5000
 #   n_data_points <- nrow(stats::na.omit(df))
@@ -114,7 +114,7 @@ create_figure_error_low_high_ess_mean <- function(
 #
 #   grDevices::dev.off()
 #
-#   svg("~/figure_error_expected_mean_dur_spec_mean_low_high_ess.svg")
+#   grDevices::svg("~/figure_error_expected_mean_dur_spec_mean_low_high_ess.svg")
 #   options(warn = 1) # Allow points to fall off plot range
 #
 #   ggplot2::ggplot(

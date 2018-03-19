@@ -16,6 +16,7 @@ create_figure_error_mean_dur_spec_median <- function(
   mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
   ..eq.label.. <- NULL; rm(..eq.label..) # nolint, should fix warning: no visible binding for global variable
   ..adj.rr.label.. <- NULL; rm(..adj.rr.label..) # nolint, should fix warning: no visible binding for global variable
+  median <- NULL; rm(median) # nolint, should fix warning: no visible binding for global variable
 
   # Add mean duration of speciation to parameters
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(

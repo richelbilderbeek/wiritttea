@@ -102,6 +102,8 @@ dev.off()
 svg("~/figure_error_expected_mean_dur_spec_median.svg")
 
 options(warn = 1) # Allow points falling out of range
+median <- NULL; rm(median) # nolint, should fix warning: no visible binding for global variable
+
 ggplot2::ggplot(
   data = stats::na.omit(df_medians),
   ggplot2::aes(x = mean_durspec, y = median)

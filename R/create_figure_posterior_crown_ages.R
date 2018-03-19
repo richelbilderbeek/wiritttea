@@ -7,6 +7,8 @@ create_figure_posterior_crown_ages <- function(
   filename
 ) {
 
+  crown_age <- NULL; rm(crown_age) # nolint, should fix warning: no visible binding for global variable
+
   ggplot2::ggplot(
     data = posterior_crown_ages,
     ggplot2::aes(x = crown_age)
@@ -21,7 +23,7 @@ create_figure_posterior_crown_ages <- function(
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-  # svg("~/figure_posterior_distribution_crown_ages_low_count.svg")
+  # grDevices::svg("~/figure_posterior_distribution_crown_ages_low_count.svg")
   # ggplot2::ggplot(
   #   data = posterior_crown_ages,
   #   ggplot2::aes(x = crown_age)
@@ -36,7 +38,7 @@ create_figure_posterior_crown_ages <- function(
   #   ) +
   #   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
   # grDevices::dev.off()
-  # svg("~/figure_posterior_distribution_crown_ages_high_count.svg")
+  # grDevices::svg("~/figure_posterior_distribution_crown_ages_high_count.svg")
   # ggplot2::ggplot(
   #   data = posterior_crown_ages,
   #   ggplot2::aes(x = crown_age)
@@ -94,12 +96,12 @@ create_figure_posterior_crown_ages <- function(
   #   p
   # }
   #
-  # df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
+  # df <- df %>% dplyr::summarize(p_value = safe_mann_whitney(pi1, pi2))
   #
   # utils::head(df)
   # names(df)
   #
-  # svg("~/figure_posterior_distribution_crown_ages_p_values.svg")
+  # grDevices::svg("~/figure_posterior_distribution_crown_ages_p_values.svg")
   # ggplot2::ggplot(
   #   stats::na.omit(df),
   #   ggplot2::aes(x = p_value, na.omit = TRUE)
@@ -140,7 +142,7 @@ create_figure_posterior_crown_ages <- function(
   #   crown_age  = c(low_crown_ages1, low_crown_ages2)
   # )
   #
-  # svg("~/figure_posterior_distribution_crown_ages_lowest_p_value.svg")
+  # grDevices::svg("~/figure_posterior_distribution_crown_ages_lowest_p_value.svg")
   # options(warn = 1) # Allow outliers not to be plotted
   # ggplot2::ggplot(
   #   stats::na.omit(df_low),
@@ -176,7 +178,7 @@ create_figure_posterior_crown_ages <- function(
   #   crown_age  = c(high_crown_ages1, high_crown_ages2)
   # )
   #
-  # svg("~/figure_posterior_distribution_crown_ages_highest_p_value.svg")
+  # grDevices::svg("~/figure_posterior_distribution_crown_ages_highest_p_value.svg")
   # options(warn = 1) # Allow outliers not to be plotted
   # ggplot2::ggplot(
   #   stats::na.omit(df_high),

@@ -6,6 +6,13 @@ create_figure_posterior_likelihoods <- function(
   posterior_likelihoods,
   filename
 ) {
+  likelihood <- NULL; rm(likelihood) # nolint, should fix warning: no visible binding for global variable
+  starts_with <- NULL; rm(starts_with) # nolint, should fix warning: no visible binding for global variable
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  pi1 <- NULL; rm(pi1) # nolint, should fix warning: no visible binding for global variable
+  pi2 <- NULL; rm(pi2) # nolint, should fix warning: no visible binding for global variable
+  p_value <- NULL; rm(p_value) # nolint, should fix warning: no visible binding for global variable
 
   # print("Determine sample size")
   n_sampled <- 500000
@@ -39,14 +46,14 @@ create_figure_posterior_likelihoods <- function(
           pi2,
           correct = FALSE,
           exact = FALSE, # cannot compute exact p-value with ties
-          na.action = na.omit
+          na.action = stats::na.omit
         )$p.value,
         error = function(cond) {} # nolint
       )
     p
   }
 
-  df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
+  df <- df %>% dplyr::summarize(p_value = safe_mann_whitney(pi1, pi2))
 
   ggplot2::ggplot(
     stats::na.omit(df),
@@ -77,7 +84,7 @@ create_figure_posterior_likelihoods <- function(
   #   likelihood  = c(low_likelihoods1, low_likelihoods2)
   # )
   #
-  # svg("~/figure_posterior_distribution_likelihoods_low.svg")
+  # grDevices::svg("~/figure_posterior_distribution_likelihoods_low.svg")
   # options(warn = 1) # Allow outliers not to be plotted
   # ggplot2::ggplot(
   #   stats::na.omit(df_low),
@@ -113,7 +120,7 @@ create_figure_posterior_likelihoods <- function(
   #   likelihood  = c(high_likelihoods1, high_likelihoods2)
   # )
   #
-  # svg("~/figure_posterior_distribution_likelihoods_high.svg")
+  # grDevices::svg("~/figure_posterior_distribution_likelihoods_high.svg")
   # options(warn = 1) # Allow outliers not to be plotted
   # ggplot2::ggplot(
   #   stats::na.omit(df_high),

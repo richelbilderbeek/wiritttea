@@ -10,6 +10,11 @@ create_figure_ess_distribution <- function(
   filename
 ) {
 
+  variable <- NULL; rm(variable) # nolint, should fix warning: no visible binding for global variable
+  value <- NULL; rm(value) # nolint, should fix warning: no visible binding for global variable
+  ess <- NULL; rm(ess) # nolint, should fix warning: no visible binding for global variable
+  parameter <- NULL; rm(parameter) # nolint, should fix warning: no visible binding for global variable
+
   # Melt data, convert to long form
   esses_long <- reshape2::melt(esses,
     id = c("filename", "sti", "ai", "pi")

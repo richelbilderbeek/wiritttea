@@ -5,6 +5,8 @@ create_figure_run_times <- function(
   log_files_info,
   filename
 ) {
+  sys_time <- NULL; rm(sys_time) # nolint, should fix warning: no visible binding for global variable
+  exit_status <- NULL; rm(exit_status) # nolint, should fix warning: no visible binding for global variable
 
   ggplot2::ggplot(
     data = log_files_info[ log_files_info$sys_time > 600,  ],
