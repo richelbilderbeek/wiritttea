@@ -21,7 +21,7 @@ posterior_crown_ages <- wiritttea::read_collected_pstr_crown_ages(
 
 print("General overview")
 
-svg("~/figure_posterior_distribution_crown_ages.svg")
+grDevices::svg("~/figure_posterior_distribution_crown_ages.svg")
 ggplot2::ggplot(
   data = posterior_crown_ages,
   ggplot2::aes(x = crown_age)
@@ -35,8 +35,9 @@ ggplot2::ggplot(
     caption  = "figure_posterior_distribution_crown_ages"
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-dev.off()
-svg("~/figure_posterior_distribution_crown_ages_low_count.svg")
+grDevices::dev.off()
+
+grDevices::svg("~/figure_posterior_distribution_crown_ages_low_count.svg")
 ggplot2::ggplot(
   data = posterior_crown_ages,
   ggplot2::aes(x = crown_age)
@@ -50,8 +51,9 @@ ggplot2::ggplot(
     caption  = "figure_posterior_distribution_crown_ages_low_count"
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-dev.off()
-svg("~/figure_posterior_distribution_crown_ages_high_count.svg")
+grDevices::dev.off()
+
+grDevices::svg("~/figure_posterior_distribution_crown_ages_high_count.svg")
 ggplot2::ggplot(
   data = posterior_crown_ages,
   ggplot2::aes(x = crown_age)
@@ -65,7 +67,7 @@ ggplot2::ggplot(
     caption  = "figure_posterior_distribution_crown_ages_high_count"
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-dev.off()
+grDevices::dev.off()
 
 
 
@@ -80,8 +82,7 @@ some_posterior_crown_ages <- dplyr::sample_n(posterior_crown_ages, size = n_samp
 print("Split posterior crown_ages per posterior index")
 testit::assert("pi" %in% names(posterior_crown_ages))
 `%>%` <- dplyr::`%>%`
-df <- tidyr::spread(some_posterior_crown_ages, pi, crown_age)
-  %>% dplyr::rename(pi1 = "1", pi2 = "2")
+df <- tidyr::spread(some_posterior_crown_ages, pi, crown_age) %>% dplyr::rename(pi1 = "1", pi2 = "2")
 
 print("Remove NA column")
 df <- dplyr::select(df, -starts_with("<NA>"))
@@ -112,7 +113,7 @@ safe_mann_whitney <- function(pi1, pi2)
 
 df <- df %>% dplyr::summarize(p_value = safe_mann_whitney(pi1, pi2))
 
-svg("~/figure_posterior_distribution_crown_ages_p_values.svg")
+grDevices::svg("~/figure_posterior_distribution_crown_ages_p_values.svg")
 ggplot2::ggplot(
   stats::na.omit(df),
   ggplot2::aes(x = p_value, na.omit = TRUE)
@@ -127,7 +128,7 @@ ggplot2::ggplot(
   ) +
   ggplot2::annotate("text", x = c(0.0, 0.125), y = 1450, label = c("different", "same")) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-dev.off()
+grDevices::dev.off()
 
 
 
@@ -153,7 +154,7 @@ df_low <- data.frame(
   crown_age  = c(low_crown_ages1, low_crown_ages2)
 )
 
-svg("~/figure_posterior_distribution_crown_ages_lowest_p_value.svg")
+grDevices::svg("~/figure_posterior_distribution_crown_ages_lowest_p_value.svg")
 options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
   stats::na.omit(df_low),
@@ -169,7 +170,7 @@ ggplot2::ggplot(
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 options(warn = 2) # Be strict
-dev.off()
+grDevices::dev.off()
 
 
 
@@ -189,7 +190,7 @@ df_high <- data.frame(
   crown_age  = c(high_crown_ages1, high_crown_ages2)
 )
 
-svg("~/figure_posterior_distribution_crown_ages_highest_p_value.svg")
+grDevices::svg("~/figure_posterior_distribution_crown_ages_highest_p_value.svg")
 options(warn = 1) # Allow outliers not to be plotted
 ggplot2::ggplot(
   stats::na.omit(df_high),
@@ -205,5 +206,5 @@ ggplot2::ggplot(
   ) +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 options(warn = 2) # Be strict
-dev.off()
+grDevices::dev.off()
 
