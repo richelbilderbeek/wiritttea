@@ -14,7 +14,6 @@ Requires:
     ape,
     beautier,
     beastier,
-    tracerer,
     dplyr,
     ggpmisc,
     latex2exp,
@@ -40,6 +39,7 @@ Imports:
     ribir,
     scales,
     svglite,
+    tracerer,
     wiritttes
 Suggests:
     ape,
