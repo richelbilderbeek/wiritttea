@@ -57,12 +57,9 @@ df <- merge(x = parameters, y = dplyr::sample_n(nltt_stats, size = n_nltt_stats)
 print("Take the mean of the nLTT stats")
 `%>%` <- dplyr::`%>%`
 nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti) %>%
-       dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+       dplyr::summarise(mean = mean(nltt_stat), sd = stats::sd(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "mean", "sd")))
-head(nltt_stat_means, n = 10)
-nrow(nltt_stat_means)
-
 
 # Connect the mean nLTT stats and parameters
 testit::assert("filename" %in% names(parameters))
@@ -80,7 +77,7 @@ sample_size <- 500000
 
 svg("~/figure_error_sampling_representative.svg")
 ggplot2::ggplot(
-  data = dplyr::sample_n(na.omit(df), size = sample_size),
+  data = dplyr::sample_n(stats::na.omit(df), size = sample_size),
   ggplot2::aes(x = as.factor(scr), y = nltt_stat, fill = sti)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +
@@ -97,7 +94,7 @@ svg("~/figure_error_sampling_representative_zoom.svg")
 set.seed(42)
 options(warn = 1) # Allow points not to be plotted
 ggplot2::ggplot(
-  data = dplyr::sample_n(na.omit(df), size = sample_size),
+  data = dplyr::sample_n(stats::na.omit(df), size = sample_size),
   ggplot2::aes(x = as.factor(scr), y = nltt_stat, fill = sti)
 ) + ggplot2::geom_boxplot() +
     ggplot2::facet_grid(erg ~ sirg) +

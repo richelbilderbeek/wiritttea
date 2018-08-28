@@ -46,11 +46,10 @@ parameters <- subset(parameters, select = c(filename, mean_durspec) )
 print("Read nLTT stats, with burn-in")
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename,
   burn_in_fraction = 0.0)
-head(nltt_stats)
 
 svg("~/figure_error_posterior_nltt_si.svg")
 ggplot2::ggplot(
-  dplyr::sample_n(na.omit(nltt_stats), size = 100000),
+  dplyr::sample_n(stats::na.omit(nltt_stats), size = 100000),
   ggplot2::aes(x = as.numeric(si), y = nltt_stat)) +
   ggplot2::geom_point(alpha = 0.01) +
   ggplot2::geom_smooth(method = "lm") +
@@ -126,13 +125,11 @@ print("Read nLTT stats, without burn-in")
 nltt_stats <- wiritttea::read_collected_nltt_stats(
   nltt_stats_filename,
   burn_in_fraction = 0.2)
-head(nltt_stats)
-tail(nltt_stats)
 
 print("Order by nltt_stat, highest value first")
 df <- stats::na.omit(nltt_stats[with(nltt_stats, order(-nltt_stat)), ])
-head(df)
-filenames <- unique(head(df, 1000)$filename)
+
+filenames <- unique(utils::head(df, 1000)$filename)
 
 file <- wiritttes::read_file(paste0(raw_data_path, date, "/", df$filename[1]))
 
@@ -157,22 +154,16 @@ svg("~/figure_error_posterior_nltt_bad_stree.svg")
 ape::plot.phylo(main = "original species tree", stree, show.tip.label = FALSE)
 dev.off()
 
-RBeast::remove_burn_in
-plot(head(df$si, 100))
-head(df)
-tail(df)
-tail(sort(na.omit(nltt_stats$nltt_stat)), 5)
+tracerer::remove_burn_in
+plot(utils::head(df$si, 100))
 
 print("Prepare nLTT stats for merge")
 nltt_stats <- subset(nltt_stats, select = c(filename, nltt_stat) )
-head(nltt_stats)
 
 print("Connect the nLTT stats and parameters")
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(nltt_stats))
 df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
-names(df)
-head(df, n = 10)
 
 df <- stats::na.omit(df)
 

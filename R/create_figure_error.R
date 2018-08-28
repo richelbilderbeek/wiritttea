@@ -1,11 +1,9 @@
-#' Creates figures 'figure_error.svg', 'figure_error_head.svg'
-#' and 'figure_error_tail.svg', showing the complete distribution of all
+#' Creates figure 'figure_error.svg', showing the complete distribution of all
 #' errors (measured as nLTT statistic)
 #' @param parameters collected parameters, as returned from 'collect_parameters'
 #' @param nltt_stats collected nLTT statistics, as returned from
 #'   'read_collected_nltt_stats', assumes burn-in is already removed
-#' @param cut_x nLTT statistic value at which head and tail are seperated
-#' @param svg_filenames the three filenames the figures will be saved as
+#' @param filename the name of the file the figures will be saved as
 #' @param verbose if set to TRUE, the function prints more information
 #' @examples
 #'   parameters <- read_collected_parameters()
@@ -13,21 +11,23 @@
 #'   create_figure_error(
 #'     parameters = parameters,
 #'     nltt_stats = nltt_stats,
-#'     svg_filenames = paste0(path.expand("~"), "/figure_error", c(".svg", "_head.svg", "_tail.svg"))
+#'     filename = paste0(path.expand("~"), "/figure_error.svg")
 #'   )
 #' @export
 #' @author Richel Bilderbeek
 create_figure_error <- function(
   parameters,
   nltt_stats,
-  cut_x = 0.05,
-  svg_filenames = paste0(path.expand("~"), "/figure_error", c(".svg", "_head.svg", "_tail.svg")),
+  filename,
   verbose = FALSE
 ) {
 
   if (verbose == TRUE) {
     print("Add mean duration of speciation to parameters")
   }
+
+  mean_durspec <- NULL; rm(mean_durspec) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
 
   parameters$mean_durspec <- PBD::pbd_mean_durspecs(
     eris = parameters$eri,
@@ -39,8 +39,6 @@ create_figure_error <- function(
     print("Prepare parameters for merge")
   }
 
-  # parameters$filename <- row.names(parameters)
-  # parameters$filename <- as.factor(parameters$filename)
   parameters <- subset(parameters, select = c(filename, mean_durspec) )
 
   if (verbose == TRUE) {
@@ -61,9 +59,8 @@ create_figure_error <- function(
   my_colors <- grDevices::hsv(
     scales::rescale(sort(unique(df$mean_durspec)), to = c(0.0, 5.0 / 6.0)))
 
-  figure_filename <- svg_filenames[1]
   if (verbose == TRUE) {
-    print(paste0("Creating main figure ", figure_filename))
+    print(paste0("Creating figure ", filename))
   }
 
   ggplot2::ggplot(
@@ -72,64 +69,13 @@ create_figure_error <- function(
   ) +
     ggplot2::geom_histogram(binwidth = 0.001) +
     ggplot2::scale_fill_manual(values = my_colors) +
-    ggplot2::geom_vline(xintercept = cut_x, linetype = "dotted") +
     ggplot2::labs(
       title = "nLTT statistic distribution",
       x = latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$"),
       y = "Count",
-      caption = basename(figure_filename)
-    ) + ggplot2::guides(fill = FALSE) +
-    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-  ggplot2::ggsave(file = figure_filename, width = 7, height = 7)
-
-  figure_filename <- svg_filenames[2]
-  if (verbose == TRUE) {
-    print(paste0("Creating head figure ", figure_filename))
-  }
-
-  ggplot2::ggplot(
-    data = df[df$nltt_stat < cut_x, ],
-    ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
-  ) +
-    ggplot2::geom_histogram(binwidth = 0.001) +
-    ggplot2::scale_fill_manual(values = my_colors) +
-    ggplot2::geom_vline(xintercept = cut_x, linetype = "dotted") +
-    ggplot2::coord_cartesian(xlim = c(0.0, cut_x)) +
-    ggplot2::labs(
-      title = "nLTT statistic distribution",
-      x = latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$"),
-      y = "Count",
-      caption = basename(figure_filename)
+      caption = basename(filename)
     ) + ggplot2::guides(fill = FALSE) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-  ggplot2::ggsave(file = figure_filename, width = 7, height = 7)
-
-  figure_filename <- svg_filenames[3]
-  if (verbose == TRUE) {
-    print(paste0("Creating tail figure ", figure_filename))
-  }
-
-  ggplot2::ggplot(
-    data = df[df$nltt_stat > cut_x, ],
-    ggplot2::aes(x = nltt_stat, fill = factor(mean_durspec))
-  ) +
-    ggplot2::geom_histogram(binwidth = 0.001) +
-    ggplot2::scale_fill_manual(values = my_colors) +
-    ggplot2::geom_vline(xintercept = cut_x, linetype = "dotted") +
-    ggplot2::coord_cartesian(xlim = c(cut_x, 0.35)) +
-    ggplot2::labs(
-      title = "nLTT statistic distribution",
-      x = latex2exp::TeX("nLTT statistic $\\Delta_{nLTT}$"),
-      y = "Count",
-      caption = "figure_error_tail.svg"
-    ) + ggplot2::guides(fill = FALSE) +
-    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-
-  ggplot2::ggsave(file = figure_filename, width = 7, height = 7)
-
-  if (verbose == TRUE) {
-    print("Done")
-  }
-
+  ggplot2::ggsave(file = filename, width = 7, height = 7)
 }

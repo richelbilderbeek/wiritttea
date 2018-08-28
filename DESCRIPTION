@@ -2,8 +2,8 @@ Package: wiritttea
 Type: Package
 Title: WIRITTTE analysis
 Version: 1.3.1
-Author: Richel Bilderbeek <richel@richelbilderbeek.nl>
-Maintainer: Richel Bilderbeek <richel@richelbilderbeek.nl>
+Author: Richel J.C. Bilderbeek <richel@richelbilderbeek.nl>
+Maintainer: Richel J.C. Bilderbeek <richel@richelbilderbeek.nl>
 Description: This package does the analysis on the
     WIRITTTE simulation results. It uses multiple summary
     statistics to do so.
@@ -12,28 +12,34 @@ LazyData: TRUE
 Requires: 
     adephylo,
     ape,
-    beastscriptr,
+    beautier,
+    beastier,
     dplyr,
+    ggpmisc,
     latex2exp,
     Matrix,
     nLTT,
     PBD,
     phangorn,
     phytools,
+    scales,
     svglite,
     testit,
     tidyr,
     tools,
     TreeSim
 Imports:
+    ggpmisc,
     latex2exp,
     Matrix,
     nLTT,
     PBD,
     phangorn,
     phytools,
-    RBeast,
     ribir,
+    scales,
+    svglite,
+    tracerer,
     wiritttes
 Suggests:
     ape,
@@ -52,10 +58,11 @@ Suggests:
     testthat,
     tidyr
 Remotes: 
-    beast-dev/RBeast,
     jimhester/covr,
     jimhester/lintr,
-    richelbilderbeek/beastscriptr,
+    richelbilderbeek/beautier,
+    richelbilderbeek/beastier,
+    richelbilderbeek/tracerer,
     richelbilderbeek/nLTT,
     richelbilderbeek/ribir,
     richelbilderbeek/wiritttes,

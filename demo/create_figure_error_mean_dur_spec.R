@@ -39,16 +39,12 @@ parameters$mean_durspec <- PBD::pbd_mean_durspecs(
 names(parameters)
 parameters <- dplyr::select(parameters, c(filename, mean_durspec, scr))
 
-head(nltt_stats)
 nltt_stats <- dplyr::select(nltt_stats, c(filename, nltt_stat))
 
 # Connect the mean nLTT stats and parameters
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(nltt_stats))
 df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
-
-names(df)
-head(df, n = 10)
 
 # Calculate mean BD error
 scr_bd <- max(stats::na.omit(df$scr))

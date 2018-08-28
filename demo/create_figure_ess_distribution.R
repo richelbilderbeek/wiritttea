@@ -32,13 +32,11 @@ testit::assert(is.factor(df_esses_long$variable))
 
 df_esses_long <- dplyr::rename(df_esses_long, parameter = variable)
 df_esses_long <- dplyr::rename(df_esses_long, ess = value)
-head(df_esses_long)
 
 print("Connect the ESSes and parameters")
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(df_esses))
 df <- merge(x = parameters, y = df_esses_long, by = "filename", all = TRUE)
-head(df)
 
 svg("~/figure_ess_distribution.svg")
 

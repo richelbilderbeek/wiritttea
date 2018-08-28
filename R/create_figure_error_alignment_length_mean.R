@@ -12,13 +12,20 @@ create_figure_error_alignment_length_mean <- function(
   filename
 ) {
 
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  pi <- NULL; rm(pi) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
+
   `%>%` <- dplyr::`%>%`
 
   nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-    dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+    dplyr::summarise(mean = mean(nltt_stat))
 
   testit::assert(all(names(nltt_stat_means)
-    == c("filename", "sti", "ai", "pi", "mean", "sd")))
+    == c("filename", "sti", "ai", "pi", "mean")))
 
   # Connect the mean nLTT stats and parameters
   testit::assert("filename" %in% names(parameters))

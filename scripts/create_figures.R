@@ -5,6 +5,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 if (1 == 2) {
   args <- c("/home/richel/wirittte_data", "stub")
+  args <- c("/home/richel/wirittte_data", "20171009")
 }
 
 if (length(args) < 1) {
@@ -37,6 +38,7 @@ nltt_stats_filename <- paste0(source_superfolder, "/nltt_stats_", date, ".csv")
 parameters_filename <- paste0(source_superfolder, "/parameters_", date, ".csv")
 alignments_filename <- paste0(source_superfolder, "/alignments_", date, ".csv")
 operators_filename <- paste0(source_superfolder, "/operators_", date, ".csv")
+esses_filename <- paste0(source_superfolder, "/esses_", date, ".csv")
 
 if (!file.exists(parameters_filename)) {
   stop(
@@ -60,31 +62,67 @@ if (!file.exists(operators_filename)) {
     "please run collect_operators")
 }
 
+if (!file.exists(esses_filename)) {
+  stop("File '", esses_filename, "' not found, ",
+    "please run collect_esses")
+}
+
 print("Reading files")
 parameters <- wiritttea::read_collected_parameters(parameters_filename)
 nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_fraction = 0.2)
 operators <- wiritttea::read_collected_operators(operators_filename)
 alignments <- wiritttea::read_collected_alignments(alignments_filename)
+esses <- wiritttea::read_collected_esses(esses_filename)
 
 print("Create figures")
+
+print("create_figure_error")
+
 wiritttea::create_figure_error(
   parameters = parameters,
   nltt_stats = nltt_stats,
-  svg_filenames = paste0(source_superfolder, "/figure_error_", date, c("","_head", "_tail"), ".svg")
+  filename = paste0(source_superfolder, "/figure_error_", date, ".svg")
 )
+
+print("create_figure_acceptance_mcmc_operators")
 
 wiritttea::create_figure_acceptance_mcmc_operators(
   operators = operators,
-  filename = paste0(source_superfolder, "/figure_acceptance_mcmc_operators", date, ".svg")
+  filename = paste0(source_superfolder, "/figure_acceptance_mcmc_operators_", date, ".svg")
 )
+
+print("create_figure_alignment_qualities")
 
 wiritttea::create_figure_alignment_qualities(
   alignments = alignments,
-  filename = paste0(source_superfolder, "/figure_alignment_qualities", date, ".svg")
+  filename = paste0(source_superfolder, "/figure_alignment_qualities_", date, ".svg")
 )
 
-wiritttea::create_figure_error_alignment_length(
+print("create_figure_error_alignment_length_mean")
+
+wiritttea::create_figure_error_alignment_length_mean(
   parameters = parameters,
   nltt_stats = nltt_stats,
-  filename = paste0(source_superfolder, "/figure_error_alignment_length", date, ".svg")
+  esses = esses,
+  filename = paste0(source_superfolder, "/figure_error_alignment_length_", date, ".svg")
 )
+
+print("create_figure_error_alignment_length_mean")
+
+wiritttea::create_figure_error_alignment_length_mean(
+  parameters = parameters,
+  nltt_stats = nltt_stats,
+  esses = esses,
+  filename = paste0(source_superfolder, "/figure_error_alignment_length_mean_", date, ".svg")
+)
+
+print("create_figure_error_alignment_length_median")
+
+wiritttea::create_figure_error_alignment_length_median(
+  parameters = parameters,
+  nltt_stats = nltt_stats,
+  esses = esses,
+  filename = paste0(source_superfolder, "/figure_error_alignment_length_median_", date, ".svg")
+)
+
+print("Done")

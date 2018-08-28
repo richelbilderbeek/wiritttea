@@ -39,16 +39,13 @@ parameters$mean_durspec <- PBD::pbd_mean_durspecs(
 names(parameters)
 parameters <- dplyr::select(parameters, c(filename, mean_durspec, sequence_length))
 
-head(esses)
+utils::head(esses)
 esses <- dplyr::select(esses, c(filename, likelihood))
 
 # Connect the mean nLTT stats and parameters
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(esses))
 df <- merge(x = parameters, y = esses, by = "filename", all = TRUE)
-
-names(df)
-head(df, n = 10)
 
 print("Creating figure")
 

@@ -34,15 +34,13 @@ parameters$mean_durspec <- PBD::pbd_mean_durspecs(
 # Take the mean of the nLTT stats
 `%>%` <- dplyr::`%>%`
 nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-       dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+       dplyr::summarise(mean = mean(nltt_stat), sd = stats::sd(nltt_stat))
 nltt_stat_medians <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-       dplyr::summarise(median = median(nltt_stat))
+       dplyr::summarise(median = stats::median(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))
 testit::assert(all(names(nltt_stat_medians)
   == c("filename", "sti", "ai", "pi", "median")))
-head(nltt_stat_means, n = 10)
-nrow(nltt_stat_means)
 
 # Prepare parameters for merge
 # parameters$filename <- row.names(parameters)
@@ -55,11 +53,11 @@ df_means <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TR
 df_medians <- merge(x = parameters, y = nltt_stat_medians, by = "filename", all = TRUE)
 
 # Calculate mean BD error
-testit::assert(max(na.omit(df_means$scr)) == max(na.omit(df_medians$scr)))
-scr_bd <- max(na.omit(df_means$scr))
+testit::assert(max(stats::na.omit(df_means$scr)) == max(stats::na.omit(df_medians$scr)))
+scr_bd <- max(stats::na.omit(df_means$scr))
 
-mean_bd_error <- mean(na.omit(df_means[ df_means$scr == scr_bd, ]$mean))
-median_bd_error <- mean(na.omit(df_medians[ df_medians$scr == scr_bd, ]$median))
+mean_bd_error <- mean(stats::na.omit(df_means[ df_means$scr == scr_bd, ]$mean))
+median_bd_error <- mean(stats::na.omit(df_medians[ df_medians$scr == scr_bd, ]$median))
 
 
 print("Creating figure")
@@ -104,6 +102,8 @@ dev.off()
 svg("~/figure_error_expected_mean_dur_spec_median.svg")
 
 options(warn = 1) # Allow points falling out of range
+median <- NULL; rm(median) # nolint, should fix warning: no visible binding for global variable
+
 ggplot2::ggplot(
   data = stats::na.omit(df_medians),
   ggplot2::aes(x = mean_durspec, y = median)

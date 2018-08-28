@@ -8,6 +8,10 @@ create_figure_acceptance_mcmc_operators <- function(
   operators,
   filename
 ) {
+
+  operator <- NULL; rm(operator) # nolint, should fix warning: no visible binding for global variable
+  p <- NULL; rm(p) # nolint, should fix warning: no visible binding for global variable
+
   optimum_acceptance_level <- 0.234
   ggplot2::ggplot(
     stats::na.omit(operators),

@@ -36,13 +36,11 @@ print("Connect the mean nLTT stats and parameters")
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(nltt_stats))
 df <- merge(x = parameters, y = nltt_stats, by = "filename", all = TRUE)
-names(df)
-head(df, n = 10)
 
 print("Only keep rows with the highest SCR (as those are a BD model)")
 print(paste0("Rows before: ", nrow(df)))
 dplyr::count(df, scr)
-scr_bd <- max(na.omit(df$scr))
+scr_bd <- max(stats::na.omit(df$scr))
 df <- df[ df$scr == scr_bd, ]
 print(paste0("Rows after: ", nrow(df)))
 

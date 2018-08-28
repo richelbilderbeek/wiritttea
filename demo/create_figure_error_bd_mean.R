@@ -31,11 +31,9 @@ nltt_stats <- wiritttea::read_collected_nltt_stats(nltt_stats_filename, burn_in_
 print("Take the mean of the nLTT stats")
 `%>%` <- dplyr::`%>%`
 nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-       dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+       dplyr::summarise(mean = mean(nltt_stat), sd = stats::sd(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))
-head(nltt_stat_means, n = 10)
-nrow(nltt_stat_means)
 
 # print("Prepare parameters for merge")
 # parameters$filename <- row.names(parameters)
@@ -45,13 +43,11 @@ print("Connect the mean nLTT stats and parameters")
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(nltt_stat_means))
 df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
-names(df)
-head(df, n = 10)
 
 print("Only keep rows with the highest SCR (as those are a BD model)")
 print(paste0("Rows before: ", nrow(df)))
 dplyr::count(df, scr)
-scr_bd <- max(na.omit(df$scr))
+scr_bd <- max(stats::na.omit(df$scr))
 df <- df[ df$scr == scr_bd, ]
 print(paste0("Rows after: ", nrow(df)))
 

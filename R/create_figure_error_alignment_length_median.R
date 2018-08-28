@@ -12,10 +12,18 @@ create_figure_error_alignment_length_median <- function(
   filename
 ) {
 
+  sti <- NULL; rm(sti) # nolint, should fix warning: no visible binding for global variable
+  ai <- NULL; rm(ai) # nolint, should fix warning: no visible binding for global variable
+  pi <- NULL; rm(pi) # nolint, should fix warning: no visible binding for global variable
+  nltt_stat <- NULL; rm(nltt_stat) # nolint, should fix warning: no visible binding for global variable
+  scr <- NULL; rm(scr) # nolint, should fix warning: no visible binding for global variable
+  sequence_length <- NULL; rm(sequence_length) # nolint, should fix warning: no visible binding for global variable
+  median <- NULL; rm(median) # nolint, should fix warning: no visible binding for global variable
+
   `%>%` <- dplyr::`%>%`
 
   nltt_stat_medians <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-    dplyr::summarise(median = median(nltt_stat))
+    dplyr::summarise(median = stats::median(nltt_stat))
 
   testit::assert(all(names(nltt_stat_medians)
     == c("filename", "sti", "ai", "pi", "median")))

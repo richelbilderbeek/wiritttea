@@ -31,4 +31,4 @@ print("Collecting log files info")
 df_log_files <- wiritttea::collect_log_files_info(filenames = my_filenames, show_progress = TRUE)
 
 print("Saving log files info")
-write.csv(df_log_files, log_files_filename)
+utils::write.csv(df_log_files, log_files_filename)

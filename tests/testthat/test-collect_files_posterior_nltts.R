@@ -15,7 +15,7 @@ test_that("Basic use", {
 
   need_to_recreate <- FALSE
   if (need_to_recreate == TRUE) {
-    write.csv(df, "~/collect_files_posterior_nltts.csv")
+    utils::write.csv(df, "~/collect_files_posterior_nltts.csv")
   }
 
   testthat::expect_true(nrow(df) == 200)

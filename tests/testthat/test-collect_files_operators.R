@@ -28,7 +28,7 @@ test_that("good and empty file", {
 
   need_to_recreate <- FALSE
   if (need_to_recreate == TRUE) {
-    write.csv(df_operators, "~/read_collected_operators.csv")
+    utils::write.csv(df_operators, "~/read_collected_operators.csv")
   }
   testthat::expect_equal(nrow(df_operators), 10)
 })

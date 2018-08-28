@@ -25,7 +25,7 @@ collect_files_operators <- function(
     }
     n_rows_to_add <- 1
     tryCatch({
-      n_rows_to_add <- nrow(RBeast::parse_beast_state_operators(filename))
+      n_rows_to_add <- nrow(tracerer::parse_beast_state_operators(filename))
       }, error = function(cond) {} # nolint
     )
     n_rows <- n_rows + n_rows_to_add
@@ -50,7 +50,7 @@ collect_files_operators <- function(
     }
     indices_to_add <- 1
     tryCatch({
-      this_df <- RBeast::parse_beast_state_operators(filename)
+      this_df <- tracerer::parse_beast_state_operators(filename)
       this_df$filename <- basename(filename)
       df[
         index:(index + nrow(this_df) - 1),

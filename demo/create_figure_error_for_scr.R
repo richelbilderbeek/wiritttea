@@ -35,11 +35,9 @@ parameters$mean_durspec <- PBD::pbd_mean_durspecs(
 # Take the mean of the nLTT stats
 `%>%` <- dplyr::`%>%`
 nltt_stat_means <- nltt_stats %>% dplyr::group_by(filename, sti, ai, pi) %>%
-       dplyr::summarise(mean = mean(nltt_stat), sd = sd(nltt_stat))
+       dplyr::summarise(mean = mean(nltt_stat), sd = stats::sd(nltt_stat))
 testit::assert(all(names(nltt_stat_means)
   == c("filename", "sti", "ai", "pi", "mean", "sd")))
-head(nltt_stat_means, n = 10)
-nrow(nltt_stat_means)
 
 # Prepare parameters for merge
 # parameters$filename <- row.names(parameters)
@@ -49,8 +47,6 @@ nrow(nltt_stat_means)
 testit::assert("filename" %in% names(parameters))
 testit::assert("filename" %in% names(nltt_stat_means))
 df <- merge(x = parameters, y = nltt_stat_means, by = "filename", all = TRUE)
-names(df)
-head(df, n = 10)
 
 svg("~/figure_140.svg")
 ggplot2::ggplot(

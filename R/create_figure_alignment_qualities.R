@@ -9,6 +9,9 @@ create_figure_alignment_qualities <- function(
   filename
 ) {
 
+  status <- NULL; rm(status) # nolint, should fix warning: no visible binding for global variable
+  n <- NULL; rm(n) # nolint, should fix warning: no visible binding for global variable
+
   df <- data.frame(
     status = c("ok", "zero", "na"),
     n = c(

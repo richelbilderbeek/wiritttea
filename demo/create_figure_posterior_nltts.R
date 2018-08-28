@@ -32,10 +32,7 @@ testit::assert(names(df) == c("filename", "sti", "ai", "si", "pi1", "pi2"))
 print("Remove NAs")
 df <- stats::na.omit(df)
 
-head(df)
-
 df <- dplyr::group_by(.data = df, filename, sti, ai)
-head(df)
 
 safe_mann_whitney <- function(pi1, pi2)
 {
@@ -46,17 +43,16 @@ safe_mann_whitney <- function(pi1, pi2)
         pi2,
         correct = FALSE,
         exact = FALSE, # cannot compute exact p-value with ties
-        na.action = na.omit
+        na.action = stats::na.omit
       )$p.value,
       error = function(cond) {} # nolint
     )
   p
 }
 
-df <- df %>% summarize(p_value = safe_mann_whitney(pi1, pi2))
+df <- df %>% dplyr::summarize(p_value = safe_mann_whitney(pi1, pi2))
 
 df <- stats::na.omit(df)
-head(df)
 
 svg("~/figure_posterior_distribution_nltts.svg")
 ggplot2::ggplot(
@@ -91,7 +87,7 @@ low_filename <- paste0(posteriors_path, low$filename[1])
 low_sti <- as.numeric(low$sti[1])
 low_ai <- as.numeric(low$ai[1])
 low_df <- wiritttea::collect_file_nltt_stats(low_filename)
-head(x)
+
 low_nltts1 <- low_df[which(low_df$sti == low_sti & low_df$ai == low_ai & low_df$pi == 1), ]$nltt_stat
 low_nltts2 <- low_df[which(low_df$sti == low_sti & low_df$ai == low_ai & low_df$pi == 2), ]$nltt_stat
 df_low <- data.frame(
@@ -139,7 +135,6 @@ high_filename <- paste0(posteriors_path, high$filename[1])
 high_sti <- as.numeric(high$sti[1])
 high_ai <- as.numeric(high$ai[1])
 high_df <- wiritttea::collect_file_nltt_stats(high_filename)
-head(x)
 high_nltts1 <- high_df[which(high_df$sti == high_sti & high_df$ai == high_ai & high_df$pi == 1), ]$nltt_stat
 high_nltts2 <- high_df[which(high_df$sti == high_sti & high_df$ai == high_ai & high_df$pi == 2), ]$nltt_stat
 df_high <- data.frame(
